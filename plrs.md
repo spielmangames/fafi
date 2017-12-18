@@ -1,2 +1,5 @@
-name............att[2-2] def[1-2]
-name............att[1-1] def[0-3]
+|name|attack from|attack to|defence from|defence to|
+|---|---|---|---|---|
+|xabi olano|2|2|3|3|
+|francesco romano|4|6|0|0|
+|david devil|   |   |   |   |
