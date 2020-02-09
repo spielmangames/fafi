@@ -14,7 +14,7 @@
 
 
 ###### QUICK MATCH
-    - As a Gamer, I want to play quick match against the AI, in order to improve my tactical skills in a 5 mins & have a fun in process.
+    - As a Gamer, I want to play quick match against the FAFIbot, in order to improve my tactical skills in a 5 mins & have a fun in process.
 
 
 
