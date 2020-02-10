@@ -3,6 +3,12 @@
 
 > Configure & port your FAFI subversions as a board games.
 
+> Use FAFIbase to compare players while watching the game.
+
+> Design your dream teams in FAFInote.
+
+>
+
 
 
 #### MVP
