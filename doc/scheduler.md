@@ -47,12 +47,11 @@
 - If `r`eplays are enabled, the 2nd `L` is added to `F` with the same `M`atchdays schema with the same `G`ame pairs,
 but home & away `t`eams are inverted inside each `G`ame pair.
 
-      Gi[a] = Gj[h]
-      Gi[h] = Gj[a]
+      Mi->Gx->ta = Mj->Gx->th
+      Mi->Gx->th = Mj->Gx->ta
 
         1 ≤ i ≤ Q(M,L)
         j = Q(M,L) + i
-
 
 
 
