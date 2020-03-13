@@ -15,7 +15,7 @@
   | birth_country | + | [nation](./models.MD/#nation-model)     | foreign |
   | birth_place   | - | string                                  | VARCHAR |
   | birth_date    | - | date                                    | DATE    |
-  | current_age   |   | int                                     | tinyint |
+  | current_age   |   | int                                     | dymanic |
 
   - name + particle + surname = unique
   - 1st_char(name) + particle + surname = unique ???
