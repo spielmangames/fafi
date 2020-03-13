@@ -35,12 +35,12 @@
   | foot          | - | enum{L;R}                               | ???     |
   | injure_factor | - | bool                                    | bit     |
 
-- attributes per [position](./models.MD/#position-model):
+- attributes per position:
 
   | property      |req| type                                    | sql     |
   |---------------|---|:---------------------------------------:|---------|
   |               |   |                                         |         |
-  | position      | + | [position](./models.MD/#position-model) | foreign |
+  | position      | + | [position](./models.MD/#positions)      | foreign |
   |               |   |                                         |         |
   | attack_min    | + | int                                     | tinyint |
   | attack_max    | + | int                                     | tinyint |
@@ -48,6 +48,24 @@
   | defence_max   | + | int                                     | tinyint |
 
   - every assigned position is unique
+  - possible positions:
+    - gk
+    - cb
+    - lb
+    - rb
+    - wb ???
+    - dm
+    - cm
+    - am
+    - lm
+    - rm
+    - wm ???
+    - lf
+    - rf
+    - wf ???
+    - ss
+    - cf
+
   - player with `gk` position can't have another positions assigned
   - player with `gk` position can have 0 attack attribute level only
   - player can have from 1 to 4 positions assigned ???
@@ -80,7 +98,6 @@
 
 ## Nation model
 
-## Position model
+## Positions
 
-
-
+    
