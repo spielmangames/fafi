@@ -1,0 +1,52 @@
+
+
+---
+# A list of tasty fruits
+- Apple
+- Strawberry
+- Mango
+  - sd
+  - sd
+  - sd
+- Strawberry
+
+
+
+
+
+
+# fafi-01
+- martin:
+     name: Martin D'vloper
+     job: Developer
+     skills:
+       - python
+       - perl
+       - pascal
+- tabitha:
+     name: Tabitha Bitumen
+     job: Developer
+     skills:
+       - lisp
+       - fortran
+       - erlang
+- sdf:
+      na
+
+martin: {name: Martin D'vloper, job: Developer, skill: Elite}
+
+
+####### fafi-01
+#`todo`
+#`E1` Quick match
+#
+#**expected**:
+#
+#    As s Gamer, I want to play single match, in order to try my tactical skills & get some fun.
+#- match length < 10 minutes
+#- configurable gameplay
+#-
+
+
+
+...

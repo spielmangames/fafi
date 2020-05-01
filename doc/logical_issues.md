@@ -46,4 +46,43 @@
 
 ###### Problem
 
-IN_PROGRESS...
+Since **B** attack has a critical tactical advantage over **T** defence, it seems like **B** can score a lot,
+however there are tricky cases when **B** can't use this advantage at full.
+
+Let's explore the relation between the quantity of **B** attacks & **T** defence level:
+
+    att_qty(B) = count(schema(att(B))
+    F = f(att_qty(B) ~ def(T))
+
+What to do when `def(T) = 0` turns into 0?
+
+1.  Option A: **B** coach can use not more attacks in schema than **T** defence level:
+
+        att_qty(B) ≤ def(T)
+        Q(goals(B)) ≤ 5
+
+    - In such case `count(goals(B))` is increasing, while `def(T)` is increasing & vice versa.
+    The less defence points **T** has, the quicker **B** will finish them up, so **B** can score less in the end.
+
+    - Also, this approach requires **T** coach to make a disclosure on his defence level,
+    but this can be fixed by requiring every team to guarantee the minimum attacks qty for the opposite team.
+
+2.  Option B: If **B** still has attacks reserved, all this advantage immediately turns into 1 penalty shot.
+
+        att_qty(B) > 0
+        B->penalty
+
+3.  Option C: 
+
+
+
+
+
+
+    f(att(B) ~ def(T)) = ?
+
+From the other hand, 
+
+    att(T) ~ def(B)
+
+
