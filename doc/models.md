@@ -70,13 +70,13 @@
   - player with `gk` position can have 0 attack attribute level only
   - player can have from 1 to 4 positions assigned ???
   - attributes:
+    - attack_min ≤ attack_max
+    - defence_min ≤ defence_max
     - 0 ≤ attack_min ≤ 5
     - 0 ≤ attack_max ≤ 5
     - 0 ≤ defence_min ≤ 5
     - 0 ≤ defence_max ≤ 5
-    - attack_min ≤ attack_max
-    - defence_min ≤ defence_max
-    - attack_min + defence_min ≤ 0
+    - attack_min + defence_min ≤ 5
     - attack_max + defence_max ≤ 5
 
 - perks: ...
