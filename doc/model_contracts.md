@@ -53,10 +53,10 @@
   |               |   |                                         |               |
   | position      | + | [position](./models.MD/#positions)      | foreign       |
   |               |   |                                         |               |
-  | attack_min    | + | int                                     | tinyint       |
-  | attack_max    | + | int                                     | tinyint       |
-  | defence_min   | + | int                                     | tinyint       |
-  | defence_max   | + | int                                     | tinyint       |
+  | attack_min    | + | int(5)                                  | tinyint       |
+  | attack_max    | + | int(5)                                  | tinyint       |
+  | defence_min   | + | int(5)                                  | tinyint       |
+  | defence_max   | + | int(5)                                  | tinyint       |
 
   - every assigned position is unique
   - possible positions:
