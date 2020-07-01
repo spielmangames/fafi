@@ -1,76 +1,70 @@
 
 ## Player model
 
-- `MVP` base:
+- `MVP` basic:
 
-  | property      |req| type                                    | sql           |
-  |---------------|---|:---------------------------------------:|---------------|
-  |               |   |                                         |               |
-  | fafi_name     | - | string(32)                              | VARCHAR(32)   |
-  | status        | - | bool                                    | bit           |
+  | property      | req | type                                    | sql           |
+  |---------------|:---:|:---------------------------------------:|---------------|
+  |               |     |                                         |               |
+  | fafi_name     |  +  | string(4~32)                            | VARCHAR(32)   |
+  | status        |  +  | bool                                    | bit           |
 
   - fafi_name = unique
   - default status = 0
+
 
 ###### personal
 
 - `MVP` origin:
 
-  | property      |req| type                                    | sql           |
-  |---------------|---|:---------------------------------------:|---------------|
-  |               |   |                                         |               |
-  | name          | - | string(32)                              | VARCHAR(32)   |
-  | particle      | - | string(8)                               | VARCHAR(8)    |
-  | surname       | + | string(32)                              | VARCHAR(32)   |
-  |               |   |                                         |               |
-  | birth_country | + | [nation](./models.MD/#nation-model)     | foreign       |
-  | birth_place   | - | string(64)                              | VARCHAR(64)   |
-  | birth_date    | - | date                                    | DATE          |
+  | property      | req | type                                    | sql           |
+  |---------------|:---:|:---------------------------------------:|---------------|
+  |               |     |                                         |               |
+  | name          |  -  | string(32)                              | VARCHAR(32)   |
+  | particle      |  -  | string(8)                               | VARCHAR(8)    |
+  | surname       |  +  | string(32)                              | VARCHAR(32)   |
+  |               |     |                                         |               |
+  | birth_country |  +  | [nation](./models.MD/#nation-model)     | foreign       |
+  | birth_place   |  -  | string(64)                              | VARCHAR(64)   |
+  | birth_date    |  -  | date                                    | DATE          |
 
   - name + particle + surname = unique
   - `???` 1st_char(name) + particle + surname = unique
 
 
-
-
-  
 ###### skills
 
 - shape:
 
-  | property      |req| type                                    | sql           |
-  |---------------|---|:---------------------------------------:|---------------|
-  |               |   |                                         |               |
-  | current_age   |   | int                                     | dymanic       |
-  | foot          | - | enum{L;R}                               | enum('L','R') |
-  | height        | - | int                                     | tinyint       |
-  | injure_factor | - | bool                                    | bit           |
+  | property      | req | type                                    | sql           |
+  |---------------|:---:|:---------------------------------------:|---------------|
+  |               |     |                                         |               |
+  | current_age   | n/a | int                                     | dymanic       |
+  | foot          |  -  | enum{L;R}                               | enum('L','R') |
+  | height        |  -  | int(111~222)                            | tinyint       |
+  | injure_factor |  -  | bool                                    | bit           |
 
 - `MVP` attributes (per position):
 
-  | property      |req| type                                    | sql           |
-  |---------------|---|:---------------------------------------:|---------------|
-  |               |   |                                         |               |
-  | position      | + | [position](./models.MD/#positions)      | foreign       |
-  |               |   |                                         |               |
-  | attack_min    | + | int(5)                                  | tinyint       |
-  | attack_max    | + | int(5)                                  | tinyint       |
-  | defence_min   | + | int(5)                                  | tinyint       |
-  | defence_max   | + | int(5)                                  | tinyint       |
+  | property      | req | type                                    | sql           |
+  |---------------|:---:|:---------------------------------------:|---------------|
+  |               |     |                                         |               |
+  | position      |  +  | [position](./models.MD/#positions)      | foreign       |
+  |               |     |                                         |               |
+  | attack_min    |  +  | int(0~5)                                | tinyint       |
+  | attack_max    |  +  | int(0~5)                                | tinyint       |
+  | defence_min   |  +  | int(0~5)                                | tinyint       |
+  | defence_max   |  +  | int(0~5)                                | tinyint       |
 
+  - player has from 1 to 4 positions assigned
   - every assigned position is unique
   - possible positions:
     - gk
-    - cb
-    - lb, rb, wb
-    - dm, cm, am
-    - lm, rm, wm
-    - lf, rf, wf
-    - ss, cf
-
+    - cb, lb, rb, wb
+    - dm, cm, am, lm, rm, wm
+    - lf, rf, wf, ss, cf
   - player with `gk` position can't have another positions assigned
   - player with `gk` position can have 0 attack attribute level only
-  - player can have from 1 to 4 positions assigned ???
   - attributes:
     - attack_min ≤ attack_max
     - defence_min ≤ defence_max
@@ -83,15 +77,16 @@
 
 - perks: ...
 
+
 ###### career
 
-- teams
+- teams:
 
-  | property      |req| type                                    |
-  |---------------|---|:---------------------------------------:|
-  |               |   |                                         |
-  | nationalities | - | [NATION](./models.MD/#nation-model)s    |
-  | clubs         | + | [CLUB](./models.MD/#club-model)s        |
+  | property      | req | type                                    | sql           |
+  |---------------|:---:|:---------------------------------------:|---------------|
+  |               |     |                                         |               |
+  | nationalities |  -  | [NATION](./models.MD/#nation-model)s    | foreign       |
+  | clubs         |  +  | [CLUB](./models.MD/#club-model)s        | foreign       |
 
 
 
