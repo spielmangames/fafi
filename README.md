@@ -6,32 +6,3 @@
 > Use FAFIbase to compare players while watching the game.
 
 > Design your dream teams in FAFInote.
-
->
-
-
-
-#### MVP
-
-###### EDITOR
-    - As a Gamer, I want to CRUD Players, in order to have wide & sharp FAFIbase & have a fun in process.
-    - As a Gamer, I want to CRUD Clubs, in order to have wide & sharp FAFIbase & have a fun in process.
-
-
-
-###### QUICK MATCH
-    - As a Gamer, I want to play quick match against the FAFIbot, in order to improve my tactical skills in a 5 mins & have a fun in process.
-
-
-
-###### Component scheme + backlog per versions
-
-- ...
-
-  | ver |   |                                     |
-  |---------------|---|:---------------------------------------:|
-  | 0.1 |   |                                         |
-  | 0.2 | - |   |
-  | 0.3 | + |       |
-
-
