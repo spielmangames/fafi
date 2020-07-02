@@ -88,13 +88,3 @@
   | nationalities | [NATION](./models.MD/#nation-model)s    | foreign       |  -  |
   | clubs         | [CLUB](./models.MD/#club-model)s        | foreign       |  -  |
 
-
-
-
-## Club model
-
-## Nation model
-
-## Positions
-
-    
