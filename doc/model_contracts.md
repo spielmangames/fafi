@@ -1,5 +1,5 @@
 
-## Player model
+# Player model
 
 ![scheme](https://github.com/spielmangames/fafi/blob/master/doc/player_model.jpg)
 
