@@ -1,7 +1,7 @@
 
 ## Player model
 
-![scheme](https://github.com/vil11/bhv/blob/master/doc/player_model.jpg)
+![scheme](https://github.com/spielmangames/fafi/blob/master/doc/player_model.jpg)
 
 
 - `MVP` basic:
