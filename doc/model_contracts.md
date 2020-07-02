@@ -1,6 +1,9 @@
 
 ## Player model
 
+![scheme](https://github.com/vil11/bhv/blob/master/doc/player_model.jpg)
+
+
 - `MVP` basic:
 
   | property      | type                                    | sql           | req |
