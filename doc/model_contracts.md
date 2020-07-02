@@ -1,8 +1,7 @@
 
-# Player model
-
 ![scheme](https://github.com/spielmangames/fafi/blob/master/doc/player_model.jpg)
 
+# Player model
 
 - `MVP` basic:
 
