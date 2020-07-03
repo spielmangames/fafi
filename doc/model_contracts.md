@@ -68,14 +68,17 @@
   - player with `gk` position can't have another positions assigned
   - player with `gk` position can have 0 attack attribute level only
   - attributes:
-    - attack_min ≤ attack_max
-    - defence_min ≤ defence_max
-    - 0 ≤ attack_min ≤ 5
-    - 0 ≤ attack_max ≤ 5
-    - 0 ≤ defence_min ≤ 5
-    - 0 ≤ defence_max ≤ 5
-    - attack_min + defence_min ≤ 5
-    - attack_max + defence_max ≤ 5
+    - scale:
+      - 0 ≤ attack_min ≤ 5
+      - 0 ≤ attack_max ≤ 5
+      - 0 ≤ defence_min ≤ 5
+      - 0 ≤ defence_max ≤ 5
+    - single range:
+      - attack_min ≤ attack_max
+      - defence_min ≤ defence_max
+    - cross range:
+      - 1 ≤ attack_min + defence_min ≤ 5 (player class > 0)
+      - attack_max + defence_max ≤ 5 (player talent is limited by scale)
 
 - perks: ...
 
