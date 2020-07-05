@@ -13,6 +13,23 @@
 
   - fafi_name = lowcase
 
+- dynamic:
+
+  | property      | type                                    | req |
+  |---------------|:---------------------------------------:|:---:|
+  |               |                                         |     |
+  | full_name     | unique string(1~64)                     | n/a |
+  |               |                                         |     |
+  | age           | int(16~)                                | n/a |
+  |               |                                         |     |
+  | class         | int(1~5)                                | n/a |
+  | talent        | int(class~5)                            | n/a |
+
+  - full_name = name + particle + surname
+  - age = now - birth_date
+  - class = max(attack_min + defence_min)
+  - talent = max(attack_max + defence_max)
+
 
 ###### personal
 
@@ -28,10 +45,6 @@
   | birth_country | [nation](./models.MD/#nation-model)     | foreign       |  -  |
   | birth_city    | string(0~64)                            | VARCHAR(64)   |  -  |
   | birth_date    | date                                    | DATE          |  -  |
-  |               |                                         |               |     |
-  | current_age   | dynamic int                             |               |     |
-
-  - name + particle + surname = unique
 
 
 ###### skills
@@ -56,9 +69,6 @@
   | attack_max    | int(0~5)                                | tinyint       |  +  |
   | defence_min   | int(0~5)                                | tinyint       |  +  |
   | defence_max   | int(0~5)                                | tinyint       |  +  |
-  |               |                                         |               |     |
-  | class         | int(1~5)                                | dynamic       | n/a |
-  | talent        | int(class~5)                            | dynamic       | n/a |
 
   - possible positions:
     - GK
@@ -69,9 +79,6 @@
   - every assigned position is unique (aware: WB = LB + RB)
   - GK can't have another positions assigned
   - GK can't have attack attributes
-  - dynamic:
-    - class = max(attack_min + defence_min)
-    - talent = max(attack_max + defence_max)
   - attributes:
     - scale:
       - 0 ≤ attack_min ≤ 5
@@ -84,8 +91,6 @@
     - cross range:
       - 1 ≤ attack_min + defence_min ≤ 5
       - attack_min + defence_min ≤ attack_max + defence_max ≤ 5
-      - 1 ≤ class ≤ 5
-      - class ≤ talent ≤ 5
 
 - `TO_DO` perks: ...
 
