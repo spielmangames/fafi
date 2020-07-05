@@ -66,7 +66,7 @@
     - DM, CM, AM, LM, RM, WM
     - LF, RF, WF, SF, CF
   - player has from 1 to 4 positions assigned
-  - every assigned position is unique (aware: WB = LB+RB)
+  - every assigned position is unique (aware: WB = LB + RB)
   - GK can't have another positions assigned
   - GK can't have attack attributes
   - dynamic:
@@ -87,7 +87,7 @@
       - 1 ≤ class ≤ 5
       - class ≤ talent ≤ 5
 
-- perks: ...
+- `TO_DO` perks: ...
 
 
 ###### `IN_PROGRESS` career
