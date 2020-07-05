@@ -1,7 +1,7 @@
 
 ![scheme](https://github.com/spielmangames/fafi/blob/master/doc/player_model.jpg)
 
-# Player model
+# Player model contract
 
 - `MVP` basic:
 
@@ -12,6 +12,7 @@
   | status        | bool                                    | bit           |  +  |
 
   - fafi_name = unique
+  - fafi_name = lowcase
   - default status = 0
 
 
@@ -59,14 +60,14 @@
   | defence_max   | int(0~5)                                | tinyint       |  +  |
 
   - possible positions:
-    - gk
-    - cb, lb, rb, wb
-    - dm, cm, am, lm, rm, wm
-    - lf, rf, wf, ss, cf
+    - GK
+    - CB, LB, RB, WB
+    - DM, CM, AM, LM, RM, WM
+    - LF, RF, WF, SF, CF
   - player has from 1 to 4 positions assigned
-  - every assigned position is unique (`[wb] = [lb/rb]`, `[wm] = [lm/rm]`, `[wf] = [lf/rf]`)
-  - player with `gk` position can't have another positions assigned
-  - player with `gk` position can have 0 attack attribute level only
+  - every assigned position is unique (aware: WB = LB+RB)
+  - GK can't have another positions assigned
+  - GK can't have attack attributes
   - attributes:
     - scale:
       - 0 ≤ attack_min ≤ 5
