@@ -3,36 +3,35 @@
 
 # Player model contract
 
-- `MVP` basic:
+- basic:
 
   | property      | type                                    | sql           | req |
   |---------------|:---------------------------------------:|---------------|:---:|
   |               |                                         |               |     |
-  | fafi_name     | string(4~32)                            | VARCHAR(32)   |  +  |
-  | status        | bool                                    | bit           |  +  |
+  | fafi_name     | unique string(1~32)                     | VARCHAR(32)   |  +  |
+  | status        | bool=0                                  | bit           |  +  |
 
-  - fafi_name = unique
   - fafi_name = lowcase
-  - default status = 0
 
 
 ###### personal
 
-- `MVP` origin:
+- origin:
 
   | property      | type                                    | sql           | req |
   |---------------|:---------------------------------------:|---------------|:---:|
   |               |                                         |               |     |
-  | name          | string(32)                              | VARCHAR(32)   |  -  |
-  | particle      | string(8)                               | VARCHAR(8)    |  -  |
-  | surname       | string(32)                              | VARCHAR(32)   |  +  |
+  | name          | string(0~32)                            | VARCHAR(32)   |  -  |
+  | particle      | string(0~8)                             | VARCHAR(8)    |  -  |
+  | surname       | string(1~32)                            | VARCHAR(32)   |  +  |
   |               |                                         |               |     |
-  | birth_country | [nation](./models.MD/#nation-model)     | foreign       |  +  |
-  | birth_place   | string(64)                              | VARCHAR(64)   |  -  |
+  | birth_country | [nation](./models.MD/#nation-model)     | foreign       |  -  |
+  | birth_city    | string(0~64)                            | VARCHAR(64)   |  -  |
   | birth_date    | date                                    | DATE          |  -  |
+  |               |                                         |               |     |
+  | current_age   | dynamic int                             |               |     |
 
   - name + particle + surname = unique
-  - `???` 1st_char(name) + particle + surname = unique
 
 
 ###### skills
@@ -42,12 +41,11 @@
   | property      | type                                    | sql           | req |
   |---------------|:---------------------------------------:|---------------|:---:|
   |               |                                         |               |     |
-  | current_age   | int                                     | dymanic       | n/a |
-  | foot          | enum{L;R}                               | enum('L','R') |  -  |
+  | foot          | {L;R}                                   | enum('L','R') |  -  |
   | height        | int(111~222)                            | tinyint       |  -  |
-  | injure_factor | bool                                    | bit           |  -  |
+  | injure_factor | bool=0                                  | bit           |  -  |
 
-- `MVP` attributes (per position):
+- attributes (per position):
 
   | property      | type                                    | sql           | req |
   |---------------|:---------------------------------------:|---------------|:---:|
@@ -58,6 +56,9 @@
   | attack_max    | int(0~5)                                | tinyint       |  +  |
   | defence_min   | int(0~5)                                | tinyint       |  +  |
   | defence_max   | int(0~5)                                | tinyint       |  +  |
+  |               |                                         |               |     |
+  | class         | int(1~5)                                | dynamic       | n/a |
+  | talent        | int(class~5)                            | dynamic       | n/a |
 
   - possible positions:
     - GK
@@ -68,6 +69,9 @@
   - every assigned position is unique (aware: WB = LB+RB)
   - GK can't have another positions assigned
   - GK can't have attack attributes
+  - dynamic:
+    - class = max(attack_min + defence_min)
+    - talent = max(attack_max + defence_max)
   - attributes:
     - scale:
       - 0 ≤ attack_min ≤ 5
@@ -78,8 +82,10 @@
       - attack_min ≤ attack_max
       - defence_min ≤ defence_max
     - cross range:
-      - 1 ≤ attack_min + defence_min ≤ 5 (player class > 0)
-      - attack_max + defence_max ≤ 5 (player talent is limited by scale)
+      - 1 ≤ attack_min + defence_min ≤ 5
+      - attack_min + defence_min ≤ attack_max + defence_max ≤ 5
+      - 1 ≤ class ≤ 5
+      - class ≤ talent ≤ 5
 
 - perks: ...
 
