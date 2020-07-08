@@ -1,7 +1,7 @@
 
-![scheme](https://github.com/spielmangames/fafi/blob/master/doc/player_model.jpg)
-
 # Player model contract
+
+![scheme](https://github.com/spielmangames/fafi/blob/master/doc/player/player_model.jpg)
 
 - basic:
 
