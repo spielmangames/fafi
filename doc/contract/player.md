@@ -3,6 +3,9 @@
 
 ![scheme](https://github.com/spielmangames/fafi/blob/master/doc/contract/player_model.jpg)
 
+
+###### profile
+
 - basic:
 
   | property      | type                                    | sql           | req |
@@ -44,7 +47,7 @@
   |               |                                         |               |     |
   | birth_country | [nation](./models.MD/#nation-model)     | foreign       |  -  |
   | birth_city    | string(0~64)                            | VARCHAR(64)   |  -  |
-  | birth_date    | date                                    | DATE          |  -  |
+  | birth_date    | date(age<=16)                           | DATE          |  -  |
 
 
 ###### skills
@@ -95,8 +98,7 @@
 - `TO_DO` perks: ...
 
 
-###### `IN_PROGRESS` :wrench: career
-:wrench:
+###### `IN_PROGRESS` career
 
 - teams:
 
@@ -105,4 +107,3 @@
   |               |                                         |               |     |
   | nationalities | [NATION](./models.MD/#nation-model)s    | foreign       |  -  |
   | clubs         | [CLUB](./models.MD/#club-model)s        | foreign       |  -  |
-
