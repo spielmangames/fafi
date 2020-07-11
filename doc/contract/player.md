@@ -45,9 +45,9 @@
   | particle      | string(0~8)                             | VARCHAR(8)    |  -  |
   | surname       | string(1~32)                            | VARCHAR(32)   |  +  |
   |               |                                         |               |     |
-  | birth_country | [nation](./models.MD/#nation-model)     | foreign       |  -  |
+  | birth_country | `IN_PROGRESS` [nation](./models.MD/#nation-model)     | foreign       |  -  |
   | birth_city    | string(0~64)                            | VARCHAR(64)   |  -  |
-  | birth_date    | date(age<=16)                           | DATE          |  -  |
+  | birth_date    | date(age≥16)                           | DATE          |  -  |
 
 
 ###### skills
