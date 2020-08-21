@@ -2,16 +2,19 @@
 
 class schedulerTester
 {
-    // errors
+    // Q errors
     public const ERR_INVALID_GAMES_IN_POOL_QTY = 'Qty of Games in a pool is %d instead of %d';
     public const ERR_INVALID_MATCHDAYS_IN_POOL_QTY = 'Qty of Matchdays in a pool is %d instead of %d';
     public const ERR_INVALID_LAPS_IN_POOL_QTY = 'Qty of Laps in a pool is %d instead of %d';
+
+    // C errors
     public const ERR_INVALID_MATCHDAYS_IN_LAP_QTY = 'Lap #%d has %d Matchdays instead of %d';
     public const ERR_INVALID_GAMES_IN_MATCHDAY_QTY = 'Matchday #%d has %d Games instead of %d';
     public const ERR_INVALID_TEAMS_IN_GAME_QTY = 'Game #%d has %d Teams instead of %d';
     public const ERR_GAMES_HOME_IN_ROW_OVERLIMIT = 'Team %s plays too many Games at home (at least in Matchdays %s of Lap #%d), while the limit is %d';
     public const ERR_GAMES_AWAY_IN_ROW_OVERLIMIT = 'Team %s plays too many Games away (at least in Matchdays %s of Lap #%d), while the limit is %d';
     public const ERR_TEAM_MISSES_MATCHDAY = 'Not every Team plays in Matchday #%d';
+
     private $failedValidations = [];
 
     /** @var scheduler */
