@@ -7,16 +7,16 @@
 
       T = [team]s = {t1,t2, ...tn}
 
-        n : {4;8;16}
+        n : {2;4;8;16}
 
 - `S` is a collection of competition settings:
 `r` shows if replays are required;
-`d` shows the top limit of how many `G`ames each `t`eam can play home (or away) in a row.
+`v` shows the top limit of how many `G`ames each `t`eam can play home (or away) in a row.
 
       S = {r,d}
 
         r : BOOL : {F;T}
-        d : {1;2}
+        v : {1;2}
 
 
 
