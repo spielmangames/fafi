@@ -11,8 +11,8 @@ class schedulerTester
     public const ERR_INVALID_MATCHDAYS_IN_LAP_QTY = 'Lap #%d has %d Matchdays instead of %d';
     public const ERR_INVALID_GAMES_IN_MATCHDAY_QTY = 'Matchday #%d has %d Games instead of %d';
     public const ERR_INVALID_TEAMS_IN_GAME_QTY = 'Game #%d has %d Teams instead of %d';
-    public const ERR_GAMES_HOME_IN_ROW_OVERLIMIT = 'Team %s plays too many Games at home (at least in Matchdays %s of Lap #%d), while the limit is %d';
-    public const ERR_GAMES_AWAY_IN_ROW_OVERLIMIT = 'Team %s plays too many Games away (at least in Matchdays %s of Lap #%d), while the limit is %d';
+    public const ERR_GAMES_HOME_IN_ROW_OVERLIMIT = 'Team %s plays too many Games at home (at least in Matchdays ##%s of Lap #%d), while the limit is %d';
+    public const ERR_GAMES_AWAY_IN_ROW_OVERLIMIT = 'Team %s plays too many Games away (at least in Matchdays ##%s of Lap #%d), while the limit is %d';
     public const ERR_TEAM_MISSES_MATCHDAY = 'Not every Team plays in Matchday #%d';
 
     private $failedValidations = [];
@@ -148,12 +148,12 @@ class schedulerTester
                     }
 
                     if ($homeUnbalanced > $limit) {
-                        $mm = implode(', ', ['#' . $mPrev2, '#' . $mPrev1, '#' . $m]);
+                        $mm = implode(',', [$mPrev2, $mPrev1, $m]);
                         $this->failedValidations[] = sprintf(self::ERR_GAMES_HOME_IN_ROW_OVERLIMIT, $home, $mm, $l, $limit);
                         return false;
                     }
                     if ($awayUnbalanced > $limit) {
-                        $mm = implode(' & ', ['#' . $mPrev2, '#' . $mPrev1, '#' . $m]);
+                        $mm = implode(',', [$mPrev2, $mPrev1, $m]);
                         $this->failedValidations[] = sprintf(self::ERR_GAMES_AWAY_IN_ROW_OVERLIMIT, $away, $mm, $l, $limit);
                         return false;
                     }
