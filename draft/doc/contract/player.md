@@ -30,8 +30,8 @@
 
   - full_name = name + particle + surname
   - age = now - birth_date
-  - class = max(attack_min + defence_min)
-  - talent = max(attack_max + defence_max)
+  - class = max(class<sub>position</sub>)
+  - talent = max(talent<sub>position</sub>)
 
 
 ###### personal
