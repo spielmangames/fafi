@@ -1,7 +1,7 @@
 
 # Player model contract
 
-![scheme](https://github.com/spielmangames/fafi/blob/master/doc/contract/player_model.jpg)
+![scheme](https://github.com/spielmangames/fafi/blob/master/draft/doc/contract/player_model.jpg)
 
 
 ###### profile
@@ -14,7 +14,7 @@
   | fafi_name     | unique string(1~32)                     | VARCHAR(32)   |  +  |
   | status        | bool=0                                  | bit           |  +  |
 
-  - fafi_name = lowcase
+  - fafi_name : lowcase
 
 - dynamic:
 
@@ -95,10 +95,10 @@
       - 1 ≤ attack_min + defence_min ≤ 5
       - attack_min + defence_min ≤ attack_max + defence_max ≤ 5
 
-- `TO_DO` perks: ...
+- perks: `TO_DO`
 
 
-###### `IN_PROGRESS` career
+###### career `TO_DO`
 
 - teams:
 
@@ -107,3 +107,8 @@
   |               |                                         |               |     |
   | nationalities | [NATION](./models.MD/#nation-model)s    | foreign       |  -  |
   | clubs         | [CLUB](./models.MD/#club-model)s        | foreign       |  -  |
+
+
+###### gallery `TO_DO`
+
+
