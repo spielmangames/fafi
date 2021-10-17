@@ -1,6 +1,6 @@
 {
     "name": "vil11/fafi",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "description": "FAFI by SpielmanGames",
     "type": "project",
     "minimum-stability": "dev",
@@ -10,7 +10,7 @@
     },
     "autoload": {
         "files": [
-            "app/boot/bootstrap1.php"
+            "app/config/settings.php"
         ],
         "psr-4": {
             "FAFI\\": "app/"
