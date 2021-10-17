@@ -1,0 +1,19 @@
+{
+    "name": "vil11/fafi",
+    "version": "0.0.1",
+    "description": "FAFI by SpielmanGames",
+    "type": "project",
+    "minimum-stability": "dev",
+    "require": {
+        "laminas/laminas-dom": "^2.7@dev",
+        "vil11/hlpr": "dev-master"
+    },
+    "autoload": {
+        "files": [
+            "app/boot/bootstrap1.php"
+        ],
+        "psr-4": {
+            "FAFI\\": "app/"
+        }
+    }
+}
