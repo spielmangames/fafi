@@ -37,7 +37,7 @@ CREATE TABLE `cities` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 
-CREATE TABLE `countries_cities_assignments` (
+CREATE TABLE `cities_countries_assignments` (
     `id` INT(11) UNSIGNED AUTO_INCREMENT NOT NULL,
 
     `city_id` INT(11) UNSIGNED NOT NULL,
@@ -45,7 +45,7 @@ CREATE TABLE `countries_cities_assignments` (
     `country_id` INT(11) UNSIGNED NOT NULL,
 
     PRIMARY KEY (`id`),
-    UNIQUE KEY `u_countries_cities_assignments_city_id_country_id` (`city_id`, `country_id`)
+    UNIQUE KEY `u_cities_countries_assignments_city_id_country_id` (`city_id`, `country_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 
@@ -57,32 +57,31 @@ CREATE TABLE `countries_cities_assignments` (
 
 
 CREATE TABLE `players` (
-    `id` INT(11) NOT NULL AUTO_INCREMENT,
+    `id` INT(11) UNSIGNED AUTO_INCREMENT NOT NULL,
 
-    `fafi_name` varchar(32) COLLATE utf8_unicode_ci NOT NULL UNIQUE,
-    `status` bool NOT NULL DEFAULT 0,
+    `name` VARCHAR(32) COLLATE utf8_unicode_ci,
+    `particle` VARCHAR(8) COLLATE utf8_unicode_ci,
+    `surname` VARCHAR(32) COLLATE utf8_unicode_ci NOT NULL,
+    `fafi_surname` VARCHAR(32) COLLATE utf8_unicode_ci NOT NULL,
 
-    `name` varchar(32) COLLATE utf8_unicode_ci,
-    `particle` varchar(8) COLLATE utf8_unicode_ci,
-    `surname` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
-    `birth_city` varchar(64) COLLATE utf8_unicode_ci,
-    `birth_date` DATE,
-
-    `height` int UNSIGNED,
+    `height` TINYINT(3) UNSIGNED,
     `foot` ENUM('L', 'R'),
-    `injure_factor` bool
-
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
-
-CREATE TABLE `player_origins` (
-    `id` bigint(16) NOT NULL PRIMARY KEY AUTO_INCREMENT,
-
-    `player_id` bigint(16) NOT NULL,
+    `injure_factor` BIT DEFAULT FALSE,
 
     PRIMARY KEY (`id`),
-    CONSTRAINT `player_id` FOREIGN KEY (`player_id`) REFERENCES `players` (`id`) ON DELETE CASCADE
+    UNIQUE KEY `u_players_name_particle_surname` (`name`, `particle`, `surname`),
+    UNIQUE KEY `u_players_fafi_surname` (`fafi_surname`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+
+# CREATE TABLE `player_origins` (
+#     `id` bigint(16) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+#
+#     `player_id` bigint(16) NOT NULL,
+#
+#     PRIMARY KEY (`id`),
+#     CONSTRAINT `player_id` FOREIGN KEY (`player_id`) REFERENCES `players` (`id`) ON DELETE CASCADE
+# ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 
 
