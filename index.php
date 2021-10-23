@@ -9,3 +9,4 @@ require_once 'app/boot/bootstrap.php';
 $playerService = new PlayerService();
 $playerService->create([PlayerResource::FAFI_NAME => 'test']);
 
+
