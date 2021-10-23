@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "10ff92c20a417bcdbf16a4ad3d7ca04d",
+    "content-hash": "1c73528363a28e6ec61dedad31aeab4f",
     "packages": [
         {
             "name": "laminas/laminas-dom",
@@ -179,7 +179,9 @@
     },
     "prefer-stable": false,
     "prefer-lowest": false,
-    "platform": [],
+    "platform": {
+        "ext-mysqli": "*"
+    },
     "platform-dev": [],
     "plugin-api-version": "1.1.0"
 }
