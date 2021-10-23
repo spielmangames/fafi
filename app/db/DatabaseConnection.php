@@ -2,7 +2,7 @@
 
 namespace FAFI\db;
 
-use FAFI\config\Setting;
+use FAFI\config\Settings;
 use mysqli;
 
 class DatabaseConnection
@@ -16,9 +16,9 @@ class DatabaseConnection
 
     public function open(): self
     {
-        $servername = Setting::getInstance()->get('db/host');
-        $username = Setting::getInstance()->get('db/user');
-        $password = Setting::getInstance()->get('db/pass');
+        $servername = Settings::getInstance()->get('db/host');
+        $username = Settings::getInstance()->get('db/user');
+        $password = Settings::getInstance()->get('db/pass');
 
         $this->connection = new mysqli($servername, $username, $password);
         $this->verifyConnect($this->connection);
@@ -35,8 +35,12 @@ class DatabaseConnection
 
     public function use(): self
     {
-        $db = Setting::getInstance()->get('db/name');
-        $this->getConnection()->select_db($db);
+        $db = Settings::getInstance()->get('db/name');
+
+        $result = $this->getConnection()->select_db($db);
+        if(!$result) {
+            throw new \Exception('Failure on selecting the database.');
+        }
 
         return $this;
     }
@@ -51,7 +55,7 @@ class DatabaseConnection
         $connection = $this->getConnection();
         if ($connection) {
             if (!$connection->close()) {
-                echo 'Failure on closing the database connection!';
+                echo 'Failure on closing the database connection.';
             }
             unset($this->connection);
         }

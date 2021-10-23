@@ -2,7 +2,7 @@
 
 namespace FAFI\config;
 
-class Setting
+class Settings
 {
     protected $path;
     protected $settings;
@@ -42,8 +42,8 @@ class Setting
         return $settings;
     }
 
-    /** @return Setting */
-    public static function getInstance(): Setting
+    /** @return Settings */
+    public static function getInstance(): Settings
     {
         if (is_null(self::$instance)) {
             self::$instance = new self();
