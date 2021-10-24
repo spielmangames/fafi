@@ -41,7 +41,7 @@ CREATE TABLE `cities_countries_assignments` (
     `id` INT(11) UNSIGNED AUTO_INCREMENT NOT NULL,
 
     `city_id` INT(11) UNSIGNED NOT NULL,
-    `state` VARCHAR(32) NOT NULL,
+    `state` VARCHAR(32),
     `country_id` INT(11) UNSIGNED NOT NULL,
 
     PRIMARY KEY (`id`),
@@ -66,7 +66,7 @@ CREATE TABLE `players` (
 
     `height` TINYINT(3) UNSIGNED,
     `foot` ENUM('L', 'R'),
-    `injure_factor` BIT DEFAULT FALSE,
+    `injure_factor` BIT DEFAULT 0,
 
     PRIMARY KEY (`id`),
     UNIQUE KEY `u_players_name_particle_surname` (`name`, `particle`, `surname`),
