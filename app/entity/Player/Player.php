@@ -4,47 +4,56 @@ namespace FAFI\entity\Player;
 
 class Player
 {
-    // profile basic
-    protected string $fafiName;
-    protected bool $status;
+    // profile: basic
+    private ?int $id;
 
-    // personal origin
-    protected string $name;
-    protected string $particle;
+    // personal: origin
+    protected ?string $name;
+    protected ?string $particle;
     protected string $surname;
-    protected string $birthCountry;
-    protected string $birthCity;
-    protected string $birthDate;
+    protected string $fafiSurname;
+//    protected string $birthCountry;
+//    protected string $birthCity;
+//    protected string $birthDate;
 
-    // skills shape
-    protected int $height;
-    protected string $foot;
-    protected bool $injureFactor;
-
-    // skills attributes
-    protected array $attributes;
+    // skills: shape
+    protected ?int $height;
+    protected ?string $foot;
+    protected ?bool $injureFactor;
 
 
-    public function setFafiName(string $fafiName): self
-    {
-        $this->fafiName = $fafiName;
-        return $this;
+    public function __construct(
+        ?int $id,
+        ?string $name,
+        ?string $particle,
+        string $surname,
+        string $fafiName,
+//        string $birthCountry,
+//        string $birthCity,
+//        string $birthDate,
+        ?int $height,
+        ?string $foot,
+        ?bool $injureFactor
+    ) {
+        $this->id = $id;
+
+        $this->name = $name;
+        $this->particle = $particle;
+        $this->surname = $surname;
+        $this->fafiSurname = $fafiName;
+//        $this->birthCountry = $birthCountry;
+//        $this->birthCity = $birthCity;
+//        $this->birthDate = $birthDate;
+
+        $this->height = $height;
+        $this->foot = $foot;
+        $this->injureFactor = $injureFactor;
     }
 
-    public function getFafiName(): string
-    {
-        return $this->fafiName;
-    }
 
-    public function setStatus(bool $status): self
+    public function getId(): ?int
     {
-        $this->status = $status;
-        return $this;
-    }
-
-    public function getStatus(): bool
-    {
-        return $this->status;
+        return $this->id;
     }
 
 
@@ -81,38 +90,49 @@ class Player
         return $this->surname;
     }
 
-    public function setBirthCountry(string $birthCountry): self
+    public function setFafiSurname(string $fafiSurname): self
     {
-        $this->birthCountry = $birthCountry;
+        $this->fafiSurname = $fafiSurname;
         return $this;
     }
 
-    public function getBirthCountry(): string
+    public function getFafiSurname(): string
     {
-        return $this->birthCountry;
+        return $this->fafiSurname;
     }
 
-    public function setBirthCity(string $birthCity): self
-    {
-        $this->birthCity = $birthCity;
-        return $this;
-    }
-
-    public function getBirthCity(): string
-    {
-        return $this->birthCity;
-    }
-
-    public function setBirthDate(string $birthDate): self
-    {
-        $this->birthDate = $birthDate;
-        return $this;
-    }
-
-    public function getBirthDate(): string
-    {
-        return $this->birthDate;
-    }
+//    public function setBirthCountry(string $birthCountry): self
+//    {
+//        $this->birthCountry = $birthCountry;
+//        return $this;
+//    }
+//
+//    public function getBirthCountry(): string
+//    {
+//        return $this->birthCountry;
+//    }
+//
+//    public function setBirthCity(string $birthCity): self
+//    {
+//        $this->birthCity = $birthCity;
+//        return $this;
+//    }
+//
+//    public function getBirthCity(): string
+//    {
+//        return $this->birthCity;
+//    }
+//
+//    public function setBirthDate(string $birthDate): self
+//    {
+//        $this->birthDate = $birthDate;
+//        return $this;
+//    }
+//
+//    public function getBirthDate(): string
+//    {
+//        return $this->birthDate;
+//    }
 
 
     public function setHeight(int $height): self
@@ -146,17 +166,5 @@ class Player
     public function getInjureFactor(): bool
     {
         return $this->injureFactor;
-    }
-
-
-    public function setAttributes(array $attributes): self
-    {
-        $this->attributes = $attributes;
-        return $this;
-    }
-
-    public function getAttributes(): array
-    {
-        return $this->attributes;
     }
 }

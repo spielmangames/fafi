@@ -2,15 +2,27 @@
 
 namespace FAFI\entity\Player;
 
-use FAFI\entity\Player\Repository\PlayerResource;
+use Exception;
+use FAFI\entity\Player\Repository\PlayerRepository;
 
 class PlayerService
 {
-    public function create(array $playerData): void
-    {
-        $player = new Player();
-        $player->setFafiName($playerData[PlayerResource::FAFI_NAME]);
+    private PlayerRepository $playerRepository;
 
-        $zzz = 1;
+
+    public function __construct()
+    {
+        $this->playerRepository = new PlayerRepository();
+    }
+
+
+    /**
+     * @param Player $player
+     * @return Player
+     * @throws Exception
+     */
+    public function create(Player $player): Player
+    {
+        return $this->playerRepository->save($player);
     }
 }
