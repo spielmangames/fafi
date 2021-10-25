@@ -21,10 +21,10 @@ class PlayerRepository
         return $this->playerResource->readFirst($criteria);
     }
 
-//    public function findCollection(PlayerCriteria $criteria, int $offset, int $limit): array
-//    {
-//        return $this->playerResource->read($criteria, $offset, $limit);
-//    }
+    public function findCollection(PlayerCriteria $criteria, int $offset, int $limit): array
+    {
+        return $this->playerResource->read($criteria, $offset, $limit);
+    }
 
 //    public function count(PlayerCriteria $criteria): int
 //    {

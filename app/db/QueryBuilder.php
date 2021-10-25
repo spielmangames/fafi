@@ -16,4 +16,19 @@ class QueryBuilder
     {
         return $this->query;
     }
+
+    public function filterOutEmpty(array $data): array
+    {
+        return array_filter($data);
+    }
+
+    public function formColumns(array $data): string
+    {
+        return implode(', ', array_keys($data));
+    }
+
+    public function formValues(array $data): string
+    {
+        return '"' . implode('", "', $data) . '"';
+    }
 }

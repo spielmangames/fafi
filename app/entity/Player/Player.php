@@ -63,7 +63,7 @@ class Player
         return $this;
     }
 
-    public function getName(): string
+    public function getName(): ?string
     {
         return $this->name;
     }
@@ -74,7 +74,7 @@ class Player
         return $this;
     }
 
-    public function getParticle(): string
+    public function getParticle(): ?string
     {
         return $this->particle;
     }
@@ -141,7 +141,7 @@ class Player
         return $this;
     }
 
-    public function getHeight(): int
+    public function getHeight(): ?int
     {
         return $this->height;
     }
@@ -152,7 +152,7 @@ class Player
         return $this;
     }
 
-    public function getFoot(): string
+    public function getFoot(): ?string
     {
         return $this->foot;
     }
@@ -163,7 +163,7 @@ class Player
         return $this;
     }
 
-    public function getInjureFactor(): bool
+    public function getInjureFactor(): ?bool
     {
         return $this->injureFactor;
     }

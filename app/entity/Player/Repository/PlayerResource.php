@@ -68,26 +68,39 @@ class PlayerResource extends AbstractResource
             throw new Exception('"id" must be null for creating Player.');
         }
 
-        $connect = $this->dbConnection->init();
-
-        $playerModel = $this->hydrator->extract($player);
+        $playerData = $this->hydrator->extract($player);
+        $playerData = $this->queryBuilder->filterOutEmpty($playerData);
 
         $query = 'INSERT INTO %s (%s) VALUES (%s);';
-        $query = sprintf($query, self::TABLE, $this->getColumns(), $playerModel);
+        $query = sprintf(
+            $query,
+            self::TABLE,
+            $this->queryBuilder->formColumns($playerData),
+            $this->queryBuilder->formValues($playerData)
+        );
 
-        $result = $connect->query($query);
-        if (!$result) {
-            echo $connect->error;
-        }
-        $playerId = 123;
+        $connect = $this->dbConnection->open();
 
-        if (!$playerId) {
-            throw new Exception('Player creation failed.');
+        $connect->begin_transaction();
+        try {
+            if (!$connect->query($query)) {
+                throw new Exception('Player creation failed: ' . $connect->error);
+            }
+
+            $playerId = $connect->insert_id;
+            if (!$playerId) {
+                throw new Exception('Player creation failed.');
+            }
+        } catch (Exception $e) {
+            $connect->rollback();
+            $this->dbConnection->close();
+
+            throw $e;
         }
+        $connect->commit();
 
         $criteria = new PlayerCriteria([$playerId]);
         $result = $this->readFirst($criteria);
-
         if (!$result) {
             throw new Exception(sprintf('Player (id = %d) is absent in storage.', $playerId));
         }
@@ -97,15 +110,22 @@ class PlayerResource extends AbstractResource
         return $result;
     }
 
-//    public function read(PlayerCriteria $criteria, int $offset = 0, int $limit = self::DEFAULT_READ_LIMIT): array
-//    {
-//        $result = [];
-//        foreach ($this->select($criteria, $offset, $limit) as $data) {
-//            $result[] = $this->hydrator->hydrate($data);
-//        }
-//
-//        return $result;
-//    }
+    /**
+     * @param PlayerCriteria $criteria
+     * @param int $offset
+     * @param int $limit
+     * @return array
+     * @throws Exception
+     */
+    public function read(PlayerCriteria $criteria, int $offset = 0, int $limit = self::DEFAULT_READ_LIMIT): ?array
+    {
+        $result = [];
+        foreach ($this->select($criteria, $offset, $limit) as $data) {
+            $result[] = $this->hydrator->hydrate($data);
+        }
+
+        return $result;
+    }
 
     public function readFirst(PlayerCriteria $criteria): ?Player
     {
@@ -116,7 +136,7 @@ class PlayerResource extends AbstractResource
     public function update(Player $player): Player
     {
         if (!$player->getId()) {
-            throw new Exception('ID is required for updating ImportChunk and can not be null.');
+            throw new Exception('ID is required for updating Player and can not be null.');
         }
 
 //        $this->connect->table(self::TABLE)
@@ -192,10 +212,5 @@ class PlayerResource extends AbstractResource
         if ($criteria->getStatuses()) {
             $query->whereIn(self::IMPORT_STATUS_FIELD, $criteria->getStatuses());
         }
-    }
-
-    private function getColumns(): string
-    {
-        return implode(', ', self::COLUMNS);
     }
 }
