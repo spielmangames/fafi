@@ -2,8 +2,8 @@
 
 namespace FAFI\entity\Player;
 
-use Exception;
 use FAFI\entity\Player\Repository\PlayerResource;
+use FAFI\exception\FafiException;
 
 class PlayerHydrator
 {
@@ -12,10 +12,15 @@ class PlayerHydrator
         PlayerResource::FAFI_SURNAME_FIELD,
     ];
 
+    /**
+     * @param array $data
+     * @return Player
+     * @throws FafiException
+     */
     public function hydrate(array $data): Player
     {
         if (!$this->checkRequiredFields($data)) {
-            throw new Exception('Required fields are missed.');
+            throw new FafiException('Required fields are missed.');
         }
 
         return new Player(

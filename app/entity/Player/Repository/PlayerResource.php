@@ -2,10 +2,10 @@
 
 namespace FAFI\entity\Player\Repository;
 
-use Exception;
 use FAFI\entity\AbstractResource;
 use FAFI\entity\Player\Player;
 use FAFI\entity\Player\PlayerHydrator;
+use FAFI\exception\FafiException;
 
 class PlayerResource extends AbstractResource
 {
@@ -45,9 +45,6 @@ class PlayerResource extends AbstractResource
     public const INJURE_FACTOR_FIELD = 'injure_factor';
 
 
-    private const DEFAULT_READ_LIMIT = 50;
-
-
     private PlayerHydrator $hydrator;
 
     public function __construct()
@@ -60,12 +57,12 @@ class PlayerResource extends AbstractResource
     /**
      * @param Player $player
      * @return Player
-     * @throws Exception
+     * @throws FafiException
      */
     public function create(Player $player): Player
     {
         if ($player->getId()) {
-            throw new Exception('"id" must be null for creating Player.');
+            throw new FafiException('"id" must be null for creating Player.');
         }
 
         $playerData = $this->hydrator->extract($player);
@@ -84,14 +81,14 @@ class PlayerResource extends AbstractResource
         $connect->begin_transaction();
         try {
             if (!$connect->query($query)) {
-                throw new Exception('Player creation failed: ' . $connect->error);
+                throw new FafiException('Failed to create Player item.' . "\n" . $connect->error);
             }
 
             $playerId = $connect->insert_id;
             if (!$playerId) {
-                throw new Exception('Player creation failed.');
+                throw new FafiException('Failed to create Player item.');
             }
-        } catch (Exception $e) {
+        } catch (FafiException $e) {
             $connect->rollback();
             $this->dbConnection->close();
 
@@ -102,7 +99,7 @@ class PlayerResource extends AbstractResource
         $criteria = new PlayerCriteria([$playerId]);
         $result = $this->readFirst($criteria);
         if (!$result) {
-            throw new Exception(sprintf('Player (id = %d) is absent in storage.', $playerId));
+            throw new FafiException(sprintf('Player (id = %d) is absent in storage.', $playerId));
         }
 
         $this->dbConnection->close();
@@ -112,21 +109,24 @@ class PlayerResource extends AbstractResource
 
     /**
      * @param PlayerCriteria $criteria
-     * @param int $offset
-     * @param int $limit
-     * @return array
-     * @throws Exception
+     * @return array|null
+     * @throws FafiException
      */
-    public function read(PlayerCriteria $criteria, int $offset = 0, int $limit = self::DEFAULT_READ_LIMIT): ?array
+    public function read(PlayerCriteria $criteria): ?array
     {
         $result = [];
-        foreach ($this->select($criteria, $offset, $limit) as $data) {
+        foreach ($this->select($criteria) as $data) {
             $result[] = $this->hydrator->hydrate($data);
         }
 
         return $result;
     }
 
+    /**
+     * @param PlayerCriteria $criteria
+     * @return Player|null
+     * @throws FafiException
+     */
     public function readFirst(PlayerCriteria $criteria): ?Player
     {
         $result = $this->select($criteria, 0, 1)->first();
@@ -136,7 +136,7 @@ class PlayerResource extends AbstractResource
     public function update(Player $player): Player
     {
         if (!$player->getId()) {
-            throw new Exception('ID is required for updating Player and can not be null.');
+            throw new FafiException('ID is required for updating Player and can not be null.');
         }
 
 //        $this->connect->table(self::TABLE)
@@ -172,45 +172,66 @@ class PlayerResource extends AbstractResource
 //        return (bool)$query->delete();
 //    }
 
-//    public function count(PlayerCriteria $criteria): int
-//    {
-//        $query = $this->connection->table(self::TABLE);
-//
-//        if (!$criteria->isEmpty()) {
-//            $this->buildWhere($query, $criteria);
-//        }
-//
-//        return $query->count();
-//    }
-
-    private function select(PlayerCriteria $criteria, int $offset, int $limit): Collection
+    public function count(PlayerCriteria $criteria): int
     {
-        $query = $this->dbConnection->getConnection()->query()
-            ->select('*')
-            ->from(self::TABLE)
-            ->orderByDesc(self::ID_FIELD);
+        $query = $this->connection->table(self::TABLE);
 
         if (!$criteria->isEmpty()) {
-            $this->buildWhere($query, $criteria);
+            $this->formWhere($criteria);
         }
-        $query->offset($offset);
-        $query->limit($limit);
 
-        return $query->get();
+        return $query->count();
     }
 
-    private function buildWhere(Builder $query, PlayerCriteria $criteria): void
+    /**
+     * @param PlayerCriteria $criteria
+     * @return array
+     * @throws FafiException
+     */
+    private function select(PlayerCriteria $criteria): array
     {
+        $query = 'SELECT %s FROM %s %s;';
+        $query = sprintf(
+            $query,
+            '*',
+            self::TABLE,
+            $criteria->isEmpty() ? '' : $this->formWhere($criteria)
+        );
+
+        $connect = $this->dbConnection->open();
+
+        $connect->begin_transaction();
+        try {
+            $result = $connect->query($query);
+            if (!$result) {
+                throw new FafiException('Failed to read Player items.' . "\n" . $connect->error);
+            }
+
+            $selection = $result->fetch_all();
+            if (!$selection) {
+                throw new FafiException('Failed to read Player items.');
+            }
+        } catch (FafiException $e) {
+            $connect->rollback();
+            $this->dbConnection->close();
+
+            throw $e;
+        }
+        $connect->commit();
+
+        $this->dbConnection->close();
+
+        return [];
+    }
+
+    private function formWhere(PlayerCriteria $criteria): string
+    {
+        $query = 'WHERE';
+
         if ($criteria->getPlayerIds()) {
-            $query->whereIn(self::ID_FIELD, $criteria->getPlayerIds());
+            $query .= ' ' . self::ID_FIELD . '' . $criteria->getPlayerIds();
         }
 
-        if ($criteria->getEntity()) {
-            $query->where(self::ENTITY_FIELD, '=', $criteria->getEntity());
-        }
-
-        if ($criteria->getStatuses()) {
-            $query->whereIn(self::IMPORT_STATUS_FIELD, $criteria->getStatuses());
-        }
+        return $query;
     }
 }

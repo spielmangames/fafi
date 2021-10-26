@@ -14,11 +14,11 @@ class PlayersFilter
 
 
     public function __construct(
-        ?array $importIds,
+        ?array $playerIds = null,
         int $offset = 0,
         int $limit = self::DEFAULT_READ_LIMIT
     ) {
-        $this->playerIds = $importIds;
+        $this->playerIds = $playerIds;
 
         $this->offset = $offset;
         $this->limit = $limit;

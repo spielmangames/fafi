@@ -2,8 +2,8 @@
 
 namespace FAFI\entity\Player\Repository;
 
-use Exception;
 use FAFI\entity\Player\Player;
+use FAFI\exception\FafiException;
 
 class PlayerRepository
 {
@@ -15,26 +15,36 @@ class PlayerRepository
     }
 
 
+    /**
+     * @param int $id
+     * @return Player|null
+     * @throws FafiException
+     */
     public function findById(int $id): ?Player
     {
         $criteria = new PlayerCriteria([$id]);
         return $this->playerResource->readFirst($criteria);
     }
 
-    public function findCollection(PlayerCriteria $criteria, int $offset, int $limit): array
+    /**
+     * @param PlayerCriteria $criteria
+     * @return array
+     * @throws FafiException
+     */
+    public function findCollection(PlayerCriteria $criteria): array
     {
-        return $this->playerResource->read($criteria, $offset, $limit);
+        return $this->playerResource->read($criteria);
     }
 
-//    public function count(PlayerCriteria $criteria): int
-//    {
-//        return $this->playerResource->count($criteria);
-//    }
+    public function count(PlayerCriteria $criteria): int
+    {
+        return $this->playerResource->count($criteria);
+    }
 
     /**
      * @param Player $player
      * @return Player
-     * @throws Exception
+     * @throws FafiException
      */
     public function save(Player $player): Player
     {

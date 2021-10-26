@@ -11,11 +11,20 @@ $fafi = new FAFI();
 $playerService = $fafi->getPlayerService();
 
 
-$filter = new PlayersFilter([18]);
-$player = $playerService->read($filter);
+// TESTING:
 
+// read
+$filter = new PlayersFilter();
+$players = $playerService->read($filter);
+$filter2 = new PlayersFilter([18]);
+$players2 = $playerService->read($filter);
+
+
+// create...
 $player = new Player(null, null, null, 'Serginho' . time(), 'Serjinio' . time(), null, null, null);
 $player = $playerService->create($player);
 
+
+// update..
 
 $zzz = 1;

@@ -2,14 +2,13 @@
 
 namespace FAFI\entity\Player;
 
-use Exception;
 use FAFI\entity\Player\Repository\PlayerCriteria;
 use FAFI\entity\Player\Repository\PlayerRepository;
+use FAFI\exception\FafiException;
 
 class PlayerService
 {
     private PlayerRepository $playerRepository;
-
 
     public function __construct()
     {
@@ -20,28 +19,23 @@ class PlayerService
     /**
      * @param Player $player
      * @return Player
-     * @throws Exception
+     * @throws FafiException
      */
     public function create(Player $player): Player
     {
         return $this->playerRepository->save($player);
     }
 
+    /**
+     * @param PlayersFilter $filter
+     * @return array
+     * @throws FafiException
+     */
     public function read(PlayersFilter $filter): array
     {
         $criteria = new PlayerCriteria($filter->getPlayerIds());
-        $players = $this->playerRepository->findCollection(
-            $criteria,
-            $filter->getOffset(),
-            $filter->getLimit()
-        );
+        $players = $this->playerRepository->findCollection($criteria);
 
-        $pagination = new Pagination(
-            $filter->getOffset(),
-            $filter->getLimit(),
-            $this->playerRepository->getCount($criteria)
-        );
-
-        return new QueryResponse($players, $pagination);
+        return $players;
     }
 }
