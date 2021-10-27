@@ -12,6 +12,7 @@ class PlayerHydrator
         PlayerResource::FAFI_SURNAME_FIELD,
     ];
 
+
     /**
      * @param array $data
      * @return Player
@@ -19,9 +20,7 @@ class PlayerHydrator
      */
     public function hydrate(array $data): Player
     {
-        if (!$this->checkRequiredFields($data)) {
-            throw new FafiException('Required fields are missed.');
-        }
+        $this->checkRequiredFields($data);
 
         return new Player(
             isset($data[PlayerResource::ID_FIELD]) ? (int)$data[PlayerResource::ID_FIELD] : null,
@@ -40,15 +39,23 @@ class PlayerHydrator
         );
     }
 
-    private function checkRequiredFields(array $data): bool
+    /**
+     * @param array $data
+     * @return void
+     * @throws FafiException
+     */
+    private function checkRequiredFields(array $data): void
     {
+        $missed = [];
         foreach ($this->requiredFields as $field) {
             if (!isset($data[$field])) {
-                return false;
+                $missed[] = $field;
             }
         }
 
-        return true;
+        if (!empty($missed)) {
+            throw new FafiException(sprintf('Required fields are missed: "%s".', implode('", "', $missed)));
+        }
     }
 
     public function extract(Player $player): array

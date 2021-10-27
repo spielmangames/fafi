@@ -115,8 +115,8 @@ class PlayerResource extends AbstractResource
     public function read(PlayerCriteria $criteria): ?array
     {
         $result = [];
-        foreach ($this->select($criteria) as $data) {
-            $result[] = $this->hydrator->hydrate($data);
+        foreach ($this->select($criteria) as $item) {
+            $result[] = $this->hydrator->hydrate($item);
         }
 
         return $result;
@@ -133,6 +133,11 @@ class PlayerResource extends AbstractResource
         return ($result) ? $this->hydrator->hydrate($result) : null;
     }
 
+    /**
+     * @param Player $player
+     * @return Player
+     * @throws FafiException
+     */
     public function update(Player $player): Player
     {
         if (!$player->getId()) {
@@ -172,16 +177,17 @@ class PlayerResource extends AbstractResource
 //        return (bool)$query->delete();
 //    }
 
-    public function count(PlayerCriteria $criteria): int
-    {
-        $query = $this->connection->table(self::TABLE);
+//    public function count(PlayerCriteria $criteria): int
+//    {
+//        $query = $this->connection->table(self::TABLE);
+//
+//        if (!$criteria->isEmpty()) {
+//            $this->formWhere($criteria);
+//        }
+//
+//        return $query->count();
+//    }
 
-        if (!$criteria->isEmpty()) {
-            $this->formWhere($criteria);
-        }
-
-        return $query->count();
-    }
 
     /**
      * @param PlayerCriteria $criteria

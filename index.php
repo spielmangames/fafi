@@ -25,6 +25,7 @@ $player = new Player(null, null, null, 'Serginho' . time(), 'Serjinio' . time(),
 $player = $playerService->create($player);
 
 
-// update..
+// update...
+// delete...
 
 $zzz = 1;

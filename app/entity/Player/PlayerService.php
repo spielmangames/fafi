@@ -34,8 +34,16 @@ class PlayerService
     public function read(PlayersFilter $filter): array
     {
         $criteria = new PlayerCriteria($filter->getPlayerIds());
-        $players = $this->playerRepository->findCollection($criteria);
+        return $this->playerRepository->findCollection($criteria);
+    }
 
-        return $players;
+    public function update()
+    {
+        // TO BE IMPLEMENTED
+    }
+
+    public function delete()
+    {
+        // TO BE IMPLEMENTED
     }
 }

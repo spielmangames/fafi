@@ -5,17 +5,20 @@ namespace FAFI\entity\Player\Repository;
 class PlayerCriteria
 {
     private ?array $playerIds;
-    private ?string $entity;
-    private ?array $statuses;
+    private ?string $statuses;
 
     /**
      * @param array|null $playerIds
+     * @param string|null $statuses
      */
     public function __construct(
-        ?array $playerIds = null
+        ?array $playerIds = null,
+        ?string $statuses = null
     ) {
         $this->playerIds = $playerIds;
+        $this->statuses = $statuses;
     }
+
 
     public function getPlayerIds(): ?array
     {
@@ -25,6 +28,6 @@ class PlayerCriteria
 
     public function isEmpty(): bool
     {
-        return empty($this->entity) && empty($this->importIds) && empty($this->statuses);
+        return empty($this->playerIds) && empty($this->statuses);
     }
 }

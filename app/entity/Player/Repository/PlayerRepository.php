@@ -15,6 +15,17 @@ class PlayerRepository
     }
 
 
+//    public function count(PlayerCriteria $criteria): int
+//    {
+//        return $this->playerResource->count($criteria);
+//    }
+
+//    public function delete(Player $player): bool
+//    {
+//        $criteria = new PlayerCriteria([$player->getId()]);
+//        return $this->playerResource->delete($criteria);
+//    }
+
     /**
      * @param int $id
      * @return Player|null
@@ -28,17 +39,12 @@ class PlayerRepository
 
     /**
      * @param PlayerCriteria $criteria
-     * @return array
+     * @return Player[]
      * @throws FafiException
      */
     public function findCollection(PlayerCriteria $criteria): array
     {
         return $this->playerResource->read($criteria);
-    }
-
-    public function count(PlayerCriteria $criteria): int
-    {
-        return $this->playerResource->count($criteria);
     }
 
     /**
@@ -51,14 +57,8 @@ class PlayerRepository
         return $player->getId() ? $this->playerResource->update($player) : $this->playerResource->create($player);
     }
 
-//    public function delete(Player $player): bool
+//    public function updateFoot(int $playerId, string $foot): bool
 //    {
-//        $criteria = new PlayerCriteria([$player->getId()]);
-//        return $this->playerResource->delete($criteria);
-//    }
-
-//    public function updateStatus(int $playerId, string $status): bool
-//    {
-//        return (bool)$this->playerResource->patch($playerId, [PlayerResource::FIELD => $status]);
+//        return (bool)$this->playerResource->patch($playerId, [PlayerResource::FOOT_FIELD => $foot]);
 //    }
 }
