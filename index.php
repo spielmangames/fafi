@@ -16,8 +16,8 @@ $playerService = $fafi->getPlayerService();
 // read
 $filter = new PlayersFilter();
 $players = $playerService->read($filter);
-$filter2 = new PlayersFilter([18]);
-$players2 = $playerService->read($filter);
+$filter2 = new PlayersFilter([18, 19, 20]);
+$players2 = $playerService->read($filter2);
 
 
 // create...

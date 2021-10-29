@@ -7,6 +7,10 @@ use FAFI\db\QueryBuilder;
 
 class AbstractResource
 {
+    // profile basic
+    public const ID_FIELD = 'id';
+
+
     protected DatabaseConnection $dbConnection;
     protected QueryBuilder $queryBuilder;
 

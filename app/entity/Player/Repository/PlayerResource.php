@@ -27,9 +27,6 @@ class PlayerResource extends AbstractResource
     ];
 
 
-    // profile basic
-    public const ID_FIELD = 'id';
-
     // personal origin
     public const NAME_FIELD = 'name';
     public const PARTICLE_FIELD = 'particle';
@@ -67,20 +64,14 @@ class PlayerResource extends AbstractResource
 
         $playerData = $this->hydrator->extract($player);
         $playerData = $this->queryBuilder->filterOutEmpty($playerData);
-
-        $query = 'INSERT INTO %s (%s) VALUES (%s);';
-        $query = sprintf(
-            $query,
-            self::TABLE,
-            $this->queryBuilder->formColumns($playerData),
-            $this->queryBuilder->formValues($playerData)
-        );
+        $query = $this->queryBuilder->formInsert(self::TABLE, $playerData);
 
         $connect = $this->dbConnection->open();
 
         $connect->begin_transaction();
         try {
-            if (!$connect->query($query)) {
+            $result = $connect->query($query);
+            if (!$result) {
                 throw new FafiException('Failed to create Player item.' . "\n" . $connect->error);
             }
 
@@ -129,8 +120,8 @@ class PlayerResource extends AbstractResource
      */
     public function readFirst(PlayerCriteria $criteria): ?Player
     {
-        $result = $this->select($criteria, 0, 1)->first();
-        return ($result) ? $this->hydrator->hydrate($result) : null;
+        $result = $this->select($criteria);
+        return (!empty($result)) ? $this->hydrator->hydrate($result[0]) : null;
     }
 
     /**
@@ -196,13 +187,7 @@ class PlayerResource extends AbstractResource
      */
     private function select(PlayerCriteria $criteria): array
     {
-        $query = 'SELECT %s FROM %s %s;';
-        $query = sprintf(
-            $query,
-            '*',
-            self::TABLE,
-            $criteria->isEmpty() ? '' : $this->formWhere($criteria)
-        );
+        $query = $this->queryBuilder->formSelect(self::TABLE, $criteria);
 
         $connect = $this->dbConnection->open();
 
@@ -213,9 +198,9 @@ class PlayerResource extends AbstractResource
                 throw new FafiException('Failed to read Player items.' . "\n" . $connect->error);
             }
 
-            $selection = $result->fetch_all();
-            if (!$selection) {
-                throw new FafiException('Failed to read Player items.');
+            $selection = [];
+            while ($row = $result->fetch_assoc()) {
+                $selection[] = $row;
             }
         } catch (FafiException $e) {
             $connect->rollback();
@@ -227,17 +212,6 @@ class PlayerResource extends AbstractResource
 
         $this->dbConnection->close();
 
-        return [];
-    }
-
-    private function formWhere(PlayerCriteria $criteria): string
-    {
-        $query = 'WHERE';
-
-        if ($criteria->getPlayerIds()) {
-            $query .= ' ' . self::ID_FIELD . '' . $criteria->getPlayerIds();
-        }
-
-        return $query;
+        return $selection;
     }
 }

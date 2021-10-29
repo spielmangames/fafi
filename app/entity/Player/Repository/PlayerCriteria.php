@@ -2,7 +2,9 @@
 
 namespace FAFI\entity\Player\Repository;
 
-class PlayerCriteria
+use FAFI\entity\EntityCriteriaInterface;
+
+class PlayerCriteria implements EntityCriteriaInterface
 {
     private ?array $playerIds;
     private ?string $statuses;
@@ -20,7 +22,7 @@ class PlayerCriteria
     }
 
 
-    public function getPlayerIds(): ?array
+    public function getIds(): ?array
     {
         return $this->playerIds;
     }

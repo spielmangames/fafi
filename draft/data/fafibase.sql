@@ -1,6 +1,6 @@
 
 #-----------------------------------------------------------------------------------------------------------------------
-# DB init
+# DB init [version=1.2]
 #-----------------------------------------------------------------------------------------------------------------------
 
 
@@ -59,10 +59,10 @@ CREATE TABLE `cities_countries_assignments` (
 CREATE TABLE `players` (
     `id` INT(11) UNSIGNED AUTO_INCREMENT NOT NULL,
 
-    `name` VARCHAR(32) COLLATE utf8_unicode_ci,
-    `particle` VARCHAR(8) COLLATE utf8_unicode_ci,
-    `surname` VARCHAR(32) COLLATE utf8_unicode_ci NOT NULL,
-    `fafi_surname` VARCHAR(32) COLLATE utf8_unicode_ci NOT NULL,
+    `name` VARCHAR(32),
+    `particle` VARCHAR(8),
+    `surname` VARCHAR(32) NOT NULL,
+    `fafi_surname` VARCHAR(32) NOT NULL,
 
     `height` TINYINT(3) UNSIGNED,
     `foot` ENUM('L', 'R'),
