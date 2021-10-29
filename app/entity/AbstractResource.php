@@ -4,7 +4,6 @@ namespace FAFI\entity;
 
 use FAFI\db\DatabaseConnection;
 use FAFI\db\QueryBuilder;
-use FAFI\entity\Player\Repository\PlayerCriteria;
 use FAFI\exception\FafiException;
 
 class AbstractResource
@@ -93,5 +92,35 @@ class AbstractResource
         $this->dbConnection->close();
 
         return $selection;
+    }
+
+    /**
+     * @param string $table
+     * @param array $data
+     * @param EntityCriteriaInterface $criteria
+     * @return void
+     * @throws FafiException
+     */
+    protected function updateRecord(string $table, array $data, EntityCriteriaInterface $criteria): void
+    {
+        $query = $this->queryBuilder->formUpdate($table, array_filter($data), $criteria);
+
+        $connect = $this->dbConnection->open();
+
+        $connect->begin_transaction();
+        try {
+            $result = $connect->query($query);
+            if (!$result) {
+                throw new FafiException(sprintf('Failed to update %s item.', $table) . "\n" . $connect->error);
+            }
+        } catch (FafiException $e) {
+            $connect->rollback();
+            $this->dbConnection->close();
+
+            throw $e;
+        }
+        $connect->commit();
+
+        $this->dbConnection->close();
     }
 }

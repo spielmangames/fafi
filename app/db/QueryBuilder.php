@@ -8,6 +8,7 @@ use FAFI\entity\EntityCriteriaInterface;
 class QueryBuilder
 {
     private const INSERT = 'INSERT INTO %s (%s) VALUES (%s);';
+    private const UPDATE = 'UPDATE %s SET %s %s;';
     private const SELECT = 'SELECT %s FROM %s %s;';
     private const WHERE = 'WHERE ';
     private const ALL = '*';
@@ -31,10 +32,28 @@ class QueryBuilder
         return '"' . implode('", "', $data) . '"';
     }
 
+
+    public function formUpdate(string $table, array $data, EntityCriteriaInterface $criteria): string
+    {
+        return sprintf(self::UPDATE, $table, $this->formUpdateData($data), $this->formWhere($criteria));
+    }
+
+    private function formUpdateData(array $data): string
+    {
+        $set = [];
+        foreach  ($data as $column => $value) {
+            $set[] = sprintf('%s = "%s"', $column, $value);
+        }
+
+        return implode(', ', $set);
+    }
+
+
     public function formSelect(string $table, EntityCriteriaInterface $criteria): string
     {
         return sprintf(self::SELECT, self::ALL, $table, $this->formWhere($criteria));
     }
+
 
     private function formWhere(EntityCriteriaInterface $criteria): string
     {
@@ -56,6 +75,7 @@ class QueryBuilder
 
         return self::WHERE . $query;
     }
+
 
 //    public function add(string $add): string
 //    {

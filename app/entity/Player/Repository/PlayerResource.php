@@ -63,12 +63,12 @@ class PlayerResource extends AbstractResource
         }
 
         $playerData = $this->hydrator->extract($player);
-        $playerId = $this->insertRecord(self::TABLE, $playerData);
+        $id = $this->insertRecord(self::TABLE, $playerData);
 
-        $criteria = new PlayerCriteria([$playerId]);
+        $criteria = new PlayerCriteria([$id]);
         $result = $this->readFirst($criteria);
         if (!$result) {
-            throw new FafiException(sprintf('Player (id = %d) is absent in storage.', $playerId));
+            throw new FafiException(sprintf('Player (id = %d) is absent in storage.', $id));
         }
 
         return $result;
@@ -110,19 +110,18 @@ class PlayerResource extends AbstractResource
         if (!$player->getId()) {
             throw new FafiException('ID is required for updating Player and can not be null.');
         }
+        $id = $player->getId();
 
-//        $this->connect->table(self::TABLE)
-//            ->where(self::ID_FIELD, '=', $player->getId())
-//            ->update(
-//                [
-//                    self::IMPORT_STATUS_FIELD => $player->getStatus(),
-//                    self::ITEMS_CREATED_FIELD => $player->getCreatedItems(),
-//                    self::ITEMS_FAILED_FIELD => $player->getFailedItems(),
-//                    self::ITEMS_TOTAL_FIELD => $player->getTotalItems(),
-//                ]
-//            );
+        $playerData = $this->hydrator->extract($player);
+        $this->updateRecord(self::TABLE, $playerData, new PlayerCriteria([$id]));
 
-        return $player;
+        $criteria = new PlayerCriteria([$id]);
+        $result = $this->readFirst($criteria);
+        if (!$result) {
+            throw new FafiException(sprintf('Player (id = %d) is absent in storage.', $id));
+        }
+
+        return $result;
     }
 
 //    public function patch(int $playerId, array $fieldValues): int
