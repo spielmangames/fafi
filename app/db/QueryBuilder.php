@@ -7,68 +7,41 @@ use FAFI\entity\EntityCriteriaInterface;
 
 class QueryBuilder
 {
-    // sql
     private const INSERT = 'INSERT INTO %s (%s) VALUES (%s);';
     private const SELECT = 'SELECT %s FROM %s %s;';
     private const WHERE = 'WHERE ';
+    private const ALL = '*';
 
 
     private string $query;
 
 
-    public function add(string $add): string
+    public function formInsert(string $table, array $data): string
     {
-        return $this->query . ' ' . $add;
+        return sprintf(self::INSERT, $table, $this->formInsertColumns($data), $this->formInsertValues($data));
     }
 
-    public function filterOutEmpty(array $data): array
-    {
-        return array_filter($data);
-    }
-
-    public function formColumns(array $data): string
+    private function formInsertColumns(array $data): string
     {
         return implode(', ', array_keys($data));
     }
 
-    public function formValues(array $data): string
+    private function formInsertValues(array $data): string
     {
         return '"' . implode('", "', $data) . '"';
     }
 
-    public function getQuery(): string
-    {
-        return $this->query;
-    }
-
-    private function close(): string
-    {
-        $query = $this->query;
-        $end = substr($query, -1);
-        if ($end !== ';') {
-            $query .= ';';
-        }
-
-        return $query;
-    }
-
-    public function formInsert(string $table, array $playerData): string
-    {
-        return sprintf(self::INSERT, $table, $this->formColumns($playerData), $this->formValues($playerData));
-    }
-
     public function formSelect(string $table, EntityCriteriaInterface $criteria): string
     {
-        return sprintf(
-            self::SELECT,
-            '*',
-            $table,
-            $criteria->isEmpty() ? '' : $this->formWhere($criteria)
-        );
+        return sprintf(self::SELECT, self::ALL, $table, $this->formWhere($criteria));
     }
 
     private function formWhere(EntityCriteriaInterface $criteria): string
     {
+        if ($criteria->isEmpty()) {
+            return '';
+        }
+
         // SELECT * FROM players WHERE id IN (17,18,19,22) AND surname = 'Serginho';
 
         $conditions = [];
@@ -83,4 +56,25 @@ class QueryBuilder
 
         return self::WHERE . $query;
     }
+
+//    public function add(string $add): string
+//    {
+//        return $this->query . ' ' . $add;
+//    }
+
+//    private function close(): string
+//    {
+//        $query = $this->query;
+//        $end = substr($query, -1);
+//        if ($end !== ';') {
+//            $query .= ';';
+//        }
+//
+//        return $query;
+//    }
+
+//    public function getQuery(): string
+//    {
+//        return $this->query;
+//    }
 }
