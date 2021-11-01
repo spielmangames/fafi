@@ -1,31 +1,50 @@
 <?php
 
+require_once 'app/boot/bootstrap.php';
+
 use FAFI\entity\FAFI;
 use FAFI\entity\Player\Player;
 use FAFI\entity\Player\PlayersFilter;
 
-require_once 'app/boot/bootstrap.php';
-
 
 $fafi = new FAFI();
-$playerService = $fafi->getPlayerService();
+
+//testingRepo($fafi);
+testingFront($fafi);
 
 
-// TESTING:
+function testingRepo(FAFI $fafi)
+{
+    $playerService = $fafi->getPlayerService();
 
-// read
-$filter = new PlayersFilter();
-$players = $playerService->read($filter);
-$filter2 = new PlayersFilter([18, 19, 20]);
-$players2 = $playerService->read($filter2);
+
+    // read
+    $filter = new PlayersFilter();
+    $players = $playerService->read($filter);
+    $filter2 = new PlayersFilter([18, 19, 20]);
+    $players2 = $playerService->read($filter2);
 
 
 // create...
-$player = new Player(null, null, null, 'Serginho' . time(), 'Serjinio' . time(), null, null, null);
-$player = $playerService->create($player);
+    $player = new Player(null, null, null, 'Serginho' . time(), 'Serjinio' . time(), null, null, null);
+    $player = $playerService->create($player);
 
 
 // update...
 // delete...
+}
 
-$zzz = 1;
+function testingFront(FAFI $fafi) {
+    $playerService = $fafi->getPlayerService();
+    $filter = new PlayersFilter([18]);
+    $players = $playerService->read($filter);
+
+    $storefrontService = $fafi->getStorefrontService();
+
+    foreach ($players as $player) {
+        $playerReadPage = $storefrontService->getPlayerReadPage($player);
+    }
+}
+
+
+echo('FAFI 2021 finished.');
