@@ -7,7 +7,8 @@
     "require": {
         "ext-mysqli": "*",
         "laminas/laminas-dom": "^2.7@dev",
-        "vil11/hlpr": "dev-master"
+        "vil11/hlpr": "dev-master",
+        "ext-mbstring": "*"
     },
     "autoload": {
         "files": [

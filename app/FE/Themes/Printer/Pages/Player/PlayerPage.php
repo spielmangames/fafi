@@ -20,39 +20,46 @@ class PlayerPage extends AbstractPrinterPage implements PageInterface
     }
 
 
-    private function setX(): void
-    {
-        $this->x = PD::PAGE_X_SIZE - (strlen(PD::PAGE_Y_BORDER) * 2);
-    }
-
     public function getX(): int
     {
-        if(!isset($this->x)) {
-            $this->setX();
-        }
-
-        return $this->x;
+        return PD::PAGE_X_SIZE;
     }
 
 
     public function getHeader(): array
     {
         $sectionLimitX = $this->getX();
-        $sectionLimitY = $this->getSectionY(PD::HEADER_Y_SIZE, PD::HEADER_TOP_BORDER, PD::HEADER_BOTTOM_BORDER);
+        $sectionLimitY = $this->getSectionY(
+            PD::HEADER_Y_SIZE,
+            PD::HEADER_TOP_BORDER,
+            PD::HEADER_TOP_PADDING,
+            PD::HEADER_BOTTOM_PADDING,
+            PD::HEADER_BOTTOM_BORDER
+        );
 
-        $header = [];
-        for ($y = 1; $y <= $sectionLimitY; $y++) {
-            $header[$y] = $this->getGeneratedLine($sectionLimitX, PD::PAGE_BASE);
-        }
+        $before = $this->fillBeforeSection(PD::HEADER_TOP_BORDER, PD::HEADER_TOP_PADDING);
+        $inside = [];
+        $after = $this->fillAfterSection(PD::HEADER_BOTTOM_PADDING, PD::HEADER_BOTTOM_BORDER, PD::HEADER_Y_SIZE);
 
-        $header[] = $this->getGeneratedLine($sectionLimitX, PD::HEADER_BOTTOM_BORDER);
-
-        return $header;
+        return array_merge($before, $inside, $after);
     }
 
     public function getTitle(): array
     {
-        return [];
+        $sectionLimitX = $this->getX();
+        $sectionLimitY = $this->getSectionY(
+            PD::TITLE_Y_SIZE,
+            PD::TITLE_TOP_BORDER,
+            PD::TITLE_TOP_PADDING,
+            PD::TITLE_BOTTOM_PADDING,
+            PD::TITLE_BOTTOM_BORDER
+        );
+
+        $before = $this->fillBeforeSection(PD::TITLE_TOP_BORDER, PD::TITLE_TOP_PADDING);
+        $inside = $this->alignCenter($this->buildFullName($this->player), $sectionLimitX, PD::PAGE_BASE);
+        $after = $this->fillAfterSection(PD::TITLE_BOTTOM_PADDING, PD::TITLE_BOTTOM_BORDER, PD::TITLE_Y_SIZE);
+
+        return array_merge($before, $inside, $after);
     }
 
     public function getBody(): array
@@ -62,16 +69,31 @@ class PlayerPage extends AbstractPrinterPage implements PageInterface
 
     public function getFooter(): array
     {
-        return [];
+        $sectionLimitX = $this->getX();
+        $sectionLimitY = $this->getSectionY(
+            PD::FOOTER_Y_SIZE,
+            PD::FOOTER_TOP_BORDER,
+            PD::FOOTER_TOP_PADDING,
+            PD::FOOTER_BOTTOM_PADDING,
+            PD::FOOTER_BOTTOM_BORDER
+        );
+
+        $before = $this->fillBeforeSection(PD::FOOTER_TOP_BORDER, PD::FOOTER_TOP_PADDING);
+        $inside = $this->alignCenter('FAFI  2021', $sectionLimitX, PD::PAGE_BASE);
+        $after = $this->fillAfterSection(PD::FOOTER_BOTTOM_PADDING, PD::FOOTER_BOTTOM_BORDER, PD::FOOTER_Y_SIZE);
+
+        return array_merge($before, $inside, $after);
     }
 
     public function getContent(): string
     {
-        $header = $this->getHeader();
-        $title = $this->getTitle();
-        $body = $this->getBody();
-        $footer = $this->getFooter();
+        $separator = PD::PAGE_Y_BORDER . EL . PD::PAGE_Y_BORDER;
 
-        return '';
+        $header = implode($separator, $this->getHeader());
+        $title = implode($separator, $this->getTitle());
+        $body = implode($separator, $this->getBody());
+        $footer = implode($separator, $this->getFooter());
+
+        return implode($separator, [$header, $title, $body, $footer]);
     }
 }
