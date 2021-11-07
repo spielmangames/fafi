@@ -42,8 +42,8 @@ function testingFront(FAFI $fafi) {
     $storefrontService = $fafi->getStorefrontService();
 
     foreach ($players as $player) {
-        $playerCardPage = $storefrontService->getPlayerCardPage($player);
-        $content = $playerCardPage->getContent();
+        $playerReadPage = $storefrontService->getPlayerReadPage($player);
+        $content = $playerReadPage->getContent();
 
         echo $content;
         echo EOL;
