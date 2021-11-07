@@ -13,6 +13,7 @@ class PrinterDesign
     public const PAGE_X_BORDER = '-';
     public const PAGE_Y_SIZE = 32;
     public const PAGE_Y_BORDER = '|';
+    public const PAGE_XY_CORNER = '+';
 
     // sections
     public const HEADER_Y_SIZE = 1;

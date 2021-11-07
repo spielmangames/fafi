@@ -1,6 +1,6 @@
 <?php
 
-namespace FAFI\FE\Themes\Printer;
+namespace FAFI\FE\Themes\Printer\Pages;
 
 use FAFI\entity\Player\Player;
 use FAFI\FE\Themes\Printer\PrinterDesign as PD;
@@ -69,13 +69,21 @@ abstract class AbstractPrinterPage
 
     public function buildFullName(Player $player): string
     {
+        $fullName = [];
+
         $name = $player->getName();
+        if ($name) {
+            $fullName[] = $name;
+        }
+
         $particle = $player->getParticle();
-        $surname = $player->getSurname();
+        if ($particle) {
+            $fullName[] = $particle;
+        }
 
-        $fullName = implode(' ', [$name, $particle, $surname]);
+        $fullName[] = $player->getSurname();
 
-        return $fullName;
+        return implode(PD::PAGE_BASE, $fullName);
     }
 
     public function fillBeforeSection(bool $topBorder, bool $topPadding): array
