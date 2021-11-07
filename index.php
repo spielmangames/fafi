@@ -42,11 +42,15 @@ function testingFront(FAFI $fafi) {
     $storefrontService = $fafi->getStorefrontService();
 
     foreach ($players as $player) {
-        $playerReadPage = $storefrontService->getPlayerReadPage($player);
+        $playerReadPage = $storefrontService->getPlayerCardPage($player);
         $content = $playerReadPage->getContent();
+
         echo $content;
+        echo EOL;
+        echo EOL;
     }
 }
 
 
+echo EOL;
 echo('FAFI 2021 finished.');
