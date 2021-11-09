@@ -51,13 +51,6 @@ abstract class AbstractPrinterPage
         return $this->pagePadding;
     }
 
-
-    public function getGeneratedLine(int $xLimit, string $value): string
-    {
-        return str_repeat($value, $xLimit);
-    }
-
-
     public function alignCenter(string $text, int $width, string $base): string
     {
         $fill = $width - mb_strlen($text);
@@ -86,7 +79,7 @@ abstract class AbstractPrinterPage
         return implode(PD::PAGE_BASE, $fullName);
     }
 
-    public function fillBeforeSection(bool $topBorder, bool $topPadding): array
+    public function fillBefore(bool $topBorder, bool $topPadding): array
     {
         $section = [];
 
@@ -100,7 +93,7 @@ abstract class AbstractPrinterPage
         return $section;
     }
 
-    public function fillAfterSection(bool $bottomPadding, bool $bottomBorder, int $ySize): array
+    public function fillAfter(bool $bottomPadding, bool $bottomBorder, int $ySize): array
     {
         $section = [];
 

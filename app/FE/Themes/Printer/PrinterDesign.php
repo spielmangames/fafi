@@ -16,12 +16,6 @@ class PrinterDesign
     public const PAGE_XY_CORNER = '+';
 
     // sections
-    public const HEADER_Y_SIZE = 1;
-    public const HEADER_TOP_BORDER = false;
-    public const HEADER_TOP_PADDING = false;
-    public const HEADER_BOTTOM_PADDING = false;
-    public const HEADER_BOTTOM_BORDER = false;
-
     public const TITLE_Y_SIZE = 4;
     public const TITLE_TOP_BORDER = true;
     public const TITLE_TOP_PADDING = true;
@@ -42,10 +36,5 @@ class PrinterDesign
 //    public const BODY_WIDGETS_X_TOP_BORDER = self::PAGE_BASE;
 //    public const BODY_WIDGETS_X_BOTTOM_BORDER = self::PAGE_BASE;
 
-    public const FOOTER_Y_SIZE = 2;
-    public const FOOTER_TOP_BORDER = false;
-    public const FOOTER_TOP_PADDING = true;
     public const FOOTER_ALIGN = DesignHelper::ALIGN_CENTER;
-    public const FOOTER_BOTTOM_PADDING = false;
-    public const FOOTER_BOTTOM_BORDER = false;
 }
