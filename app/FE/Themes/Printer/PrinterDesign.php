@@ -16,12 +16,7 @@ class PrinterDesign
     public const PAGE_XY_CORNER = '+';
 
     // sections
-    public const TITLE_Y_SIZE = 4;
-    public const TITLE_TOP_BORDER = true;
-    public const TITLE_TOP_PADDING = true;
     public const TITLE_ALIGN = DesignHelper::ALIGN_CENTER;
-    public const TITLE_BOTTOM_PADDING = true;
-    public const TITLE_BOTTOM_BORDER = false;
 
 //    public const BODY_TABS_Y_SIZE = 1;
 //    public const BODY_TABS_BASE = self::PAGE_X_BORDER;
