@@ -7,7 +7,7 @@ use FAFI\FE\PageInterface;
 use FAFI\FE\Themes\Printer\Basic\Pages\AbstractPrinterPage;
 use FAFI\FE\Themes\Printer\Basic\PageSections\Footer;
 use FAFI\FE\Themes\Printer\Basic\PageSections\Header;
-use FAFI\FE\Themes\Printer\Basic\PageSections\Title as BasicTitle;
+use FAFI\FE\Themes\Printer\Basic\PageSections\Title;
 use FAFI\FE\Themes\Printer\PrinterDesign as PD;
 
 class PlayerPage extends AbstractPrinterPage implements PageInterface
@@ -31,7 +31,7 @@ class PlayerPage extends AbstractPrinterPage implements PageInterface
         return new Header($this->getX());
     }
 
-    public function getTitle(): BasicTitle
+    public function getTitle(): Title
     {
         $title = new PlayerTitle($this->getX());
         $title->setEntity($this->player);

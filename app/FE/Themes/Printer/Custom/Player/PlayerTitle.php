@@ -17,10 +17,10 @@ class PlayerTitle extends Title
     protected bool $bottomBorder = false;
 
 
-//    public function __construct(int $x)
-//    {
-//        parent::__construct($x);
-//    }
+    public function __construct(int $x)
+    {
+        parent::__construct($x);
+    }
 
     public function setEntity(Player $player): self
     {

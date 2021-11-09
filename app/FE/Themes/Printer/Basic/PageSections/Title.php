@@ -3,7 +3,6 @@
 namespace FAFI\FE\Themes\Printer\Basic\PageSections;
 
 use FAFI\FE\PageSectionInterface;
-use FAFI\FE\Themes\Printer\PageSections\AbstractPrinterPageSection;
 use FAFI\FE\Themes\Printer\PrinterDesign as PD;
 
 class Title extends AbstractPrinterPageSection implements PageSectionInterface
@@ -15,10 +14,10 @@ class Title extends AbstractPrinterPageSection implements PageSectionInterface
     protected bool $bottomBorder = false;
 
 
-//    public function __construct(int $x)
-//    {
-//        parent::__construct($x);
-//    }
+    public function __construct(int $x)
+    {
+        parent::__construct($x);
+    }
 
 
     public function get(): array

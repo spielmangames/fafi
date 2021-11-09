@@ -3,7 +3,6 @@
 namespace FAFI\FE\Themes\Printer\Basic\PageSections;
 
 use FAFI\FE\PageSectionInterface;
-use FAFI\FE\Themes\Printer\PageSections\AbstractPrinterPageSection;
 use FAFI\FE\Themes\Printer\PrinterDesign as PD;
 
 class Footer extends AbstractPrinterPageSection implements PageSectionInterface
