@@ -1,8 +1,7 @@
 <?php
 
-namespace FAFI\FE\Themes\Printer\Pages;
+namespace FAFI\FE\Themes\Printer\Basic\Pages;
 
-use FAFI\entity\Player\Player;
 use FAFI\FE\Themes\Printer\PrinterDesign as PD;
 
 abstract class AbstractPrinterPage

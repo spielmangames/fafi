@@ -1,6 +1,6 @@
 <?php
 
-namespace FAFI\FE\Themes\Printer\Basic\Sections;
+namespace FAFI\FE\Themes\Printer\Basic\PageSections;
 
 use FAFI\FE\PageSectionInterface;
 use FAFI\FE\Themes\Printer\PageSections\AbstractPrinterPageSection;

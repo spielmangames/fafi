@@ -4,9 +4,9 @@ namespace FAFI\FE\Themes\Printer\Custom\Player;
 
 use FAFI\entity\Player\Player;
 use FAFI\exception\FafiException;
-use FAFI\FE\Themes\Printer\Basic\Sections\Title as BasicTitle;
+use FAFI\FE\Themes\Printer\Basic\PageSections\Title;
 
-class Title extends BasicTitle
+class PlayerTitle extends Title
 {
     private Player $player;
 

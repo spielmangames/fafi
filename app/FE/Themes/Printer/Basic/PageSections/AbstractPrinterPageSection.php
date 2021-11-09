@@ -1,6 +1,6 @@
 <?php
 
-namespace FAFI\FE\Themes\Printer\PageSections;
+namespace FAFI\FE\Themes\Printer\Basic\PageSections;
 
 use FAFI\FE\Themes\Printer\PrinterDesign as PD;
 use FAFI\FE\Themes\Printer\PrinterHelperTrait;

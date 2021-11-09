@@ -9,7 +9,6 @@ use FAFI\FE\Themes\ThemeInterface;
 
 class Printer implements ThemeInterface
 {
-
     public function getPlayerReadPage(Player $player): PageInterface
     {
         return new PlayerPage($player);

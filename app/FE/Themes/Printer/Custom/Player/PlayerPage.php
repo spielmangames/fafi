@@ -1,14 +1,13 @@
 <?php
 
-namespace FAFI\FE\Themes\Printer\Pages\Player;
+namespace FAFI\FE\Themes\Printer\Custom\Player;
 
 use FAFI\entity\Player\Player;
 use FAFI\FE\PageInterface;
-use FAFI\FE\Themes\Printer\Basic\Sections\Footer;
-use FAFI\FE\Themes\Printer\Basic\Sections\Header;
-use FAFI\FE\Themes\Printer\Basic\Sections\Title as BasicTitle;
-use FAFI\FE\Themes\Printer\Custom\Player\Title;
-use FAFI\FE\Themes\Printer\Pages\AbstractPrinterPage;
+use FAFI\FE\Themes\Printer\Basic\Pages\AbstractPrinterPage;
+use FAFI\FE\Themes\Printer\Basic\PageSections\Footer;
+use FAFI\FE\Themes\Printer\Basic\PageSections\Header;
+use FAFI\FE\Themes\Printer\Basic\PageSections\Title as BasicTitle;
 use FAFI\FE\Themes\Printer\PrinterDesign as PD;
 
 class PlayerPage extends AbstractPrinterPage implements PageInterface
@@ -34,7 +33,7 @@ class PlayerPage extends AbstractPrinterPage implements PageInterface
 
     public function getTitle(): BasicTitle
     {
-        $title = new Title($this->getX());
+        $title = new PlayerTitle($this->getX());
         $title->setEntity($this->player);
 
         return $title;
