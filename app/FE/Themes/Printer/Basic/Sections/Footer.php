@@ -1,15 +1,19 @@
 <?php
 
-namespace FAFI\FE\Themes\Printer;
+namespace FAFI\FE\Themes\Printer\Basic\Sections;
 
 use FAFI\FE\PageSectionInterface;
 use FAFI\FE\Themes\Printer\PageSections\AbstractPrinterPageSection;
+use FAFI\FE\Themes\Printer\PrinterDesign as PD;
 
-class Header extends AbstractPrinterPageSection implements PageSectionInterface
+class Footer extends AbstractPrinterPageSection implements PageSectionInterface
 {
-    protected int $yReserve = 1;
+    private const WATERMARK = 'FAFI  2021';
+
+
+    protected int $yReserve = 2;
     protected bool $topBorder = false;
-    protected bool $topPadding = false;
+    protected bool $topPadding = true;
     protected bool $bottomPadding = false;
     protected bool $bottomBorder = false;
 
@@ -23,7 +27,7 @@ class Header extends AbstractPrinterPageSection implements PageSectionInterface
     public function get(): array
     {
         $before = $this->fillBefore($this->topBorder, $this->topPadding);
-        $inside = [];
+        $inside = [$this->alignCenter(self::WATERMARK, $this->getX(), PD::PAGE_BASE)];
         $after = $this->fillAfter($this->bottomPadding, $this->bottomBorder, $this->getY() - count($inside));
 
         return array_merge($before, $inside, $after);

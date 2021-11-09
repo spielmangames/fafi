@@ -2,7 +2,6 @@
 
 namespace FAFI\FE\Themes\Printer\PageSections;
 
-use FAFI\entity\Player\Player;
 use FAFI\FE\Themes\Printer\PrinterDesign as PD;
 use FAFI\FE\Themes\Printer\PrinterHelperTrait;
 
@@ -109,25 +108,5 @@ abstract class AbstractPrinterPageSection
         }
 
         return $section;
-    }
-
-
-    public function buildPlayerFullName(Player $player): string
-    {
-        $fullName = [];
-
-        $name = $player->getName();
-        if ($name) {
-            $fullName[] = $name;
-        }
-
-        $particle = $player->getParticle();
-        if ($particle) {
-            $fullName[] = $particle;
-        }
-
-        $fullName[] = $player->getSurname();
-
-        return implode(' ', $fullName);
     }
 }

@@ -2,9 +2,9 @@
 
 namespace FAFI\FE;
 
-use FAFI\FE\Themes\Printer\Footer;
-use FAFI\FE\Themes\Printer\Header;
-use FAFI\FE\Themes\Printer\Title;
+use FAFI\FE\Themes\Printer\Basic\Sections\Footer;
+use FAFI\FE\Themes\Printer\Basic\Sections\Header;
+use FAFI\FE\Themes\Printer\Basic\Sections\Title;
 
 interface PageInterface
 {
