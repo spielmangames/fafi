@@ -28,6 +28,7 @@ class PlayerTitle extends Title
         return $this;
     }
 
+
     /**
      * @return string
      * @throws FafiException

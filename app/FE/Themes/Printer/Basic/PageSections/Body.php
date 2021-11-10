@@ -3,16 +3,11 @@
 namespace FAFI\FE\Themes\Printer\Basic\PageSections;
 
 use FAFI\FE\PageSectionInterface;
-use FAFI\FE\Themes\Printer\PrinterDesign as PD;
 
-class Footer extends AbstractPrinterPageSection implements PageSectionInterface
+class Body extends AbstractPrinterPageSection implements PageSectionInterface
 {
-    private const WATERMARK = 'FAFI  2021';
-
-
-    protected int $yReserve = 2;
     protected bool $topBorder = false;
-    protected bool $topPadding = true;
+    protected bool $topPadding = false;
     protected bool $bottomPadding = false;
     protected bool $bottomBorder = false;
 
@@ -22,9 +17,14 @@ class Footer extends AbstractPrinterPageSection implements PageSectionInterface
         parent::__construct($x);
     }
 
+    public function setYReserve(int $yReserve): self
+    {
+        $this->yReserve = $yReserve;
+        return $this;
+    }
 
     public function getInside(): array
     {
-        return [$this->alignCenter(self::WATERMARK, $this->getX(), PD::PAGE_BASE)];
+        return [];
     }
 }

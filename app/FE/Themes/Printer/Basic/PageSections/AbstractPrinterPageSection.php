@@ -2,10 +2,11 @@
 
 namespace FAFI\FE\Themes\Printer\Basic\PageSections;
 
+use FAFI\FE\PageSectionInterface;
 use FAFI\FE\Themes\Printer\PrinterDesign as PD;
 use FAFI\FE\Themes\Printer\PrinterHelperTrait;
 
-abstract class AbstractPrinterPageSection
+abstract class AbstractPrinterPageSection implements PageSectionInterface
 {
     use PrinterHelperTrait;
 
@@ -47,6 +48,11 @@ abstract class AbstractPrinterPageSection
         }
 
         return $this->y;
+    }
+
+    public function getYReserve(): int
+    {
+        return $this->yReserve;
     }
 
 
@@ -108,5 +114,14 @@ abstract class AbstractPrinterPageSection
         }
 
         return $section;
+    }
+
+    public function get(): array
+    {
+        $before = $this->fillBefore($this->topBorder, $this->topPadding);
+        $inside = $this->getInside();
+        $after = $this->fillAfter($this->bottomPadding, $this->bottomBorder, $this->getY() - count($inside));
+
+        return array_merge($before, $inside, $after);
     }
 }

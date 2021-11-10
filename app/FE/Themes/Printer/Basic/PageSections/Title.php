@@ -7,26 +7,15 @@ use FAFI\FE\Themes\Printer\PrinterDesign as PD;
 
 class Title extends AbstractPrinterPageSection implements PageSectionInterface
 {
-    protected int $yReserve = 4;
-    protected bool $topBorder = true;
-    protected bool $topPadding = true;
-    protected bool $bottomPadding = true;
-    protected bool $bottomBorder = false;
-
-
     public function __construct(int $x)
     {
         parent::__construct($x);
     }
 
 
-    public function get(): array
+    public function getInside(): array
     {
-        $before = $this->fillBefore($this->topBorder, $this->topPadding);
-        $inside = [$this->alignCenter($this->prepareContent(), $this->getX(), PD::PAGE_BASE)];
-        $after = $this->fillAfter($this->bottomPadding, $this->bottomBorder, $this->getY() - count($inside));
-
-        return array_merge($before, $inside, $after);
+        return [$this->alignCenter($this->prepareContent(), $this->getX(), PD::PAGE_BASE)];
     }
 
     protected function prepareContent(): string

@@ -19,12 +19,8 @@ class Header extends AbstractPrinterPageSection implements PageSectionInterface
     }
 
 
-    public function get(): array
+    public function getInside(): array
     {
-        $before = $this->fillBefore($this->topBorder, $this->topPadding);
-        $inside = [];
-        $after = $this->fillAfter($this->bottomPadding, $this->bottomBorder, $this->getY() - count($inside));
-
-        return array_merge($before, $inside, $after);
+        return [];
     }
 }

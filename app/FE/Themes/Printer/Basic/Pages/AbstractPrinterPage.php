@@ -2,9 +2,10 @@
 
 namespace FAFI\FE\Themes\Printer\Basic\Pages;
 
+use FAFI\FE\PageInterface;
 use FAFI\FE\Themes\Printer\PrinterDesign as PD;
 
-abstract class AbstractPrinterPage
+abstract class AbstractPrinterPage implements PageInterface
 {
     protected string $pageBorder;
 
@@ -21,5 +22,15 @@ abstract class AbstractPrinterPage
         }
 
         return $this->pageBorder;
+    }
+
+
+    public function calcBodyYReserve(): int
+    {
+        $h = $this->getHeader()->getYReserve();
+        $t = $this->getTitle()->getYReserve();
+        $f = $this->getFooter()->getYReserve();
+
+        return PD::PAGE_Y_SIZE - ($h + $t + $f);
     }
 }
