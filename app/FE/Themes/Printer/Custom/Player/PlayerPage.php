@@ -3,6 +3,7 @@
 namespace FAFI\FE\Themes\Printer\Custom\Player;
 
 use FAFI\entity\Player\Player;
+use FAFI\FE\BodyPageSectionInterface;
 use FAFI\FE\PageInterface;
 use FAFI\FE\Themes\Printer\Basic\Pages\AbstractPrinterPage;
 use FAFI\FE\Themes\Printer\Basic\PageSections\Body;
@@ -61,7 +62,7 @@ class PlayerPage extends AbstractPrinterPage implements PageInterface
         $this->title = new PlayerTitle($this->getX(), $this->player);
     }
 
-    public function getBody(): Body
+    public function getBody(): BodyPageSectionInterface
     {
         if(!isset($this->body)) {
             $this->setBody();
