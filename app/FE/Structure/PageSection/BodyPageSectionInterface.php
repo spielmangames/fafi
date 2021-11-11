@@ -1,6 +1,6 @@
 <?php
 
-namespace FAFI\FE;
+namespace FAFI\FE\Structure\PageSection;
 
 interface BodyPageSectionInterface extends PageSectionInterface
 {

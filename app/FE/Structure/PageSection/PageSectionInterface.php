@@ -1,6 +1,8 @@
 <?php
 
-namespace FAFI\FE;
+namespace FAFI\FE\Structure\PageSection;
+
+use FAFI\FE\Structure\ContentableInterface;
 
 interface PageSectionInterface extends ContentableInterface
 {
