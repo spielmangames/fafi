@@ -2,7 +2,7 @@
 
 namespace FAFI\FE;
 
-interface PageSectionInterface
+interface PageSectionInterface extends ContentableInterface
 {
 //    public function getY(): int;
     public function get(): array;
