@@ -8,8 +8,6 @@ use FAFI\FE\Themes\Printer\Basic\PageSections\Title;
 
 class PlayerTitle extends Title
 {
-    private Player $player;
-
     protected int $yReserve = 4;
     protected bool $topBorder = true;
     protected bool $topPadding = true;
@@ -17,15 +15,12 @@ class PlayerTitle extends Title
     protected bool $bottomBorder = false;
 
 
-    public function __construct(int $x)
-    {
-        parent::__construct($x);
-    }
+    private Player $player;
 
-    public function setEntity(Player $player): self
+    public function __construct(int $x, Player $player)
     {
         $this->player = $player;
-        return $this;
+        parent::__construct($x);
     }
 
 
@@ -38,26 +33,9 @@ class PlayerTitle extends Title
         if (!isset($this->player)) {
             throw new FafiException('Player is required.');
         }
+        /** @var Player $player */
+        $player = $this->player;
 
-        return $this->buildPlayerFullName($this->player);
-    }
-
-    private function buildPlayerFullName(Player $player): string
-    {
-        $fullName = [];
-
-        $name = $player->getName();
-        if ($name) {
-            $fullName[] = $name;
-        }
-
-        $particle = $player->getParticle();
-        if ($particle) {
-            $fullName[] = $particle;
-        }
-
-        $fullName[] = $player->getSurname();
-
-        return implode(' ', $fullName);
+        return $player->buildPlayerFullName();
     }
 }

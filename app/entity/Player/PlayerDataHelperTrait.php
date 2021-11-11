@@ -2,7 +2,7 @@
 
 namespace FAFI\entity\Player;
 
-trait PlayerDataHelper
+trait PlayerDataHelperTrait
 {
     public function buildPlayerFullName(): string
     {

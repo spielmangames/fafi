@@ -4,7 +4,7 @@ namespace FAFI\entity\Player;
 
 class Player
 {
-    use PlayerDataHelper;
+    use PlayerDataHelperTrait;
 
 
     // profile: basic
