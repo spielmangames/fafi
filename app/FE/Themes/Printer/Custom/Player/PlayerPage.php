@@ -58,10 +58,7 @@ class PlayerPage extends AbstractPrinterPage implements PageInterface
 
     private function setTitle(): void
     {
-        $title = new PlayerTitle($this->getX());
-        $title->setEntity($this->player);
-
-        $this->title = $title;
+        $this->title = new PlayerTitle($this->getX(), $this->player);
     }
 
     public function getBody(): Body
@@ -75,10 +72,7 @@ class PlayerPage extends AbstractPrinterPage implements PageInterface
 
     private function setBody(): void
     {
-        $body = new PlayerBody($this->getX());
-        $body->setEntity($this->player)->setYReserve($this->calcBodyYReserve());
-
-        $this->body = $body;
+        $this->body = new PlayerBody($this->getX(), $this->calcBodyYReserve(), $this->player);
     }
 
     public function getFooter(): Footer

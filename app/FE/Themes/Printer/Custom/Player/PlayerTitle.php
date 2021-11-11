@@ -19,8 +19,8 @@ class PlayerTitle extends Title
 
     public function __construct(int $x, Player $player)
     {
-        $this->player = $player;
         parent::__construct($x);
+        $this->player = $player;
     }
 
 

@@ -15,6 +15,9 @@ abstract class AbstractPrinterPageSection implements PageSectionInterface
     private string $padding;
 
 
+    protected int $x;
+    protected int $y;
+
     protected int $yReserve;
     protected bool $topBorder;
     protected bool $topPadding;
@@ -22,12 +25,10 @@ abstract class AbstractPrinterPageSection implements PageSectionInterface
     protected bool $bottomBorder;
 
 
-    protected int $x;
-    protected int $y;
-
-    public function __construct(int $x)
+    public function __construct(int $x, int $yReserve)
     {
         $this->x = $x;
+        $this->yReserve = $yReserve;
     }
 
     public function getX(): int
