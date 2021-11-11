@@ -2,7 +2,7 @@
 
 namespace FAFI\FE\Structure\PageSection;
 
-interface BodyPageSectionInterface extends PageSectionInterface
+interface BodyInterface extends PageSectionInterface
 {
     public function getTabs(): array;
 }
