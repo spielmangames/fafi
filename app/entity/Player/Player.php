@@ -4,6 +4,9 @@ namespace FAFI\entity\Player;
 
 class Player
 {
+    use PlayerDataHelper;
+
+
     // profile: basic
     private ?int $id;
 

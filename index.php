@@ -53,4 +53,5 @@ function testingFront(FAFI $fafi) {
 
 
 echo EOL;
-echo('FAFI 2021 finished.');
+echo('FAFI 2021: finished.');
+echo EOL;
