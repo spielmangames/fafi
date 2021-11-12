@@ -11,14 +11,14 @@ abstract class AbstractPrinterPageSection implements PageSectionInterface
     use PrinterHelperTrait;
 
 
+    protected int $x;
+    protected int $y;
+    protected int $yReserve;
+
     private string $border;
     private string $padding;
 
 
-    protected int $x;
-    protected int $y;
-
-    protected int $yReserve;
     protected bool $topBorder;
     protected bool $topPadding;
     protected bool $bottomPadding;
@@ -36,12 +36,6 @@ abstract class AbstractPrinterPageSection implements PageSectionInterface
         return $this->x;
     }
 
-    private function setY(): void
-    {
-        $frame = (int)$this->topBorder + (int)$this->topPadding + (int)$this->bottomPadding + (int)$this->bottomBorder;
-        $this->y = $this->yReserve - $frame;
-    }
-
     public function getY(): int
     {
         if(!isset($this->y)) {
@@ -49,6 +43,12 @@ abstract class AbstractPrinterPageSection implements PageSectionInterface
         }
 
         return $this->y;
+    }
+
+    private function setY(): void
+    {
+        $frame = (int)$this->topBorder + (int)$this->topPadding + (int)$this->bottomPadding + (int)$this->bottomBorder;
+        $this->y = $this->yReserve - $frame;
     }
 
     public function getYReserve(): int
@@ -108,6 +108,8 @@ abstract class AbstractPrinterPageSection implements PageSectionInterface
 
         return $section;
     }
+
+    abstract function getInside(): array;
 
     private function fillAfter(bool $bottomPadding, bool $bottomBorder, int $ySize): array
     {
