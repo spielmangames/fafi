@@ -2,10 +2,10 @@
 
 namespace FAFI\FE\Themes\Printer\Basic\PageSections;
 
-use FAFI\FE\PageSectionInterface;
+use FAFI\FE\Structure\PageSection\FooterInterface;
 use FAFI\FE\Themes\Printer\PrinterDesign as PD;
 
-class Footer extends AbstractPrinterPageSection implements PageSectionInterface
+class Footer extends AbstractPrinterPageSection implements FooterInterface
 {
     private const WATERMARK = 'FAFI  2021';
 

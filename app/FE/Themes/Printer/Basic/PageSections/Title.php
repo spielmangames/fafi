@@ -2,10 +2,10 @@
 
 namespace FAFI\FE\Themes\Printer\Basic\PageSections;
 
-use FAFI\FE\PageSectionInterface;
+use FAFI\FE\Structure\PageSection\TitleInterface;
 use FAFI\FE\Themes\Printer\PrinterDesign as PD;
 
-class Title extends AbstractPrinterPageSection implements PageSectionInterface
+class Title extends AbstractPrinterPageSection implements TitleInterface
 {
     public function __construct(int $x)
     {

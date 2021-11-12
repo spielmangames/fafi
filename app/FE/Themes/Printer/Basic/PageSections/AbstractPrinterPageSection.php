@@ -2,7 +2,7 @@
 
 namespace FAFI\FE\Themes\Printer\Basic\PageSections;
 
-use FAFI\FE\PageSectionInterface;
+use FAFI\FE\Structure\PageSection\PageSectionInterface;
 use FAFI\FE\Themes\Printer\PrinterDesign as PD;
 use FAFI\FE\Themes\Printer\PrinterHelperTrait;
 
@@ -86,7 +86,16 @@ abstract class AbstractPrinterPageSection implements PageSectionInterface
     }
 
 
-    public function fillBefore(bool $topBorder, bool $topPadding): array
+    public function getContent(): array
+    {
+        $before = $this->fillBefore($this->topBorder, $this->topPadding);
+        $inside = $this->getInside();
+        $after = $this->fillAfter($this->bottomPadding, $this->bottomBorder, $this->getY() - count($inside));
+
+        return array_merge($before, $inside, $after);
+    }
+
+    private function fillBefore(bool $topBorder, bool $topPadding): array
     {
         $section = [];
 
@@ -100,7 +109,7 @@ abstract class AbstractPrinterPageSection implements PageSectionInterface
         return $section;
     }
 
-    public function fillAfter(bool $bottomPadding, bool $bottomBorder, int $ySize): array
+    private function fillAfter(bool $bottomPadding, bool $bottomBorder, int $ySize): array
     {
         $section = [];
 
@@ -115,14 +124,5 @@ abstract class AbstractPrinterPageSection implements PageSectionInterface
         }
 
         return $section;
-    }
-
-    public function get(): array
-    {
-        $before = $this->fillBefore($this->topBorder, $this->topPadding);
-        $inside = $this->getInside();
-        $after = $this->fillAfter($this->bottomPadding, $this->bottomBorder, $this->getY() - count($inside));
-
-        return array_merge($before, $inside, $after);
     }
 }

@@ -4,6 +4,7 @@ namespace FAFI\FE;
 
 use FAFI\entity\Player\Player;
 use FAFI\exception\FafiException;
+use FAFI\FE\Structure\Page\PageInterface;
 use FAFI\FE\Themes\ThemeFactory;
 use FAFI\FE\Themes\ThemeInterface;
 

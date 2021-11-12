@@ -2,7 +2,7 @@
 
 namespace FAFI\FE\Themes\Printer\Basic\Pages;
 
-use FAFI\FE\PageInterface;
+use FAFI\FE\Structure\Page\PageInterface;
 use FAFI\FE\Themes\Printer\PrinterDesign as PD;
 
 abstract class AbstractPrinterPage implements PageInterface

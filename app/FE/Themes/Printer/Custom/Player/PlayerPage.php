@@ -3,21 +3,21 @@
 namespace FAFI\FE\Themes\Printer\Custom\Player;
 
 use FAFI\entity\Player\Player;
-use FAFI\FE\BodyPageSectionInterface;
-use FAFI\FE\PageInterface;
+use FAFI\FE\Structure\PageSection\BodyInterface;
+use FAFI\FE\Structure\PageSection\FooterInterface;
+use FAFI\FE\Structure\PageSection\HeaderInterface;
+use FAFI\FE\Structure\PageSection\TitleInterface;
 use FAFI\FE\Themes\Printer\Basic\Pages\AbstractPrinterPage;
-use FAFI\FE\Themes\Printer\Basic\PageSections\Body;
 use FAFI\FE\Themes\Printer\Basic\PageSections\Footer;
 use FAFI\FE\Themes\Printer\Basic\PageSections\Header;
-use FAFI\FE\Themes\Printer\Basic\PageSections\Title;
 use FAFI\FE\Themes\Printer\PrinterDesign as PD;
 
-class PlayerPage extends AbstractPrinterPage implements PageInterface
+class PlayerPage extends AbstractPrinterPage
 {
-    private Header $header;
-    private Title $title;
-    private Body $body;
-    private Footer $footer;
+    private HeaderInterface $header;
+    private TitleInterface $title;
+    private BodyInterface $body;
+    private FooterInterface $footer;
 
 
     private Player $player;
@@ -33,8 +33,13 @@ class PlayerPage extends AbstractPrinterPage implements PageInterface
         return PD::PAGE_X_SIZE;
     }
 
+    public function getY(): int
+    {
+        return PD::PAGE_Y_SIZE;
+    }
 
-    public function getHeader(): Header
+
+    public function getHeader(): HeaderInterface
     {
         if(!isset($this->header)) {
             $this->setHeader();
@@ -48,7 +53,7 @@ class PlayerPage extends AbstractPrinterPage implements PageInterface
         $this->header = new Header($this->getX());
     }
 
-    public function getTitle(): Title
+    public function getTitle(): TitleInterface
     {
         if(!isset($this->title)) {
             $this->setTitle();
@@ -62,7 +67,7 @@ class PlayerPage extends AbstractPrinterPage implements PageInterface
         $this->title = new PlayerTitle($this->getX(), $this->player);
     }
 
-    public function getBody(): BodyPageSectionInterface
+    public function getBody(): BodyInterface
     {
         if(!isset($this->body)) {
             $this->setBody();
@@ -76,7 +81,7 @@ class PlayerPage extends AbstractPrinterPage implements PageInterface
         $this->body = new PlayerBody($this->getX(), $this->calcBodyYReserve(), $this->player);
     }
 
-    public function getFooter(): Footer
+    public function getFooter(): FooterInterface
     {
         if(!isset($this->footer)) {
             $this->setFooter();
@@ -91,15 +96,15 @@ class PlayerPage extends AbstractPrinterPage implements PageInterface
     }
 
 
-    public function getContent(): string
+    public function getContent(): array
     {
         $separator = PD::PAGE_Y_BORDER . EOL . PD::PAGE_Y_BORDER;
         $xBorder = PD::PAGE_XY_CORNER . $this->getPageBorder() . PD::PAGE_XY_CORNER;
 
-        $header = implode($separator, $this->getHeader()->get());
-        $title = implode($separator, $this->getTitle()->get());
-        $body = implode($separator, $this->getBody()->get());
-        $footer = implode($separator, $this->getFooter()->get());
+        $header = implode($separator, $this->getHeader()->getContent());
+        $title = implode($separator, $this->getTitle()->getContent());
+        $body = implode($separator, $this->getBody()->getContent());
+        $footer = implode($separator, $this->getFooter()->getContent());
 
         $page = implode($separator, [$xBorder, $header, $title, $body, $footer, $xBorder]);
         return $page;

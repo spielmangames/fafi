@@ -2,9 +2,9 @@
 
 namespace FAFI\FE\Themes\Printer\Basic\PageSections;
 
-use FAFI\FE\PageSectionInterface;
+use FAFI\FE\Structure\PageSection\BodyInterface;
 
-class Body extends AbstractPrinterPageSection implements PageSectionInterface
+class Body extends AbstractPrinterPageSection implements BodyInterface
 {
     protected bool $topBorder = false;
     protected bool $topPadding = false;
@@ -12,18 +12,19 @@ class Body extends AbstractPrinterPageSection implements PageSectionInterface
     protected bool $bottomBorder = false;
 
 
-    public function __construct(int $x)
+    public function __construct(int $x, int $yReserve)
     {
-        parent::__construct($x);
+        parent::__construct($x, $yReserve);
     }
 
-    public function setYReserve(int $yReserve): self
-    {
-        $this->yReserve = $yReserve;
-        return $this;
-    }
 
     public function getInside(): array
+    {
+        return [];
+    }
+
+
+    public function getTabs(): array
     {
         return [];
     }
