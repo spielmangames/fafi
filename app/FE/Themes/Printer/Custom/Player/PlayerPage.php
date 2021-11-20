@@ -14,6 +14,16 @@ use FAFI\FE\Themes\Printer\PrinterDesign as PD;
 
 class PlayerPage extends AbstractPrinterPage
 {
+    public const TAB_PROFILE = 'profile';
+    public const TAB_ORIGIN = 'origin';
+    public const TAB_SKILLS = 'skills';
+    private const TABS_LIST = [
+        self::TAB_PROFILE,
+        self::TAB_ORIGIN,
+        self::TAB_SKILLS,
+    ];
+
+
     private HeaderInterface $header;
     private TitleInterface $title;
     private BodyInterface $body;
@@ -25,6 +35,12 @@ class PlayerPage extends AbstractPrinterPage
     public function __construct(Player $player)
     {
         $this->player = $player;
+    }
+
+
+    public function getTabsList(): array
+    {
+        return self::TABS_LIST;
     }
 
 
@@ -98,6 +114,10 @@ class PlayerPage extends AbstractPrinterPage
 
     public function getContent(): array
     {
+//        if (!isset($this->tabName)) {
+//            throw new FafiException(sprintf('Tab is not set for %s.', self::class));
+//        }
+
         $separator = PD::PAGE_Y_BORDER . EOL . PD::PAGE_Y_BORDER;
         $xBorder = PD::PAGE_XY_CORNER . $this->getPageBorder() . PD::PAGE_XY_CORNER;
 

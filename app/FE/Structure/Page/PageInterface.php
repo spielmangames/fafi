@@ -10,6 +10,9 @@ use FAFI\FE\Structure\PageSection\TitleInterface;
 
 interface PageInterface extends ContentableInterface
 {
+    public function getTabsList(): array;
+    public function initTab(string $tabName): self;
+
     public function getHeader(): HeaderInterface;
     public function getTitle(): TitleInterface;
     public function getBody(): BodyInterface;

@@ -43,10 +43,13 @@ function testingFront(FAFI $fafi) {
 
     foreach ($players as $player) {
         $playerReadPage = $storefrontService->getPlayerReadPage($player);
-        $content = $playerReadPage->getContent();
 
-        echo $content;
-        echo EOL;
+        foreach ($playerReadPage->getTabsList() as $tab) {
+            $content = $playerReadPage->initTab($tab)->getContent();
+
+            echo $content;
+            echo EOL;
+        }
         echo EOL;
     }
 }

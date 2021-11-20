@@ -19,7 +19,7 @@ class Footer extends AbstractPrinterPageSection implements FooterInterface
 
     public function __construct(int $x)
     {
-        parent::__construct($x);
+        parent::__construct($x, $this->yReserve);
     }
 
 

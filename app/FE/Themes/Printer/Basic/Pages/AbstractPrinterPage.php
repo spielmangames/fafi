@@ -2,12 +2,31 @@
 
 namespace FAFI\FE\Themes\Printer\Basic\Pages;
 
+use FAFI\exception\FafiException;
 use FAFI\FE\Structure\Page\PageInterface;
 use FAFI\FE\Themes\Printer\PrinterDesign as PD;
 
 abstract class AbstractPrinterPage implements PageInterface
 {
+    protected string $tabName;
+
     protected string $pageBorder;
+
+
+    /**
+     * @param string $tabName
+     * @return PageInterface
+     * @throws FafiException
+     */
+    public function initTab(string $tabName): PageInterface
+    {
+        if (!in_array($tabName, $this->getTabsList())) {
+            throw new FafiException(sprintf('%s tab is not supported for %s.', $tabName, self::class));
+        }
+        $this->tabName = $tabName;
+
+        return $this;
+    }
 
 
     private function setPageBorder(): void

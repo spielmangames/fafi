@@ -15,7 +15,7 @@ class Header extends AbstractPrinterPageSection implements HeaderInterface
 
     public function __construct(int $x)
     {
-        parent::__construct($x);
+        parent::__construct($x, $this->yReserve);
     }
 
 
