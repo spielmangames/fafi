@@ -28,7 +28,7 @@ class PlayerService
 
     /**
      * @param PlayersFilter $filter
-     * @return array
+     * @return Player[]
      * @throws FafiException
      */
     public function read(PlayersFilter $filter): array
