@@ -8,9 +8,12 @@ use FAFI\FE\Themes\ThemeFactory;
 
 class FAFI
 {
+    // domain services
     private PlayerService $playerService;
 
+    // tech services
     private StorefrontService $storefrontService;
+
 
     public function __construct()
     {
