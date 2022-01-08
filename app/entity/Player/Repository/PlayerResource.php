@@ -58,7 +58,7 @@ class PlayerResource extends AbstractResource
     public function create(Player $player): Player
     {
         if ($player->getId()) {
-            throw new FafiException('"id" must be null for creating Player.');
+            throw new FafiException(sprintf(self::E_ID_PRESENT, 'Player'));
         }
 
         $playerData = $this->hydrator->extract($player);
@@ -67,7 +67,7 @@ class PlayerResource extends AbstractResource
         $criteria = new PlayerCriteria([$id]);
         $result = $this->readFirst($criteria);
         if (!$result) {
-            throw new FafiException(sprintf('Player (id = %d) is absent in storage.', $id));
+            throw new FafiException(sprintf(self::E_ENTITY_ABSENT, 'Player', $id));
         }
 
         return $result;
@@ -75,7 +75,7 @@ class PlayerResource extends AbstractResource
 
     /**
      * @param PlayerCriteria $criteria
-     * @return array|null
+     * @return Player[]|null
      * @throws FafiException
      */
     public function read(PlayerCriteria $criteria): ?array
@@ -107,7 +107,7 @@ class PlayerResource extends AbstractResource
     public function update(Player $player): Player
     {
         if (!$player->getId()) {
-            throw new FafiException('ID is required for updating Player and can not be null.');
+            throw new FafiException(self::E_ID_ABSENT, 'Player');
         }
         $id = $player->getId();
 
@@ -117,7 +117,7 @@ class PlayerResource extends AbstractResource
         $criteria = new PlayerCriteria([$id]);
         $result = $this->readFirst($criteria);
         if (!$result) {
-            throw new FafiException(sprintf('Player (id = %d) is absent in storage.', $id));
+            throw new FafiException(sprintf(self::E_ENTITY_ABSENT, 'Player', $id));
         }
 
         return $result;

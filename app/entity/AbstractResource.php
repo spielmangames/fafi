@@ -12,6 +12,7 @@ class AbstractResource
 
 
     public const E_ID_PRESENT = '"id" must be absent for creating %s.';
+    public const E_ID_ABSENT = 'ID is required for updating %s and can not be null.';
     public const E_ENTITY_ABSENT = '%s (id = %d) is absent in storage.';
 
     public const E_ENTITY_CREATE_FAILED = 'Failed to create %s item.';
