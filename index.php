@@ -33,8 +33,10 @@ function demoRepo(FAFI $fafi)
 
 function demoFront(FAFI $fafi) {
     $playerService = $fafi->getPlayerService();
+
     $filter = new PlayersFilter([18]);
     $players = $playerService->read($filter);
+
 
     $storefrontService = $fafi->getStorefrontService();
 
@@ -62,7 +64,7 @@ echo EOL;
 
 $fafi = new FAFI();
 
-//demoRepo($fafi);
+demoRepo($fafi);
 demoFront($fafi);
 
 
