@@ -7,6 +7,10 @@ use mysqli;
 
 class DatabaseConnection
 {
+    private const E_DB_CONNECT_FAILED = 'Connection failed: %s';
+    private const E_DB_CONNECT_CLOSING_FAILED = 'Failure on closing the database connection.';
+
+
     private ?mysqli $connection = null;
 
 
@@ -26,7 +30,7 @@ class DatabaseConnection
     public function verifyConnect(mysqli $connection): void
     {
         if ($connection->connect_error) {
-            die('Connection failed: ' . $connection->connect_error);
+            die(sprintf(self::E_DB_CONNECT_FAILED, $connection->connect_error));
         }
     }
 
@@ -40,7 +44,7 @@ class DatabaseConnection
         $connection = $this->getConnection();
         if ($connection) {
             if (!$connection->close()) {
-                echo 'Failure on closing the database connection.';
+                echo self::E_DB_CONNECT_CLOSING_FAILED;
             }
             unset($this->connection);
         }
