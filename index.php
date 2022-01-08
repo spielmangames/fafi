@@ -64,7 +64,7 @@ echo EOL;
 
 $fafi = new FAFI();
 
-demoRepo($fafi);
+//demoRepo($fafi);
 demoFront($fafi);
 
 
