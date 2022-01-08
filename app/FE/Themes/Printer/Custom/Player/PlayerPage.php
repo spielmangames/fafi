@@ -94,7 +94,7 @@ class PlayerPage extends AbstractPrinterPage
 
     private function setBody(): void
     {
-        $this->body = new PlayerBody($this->getX(), $this->calcBodyYReserve(), $this->player);
+        $this->body = new PlayerBody($this->getX(), $this->calcBodyYReserve(), $this->player, $this->tabName);
     }
 
     public function getFooter(): FooterInterface
