@@ -10,6 +10,8 @@ class FAFI
 {
     // BE
     private PlayerService $playerService;
+//    private ClubService $clubService;
+//    private NationService $nationService;
 
     // FE
     private StorefrontService $storefrontService;
@@ -18,6 +20,8 @@ class FAFI
     public function __construct()
     {
         $this->playerService = new PlayerService();
+//        $this->clubService = new ClubService();
+//        $this->nationService = new NationService();
 
         $this->storefrontService = new StorefrontService(ThemeFactory::THEME_PRINTER);
     }

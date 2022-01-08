@@ -13,7 +13,6 @@ class StorefrontService
     private ThemeInterface $theme;
 
     /**
-     * StorefrontService constructor.
      * @param string $themeName
      * @throws FafiException
      */
