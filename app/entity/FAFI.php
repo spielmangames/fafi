@@ -14,7 +14,6 @@ class FAFI
     // tech services
     private StorefrontService $storefrontService;
 
-
     public function __construct()
     {
         $this->playerService = new PlayerService();

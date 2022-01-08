@@ -1,8 +1,8 @@
 <?php
 
-namespace FAFI\entity\Player;
+namespace FAFI\entity\Player\Repository;
 
-use FAFI\entity\Player\Repository\PlayerResource;
+use FAFI\entity\Player\Player;
 use FAFI\exception\FafiException;
 
 class PlayerHydrator

@@ -4,7 +4,6 @@ namespace FAFI\entity\Player\Repository;
 
 use FAFI\entity\AbstractResource;
 use FAFI\entity\Player\Player;
-use FAFI\entity\Player\PlayerHydrator;
 use FAFI\exception\FafiException;
 
 class PlayerResource extends AbstractResource
