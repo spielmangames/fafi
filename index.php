@@ -7,13 +7,10 @@ use FAFI\entity\Player\Player;
 use FAFI\entity\Player\PlayersFilter;
 
 
-$fafi = new FAFI();
-
-//testingRepo($fafi);
-testingFront($fafi);
+//----------------------------------------------------------------------------------------------------------------------
 
 
-function testingRepo(FAFI $fafi)
+function demoRepo(FAFI $fafi)
 {
     $playerService = $fafi->getPlayerService();
 
@@ -25,16 +22,16 @@ function testingRepo(FAFI $fafi)
     $players2 = $playerService->read($filter2);
 
 
-// create...
+    // create...
     $player = new Player(null, null, null, 'Serginho' . time(), 'Serjinio' . time(), null, null, null);
     $player = $playerService->create($player);
 
 
-// update...
-// delete...
+    // update...
+    // delete...
 }
 
-function testingFront(FAFI $fafi) {
+function demoFront(FAFI $fafi) {
     $playerService = $fafi->getPlayerService();
     $filter = new PlayersFilter([18]);
     $players = $playerService->read($filter);
@@ -55,6 +52,22 @@ function testingFront(FAFI $fafi) {
 }
 
 
+//----------------------------------------------------------------------------------------------------------------------
+
+
+echo EOL;
+echo('FAFI 2021: started.');
+echo EOL;
+
+
+$fafi = new FAFI();
+
+//demoRepo($fafi);
+demoFront($fafi);
+
+
+
 echo EOL;
 echo('FAFI 2021: finished.');
 echo EOL;
+
