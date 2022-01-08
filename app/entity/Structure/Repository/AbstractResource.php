@@ -1,6 +1,6 @@
 <?php
 
-namespace FAFI\entity;
+namespace FAFI\entity\Structure\Repository;
 
 use FAFI\db\DatabaseConnection;
 use FAFI\db\QueryBuilder;

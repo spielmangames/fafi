@@ -2,7 +2,7 @@
 
 namespace FAFI\entity\Player\Repository;
 
-use FAFI\entity\EntityCriteriaInterface;
+use FAFI\entity\Structure\Repository\EntityCriteriaInterface;
 
 class PlayerCriteria implements EntityCriteriaInterface
 {

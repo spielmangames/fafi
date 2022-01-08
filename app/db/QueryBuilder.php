@@ -2,8 +2,8 @@
 
 namespace FAFI\db;
 
-use FAFI\entity\AbstractResource;
-use FAFI\entity\EntityCriteriaInterface;
+use FAFI\entity\Structure\Repository\AbstractResource;
+use FAFI\entity\Structure\Repository\EntityCriteriaInterface;
 
 class QueryBuilder
 {

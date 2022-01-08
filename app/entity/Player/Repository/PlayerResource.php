@@ -2,8 +2,8 @@
 
 namespace FAFI\entity\Player\Repository;
 
-use FAFI\entity\AbstractResource;
 use FAFI\entity\Player\Player;
+use FAFI\entity\Structure\Repository\AbstractResource;
 use FAFI\exception\FafiException;
 
 class PlayerResource extends AbstractResource
