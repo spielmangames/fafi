@@ -8,8 +8,16 @@ use FAFI\exception\FafiException;
 
 class AbstractResource
 {
-    // profile basic
     public const ID_FIELD = 'id';
+
+
+    public const E_ID_PRESENT = '"id" must be absent for creating %s.';
+    public const E_ENTITY_ABSENT = '%s (id = %d) is absent in storage.';
+
+    public const E_ENTITY_CREATE_FAILED = 'Failed to create %s item.';
+    public const E_ENTITY_READ_FAILED = 'Failed to read %s item.';
+    public const E_ENTITY_UPDATE_FAILED = 'Failed to update %s item.';
+    public const E_ENTITY_DELETE_FAILED = 'Failed to delete %s item.';
 
 
     protected DatabaseConnection $dbConnection;
@@ -38,12 +46,12 @@ class AbstractResource
         try {
             $result = $connect->query($query);
             if (!$result) {
-                throw new FafiException(sprintf('Failed to create %s item.', $table) . "\n" . $connect->error);
+                throw new FafiException(sprintf(self::E_ENTITY_CREATE_FAILED, $table) . "\n" . $connect->error);
             }
 
             $id = $connect->insert_id;
             if (!$id) {
-                throw new FafiException(sprintf('Failed to create %s item.', $table));
+                throw new FafiException(sprintf(self::E_ENTITY_CREATE_FAILED, $table));
             }
         } catch (FafiException $e) {
             $connect->rollback();
@@ -74,7 +82,7 @@ class AbstractResource
         try {
             $result = $connect->query($query);
             if (!$result) {
-                throw new FafiException(sprintf('Failed to read %s items.', $table) . "\n" . $connect->error);
+                throw new FafiException(sprintf(self::E_ENTITY_READ_FAILED, $table) . "\n" . $connect->error);
             }
 
             $selection = [];
@@ -111,7 +119,7 @@ class AbstractResource
         try {
             $result = $connect->query($query);
             if (!$result) {
-                throw new FafiException(sprintf('Failed to update %s item.', $table) . "\n" . $connect->error);
+                throw new FafiException(sprintf(self::E_ENTITY_UPDATE_FAILED, $table) . "\n" . $connect->error);
             }
         } catch (FafiException $e) {
             $connect->rollback();
