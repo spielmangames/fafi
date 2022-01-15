@@ -4,10 +4,7 @@ namespace FAFI\FE\Themes\Printer\Custom\Player;
 
 use FAFI\entity\Player\Player;
 use FAFI\FE\Structure\ContentableInterface;
-use FAFI\FE\Structure\PageSection\BodyInterface;
-use FAFI\FE\Structure\PageSection\FooterInterface;
-use FAFI\FE\Structure\PageSection\HeaderInterface;
-use FAFI\FE\Structure\PageSection\TitleInterface;
+use FAFI\FE\Structure\PageSection\PageSectionInterface;
 use FAFI\FE\Themes\Printer\Basic\Pages\AbstractPrinterPage;
 use FAFI\FE\Themes\Printer\Basic\PageSections\Footer;
 use FAFI\FE\Themes\Printer\Basic\PageSections\Header;
@@ -25,10 +22,10 @@ class PlayerPage extends AbstractPrinterPage
     ];
 
 
-    private HeaderInterface $header;
-    private TitleInterface $title;
-    private BodyInterface $body;
-    private FooterInterface $footer;
+    private PageSectionInterface $header;
+    private PageSectionInterface $title;
+    private PageSectionInterface $body;
+    private PageSectionInterface $footer;
 
 
     private Player $player;
@@ -56,7 +53,7 @@ class PlayerPage extends AbstractPrinterPage
     }
 
 
-    public function getHeader(): HeaderInterface
+    public function getHeader(): PageSectionInterface
     {
         if(!isset($this->header)) {
             $this->setHeader();
@@ -70,7 +67,7 @@ class PlayerPage extends AbstractPrinterPage
         $this->header = new Header($this->getX());
     }
 
-    public function getTitle(): TitleInterface
+    public function getTitle(): PageSectionInterface
     {
         if(!isset($this->title)) {
             $this->setTitle();
@@ -84,7 +81,7 @@ class PlayerPage extends AbstractPrinterPage
         $this->title = new PlayerTitle($this->getX(), $this->player);
     }
 
-    public function getBody(): BodyInterface
+    public function getBody(): PageSectionInterface
     {
         if(!isset($this->body)) {
             $this->setBody();
@@ -98,7 +95,7 @@ class PlayerPage extends AbstractPrinterPage
         $this->body = new PlayerBody($this->getX(), $this->calcBodyYReserve(), $this->player, $this->tabName);
     }
 
-    public function getFooter(): FooterInterface
+    public function getFooter(): PageSectionInterface
     {
         if(!isset($this->footer)) {
             $this->setFooter();
