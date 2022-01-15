@@ -2,9 +2,7 @@
 
 namespace FAFI\FE\Themes\Printer\Basic\PageSections;
 
-use FAFI\FE\Structure\PageSection\HeaderInterface;
-
-class Header extends AbstractPrinterPageSection implements HeaderInterface
+class Header extends AbstractPrinterPageSection
 {
     protected int $yReserve = 1;
     protected bool $topBorder = false;
