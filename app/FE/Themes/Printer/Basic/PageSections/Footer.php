@@ -2,12 +2,11 @@
 
 namespace FAFI\FE\Themes\Printer\Basic\PageSections;
 
-use FAFI\FE\Structure\PageSection\FooterInterface;
 use FAFI\FE\Themes\Printer\PrinterDesign as PD;
 
-class Footer extends AbstractPrinterPageSection implements FooterInterface
+class Footer extends AbstractPrinterPageSection
 {
-    private const WATERMARK = 'FAFI  2021';
+    private const WATERMARK = 'FAFI  2022';
 
 
     protected int $yReserve = 2;
