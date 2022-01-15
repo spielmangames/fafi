@@ -10,6 +10,8 @@ abstract class AbstractPrinterPage implements PageInterface
 {
     protected string $tabName;
 
+    private const E_TAB_NOT_SUPPORTED = 'Tab %s is not supported for %s.';
+
     protected string $pageBorder;
 
 
@@ -21,7 +23,7 @@ abstract class AbstractPrinterPage implements PageInterface
     public function initTab(string $tabName): PageInterface
     {
         if (!in_array($tabName, $this->getTabsList())) {
-            throw new FafiException(sprintf('%s tab is not supported for %s.', $tabName, self::class));
+            throw new FafiException(sprintf(self::E_TAB_NOT_SUPPORTED, $tabName, self::class));
         }
         $this->tabName = $tabName;
 

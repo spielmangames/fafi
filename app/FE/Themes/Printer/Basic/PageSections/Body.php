@@ -12,9 +12,13 @@ class Body extends AbstractPrinterPageSection implements BodyInterface
     protected bool $bottomBorder = false;
 
 
-    public function __construct(int $x, int $yReserve)
+    protected string $tabName;
+
+
+    public function __construct(int $x, int $yReserve, string $tabName)
     {
         parent::__construct($x, $yReserve);
+        $this->tabName = $tabName;
     }
 
 

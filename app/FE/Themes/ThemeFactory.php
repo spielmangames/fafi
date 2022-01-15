@@ -9,6 +9,8 @@ class ThemeFactory
 {
     public const THEME_PRINTER = 'Printer';
 
+    private const E_THEME_NOT_SUPPORTED = 'Theme %s is not supported.';
+
 
     /**
      * @param string $themeName
@@ -22,7 +24,7 @@ class ThemeFactory
                 return new Printer();
 
             default:
-                throw new FafiException(sprintf('Theme %s is not supported.', $themeName));
+                throw new FafiException(sprintf(self::E_THEME_NOT_SUPPORTED, $themeName));
         }
     }
 }

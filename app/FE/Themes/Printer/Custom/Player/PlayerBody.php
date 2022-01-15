@@ -5,6 +5,7 @@ namespace FAFI\FE\Themes\Printer\Custom\Player;
 use FAFI\entity\Player\Player;
 use FAFI\exception\FafiException;
 use FAFI\FE\Themes\Printer\Basic\PageSections\Body;
+use FAFI\FE\Themes\Printer\Basic\PageSections\TabsPanelWidget;
 
 class PlayerBody extends Body
 {
@@ -16,9 +17,9 @@ class PlayerBody extends Body
 
     private Player $player;
 
-    public function __construct(int $x, int $yReserve, Player $player)
+    public function __construct(int $x, int $yReserve, Player $player, string $tabName)
     {
-        parent::__construct($x, $yReserve);
+        parent::__construct($x, $yReserve, $tabName);
         $this->player = $player;
     }
 

@@ -9,7 +9,7 @@ class Title extends AbstractPrinterPageSection implements TitleInterface
 {
     public function __construct(int $x)
     {
-        parent::__construct($x);
+        parent::__construct($x, $this->yReserve);
     }
 
 

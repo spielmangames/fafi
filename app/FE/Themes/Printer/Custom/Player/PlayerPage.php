@@ -3,6 +3,7 @@
 namespace FAFI\FE\Themes\Printer\Custom\Player;
 
 use FAFI\entity\Player\Player;
+use FAFI\FE\Structure\ContentableInterface;
 use FAFI\FE\Structure\PageSection\BodyInterface;
 use FAFI\FE\Structure\PageSection\FooterInterface;
 use FAFI\FE\Structure\PageSection\HeaderInterface;
@@ -121,12 +122,17 @@ class PlayerPage extends AbstractPrinterPage
         $separator = PD::PAGE_Y_BORDER . EOL . PD::PAGE_Y_BORDER;
         $xBorder = PD::PAGE_XY_CORNER . $this->getPageBorder() . PD::PAGE_XY_CORNER;
 
-        $header = implode($separator, $this->getHeader()->getContent());
-        $title = implode($separator, $this->getTitle()->getContent());
-        $body = implode($separator, $this->getBody()->getContent());
-        $footer = implode($separator, $this->getFooter()->getContent());
+        $header = $this->wrap($this->getHeader(), $separator);
+        $title = $this->wrap($this->getTitle(), $separator);
+        $body = $this->wrap($this->getBody(), $separator);
+        $footer = $this->wrap($this->getFooter(), $separator);
 
         $page = implode($separator, [$xBorder, $header, $title, $body, $footer, $xBorder]);
         return $page;
+    }
+
+    private function wrap(ContentableInterface $block, string $separator): string
+    {
+        return implode($separator, $block->getContent());
     }
 }
