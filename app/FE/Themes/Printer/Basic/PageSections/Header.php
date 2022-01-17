@@ -5,6 +5,7 @@ namespace FAFI\FE\Themes\Printer\Basic\PageSections;
 class Header extends AbstractPrinterPageSection
 {
     protected int $yReserve = 1;
+
     protected bool $topBorder = false;
     protected bool $topPadding = false;
     protected bool $bottomPadding = false;

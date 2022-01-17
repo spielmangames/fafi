@@ -10,6 +10,7 @@ class Footer extends AbstractPrinterPageSection
 
 
     protected int $yReserve = 2;
+
     protected bool $topBorder = false;
     protected bool $topPadding = true;
     protected bool $bottomPadding = false;

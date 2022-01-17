@@ -6,6 +6,9 @@ use FAFI\FE\Themes\Printer\PrinterDesign as PD;
 
 abstract class AbstractTitle extends AbstractPrinterPageSection
 {
+    protected int $yReserve = 4;
+
+
     public function __construct(int $x)
     {
         parent::__construct($x, $this->yReserve);

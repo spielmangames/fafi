@@ -8,7 +8,6 @@ use FAFI\FE\Themes\Printer\Basic\PageSections\AbstractTitle;
 
 class PlayerTitle extends AbstractTitle
 {
-    protected int $yReserve = 4;
     protected bool $topBorder = true;
     protected bool $topPadding = true;
     protected bool $bottomPadding = true;
