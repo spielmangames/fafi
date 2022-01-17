@@ -12,7 +12,6 @@ abstract class AbstractBody extends AbstractPrinterPageSection
 
     protected string $tabName;
 
-
     public function __construct(int $x, int $yReserve, string $tabName)
     {
         parent::__construct($x, $yReserve);
