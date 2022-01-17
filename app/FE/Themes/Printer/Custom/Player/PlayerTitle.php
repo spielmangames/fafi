@@ -4,9 +4,9 @@ namespace FAFI\FE\Themes\Printer\Custom\Player;
 
 use FAFI\entity\Player\Player;
 use FAFI\exception\FafiException;
-use FAFI\FE\Themes\Printer\Basic\PageSections\Title;
+use FAFI\FE\Themes\Printer\Basic\PageSections\AbstractTitle;
 
-class PlayerTitle extends Title
+class PlayerTitle extends AbstractTitle
 {
     protected int $yReserve = 4;
     protected bool $topBorder = true;
@@ -16,6 +16,7 @@ class PlayerTitle extends Title
 
 
     private Player $player;
+    public const E_PLAYER_IS_MISSED = 'Player is required for %s.';
 
     public function __construct(int $x, Player $player)
     {
@@ -31,7 +32,7 @@ class PlayerTitle extends Title
     protected function prepareContent(): string
     {
         if (!isset($this->player)) {
-            throw new FafiException('Player is required.');
+            throw new FafiException(sprintf(self::E_PLAYER_IS_MISSED, self::class));
         }
         /** @var Player $player */
         $player = $this->player;
