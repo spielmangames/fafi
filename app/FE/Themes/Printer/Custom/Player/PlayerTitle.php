@@ -27,7 +27,7 @@ class PlayerTitle extends AbstractTitle
      * @return string
      * @throws FafiException
      */
-    protected function prepareContent(): string
+    protected function prepareTitle(): string
     {
         if (!isset($this->player)) {
             throw new FafiException(sprintf(FafiException::E_PLAYER_IS_MISSED, self::class));

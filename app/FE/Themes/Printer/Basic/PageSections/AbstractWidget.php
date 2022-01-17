@@ -11,6 +11,4 @@ abstract class AbstractWidget extends AbstractPrinterPageSection
 
 
     abstract public function getInside(): array;
-
-    abstract protected function prepareContent(): string;
 }

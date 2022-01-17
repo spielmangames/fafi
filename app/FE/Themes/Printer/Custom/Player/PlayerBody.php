@@ -3,7 +3,6 @@
 namespace FAFI\FE\Themes\Printer\Custom\Player;
 
 use FAFI\entity\Player\Player;
-use FAFI\exception\FafiException;
 use FAFI\FE\Themes\Printer\Basic\PageSections\AbstractBody;
 use FAFI\FE\Themes\Printer\Basic\PageSections\TabsPanelWidget;
 
@@ -24,21 +23,30 @@ class PlayerBody extends AbstractBody
     }
 
 
-    /**
-     * @return string
-     * @throws FafiException
-     */
-    protected function prepareContent(): string
+    public function getInside(): array
     {
-        if (!isset($this->player)) {
-            throw new FafiException(sprintf(FafiException::E_PLAYER_IS_MISSED, self::class));
-        }
+        $inside = [];
 
-        return $this->asdf($this->player);
+        $tabsPanel = new TabsPanelWidget($this->getX(), PlayerPage::TABS_LIST, $this->tabName);
+
+        return $inside;
     }
 
-    private function asdf(Player $player): string
-    {
-        return '';
-    }
+//    /**
+//     * @return string
+//     * @throws FafiException
+//     */
+//    protected function prepareBodyContent(): string
+//    {
+//        if (!isset($this->player)) {
+//            throw new FafiException(sprintf(FafiException::E_PLAYER_IS_MISSED, self::class));
+//        }
+//
+//        return $this->asdf($this->player);
+//    }
+//
+//    private function asdf(Player $player): string
+//    {
+//        return '';
+//    }
 }

@@ -17,8 +17,8 @@ abstract class AbstractTitle extends AbstractPrinterPageSection
 
     public function getInside(): array
     {
-        return [$this->alignCenter($this->prepareContent(), $this->getX(), PD::PAGE_BASE)];
+        return [$this->alignCenter($this->prepareTitle(), $this->getX(), PD::PAGE_BASE)];
     }
 
-    abstract protected function prepareContent(): string;
+    abstract protected function prepareTitle(): string;
 }

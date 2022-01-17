@@ -30,51 +30,42 @@ class TabsPanelWidget extends AbstractWidget
      */
     public function getInside(): array
     {
-        return [$this->alignLeft($this->prepareContent(), $this->getX(), PD::PAGE_X_BORDER)];
+        return [$this->alignLeft($this->prepareTabsList(), $this->getX(), PD::PAGE_X_BORDER)];
     }
 
     /**
      * @return string
      * @throws FafiException
      */
-    protected function prepareContent(): string
+    private function prepareTabsList(): string
     {
-        return implode(PD::PAGE_X_BORDER, $this->handleTabsList());
-    }
-
-    /**
-     * @return array
-     * @throws FafiException
-     */
-    private function handleTabsList(): array
-    {
-        $tabs = [];
-
         if (!in_array($this->activeTab, $this->tabsList)) {
             throw new FafiException(sprintf(FafiException::E_TAB_NOT_SUPPORTED, $this->activeTab, self::class));
         }
 
+        $tabs = [];
+
         $activeHandled = false;
         foreach ($this->tabsList as $tabName) {
             if (!$activeHandled && $tabName === $this->activeTab) {
-                $tabName = $this->handleActiveTab($tabName);
+                $tabName = $this->prepareActiveTab($tabName);
                 $activeHandled = true;
             } else {
-                $tabName = $this->handlePassiveTab($tabName);
+                $tabName = $this->preparePassiveTab($tabName);
             }
 
             $tabs[] = $tabName;
         }
 
-        return $tabs;
+        return implode(PD::PAGE_X_BORDER, $tabs);
     }
 
-    private function handleActiveTab(string $tabName): string
+    private function prepareActiveTab(string $tabName): string
     {
         return PD::PAGE_Y_BORDER . $tabName . PD::PAGE_Y_BORDER;
     }
 
-    private function handlePassiveTab(string $tabName): string
+    private function preparePassiveTab(string $tabName): string
     {
         return $tabName = substr($tabName, 0, $this->passiveTabTrim);
     }
