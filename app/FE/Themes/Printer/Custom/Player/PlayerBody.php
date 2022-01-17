@@ -9,12 +9,6 @@ use FAFI\FE\Themes\Printer\Basic\PageSections\TabsPanelWidget;
 
 class PlayerBody extends AbstractBody
 {
-    protected bool $topBorder = false;
-    protected bool $topPadding = false;
-    protected bool $bottomPadding = false;
-    protected bool $bottomBorder = false;
-
-
     private Player $player;
 
     public function __construct(int $x, int $yReserve, Player $player, string $tabName)

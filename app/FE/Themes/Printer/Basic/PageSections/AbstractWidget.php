@@ -10,10 +10,7 @@ abstract class AbstractWidget extends AbstractPrinterPageSection
     }
 
 
-    public function getInside(): array
-    {
-
-    }
+    abstract public function getInside(): array;
 
     abstract protected function prepareContent(): string;
 }

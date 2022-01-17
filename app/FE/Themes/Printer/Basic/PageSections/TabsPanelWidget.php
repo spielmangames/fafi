@@ -2,6 +2,7 @@
 
 namespace FAFI\FE\Themes\Printer\Basic\PageSections;
 
+use FAFI\exception\FafiException;
 use FAFI\FE\Themes\Printer\PrinterDesign as PD;
 
 class TabsPanelWidget extends AbstractWidget
@@ -23,19 +24,35 @@ class TabsPanelWidget extends AbstractWidget
     }
 
 
+    /**
+     * @return array
+     * @throws FafiException
+     */
     public function getInside(): array
     {
         return [$this->alignLeft($this->prepareContent(), $this->getX(), PD::PAGE_X_BORDER)];
     }
 
+    /**
+     * @return string
+     * @throws FafiException
+     */
     protected function prepareContent(): string
     {
         return implode(PD::PAGE_X_BORDER, $this->handleTabsList());
     }
 
-    protected function handleTabsList(): array
+    /**
+     * @return array
+     * @throws FafiException
+     */
+    private function handleTabsList(): array
     {
         $tabs = [];
+
+        if (!in_array($this->activeTab, $this->tabsList)) {
+            throw new FafiException(sprintf(FafiException::E_TAB_NOT_SUPPORTED, $this->activeTab, self::class));
+        }
 
         $activeHandled = false;
         foreach ($this->tabsList as $tabName) {
@@ -52,12 +69,12 @@ class TabsPanelWidget extends AbstractWidget
         return $tabs;
     }
 
-    protected function handleActiveTab(string $tabName): string
+    private function handleActiveTab(string $tabName): string
     {
         return PD::PAGE_Y_BORDER . $tabName . PD::PAGE_Y_BORDER;
     }
 
-    protected function handlePassiveTab(string $tabName): string
+    private function handlePassiveTab(string $tabName): string
     {
         return $tabName = substr($tabName, 0, $this->passiveTabTrim);
     }

@@ -118,7 +118,7 @@ class PlayerPage extends AbstractPrinterPage
     public function getContent(): array
     {
         if (!isset($this->tabName)) {
-            throw new FafiException(sprintf(self::E_TAB_NOT_SET, self::class));
+            throw new FafiException(sprintf(FafiException::E_TAB_NOT_SET, self::class));
         }
 
         $separator = PD::PAGE_Y_BORDER . EOL . PD::PAGE_Y_BORDER;
