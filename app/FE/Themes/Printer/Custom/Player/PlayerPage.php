@@ -111,6 +111,10 @@ class PlayerPage extends AbstractPrinterPage
     }
 
 
+    /**
+     * @return array
+     * @throws FafiException
+     */
     public function getContent(): array
     {
         if (!isset($this->tabName)) {

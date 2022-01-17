@@ -2,9 +2,7 @@
 
 namespace FAFI\FE\Themes\Printer\Basic\PageSections;
 
-use FAFI\FE\Structure\PageSection\BodyInterface;
-
-class Body extends AbstractPrinterPageSection implements BodyInterface
+abstract class AbstractBody extends AbstractPrinterPageSection
 {
     protected bool $topBorder = false;
     protected bool $topPadding = false;
@@ -22,14 +20,5 @@ class Body extends AbstractPrinterPageSection implements BodyInterface
     }
 
 
-    public function getInside(): array
-    {
-        return [];
-    }
-
-
-    public function getTabs(): array
-    {
-        return [];
-    }
+    abstract public function getInside(): array;
 }

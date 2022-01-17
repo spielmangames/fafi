@@ -4,10 +4,10 @@ namespace FAFI\FE\Themes\Printer\Custom\Player;
 
 use FAFI\entity\Player\Player;
 use FAFI\exception\FafiException;
-use FAFI\FE\Themes\Printer\Basic\PageSections\Body;
+use FAFI\FE\Themes\Printer\Basic\PageSections\AbstractBody;
 use FAFI\FE\Themes\Printer\Basic\PageSections\TabsPanelWidget;
 
-class PlayerBody extends Body
+class PlayerBody extends AbstractBody
 {
     protected bool $topBorder = false;
     protected bool $topPadding = false;
@@ -37,7 +37,7 @@ class PlayerBody extends Body
     protected function prepareContent(): string
     {
         if (!isset($this->player)) {
-            throw new FafiException('Player is required.');
+            throw new FafiException(sprintf(FafiException::E_PLAYER_IS_MISSED, self::class));
         }
 
         return $this->asdf($this->player);

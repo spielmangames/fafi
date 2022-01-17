@@ -15,7 +15,6 @@ class PlayerTitle extends AbstractTitle
 
 
     private Player $player;
-    public const E_PLAYER_IS_MISSED = 'Player is required for %s.';
 
     public function __construct(int $x, Player $player)
     {
@@ -31,7 +30,7 @@ class PlayerTitle extends AbstractTitle
     protected function prepareContent(): string
     {
         if (!isset($this->player)) {
-            throw new FafiException(sprintf(self::E_PLAYER_IS_MISSED, self::class));
+            throw new FafiException(sprintf(FafiException::E_PLAYER_IS_MISSED, self::class));
         }
         /** @var Player $player */
         $player = $this->player;
