@@ -10,7 +10,8 @@ abstract class AbstractPrinterPage implements PageInterface
 {
     protected string $tabName;
 
-    private const E_TAB_NOT_SUPPORTED = 'Tab %s is not supported for %s.';
+    public const E_TAB_NOT_SET = 'Tab is not set for %s.';
+    public const E_TAB_NOT_SUPPORTED = 'Tab %s is not supported for %s.';
 
     protected string $pageBorder;
 

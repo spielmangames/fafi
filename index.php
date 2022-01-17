@@ -58,7 +58,7 @@ function demoFront(FAFI $fafi) {
 
 
 echo EOL;
-echo('FAFI 2021: started.');
+echo('FAFI 2022: started.');
 echo EOL;
 
 
@@ -70,6 +70,6 @@ demoFront($fafi);
 
 
 echo EOL;
-echo('FAFI 2021: finished.');
+echo('FAFI 2022: finished.');
 echo EOL;
 

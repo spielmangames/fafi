@@ -4,7 +4,7 @@ namespace FAFI\FE\Themes\Printer\Basic\PageSections;
 
 use FAFI\FE\Themes\Printer\PrinterDesign as PD;
 
-class Title extends AbstractPrinterPageSection
+abstract class AbstractTitle extends AbstractPrinterPageSection
 {
     public function __construct(int $x)
     {
@@ -17,8 +17,5 @@ class Title extends AbstractPrinterPageSection
         return [$this->alignCenter($this->prepareContent(), $this->getX(), PD::PAGE_BASE)];
     }
 
-    protected function prepareContent(): string
-    {
-        return '';
-    }
+    abstract protected function prepareContent(): string;
 }
