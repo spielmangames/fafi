@@ -16,7 +16,7 @@ class PlayerPage extends AbstractPrinterPage
     public const TAB_PROFILE = 'profile';
     public const TAB_ORIGIN = 'origin';
     public const TAB_SKILLS = 'skills';
-    private const TABS_LIST = [
+    public const TABS_LIST = [
         self::TAB_PROFILE,
         self::TAB_ORIGIN,
         self::TAB_SKILLS,

@@ -2,18 +2,20 @@
 
 namespace FAFI\FE\Themes\Printer\Basic\PageSections;
 
-use FAFI\FE\Structure\PageSection\WidgetInterface;
 use FAFI\FE\Themes\Printer\PrinterDesign as PD;
 
-class TabsPanelWidget extends Widget implements WidgetInterface
+class TabsPanelWidget extends AbstractWidget
 {
+    protected int $yReserve = 1;
+
+
     private array $tabsList;
     private string $activeTab;
     private int $passiveTabTrim;
 
-    public function __construct(int $x, array $tabsList, string $activeTab, int $passiveTabTrim)
+    public function __construct(int $x, array $tabsList, string $activeTab, int $passiveTabTrim = 3)
     {
-        parent::__construct($x);
+        parent::__construct($x, $this->yReserve);
 
         $this->tabsList = $tabsList;
         $this->activeTab = $activeTab;
