@@ -3,6 +3,7 @@
 namespace FAFI\FE\Themes\Printer\Custom\Player;
 
 use FAFI\entity\Player\Player;
+use FAFI\FE\Structure\PageSection\PageSectionInterface;
 use FAFI\FE\Themes\Printer\Basic\PageSections\AbstractBody;
 use FAFI\FE\Themes\Printer\Basic\PageSections\TabsPanelWidget;
 
@@ -25,9 +26,14 @@ class PlayerBody extends AbstractBody
 
     public function getInside(): array
     {
-        $inside = [];
-
         $tabsPanel = new TabsPanelWidget($this->getX(), PlayerPage::TABS_LIST, $this->tabName);
+        $widgets = [$tabsPanel];
+
+        $inside = [];
+        foreach ($widgets as $widget) {
+            /** @var PageSectionInterface $widget */
+            $inside = array_merge($inside, $widget->getContent());
+        }
 
         return $inside;
     }

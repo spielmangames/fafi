@@ -133,7 +133,7 @@ class PlayerPage extends AbstractPrinterPage
         return $page;
     }
 
-    private function wrap(ContentableInterface $block, string $separator): string
+    public function wrap(ContentableInterface $block, string $separator): string
     {
         return implode($separator, $block->getContent());
     }
