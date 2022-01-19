@@ -18,7 +18,7 @@ abstract class AbstractPrinterPage implements PageInterface
      * @return PageInterface
      * @throws FafiException
      */
-    public function initTab(string $tabName): PageInterface
+    public function setTabName(string $tabName): PageInterface
     {
         if (!in_array($tabName, $this->getTabsList())) {
             throw new FafiException(sprintf(FafiException::E_TAB_NOT_SUPPORTED, $tabName, self::class));

@@ -44,7 +44,7 @@ function demoFront(FAFI $fafi) {
         $playerReadPage = $storefrontService->getPlayerReadPage($player);
 
         foreach ($playerReadPage->getTabsList() as $tab) {
-            $content = $playerReadPage->initTab($tab)->getContent();
+            $content = $playerReadPage->setTabName($tab)->forPrint();
 
             echo $content;
             echo EOL;

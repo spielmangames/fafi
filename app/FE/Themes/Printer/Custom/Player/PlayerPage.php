@@ -137,4 +137,12 @@ class PlayerPage extends AbstractPrinterPage
     {
         return implode($separator, $block->getContent());
     }
+
+
+    public function forPrint(): string
+    {
+        $separator = PD::PAGE_Y_BORDER . EOL . PD::PAGE_Y_BORDER;
+
+        return $this->wrap($this, $separator);
+    }
 }
