@@ -9,6 +9,11 @@ class TabsPanelWidget extends AbstractWidget
 {
     protected int $yReserve = 1;
 
+    protected bool $topBorder = false;
+    protected bool $topPadding = false;
+    protected bool $bottomPadding = true;
+    protected bool $bottomBorder = false;
+
 
     private array $tabsList;
     private string $activeTab;
