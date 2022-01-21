@@ -1,8 +1,9 @@
 <?php
 
-namespace FAFI\FE\Themes\Printer\Basic\PageSections;
+namespace FAFI\FE\Themes\Printer\Basic\Widgets;
 
 use FAFI\exception\FafiException;
+use FAFI\FE\Themes\Printer\Basic\PageSections\AbstractWidget;
 use FAFI\FE\Themes\Printer\PrinterDesign as PD;
 
 class TabsPanelWidget extends AbstractWidget
