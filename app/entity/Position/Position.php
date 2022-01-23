@@ -4,6 +4,9 @@ namespace FAFI\entity\Position;
 
 class Position
 {
+    public const ENTITY = 'Position';
+
+
     public const P_GK = 'GK';
 
     public const P_CB = 'CB';

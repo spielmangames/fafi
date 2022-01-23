@@ -35,7 +35,7 @@ class PositionResource extends AbstractResource
     public function create(Position $position): Position
     {
         if ($position->getId()) {
-            throw new FafiException(sprintf(self::E_ID_PRESENT, 'Position'));
+            throw new FafiException(sprintf(self::E_ID_PRESENT, Position::ENTITY));
         }
 
         $positionData = $this->hydrator->extract($position);
@@ -44,7 +44,7 @@ class PositionResource extends AbstractResource
         $criteria = new PositionCriteria([$id]);
         $result = $this->readFirst($criteria);
         if (!$result) {
-            throw new FafiException(sprintf(self::E_ENTITY_ABSENT, 'Position', $id));
+            throw new FafiException(sprintf(self::E_ENTITY_ABSENT, Position::ENTITY, $id));
         }
 
         return $result;
@@ -84,7 +84,7 @@ class PositionResource extends AbstractResource
     public function update(Position $position): Position
     {
         if (!$position->getId()) {
-            throw new FafiException(self::E_ID_ABSENT, 'Position');
+            throw new FafiException(self::E_ID_ABSENT, Position::ENTITY);
         }
         $id = $position->getId();
 
@@ -94,7 +94,7 @@ class PositionResource extends AbstractResource
         $criteria = new PositionCriteria([$id]);
         $result = $this->readFirst($criteria);
         if (!$result) {
-            throw new FafiException(sprintf(self::E_ENTITY_ABSENT, 'Position', $id));
+            throw new FafiException(sprintf(self::E_ENTITY_ABSENT, Position::ENTITY, $id));
         }
 
         return $result;

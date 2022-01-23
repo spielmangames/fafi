@@ -43,7 +43,7 @@ class PositionHydrator
         }
 
         if (!empty($missed)) {
-            throw new FafiException(sprintf('Required fields are missed: "%s".', implode('", "', $missed)));
+            throw new FafiException(sprintf(FafiException::E_REQ_MISSED, Position::ENTITY, implode('", "', $missed)));
         }
     }
 
