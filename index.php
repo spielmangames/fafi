@@ -10,6 +10,13 @@ use FAFI\entity\Player\PlayersFilter;
 //----------------------------------------------------------------------------------------------------------------------
 
 
+function demoInstall(FAFI $fafi)
+{
+//    $installService = $fafi->getInstallService();
+//    $installService->installDB();
+    $fafi->installData();
+}
+
 function demoRepo(FAFI $fafi)
 {
     $playerService = $fafi->getPlayerService();
@@ -64,6 +71,7 @@ echo EOL;
 
 $fafi = new FAFI();
 
+//demoInstall($fafi);
 //demoRepo($fafi);
 //demoFront($fafi);
 
