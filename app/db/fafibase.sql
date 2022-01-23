@@ -1,6 +1,6 @@
 
 #-----------------------------------------------------------------------------------------------------------------------
-# DB init [version=1.3]
+# DB init [version=1.4]
 #-----------------------------------------------------------------------------------------------------------------------
 
 
@@ -67,6 +67,16 @@ CREATE TABLE `cities_countries_assignments` (
 #-----------------------------------------------------------------------------------------------------------------------
 
 
+CREATE TABLE `positions` (
+    `id` INT(11) UNSIGNED AUTO_INCREMENT NOT NULL,
+
+    `name` VARCHAR(2) NOT NULL,
+
+    PRIMARY KEY (`id`),
+    UNIQUE KEY `u_positions_name` (`name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+
 CREATE TABLE `players` (
     `id` INT(11) UNSIGNED AUTO_INCREMENT NOT NULL,
 
@@ -85,6 +95,25 @@ CREATE TABLE `players` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 
+
+CREATE TABLE `players_positions_assignments` (
+    `id` INT(11) UNSIGNED AUTO_INCREMENT NOT NULL,
+
+    `player_id` INT(11) UNSIGNED NOT NULL,
+    `position_id` INT(11) UNSIGNED NOT NULL,
+
+    `att_min` TINYINT(1) NOT NULL DEFAULT 0,
+    `att_max` TINYINT(1) NOT NULL DEFAULT 0,
+    `def_min` TINYINT(1) NOT NULL DEFAULT 0,
+    `def_max` TINYINT(1) NOT NULL DEFAULT 0,
+
+    PRIMARY KEY (`id`),
+    UNIQUE KEY `u_players_player_id_position_id` (`player_id`, `position_id`),
+    CONSTRAINT `player_id` FOREIGN KEY (`player_id`) REFERENCES `players` (`id`) ON DELETE CASCADE,
+    CONSTRAINT `position_id` FOREIGN KEY (`position_id`) REFERENCES `positions` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+
 # CREATE TABLE `player_origins` (
 #     `id` bigint(16) NOT NULL PRIMARY KEY AUTO_INCREMENT,
 #
@@ -97,9 +126,7 @@ CREATE TABLE `players` (
 
 
 #-----------------------------------------------------------------------------------------------------------------------
-# insert basic data
+# set Schema version
 #-----------------------------------------------------------------------------------------------------------------------
 
-
-INSERT INTO _version VALUES ('1.3');
-
+INSERT INTO _version VALUES ('1.4');
