@@ -38,8 +38,8 @@ class PositionResource extends AbstractResource
             throw new FafiException(sprintf(self::E_ID_PRESENT, Position::ENTITY));
         }
 
-        $positionData = $this->hydrator->extract($position);
-        $id = $this->insertRecord(self::TABLE, $positionData);
+        $data = $this->hydrator->extract($position);
+        $id = $this->insertRecord(self::TABLE, $data);
 
         $criteria = new PositionCriteria([$id]);
         $result = $this->readFirst($criteria);
@@ -88,8 +88,8 @@ class PositionResource extends AbstractResource
         }
         $id = $position->getId();
 
-        $positionData = $this->hydrator->extract($position);
-        $this->updateRecord(self::TABLE, $positionData, new PositionCriteria([$id]));
+        $data = $this->hydrator->extract($position);
+        $this->updateRecord(self::TABLE, $data, new PositionCriteria([$id]));
 
         $criteria = new PositionCriteria([$id]);
         $result = $this->readFirst($criteria);

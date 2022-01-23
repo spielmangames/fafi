@@ -61,8 +61,8 @@ class PlayerResource extends AbstractResource
             throw new FafiException(sprintf(self::E_ID_PRESENT, Player::ENTITY));
         }
 
-        $playerData = $this->hydrator->extract($player);
-        $id = $this->insertRecord(self::TABLE, $playerData);
+        $data = $this->hydrator->extract($player);
+        $id = $this->insertRecord(self::TABLE, $data);
 
         $criteria = new PlayerCriteria([$id]);
         $result = $this->readFirst($criteria);
@@ -111,8 +111,8 @@ class PlayerResource extends AbstractResource
         }
         $id = $player->getId();
 
-        $playerData = $this->hydrator->extract($player);
-        $this->updateRecord(self::TABLE, $playerData, new PlayerCriteria([$id]));
+        $data = $this->hydrator->extract($player);
+        $this->updateRecord(self::TABLE, $data, new PlayerCriteria([$id]));
 
         $criteria = new PlayerCriteria([$id]);
         $result = $this->readFirst($criteria);
