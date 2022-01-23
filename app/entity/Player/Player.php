@@ -7,6 +7,9 @@ class Player
     use PlayerDataHelperTrait;
 
 
+    public const ENTITY = 'Player';
+
+
     // profile: basic
     private ?int $id;
 

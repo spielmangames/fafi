@@ -54,7 +54,7 @@ class PlayerHydrator
         }
 
         if (!empty($missed)) {
-            throw new FafiException(sprintf('Required fields are missed: "%s".', implode('", "', $missed)));
+            throw new FafiException(sprintf(FafiException::E_REQ_MISSED, Player::ENTITY, implode('", "', $missed)));
         }
     }
 

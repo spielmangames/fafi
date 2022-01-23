@@ -58,7 +58,7 @@ class PlayerResource extends AbstractResource
     public function create(Player $player): Player
     {
         if ($player->getId()) {
-            throw new FafiException(sprintf(self::E_ID_PRESENT, 'Player'));
+            throw new FafiException(sprintf(self::E_ID_PRESENT, Player::ENTITY));
         }
 
         $playerData = $this->hydrator->extract($player);
@@ -67,7 +67,7 @@ class PlayerResource extends AbstractResource
         $criteria = new PlayerCriteria([$id]);
         $result = $this->readFirst($criteria);
         if (!$result) {
-            throw new FafiException(sprintf(self::E_ENTITY_ABSENT, 'Player', $id));
+            throw new FafiException(sprintf(self::E_ENTITY_ABSENT, Player::ENTITY, $id));
         }
 
         return $result;
@@ -107,7 +107,7 @@ class PlayerResource extends AbstractResource
     public function update(Player $player): Player
     {
         if (!$player->getId()) {
-            throw new FafiException(self::E_ID_ABSENT, 'Player');
+            throw new FafiException(self::E_ID_ABSENT, Player::ENTITY);
         }
         $id = $player->getId();
 
@@ -117,7 +117,7 @@ class PlayerResource extends AbstractResource
         $criteria = new PlayerCriteria([$id]);
         $result = $this->readFirst($criteria);
         if (!$result) {
-            throw new FafiException(sprintf(self::E_ENTITY_ABSENT, 'Player', $id));
+            throw new FafiException(sprintf(self::E_ENTITY_ABSENT, Player::ENTITY, $id));
         }
 
         return $result;
