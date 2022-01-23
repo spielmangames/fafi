@@ -4,6 +4,7 @@ namespace FAFI\entity\Player;
 
 use FAFI\entity\Player\Repository\PlayerCriteria;
 use FAFI\entity\Player\Repository\PlayerRepository;
+use FAFI\entity\Player\Repository\PlayersFilter;
 use FAFI\exception\FafiException;
 
 class PlayerService

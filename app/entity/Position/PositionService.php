@@ -4,6 +4,7 @@ namespace FAFI\entity\Position;
 
 use FAFI\entity\Position\Repository\PositionCriteria;
 use FAFI\entity\Position\Repository\PositionRepository;
+use FAFI\entity\Position\Repository\PositionsFilter;
 use FAFI\exception\FafiException;
 
 class PositionService

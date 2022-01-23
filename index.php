@@ -4,7 +4,7 @@ require_once 'app/boot/bootstrap.php';
 
 use FAFI\entity\FAFI;
 use FAFI\entity\Player\Player;
-use FAFI\entity\Player\PlayersFilter;
+use FAFI\entity\Player\Repository\PlayersFilter;
 
 
 //----------------------------------------------------------------------------------------------------------------------

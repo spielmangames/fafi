@@ -1,33 +1,33 @@
 <?php
 
-namespace FAFI\entity\Position;
+namespace FAFI\entity\Player\Repository;
 
-class PositionsFilter
+class PlayersFilter
 {
     private const DEFAULT_READ_LIMIT = 50;
 
 
-    private ?array $positionIds;
+    private ?array $playerIds;
 
     private int $offset;
     private int $limit;
 
 
     public function __construct(
-        ?array $positionIds = null,
+        ?array $playerIds = null,
         int $offset = 0,
         int $limit = self::DEFAULT_READ_LIMIT
     ) {
-        $this->positionIds = $positionIds;
+        $this->playerIds = $playerIds;
 
         $this->offset = $offset;
         $this->limit = $limit;
     }
 
 
-    public function getPositionIds(): ?array
+    public function getPlayerIds(): ?array
     {
-        return $this->positionIds;
+        return $this->playerIds;
     }
 
 
