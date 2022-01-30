@@ -34,11 +34,10 @@ class ImportService
     public function importPositions(string $filePath): void
     {
         $filePath = self::IMEX_DIR_PATH_SAMPLE . $filePath;
+
         $extracted = $this->extract($filePath);
         $transformed = $this->transform($extracted);
         $this->load($transformed);
-
-        $zzz = 1;
     }
 
     /**
@@ -81,6 +80,12 @@ class ImportService
         }
     }
 
+    /**
+     * @param array $data
+     *
+     * @return Position[]
+     * @throws FafiException
+     */
     public function transform(array $data): array
     {
         $hydrator = new PositionHydrator();
