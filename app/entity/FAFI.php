@@ -2,6 +2,7 @@
 
 namespace FAFI\entity;
 
+use FAFI\entity\Import\ImportService;
 use FAFI\entity\Install\InstallService;
 use FAFI\entity\Player\PlayerService;
 use FAFI\entity\Position\Position;
@@ -13,6 +14,7 @@ class FAFI
 {
     // technical
     private InstallService $installService;
+    private ImportService $importService;
 
     // BE
     private PlayerService $playerService;
@@ -27,6 +29,7 @@ class FAFI
     public function __construct()
     {
         $this->installService = new InstallService();
+        $this->importService = new ImportService();
 
         $this->playerService = new PlayerService();
         $this->positionService = new PositionService();
@@ -40,6 +43,11 @@ class FAFI
     public function getInstallService(): InstallService
     {
         return $this->installService;
+    }
+
+    public function getImportService(): ImportService
+    {
+        return $this->importService;
     }
 
 
@@ -62,7 +70,10 @@ class FAFI
 
     public function installData()
     {
-        $this->installPositions();
+        $importService = $this->getImportService();
+
+        $fp = 'positions.csv';
+        $importService->importPositions($fp);
     }
 
     private function installPositions()
