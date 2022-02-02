@@ -28,7 +28,7 @@ class FileValidator
             throw new FafiException(sprintf(self::E_FILE_EXT_INVALID, $filePath));
         }
 
-        if (!is_null($limit) && filesize($filePath) > $limit) {
+        if (isset($limit) && filesize($filePath) > $limit) {
             throw new FafiException(sprintf(self::E_FILE_TOO_LARGE, $filePath));
         }
     }
