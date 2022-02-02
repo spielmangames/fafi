@@ -13,12 +13,12 @@ class FileValidator
     /**
      * @param string $filePath
      * @param string $expectedExt
-     * @param int $limit
+     * @param int|null $limit
      *
      * @return void
      * @throws FafiException
      */
-    public function validateFile(string $filePath, string $expectedExt, int $limit): void
+    public function validateFile(string $filePath, string $expectedExt, ?int $limit = null): void
     {
         if (!isFileValid($filePath)) {
             throw new FafiException(sprintf(self::E_FILE_INVALID, $filePath));
@@ -28,7 +28,7 @@ class FileValidator
             throw new FafiException(sprintf(self::E_FILE_EXT_INVALID, $filePath));
         }
 
-        if (filesize($filePath) > $limit) {
+        if (!is_null($limit) && filesize($filePath) > $limit) {
             throw new FafiException(sprintf(self::E_FILE_TOO_LARGE, $filePath));
         }
     }
