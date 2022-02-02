@@ -2,7 +2,7 @@
 
 namespace FAFI\entity;
 
-use FAFI\entity\Import\ImportService;
+use FAFI\entity\ImEx\ImExService;
 use FAFI\entity\Install\InstallService;
 use FAFI\entity\Player\PlayerService;
 use FAFI\entity\Position\Position;
@@ -14,7 +14,7 @@ class FAFI
 {
     // technical
     private InstallService $installService;
-    private ImportService $importService;
+    private ImExService $imExService;
 
     // BE
     private PlayerService $playerService;
@@ -29,7 +29,7 @@ class FAFI
     public function __construct()
     {
         $this->installService = new InstallService();
-        $this->importService = new ImportService();
+        $this->imExService = new ImExService();
 
         $this->playerService = new PlayerService();
         $this->positionService = new PositionService();
@@ -45,9 +45,9 @@ class FAFI
         return $this->installService;
     }
 
-    public function getImportService(): ImportService
+    public function getImExService(): ImExService
     {
-        return $this->importService;
+        return $this->imExService;
     }
 
 

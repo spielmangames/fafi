@@ -14,12 +14,30 @@ class PositionHydrator
 
     /**
      * @param array $data
+     *
+     * @return Position[]
+     * @throws FafiException
+     */
+    public function hydrateCollection(array $data): array
+    {
+        $transformed = [];
+        foreach ($data as $row) {
+            $entity = $this->hydrate($row);
+            $transformed[] = $entity;
+        }
+
+        return $transformed;
+    }
+
+    /**
+     * @param array $data
+     *
      * @return Position
      * @throws FafiException
      */
     public function hydrate(array $data): Position
     {
-        $this->checkRequiredFields($data);
+        $this->validateRequiredFieldsOnHydration($data);
 
         return new Position(
             isset($data[PositionResource::ID_FIELD]) ? (int)$data[PositionResource::ID_FIELD] : null,
@@ -30,10 +48,11 @@ class PositionHydrator
 
     /**
      * @param array $data
+     *
      * @return void
      * @throws FafiException
      */
-    private function checkRequiredFields(array $data): void
+    private function validateRequiredFieldsOnHydration(array $data): void
     {
         $missed = [];
         foreach ($this->requiredFields as $field) {
@@ -43,9 +62,11 @@ class PositionHydrator
         }
 
         if (!empty($missed)) {
-            throw new FafiException(sprintf(FafiException::E_REQ_MISSED, Position::ENTITY, implode('", "', $missed)));
+            $e = sprintf(FafiException::E_REQ_MISSED, Position::ENTITY, implode('", "', $missed));
+            throw new FafiException($e);
         }
     }
+
 
     public function extract(Position $position): array
     {
