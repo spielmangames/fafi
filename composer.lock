@@ -68,15 +68,16 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/vil11/hlpr.git",
-                "reference": "eb4669b0a45bbb1068d4c7c4a506c959acb06f39"
+                "reference": "d57324868fc7752ef33abb2bbcc3766f2812ae83"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/vil11/hlpr/zipball/eb4669b0a45bbb1068d4c7c4a506c959acb06f39",
-                "reference": "eb4669b0a45bbb1068d4c7c4a506c959acb06f39",
+                "url": "https://api.github.com/repos/vil11/hlpr/zipball/d57324868fc7752ef33abb2bbcc3766f2812ae83",
+                "reference": "d57324868fc7752ef33abb2bbcc3766f2812ae83",
                 "shasum": ""
             },
             "require": {
+                "ext-mysqli": "*",
                 "laminas/laminas-dom": "^2.7@dev",
                 "php": ">=7.4.5"
             },
@@ -110,7 +111,7 @@
                 }
             ],
             "description": "PHP micro-functional helper.",
-            "time": "2022-01-29T04:18:08+00:00"
+            "time": "2022-02-02T04:26:55+00:00"
         }
     ],
     "packages-dev": [],
