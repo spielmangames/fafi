@@ -2,7 +2,8 @@
 
 namespace FAFI\entity\Install;
 
-use FAFI\config\Settings;
+use FAFI\data\FileValidator;
+use FAFI\db\DatabaseConnection;
 use FAFI\entity\ImEx\ImExService;
 use FAFI\exception\FafiException;
 
@@ -12,11 +13,15 @@ class InstallService
     public const SAMPLE_POSITIONS = 'positions';
 
 
+    private DatabaseConnection $dbConnection;
     private ImExService $imExService;
+    private FileValidator $fileValidator;
 
     public function __construct()
     {
+        $this->dbConnection = new DatabaseConnection();
         $this->imExService = new ImExService();
+        $this->fileValidator = new FileValidator();
     }
 
 
@@ -24,25 +29,22 @@ class InstallService
      * @return void
      * @throws FafiException
      */
-    public function installDB(): void
+    public function installDbSchema(): void
     {
-        $filename = 'fafibase.sql';
-        $filepath = bendSeparatorsRight(PATH_APP . 'db' . DS . $filename);
+        $fileName = 'fafibase_schema.sql';
+        $filePath = PATH_APP . 'db' . DS . $fileName;
+
+        $this->fileValidator->validateFile($filePath, '.sql');
+        if (!execSqlFile($filePath, $this->dbConnection->open(false))) {
+            throw new FafiException(sprintf('Failed to execute "%s".', $fileName));
+        }
+    }
 
 
-        $servername = Settings::getInstance()->get('db/host');
-        $username = Settings::getInstance()->get('db/user');
-        $password = Settings::getInstance()->get('db/pass');
-        $dbname = Settings::getInstance()->get('db/name');
-
-
-        $cmd = 'mysql -u%s -p%s %s < %s';
-        $cmd = sprintf($cmd, $username, $password, $dbname, $filepath);
-
-        throw new FafiException(sprintf('Please run "%s" manually in order to re-install the DB.', $cmd));
-//        $result = system($cmd);
-//        if (!$result) {
-//            throw new FafiException('');
-//        }
+    /** @throws FafiException */
+    public function installSampleData()
+    {
+        $filePath = self::IMEX_SAMPLE_DIR_PATH . self::SAMPLE_POSITIONS . ImExService::FILE_EXT;
+        $this->imExService->importPositions($filePath);
     }
 }

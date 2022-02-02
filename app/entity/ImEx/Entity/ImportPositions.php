@@ -13,6 +13,7 @@ class ImportPositions extends AbstractEntityImport
 
     public function __construct()
     {
+        parent::__construct();
         $this->positionHydrator = new PositionHydrator();
     }
 

@@ -5,20 +5,20 @@ namespace FAFI\entity;
 use FAFI\entity\ImEx\ImExService;
 use FAFI\entity\Install\InstallService;
 use FAFI\entity\Player\PlayerService;
-use FAFI\entity\Position\Position;
 use FAFI\entity\Position\PositionService;
 use FAFI\FE\StorefrontService;
 use FAFI\FE\Themes\ThemeFactory;
 
 class FAFI
 {
-    // technical
+    // BE technical
     private InstallService $installService;
     private ImExService $imExService;
 
-    // BE
+    // BE domain
     private PlayerService $playerService;
     private PositionService $positionService;
+//    private PlayerAttributeService $playerAttributeService;
 //    private ClubService $clubService;
 //    private NationService $nationService;
 
@@ -65,22 +65,5 @@ class FAFI
     public function getStorefrontService(): StorefrontService
     {
         return $this->storefrontService;
-    }
-
-
-    public function installData()
-    {
-        $importService = $this->getImportService();
-
-        $fp = 'positions.csv';
-        $importService->importPositions($fp);
-    }
-
-    private function installPositions()
-    {
-        foreach (Position::P_SUPPORTED as $positionName) {
-            $position = new Position(null, $positionName);
-            $this->positionService->create($position);
-        }
     }
 }

@@ -14,14 +14,14 @@ class DatabaseConnection
     private ?mysqli $connection = null;
 
 
-    public function open(): mysqli
+    public function open(bool $withDb = true): mysqli
     {
-        $servername = Settings::getInstance()->get('db/host');
+        $host = Settings::getInstance()->get('db/host');
         $username = Settings::getInstance()->get('db/user');
         $password = Settings::getInstance()->get('db/pass');
-        $dbname = Settings::getInstance()->get('db/name');
+        $dbname = $withDb ? Settings::getInstance()->get('db/name') : null;
 
-        $this->connection = new mysqli($servername, $username, $password, $dbname);
+        $this->connection = new mysqli($host, $username, $password, $dbname);
         $this->verifyConnect($this->connection);
 
         return $this->connection;

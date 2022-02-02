@@ -5,18 +5,27 @@ require_once 'app/boot/bootstrap.php';
 use FAFI\entity\FAFI;
 use FAFI\entity\Player\Player;
 use FAFI\entity\Player\Repository\PlayersFilter;
+use FAFI\exception\FafiException;
 
 
 //----------------------------------------------------------------------------------------------------------------------
 
 
+/**
+ * @param FAFI $fafi
+ * @throws FafiException
+ */
 function demoInstall(FAFI $fafi)
 {
-//    $installService = $fafi->getInstallService();
-//    $installService->installDB();
-    $fafi->installData();
+    $installService = $fafi->getInstallService();
+    $installService->installDbSchema();
+    $installService->installSampleData();
 }
 
+/**
+ * @param FAFI $fafi
+ * @throws FafiException
+ */
 function demoRepo(FAFI $fafi)
 {
     $playerService = $fafi->getPlayerService();
@@ -38,6 +47,10 @@ function demoRepo(FAFI $fafi)
     // delete...
 }
 
+/**
+ * @param FAFI $fafi
+ * @throws FafiException
+ */
 function demoFront(FAFI $fafi) {
     $playerService = $fafi->getPlayerService();
 

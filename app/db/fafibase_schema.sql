@@ -1,10 +1,10 @@
 
 #-----------------------------------------------------------------------------------------------------------------------
-# DB init [version=1.4]
+# DB init [version=1.5]
 #-----------------------------------------------------------------------------------------------------------------------
 
 
-DROP DATABASE `fafi_db`;
+DROP DATABASE IF EXISTS `fafi_db`;
 CREATE DATABASE `fafi_db`;
 USE fafi_db;
 
@@ -48,7 +48,7 @@ CREATE TABLE `cities` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 
-CREATE TABLE `cities_countries_assignments` (
+CREATE TABLE `cities_countries_assocs` (
     `id` INT(11) UNSIGNED AUTO_INCREMENT NOT NULL,
 
     `city_id` INT(11) UNSIGNED NOT NULL,
@@ -56,7 +56,7 @@ CREATE TABLE `cities_countries_assignments` (
     `country_id` INT(11) UNSIGNED NOT NULL,
 
     PRIMARY KEY (`id`),
-    UNIQUE KEY `u_cities_countries_assignments_city_id_country_id` (`city_id`, `country_id`)
+    UNIQUE KEY `u_cities_countries_assocs_city_id_country_id` (`city_id`, `country_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 
@@ -96,7 +96,7 @@ CREATE TABLE `players` (
 
 
 
-CREATE TABLE `players_positions_assignments` (
+CREATE TABLE `players_positions_assocs` (
     `id` INT(11) UNSIGNED AUTO_INCREMENT NOT NULL,
 
     `player_id` INT(11) UNSIGNED NOT NULL,
@@ -129,4 +129,4 @@ CREATE TABLE `players_positions_assignments` (
 # set Schema version
 #-----------------------------------------------------------------------------------------------------------------------
 
-INSERT INTO _version VALUES ('1.4');
+INSERT INTO _version VALUES ('1.5');
