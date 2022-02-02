@@ -3,10 +3,23 @@
 namespace FAFI\entity\Install;
 
 use FAFI\config\Settings;
+use FAFI\entity\ImEx\ImExService;
 use FAFI\exception\FafiException;
 
 class InstallService
 {
+    public const IMEX_SAMPLE_DIR_PATH = PATH_DATA . 'sample' . DS;
+    public const SAMPLE_POSITIONS = 'positions';
+
+
+    private ImExService $imExService;
+
+    public function __construct()
+    {
+        $this->imExService = new ImExService();
+    }
+
+
     /**
      * @return void
      * @throws FafiException
