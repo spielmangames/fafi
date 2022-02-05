@@ -3,6 +3,7 @@
 require_once 'app/boot/bootstrap.php';
 
 use FAFI\entity\FAFI;
+use FAFI\entity\ImEx\ImExService;
 use FAFI\entity\Player\Player;
 use FAFI\entity\Player\Repository\PlayersFilter;
 use FAFI\exception\FafiException;
@@ -18,8 +19,22 @@ use FAFI\exception\FafiException;
 function demoInstall(FAFI $fafi)
 {
     $installService = $fafi->getInstallService();
+
     $installService->installDbSchema();
     $installService->installSampleData();
+}
+
+/**
+ * @param FAFI $fafi
+ * @throws FafiException
+ */
+function demoImport(FAFI $fafi)
+{
+    $imExService = $fafi->getImExService();
+    $testDirPath = PATH_DATA . 'in_test' . DS;
+
+    $filePath = $testDirPath . '_test_players_setA.csv';
+    $imExService->importEntity($filePath, ImExService::ENTITIES_PLAYERS);
 }
 
 /**
@@ -85,9 +100,9 @@ echo EOL;
 $fafi = new FAFI();
 
 //demoInstall($fafi);
+demoImport($fafi);
 //demoRepo($fafi);
 //demoFront($fafi);
-
 
 
 echo EOL;
