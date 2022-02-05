@@ -2,19 +2,21 @@
 
 namespace FAFI\entity\ImEx\Entity;
 
+use FAFI\entity\ImEx\Transformer\PositionTransformer;
 use FAFI\entity\Position\Position;
-use FAFI\entity\Position\Repository\PositionHydrator;
-use FAFI\entity\Position\Repository\PositionRepository;
+use FAFI\entity\Position\PositionService;
 use FAFI\exception\FafiException;
 
 class ImportPositions extends AbstractEntityImport
 {
-    private PositionHydrator $positionHydrator;
+    private PositionTransformer $positionTransformer;
+    private PositionService $positionService;
 
     public function __construct()
     {
         parent::__construct();
-        $this->positionHydrator = new PositionHydrator();
+        $this->positionTransformer = new PositionTransformer();
+        $this->positionService = new PositionService();
     }
 
 
@@ -32,28 +34,26 @@ class ImportPositions extends AbstractEntityImport
     }
 
     /**
-     * @param array $data
+     * @param array $entities
      *
      * @return Position[]
      * @throws FafiException
      */
-    public function transform(array $data): array
+    public function transform(array $entities): array
     {
-        return $this->positionHydrator->hydrateCollection($data);
+        return $this->positionTransformer->hydrateCollection($entities);
     }
 
     /**
-     * @param Position[] $data
+     * @param Position[] $entities
      *
      * @return void
      * @throws FafiException
      */
-    public function load(array $data): void
+    public function load(array $entities): void
     {
-        $repo = new PositionRepository();
-
-        foreach ($data as $entity) {
-            $repo->save($entity);
+        foreach ($entities as $entity) {
+            $this->positionService->create($entity);
         }
     }
 }
