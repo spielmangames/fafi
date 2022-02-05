@@ -10,6 +10,9 @@ class FileValidator
     private const E_FILE_EXT_INVALID = 'File "%s" has unsupported extension.';
     private const E_FILE_TOO_LARGE = 'File "%s" is too large.';
 
+    private const E_FILE_DATA_ABSENT = 'No content data had been extracted from "%s".';
+
+
     /**
      * @param string $filePath
      * @param string $expectedExt
@@ -30,6 +33,20 @@ class FileValidator
 
         if (isset($limit) && filesize($filePath) > $limit) {
             throw new FafiException(sprintf(self::E_FILE_TOO_LARGE, $filePath));
+        }
+    }
+
+    /**
+     * @param string $filePath
+     * @param array $data
+     *
+     * @return void
+     * @throws FafiException
+     */
+    public function validateFileContentPresent(string $filePath, array $data): void
+    {
+        if (empty($data)) {
+            throw new FafiException(sprintf(self::E_FILE_DATA_ABSENT, $filePath));
         }
     }
 }
