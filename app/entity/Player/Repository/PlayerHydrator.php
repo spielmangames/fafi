@@ -41,10 +41,11 @@ class PlayerHydrator
 
     /**
      * @param array $data
+     *
      * @return void
      * @throws FafiException
      */
-    private function checkRequiredFields(array $data): void
+    private function validateRequiredFieldsOnHydration(array $data): void
     {
         $missed = [];
         foreach ($this->requiredFields as $field) {
@@ -54,7 +55,8 @@ class PlayerHydrator
         }
 
         if (!empty($missed)) {
-            throw new FafiException(sprintf(FafiException::E_REQ_MISSED, Player::ENTITY, implode('", "', $missed)));
+            $e = sprintf(FafiException::E_REQ_MISSED, Player::ENTITY, implode('", "', $missed));
+            throw new FafiException($e);
         }
     }
 

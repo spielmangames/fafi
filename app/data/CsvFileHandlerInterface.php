@@ -6,6 +6,9 @@ use FAFI\exception\FafiException;
 
 interface CsvFileHandlerInterface
 {
+    public const FILE_EXT = '.csv';
+
+
     /**
      * @param string $filePath
      * @param string[][] $content

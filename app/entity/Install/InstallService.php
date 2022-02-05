@@ -9,8 +9,7 @@ use FAFI\exception\FafiException;
 
 class InstallService
 {
-    public const IMEX_SAMPLE_DIR_PATH = PATH_DATA . 'sample' . DS;
-    public const SAMPLE_POSITIONS = 'positions';
+    public const IMEX_SAMPLE_DIR_PATH = PATH_STORAGE . 'sample' . DS;
 
 
     private DatabaseConnection $dbConnection;
@@ -40,11 +39,25 @@ class InstallService
         }
     }
 
-
-    /** @throws FafiException */
-    public function installSampleData()
+    /**
+     * @return void
+     * @throws FafiException
+     */
+    public function installSampleData(): void
     {
-        $filePath = self::IMEX_SAMPLE_DIR_PATH . self::SAMPLE_POSITIONS . ImExService::FILE_EXT;
-        $this->imExService->importPositions($filePath);
+        $this->importEntity(ImExService::ENTITIES_POSITIONS);
+        $this->importEntity(ImExService::ENTITIES_PLAYERS);
+    }
+
+    /**
+     * @param string $entityName
+     *
+     * @return void
+     * @throws FafiException
+     */
+    private function importEntity(string $entityName): void
+    {
+        $filePath = self::IMEX_SAMPLE_DIR_PATH . $entityName . ImExService::FILE_EXT;
+        $this->imExService->importEntity($filePath, $entityName);
     }
 }

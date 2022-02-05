@@ -31,7 +31,7 @@ function demoInstall(FAFI $fafi)
 function demoImport(FAFI $fafi)
 {
     $imExService = $fafi->getImExService();
-    $testDirPath = PATH_DATA . 'in_test' . DS;
+    $testDirPath = PATH_STORAGE . 'in_test' . DS;
 
     $filePath = $testDirPath . '_test_players_setA.csv';
     $imExService->importEntity($filePath, ImExService::ENTITIES_PLAYERS);

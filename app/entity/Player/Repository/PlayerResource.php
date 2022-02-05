@@ -51,17 +51,18 @@ class PlayerResource extends AbstractResource
 
 
     /**
-     * @param Player $player
+     * @param Player $entity
+     *
      * @return Player
      * @throws FafiException
      */
-    public function create(Player $player): Player
+    public function create(Player $entity): Player
     {
-        if ($player->getId()) {
+        if ($entity->getId()) {
             throw new FafiException(sprintf(self::E_ID_PRESENT, Player::ENTITY));
         }
 
-        $data = $this->hydrator->extract($player);
+        $data = $this->hydrator->extract($entity);
         $id = $this->insertRecord(self::TABLE, $data);
 
         $criteria = new PlayerCriteria([$id]);
@@ -75,6 +76,7 @@ class PlayerResource extends AbstractResource
 
     /**
      * @param PlayerCriteria $criteria
+     *
      * @return Player[]|null
      * @throws FafiException
      */
@@ -90,6 +92,7 @@ class PlayerResource extends AbstractResource
 
     /**
      * @param PlayerCriteria $criteria
+     *
      * @return Player|null
      * @throws FafiException
      */
@@ -100,18 +103,19 @@ class PlayerResource extends AbstractResource
     }
 
     /**
-     * @param Player $player
+     * @param Player $entity
+     *
      * @return Player
      * @throws FafiException
      */
-    public function update(Player $player): Player
+    public function update(Player $entity): Player
     {
-        if (!$player->getId()) {
+        if (!$entity->getId()) {
             throw new FafiException(self::E_ID_ABSENT, Player::ENTITY);
         }
-        $id = $player->getId();
+        $id = $entity->getId();
 
-        $data = $this->hydrator->extract($player);
+        $data = $this->hydrator->extract($entity);
         $this->updateRecord(self::TABLE, $data, new PlayerCriteria([$id]));
 
         $criteria = new PlayerCriteria([$id]);
