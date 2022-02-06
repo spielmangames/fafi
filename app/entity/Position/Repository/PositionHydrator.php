@@ -68,12 +68,12 @@ class PositionHydrator
     }
 
 
-    public function extract(Position $position): array
+    public function extract(Position $entity): array
     {
         return [
-            PositionResource::ID_FIELD => $position->getId(),
+            PositionResource::ID_FIELD => $entity->getId(),
 
-            PositionResource::NAME_FIELD => $position->getName(),
+            PositionResource::NAME_FIELD => $entity->getName(),
         ];
     }
 }

@@ -2,6 +2,8 @@
 
 namespace FAFI\entity\Player;
 
+use FAFI\entity\PlayerAttribute\PlayerAttribute;
+
 class Player
 {
     use PlayerDataHelperTrait;
@@ -16,30 +18,35 @@ class Player
     // personal: origin
     protected ?string $name;
     protected ?string $particle;
-    protected string $surname;
-    protected string $fafiSurname;
-//    protected string $birthCountry;
-//    protected string $birthCity;
-//    protected string $birthDate;
+    protected ?string $surname;
+    protected ?string $fafiSurname;
+//    protected ?string $birthCountry;
+//    protected ?string $birthCity;
+//    protected ?string $birthDate;
 
     // skills: shape
     protected ?int $height;
     protected ?string $foot;
     protected ?bool $injureFactor;
 
+    // skills: attributes per positions
+    /** @var PlayerAttribute[]|null $attributes */
+    protected ?array $attributes;
+
 
     public function __construct(
         ?int $id,
         ?string $name,
         ?string $particle,
-        string $surname,
-        string $fafiName,
-//        string $birthCountry,
-//        string $birthCity,
-//        string $birthDate,
+        ?string $surname,
+        ?string $fafiName,
+//        ?string $birthCountry,
+//        ?string $birthCity,
+//        ?string $birthDate,
         ?int $height,
         ?string $foot,
-        ?bool $injureFactor
+        ?bool $injureFactor,
+        ?array $attributes
     ) {
         $this->id = $id;
 
@@ -54,6 +61,8 @@ class Player
         $this->height = $height;
         $this->foot = $foot;
         $this->injureFactor = $injureFactor;
+
+        $this->attributes = $attributes;
     }
 
 
@@ -91,7 +100,7 @@ class Player
         return $this;
     }
 
-    public function getSurname(): string
+    public function getSurname(): ?string
     {
         return $this->surname;
     }
@@ -102,7 +111,7 @@ class Player
         return $this;
     }
 
-    public function getFafiSurname(): string
+    public function getFafiSurname(): ?string
     {
         return $this->fafiSurname;
     }
@@ -113,7 +122,7 @@ class Player
 //        return $this;
 //    }
 //
-//    public function getBirthCountry(): string
+//    public function getBirthCountry(): ?string
 //    {
 //        return $this->birthCountry;
 //    }
@@ -124,7 +133,7 @@ class Player
 //        return $this;
 //    }
 //
-//    public function getBirthCity(): string
+//    public function getBirthCity(): ?string
 //    {
 //        return $this->birthCity;
 //    }
@@ -135,7 +144,7 @@ class Player
 //        return $this;
 //    }
 //
-//    public function getBirthDate(): string
+//    public function getBirthDate(): ?string
 //    {
 //        return $this->birthDate;
 //    }
@@ -172,5 +181,23 @@ class Player
     public function getInjureFactor(): ?bool
     {
         return $this->injureFactor;
+    }
+
+    /**
+     * @param PlayerAttribute[] $attributes
+     *
+     * @return Player
+     */
+    public function setAttributes(array $attributes): self
+    {
+        $this->attributes = $attributes;
+        return $this;
+    }
+
+
+    /** @return PlayerAttribute[]|null */
+    public function getAttributes(): ?array
+    {
+        return $this->attributes;
     }
 }
