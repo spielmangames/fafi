@@ -3,7 +3,7 @@
 <phpunit bootstrap="../app/boot/bootstrap.php">
     <testsuites>
         <testsuite name="full_integration">
-            <file>integration/BaseIntegrationTest.php</file>
+            <directory suffix="Test.php">integration</directory>
         </testsuite>
     </testsuites>
 </phpunit>

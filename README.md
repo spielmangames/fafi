@@ -1,2 +1,2 @@
 
-**FAFI** 2014-2021 by **SpielmanGames**
+**FAFI** 2014-2022 by **SpielmanGames**
