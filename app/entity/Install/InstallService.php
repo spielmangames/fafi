@@ -3,7 +3,7 @@
 namespace FAFI\entity\Install;
 
 use FAFI\data\FileValidator;
-use FAFI\db\DatabaseConnection;
+use FAFI\db\DatabaseConnector;
 use FAFI\entity\ImEx\ImExService;
 use FAFI\exception\FafiException;
 
@@ -12,13 +12,13 @@ class InstallService
     public const IMEX_SAMPLE_DIR_PATH = PATH_STORAGE . 'sample' . DS;
 
 
-    private DatabaseConnection $dbConnection;
+    private DatabaseConnector $dbConnect;
     private ImExService $imExService;
     private FileValidator $fileValidator;
 
     public function __construct()
     {
-        $this->dbConnection = new DatabaseConnection();
+        $this->dbConnect = new DatabaseConnector();
         $this->imExService = new ImExService();
         $this->fileValidator = new FileValidator();
     }
@@ -34,7 +34,7 @@ class InstallService
         $filePath = PATH_APP . 'db' . DS . $fileName;
 
         $this->fileValidator->validateFile($filePath, '.sql');
-        if (!execSqlFile($filePath, $this->dbConnection->open(false))) {
+        if (!execSqlFile($filePath, $this->dbConnect->open(false))) {
             throw new FafiException(sprintf('Failed to execute "%s".', $fileName));
         }
     }

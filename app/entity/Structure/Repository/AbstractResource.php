@@ -2,7 +2,7 @@
 
 namespace FAFI\entity\Structure\Repository;
 
-use FAFI\db\DatabaseConnection;
+use FAFI\db\DatabaseConnector;
 use FAFI\db\QueryBuilder;
 use FAFI\exception\FafiException;
 
@@ -21,12 +21,12 @@ class AbstractResource
     public const E_ENTITY_DELETE_FAILED = 'Failed to delete %s item.';
 
 
-    protected DatabaseConnection $dbConnection;
+    protected DatabaseConnector $dbConnect;
     protected QueryBuilder $queryBuilder;
 
     public function __construct()
     {
-        $this->dbConnection = new DatabaseConnection();
+        $this->dbConnect = new DatabaseConnector();
         $this->queryBuilder = new QueryBuilder();
     }
 
@@ -41,7 +41,7 @@ class AbstractResource
     {
         $query = $this->queryBuilder->formInsert($table, array_filter($data));
 
-        $connect = $this->dbConnection->open();
+        $connect = $this->dbConnect->open();
 
         $connect->begin_transaction();
         try {
@@ -56,13 +56,13 @@ class AbstractResource
             }
         } catch (FafiException $e) {
             $connect->rollback();
-            $this->dbConnection->close();
+            $this->dbConnect->close();
 
             throw $e;
         }
         $connect->commit();
 
-        $this->dbConnection->close();
+        $this->dbConnect->close();
 
         return $id;
     }
@@ -77,7 +77,7 @@ class AbstractResource
     {
         $query = $this->queryBuilder->formSelect($table, $criteria);
 
-        $connect = $this->dbConnection->open();
+        $connect = $this->dbConnect->open();
 
         $connect->begin_transaction();
         try {
@@ -92,13 +92,13 @@ class AbstractResource
             }
         } catch (FafiException $e) {
             $connect->rollback();
-            $this->dbConnection->close();
+            $this->dbConnect->close();
 
             throw $e;
         }
         $connect->commit();
 
-        $this->dbConnection->close();
+        $this->dbConnect->close();
 
         return $selection;
     }
@@ -114,7 +114,7 @@ class AbstractResource
     {
         $query = $this->queryBuilder->formUpdate($table, array_filter($data), $criteria);
 
-        $connect = $this->dbConnection->open();
+        $connect = $this->dbConnect->open();
 
         $connect->begin_transaction();
         try {
@@ -124,12 +124,12 @@ class AbstractResource
             }
         } catch (FafiException $e) {
             $connect->rollback();
-            $this->dbConnection->close();
+            $this->dbConnect->close();
 
             throw $e;
         }
         $connect->commit();
 
-        $this->dbConnection->close();
+        $this->dbConnect->close();
     }
 }

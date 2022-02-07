@@ -5,7 +5,7 @@ namespace FAFI\db;
 use FAFI\config\Settings;
 use mysqli;
 
-class DatabaseConnection
+class DatabaseConnector
 {
     private const E_DB_CONNECT_FAILED = 'Connection failed: %s';
     private const E_DB_CONNECT_CLOSING_FAILED = 'Failure on closing the database connection.';
