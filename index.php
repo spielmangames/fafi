@@ -15,7 +15,7 @@ $fafi = new FAFI();
 
 //demoInstall($fafi);
 //demoImport($fafi);
-demoPlayerService($fafi);
+//demoPlayerService($fafi);
 //demoFront($fafi);
 
 

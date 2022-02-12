@@ -28,17 +28,18 @@ class PositionResource extends AbstractResource
 
 
     /**
-     * @param Position $position
+     * @param Position $entity
+     *
      * @return Position
      * @throws FafiException
      */
-    public function create(Position $position): Position
+    public function create(Position $entity): Position
     {
-        if ($position->getId()) {
+        if ($entity->getId()) {
             throw new FafiException(sprintf(self::E_ID_PRESENT, Position::ENTITY));
         }
 
-        $data = $this->hydrator->extract($position);
+        $data = $this->hydrator->extract($entity);
         $id = $this->insertRecord(self::TABLE, $data);
 
         $criteria = new PositionCriteria([$id]);
@@ -52,6 +53,7 @@ class PositionResource extends AbstractResource
 
     /**
      * @param PositionCriteria $criteria
+     *
      * @return Position[]|null
      * @throws FafiException
      */
@@ -67,6 +69,7 @@ class PositionResource extends AbstractResource
 
     /**
      * @param PositionCriteria $criteria
+     *
      * @return Position|null
      * @throws FafiException
      */
@@ -77,18 +80,19 @@ class PositionResource extends AbstractResource
     }
 
     /**
-     * @param Position $position
+     * @param Position $entity
+     *
      * @return Position
      * @throws FafiException
      */
-    public function update(Position $position): Position
+    public function update(Position $entity): Position
     {
-        if (!$position->getId()) {
+        if (!$entity->getId()) {
             throw new FafiException(self::E_ID_ABSENT, Position::ENTITY);
         }
-        $id = $position->getId();
+        $id = $entity->getId();
 
-        $data = $this->hydrator->extract($position);
+        $data = $this->hydrator->extract($entity);
         $this->updateRecord(self::TABLE, $data, new PositionCriteria([$id]));
 
         $criteria = new PositionCriteria([$id]);

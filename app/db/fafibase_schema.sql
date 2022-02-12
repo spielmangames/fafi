@@ -21,6 +21,8 @@ CREATE TABLE `_version` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 
+
+
 #-----------------------------------------------------------------------------------------------------------------------
 # Geography models
 #-----------------------------------------------------------------------------------------------------------------------
@@ -95,7 +97,6 @@ CREATE TABLE `players` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 
-
 CREATE TABLE `players_positions_assocs` (
     `id` INT(11) UNSIGNED AUTO_INCREMENT NOT NULL,
 
@@ -125,8 +126,10 @@ CREATE TABLE `players_positions_assocs` (
 
 
 
+
 #-----------------------------------------------------------------------------------------------------------------------
 # set Schema version
 #-----------------------------------------------------------------------------------------------------------------------
 
 INSERT INTO _version VALUES ('1.5');
+

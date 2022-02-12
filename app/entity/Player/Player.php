@@ -36,10 +36,11 @@ class Player
 
     public function __construct(
         ?int $id,
+
         ?string $name,
         ?string $particle,
         ?string $surname,
-        ?string $fafiName,
+        ?string $fafiSurname,
 //        ?string $birthCountry,
 //        ?string $birthCity,
 //        ?string $birthDate,
@@ -53,7 +54,7 @@ class Player
         $this->name = $name;
         $this->particle = $particle;
         $this->surname = $surname;
-        $this->fafiSurname = $fafiName;
+        $this->fafiSurname = $fafiSurname;
 //        $this->birthCountry = $birthCountry;
 //        $this->birthCity = $birthCity;
 //        $this->birthDate = $birthDate;
