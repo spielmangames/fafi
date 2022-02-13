@@ -27,7 +27,7 @@ class ImExService
 
     public function __construct()
     {
-//        $this->importCountries = new ImportCountries();
+        $this->importCountries = new ImportCountries();
         $this->importPositions = new ImportPositions();
         $this->importPlayers = new ImportPlayers();
     }
