@@ -1,6 +1,6 @@
 
 #-----------------------------------------------------------------------------------------------------------------------
-# DB init [version=1.5]
+# DB init [version=1.6]
 #-----------------------------------------------------------------------------------------------------------------------
 
 
@@ -32,34 +32,32 @@ CREATE TABLE `countries` (
     `id` INT(11) UNSIGNED AUTO_INCREMENT NOT NULL,
 
     `name` VARCHAR(32) NOT NULL,
-    `code` VARCHAR(5) NOT NULL,
 
     PRIMARY KEY (`id`),
-    UNIQUE KEY `u_countries_name` (`name`),
-    UNIQUE KEY `u_countries_code` (`code`)
+    UNIQUE KEY `u_countries_name` (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 
-CREATE TABLE `cities` (
-    `id` INT(11) UNSIGNED AUTO_INCREMENT NOT NULL,
-
-    `name` VARCHAR(32) NOT NULL,
-
-    PRIMARY KEY (`id`),
-    UNIQUE KEY `u_cities_name` (`name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
-
-CREATE TABLE `cities_countries_assocs` (
-    `id` INT(11) UNSIGNED AUTO_INCREMENT NOT NULL,
-
-    `city_id` INT(11) UNSIGNED NOT NULL,
-    `state` VARCHAR(32),
-    `country_id` INT(11) UNSIGNED NOT NULL,
-
-    PRIMARY KEY (`id`),
-    UNIQUE KEY `u_cities_countries_assocs_city_id_country_id` (`city_id`, `country_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+# CREATE TABLE `cities` (
+#     `id` INT(11) UNSIGNED AUTO_INCREMENT NOT NULL,
+#
+#     `name` VARCHAR(32) NOT NULL,
+#
+#     PRIMARY KEY (`id`),
+#     UNIQUE KEY `u_cities_name` (`name`)
+# ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+#
+#
+# CREATE TABLE `cities_countries_assocs` (
+#     `id` INT(11) UNSIGNED AUTO_INCREMENT NOT NULL,
+#
+#     `city_id` INT(11) UNSIGNED NOT NULL,
+#     `state` VARCHAR(32),
+#     `country_id` INT(11) UNSIGNED NOT NULL,
+#
+#     PRIMARY KEY (`id`),
+#     UNIQUE KEY `u_cities_countries_assocs_city_id_country_id` (`city_id`, `country_id`)
+# ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 
 
@@ -131,5 +129,5 @@ CREATE TABLE `players_positions_assocs` (
 # set Schema version
 #-----------------------------------------------------------------------------------------------------------------------
 
-INSERT INTO _version VALUES ('1.5');
+INSERT INTO _version VALUES ('1.6');
 
