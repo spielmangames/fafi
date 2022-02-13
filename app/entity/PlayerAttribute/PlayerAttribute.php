@@ -20,8 +20,10 @@ class PlayerAttribute
 
     public function __construct(
         ?int $id,
+
         ?int $playerId,
         ?int $positionId,
+
         ?int $attMin,
         ?int $attMax,
         ?int $defMin,
