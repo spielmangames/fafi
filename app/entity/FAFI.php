@@ -2,6 +2,7 @@
 
 namespace FAFI\entity;
 
+use FAFI\entity\GeoCountry\CountryService;
 use FAFI\entity\ImEx\ImExService;
 use FAFI\entity\Install\InstallService;
 use FAFI\entity\Player\PlayerService;
@@ -16,11 +17,9 @@ class FAFI
     private ImExService $imExService;
 
     // BE domain
+    private CountryService $countryService;
     private PlayerService $playerService;
     private PositionService $positionService;
-//    private PlayerAttributeService $playerAttributeService;
-//    private ClubService $clubService;
-//    private NationService $nationService;
 
     // FE
     private StorefrontService $storefrontService;
@@ -31,10 +30,9 @@ class FAFI
         $this->installService = new InstallService();
         $this->imExService = new ImExService();
 
+        $this->countryService = new CountryService();
         $this->playerService = new PlayerService();
         $this->positionService = new PositionService();
-//        $this->clubService = new ClubService();
-//        $this->nationService = new NationService();
 
         $this->storefrontService = new StorefrontService(ThemeFactory::THEME_PRINTER);
     }
@@ -50,6 +48,11 @@ class FAFI
         return $this->imExService;
     }
 
+
+    public function getCountryService(): CountryService
+    {
+        return $this->countryService;
+    }
 
     public function getPlayerService(): PlayerService
     {
