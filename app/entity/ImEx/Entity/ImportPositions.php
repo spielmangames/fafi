@@ -2,20 +2,20 @@
 
 namespace FAFI\entity\ImEx\Entity;
 
-use FAFI\entity\ImEx\Transformer\PositionTransformer;
+use FAFI\entity\ImEx\Transformer\PositionTrHydrator;
 use FAFI\entity\Position\Position;
 use FAFI\entity\Position\PositionService;
 use FAFI\exception\FafiException;
 
 class ImportPositions extends AbstractEntityImport
 {
-    private PositionTransformer $positionTransformer;
+    private PositionTrHydrator $positionTrHydrator;
     private PositionService $positionService;
 
     public function __construct()
     {
         parent::__construct();
-        $this->positionTransformer = new PositionTransformer();
+        $this->positionTrHydrator = new PositionTrHydrator();
         $this->positionService = new PositionService();
     }
 
@@ -41,7 +41,7 @@ class ImportPositions extends AbstractEntityImport
      */
     public function transform(array $entities): array
     {
-        return $this->positionTransformer->hydrateCollection($entities);
+        return $this->positionTrHydrator->hydrateCollection($entities);
     }
 
     /**
