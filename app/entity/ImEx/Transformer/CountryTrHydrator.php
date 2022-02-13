@@ -3,7 +3,6 @@
 namespace FAFI\entity\ImEx\Transformer;
 
 use FAFI\entity\GeoCountry\Country;
-use FAFI\exception\FafiException;
 
 class CountryTrHydrator
 {
@@ -11,7 +10,6 @@ class CountryTrHydrator
      * @param array $data
      *
      * @return Country[]
-     * @throws FafiException
      */
     public function hydrateCollection(array $data): array
     {

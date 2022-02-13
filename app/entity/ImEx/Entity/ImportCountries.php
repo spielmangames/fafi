@@ -37,7 +37,6 @@ class ImportCountries extends AbstractEntityImport
      * @param array $entities
      *
      * @return Country[]
-     * @throws FafiException
      */
     public function transform(array $entities): array
     {

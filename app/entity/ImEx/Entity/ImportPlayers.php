@@ -2,20 +2,20 @@
 
 namespace FAFI\entity\ImEx\Entity;
 
+use FAFI\entity\ImEx\Transformer\PlayerTrHydrator;
 use FAFI\entity\Player\Player;
 use FAFI\entity\Player\PlayerService;
-use FAFI\entity\Player\Repository\PlayerHydrator;
 use FAFI\exception\FafiException;
 
 class ImportPlayers extends AbstractEntityImport
 {
-    private PlayerHydrator $playerHydrator;
+    private PlayerTrHydrator $playerTrHydrator;
     private PlayerService $playerService;
 
     public function __construct()
     {
         parent::__construct();
-        $this->playerHydrator = new PlayerHydrator();
+        $this->playerTrHydrator = new PlayerTrHydrator();
         $this->playerService = new PlayerService();
     }
 
@@ -37,11 +37,10 @@ class ImportPlayers extends AbstractEntityImport
      * @param array $entities
      *
      * @return Player[]
-     * @throws FafiException
      */
     public function transform(array $entities): array
     {
-        return $this->playerHydrator->hydrateCollection($entities);
+        return $this->playerTrHydrator->hydrateCollection($entities);
     }
 
     /**

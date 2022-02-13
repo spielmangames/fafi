@@ -37,7 +37,6 @@ class ImportPositions extends AbstractEntityImport
      * @param array $entities
      *
      * @return Position[]
-     * @throws FafiException
      */
     public function transform(array $entities): array
     {
