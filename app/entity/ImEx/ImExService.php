@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace FAFI\entity\ImEx;
 
 use FAFI\data\CsvFileHandlerInterface;

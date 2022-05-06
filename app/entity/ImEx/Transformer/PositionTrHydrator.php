@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace FAFI\entity\ImEx\Transformer;
 
 use FAFI\entity\Position\Position;
