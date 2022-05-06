@@ -29,10 +29,21 @@ class PlayerTrHydrator
      */
     public function hydrate(array $data): Player
     {
+        $attributes = [];
+
         return new Player(
             isset($data[PlayerFileSchema::ID]) ? (int)$data[PlayerFileSchema::ID] : null,
 
-            $data[PlayerFileSchema::NAME]
+            $data[PlayerFileSchema::NAME],
+            $data[PlayerFileSchema::PARTICLE],
+            $data[PlayerFileSchema::SURNAME],
+            $data[PlayerFileSchema::FAFI_SURNAME],
+
+            $data[PlayerFileSchema::HEIGHT],
+            $data[PlayerFileSchema::FOOT],
+            $data[PlayerFileSchema::INJURE_FACTOR],
+
+            $attributes
         );
     }
 

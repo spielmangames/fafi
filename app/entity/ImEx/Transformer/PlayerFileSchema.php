@@ -12,4 +12,13 @@ class PlayerFileSchema extends AbstractFileSchema
     public const HEIGHT = 'height';
     public const FOOT = 'foot';
     public const INJURE_FACTOR = 'injure_factor';
+
+
+    public function getMandatoryFieldsOnCreate(): array
+    {
+        return [
+            self::SURNAME,
+            self::FOOT,
+        ];
+    }
 }
