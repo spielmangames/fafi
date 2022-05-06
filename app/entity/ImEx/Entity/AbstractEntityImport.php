@@ -34,6 +34,20 @@ abstract class AbstractEntityImport
         $extracted = $this->fileHandler->read($filePath);
         $this->fileValidator->validateFileContentPresent($filePath, $extracted);
 
+        return $this->removeHeaderDelimiterLine($extracted);
+    }
+
+    /**
+     * @param array $extracted
+     *
+     * @return array
+     * @throws FafiException
+     */
+    private function removeHeaderDelimiterLine(array $extracted): array
+    {
+        $removeLine = array_shift($extracted);
+        $this->fileValidator->validateLineEmpty($removeLine);
+
         return $extracted;
     }
 }

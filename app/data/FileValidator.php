@@ -12,6 +12,8 @@ class FileValidator
 
     private const E_FILE_DATA_ABSENT = 'No content data had been extracted from "%s".';
 
+    private const E_LINE_NOT_EMPTY = 'Line is not empty: "%s" column contains data.';
+
 
     /**
      * @param string $filePath
@@ -47,6 +49,21 @@ class FileValidator
     {
         if (empty($data)) {
             throw new FafiException(sprintf(self::E_FILE_DATA_ABSENT, $filePath));
+        }
+    }
+
+    /**
+     * @param array $line
+     *
+     * @return void
+     * @throws FafiException
+     */
+    public function validateLineEmpty(array $line): void
+    {
+        foreach ($line as $column => $cellValue) {
+            if (!empty($cellValue)) {
+                throw new FafiException(sprintf(self::E_LINE_NOT_EMPTY, $column));
+            }
         }
     }
 }
