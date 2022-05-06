@@ -2,6 +2,7 @@
 
 namespace FAFI\entity\ImEx\Transformer;
 
+use FAFI\entity\ImEx\Transformer\Schema\PlayerFileSchema;
 use FAFI\entity\Player\Player;
 
 class PlayerTrHydrator
@@ -32,7 +33,7 @@ class PlayerTrHydrator
         $attributes = [];
 
         return new Player(
-            isset($data[PlayerFileSchema::ID]) ? (int)$data[PlayerFileSchema::ID] : null,
+            isset($data[PlayerFileSchema::ID]) ? $data[PlayerFileSchema::ID] : null,
 
             $data[PlayerFileSchema::NAME],
             $data[PlayerFileSchema::PARTICLE],
@@ -54,6 +55,13 @@ class PlayerTrHydrator
             PlayerFileSchema::ID => $position->getId(),
 
             PlayerFileSchema::NAME => $position->getName(),
+            PlayerFileSchema::PARTICLE => $position->getParticle(),
+            PlayerFileSchema::SURNAME => $position->getSurname(),
+            PlayerFileSchema::FAFI_SURNAME => $position->getFafiSurname(),
+
+            PlayerFileSchema::HEIGHT => $position->getHeight(),
+            PlayerFileSchema::FOOT => $position->getFoot(),
+            PlayerFileSchema::INJURE_FACTOR => $position->getInjureFactor(),
         ];
     }
 }

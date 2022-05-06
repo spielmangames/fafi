@@ -1,6 +1,6 @@
 <?php
 
-namespace FAFI\entity\ImEx\Transformer;
+namespace FAFI\entity\ImEx\Transformer\Schema;
 
 class CountryFileSchema extends AbstractFileSchema
 {

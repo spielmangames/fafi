@@ -1,6 +1,6 @@
 <?php
 
-namespace FAFI\entity\ImEx\Transformer;
+namespace FAFI\entity\ImEx\Transformer\Schema;
 
 class PositionFileSchema extends AbstractFileSchema
 {

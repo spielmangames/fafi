@@ -3,6 +3,7 @@
 namespace FAFI\entity\ImEx\Transformer;
 
 use FAFI\entity\GeoCountry\Country;
+use FAFI\entity\ImEx\Transformer\Schema\CountryFileSchema;
 
 class CountryTrHydrator
 {
