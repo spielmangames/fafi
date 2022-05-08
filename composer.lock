@@ -68,12 +68,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/vil11/hlpr.git",
-                "reference": "0fa929084a27ea652d8880349686d6d62f99156e"
+                "reference": "52843e9ab6b819216a177b6dbab83631144b76e5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/vil11/hlpr/zipball/0fa929084a27ea652d8880349686d6d62f99156e",
-                "reference": "0fa929084a27ea652d8880349686d6d62f99156e",
+                "url": "https://api.github.com/repos/vil11/hlpr/zipball/52843e9ab6b819216a177b6dbab83631144b76e5",
+                "reference": "52843e9ab6b819216a177b6dbab83631144b76e5",
                 "shasum": ""
             },
             "require": {
@@ -111,7 +111,7 @@
                 }
             ],
             "description": "PHP micro-functional helper.",
-            "time": "2022-02-05T20:27:37+00:00"
+            "time": "2022-05-08T19:27:41+00:00"
         }
     ],
     "packages-dev": [
