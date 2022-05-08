@@ -35,7 +35,7 @@ class BooleanTransformer
                 break;
         }
 
-        $this->booleanSpecification->assertBool($property, $value);
+//        $this->booleanSpecification->validate($property, $value);
 
         return $value;
     }

@@ -6,6 +6,8 @@ use FAFI\data\CsvFileHandler;
 use FAFI\data\FileValidator;
 use FAFI\entity\ImEx\ImExService;
 use FAFI\entity\ImEx\Transformer\Specification\Entity\ImExEntitySpecification;
+use FAFI\entity\ImEx\Transformer\Specification\Field\ImExFieldSpecification;
+use FAFI\entity\ImEx\Transformer\Specification\Field\ImExFieldSpecificationFactory;
 use FAFI\exception\FafiException;
 
 abstract class AbstractEntityImport
@@ -15,11 +17,13 @@ abstract class AbstractEntityImport
 
     private FileValidator $fileValidator;
     private CsvFileHandler $fileHandler;
+    private ImExFieldSpecificationFactory $fieldSpecificationFactory;
 
     public function __construct()
     {
         $this->fileValidator = new FileValidator();
         $this->fileHandler = new CsvFileHandler();
+        $this->fieldSpecificationFactory = new ImExFieldSpecificationFactory();
     }
 
 
@@ -57,17 +61,52 @@ abstract class AbstractEntityImport
         return $extracted;
     }
 
+    /**
+     * @param array $entities
+     * @param ImExEntitySpecification $entitySpecification
+     *
+     * @return array
+     * @throws FafiException
+     */
     public function transform(array $entities, ImExEntitySpecification $entitySpecification): array
     {
         $result = [];
 
-        $fieldSpecifications = $entitySpecification->getFieldSpecifications();
+        $fieldSpecifications = $this->prepareFieldSpecifications($entitySpecification);
+        foreach ($entities as $entity) {
+            $this->transformEntity($entity, $fieldSpecifications);
+        }
 
-        /**
-         * @var $fieldSpecification
-         */
-        foreach ($fieldSpecifications as $field => $fieldSpecification) {
-//            $validation = $fieldSpecification->
+        return $result;
+    }
+
+    /**
+     * @param ImExEntitySpecification $entitySpecification
+     *
+     * @return array
+     * @throws FafiException
+     */
+    private function prepareFieldSpecifications(ImExEntitySpecification $entitySpecification): array
+    {
+        $fieldSpecifications = [];
+
+        $fieldSpecificationClasses = $entitySpecification->getFieldSpecifications();
+        foreach ($fieldSpecificationClasses as $fieldName => $className) {
+            $fieldSpecifications[$fieldName] = $this->fieldSpecificationFactory->create($className);
+        }
+
+        return $fieldSpecifications;
+    }
+
+    private function transformEntity(array $entity, array $fieldSpecifications): array
+    {
+        $result = [];
+
+        /** @var ImExFieldSpecification $fieldSpecification */
+        foreach ($fieldSpecifications as $fieldName => $fieldSpecification) {
+            $validation = $fieldSpecification->validate($fieldName, $entity[$fieldName]);
+
+            $zzz = 1;
         }
 
         return $result;

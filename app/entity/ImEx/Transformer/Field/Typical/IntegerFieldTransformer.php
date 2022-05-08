@@ -28,7 +28,7 @@ class IntegerFieldTransformer
     {
         $value = ctype_digit($value) ? (int)$value : $value;
 
-        $this->integerSpecification->assertInt($property, $value);
+//        $this->integerSpecification->validate($property, $value);
 
         return $value;
     }

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace FAFI\entity\ImEx\Transformer\Specification\Field\Typical;
 
+use FAFI\entity\ImEx\Transformer\Specification\Field\ImExFieldSpecification;
 use FAFI\exception\FafiException;
 
 class BooleanSpecification implements ImExFieldSpecification
@@ -15,7 +16,7 @@ class BooleanSpecification implements ImExFieldSpecification
     private const E_VALUE_TYPE_INVALID = 'Property %s must be boolean.';
 
 
-    public function validate(): bool
+    public function validate(string $property, $value): bool
     {
         return false;
     }
