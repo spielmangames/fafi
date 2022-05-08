@@ -4,6 +4,7 @@
 
 require_once 'app/boot/bootstrap.php';
 
+use FAFI\data\CsvFileHandlerInterface;
 use FAFI\entity\FAFI;
 use FAFI\entity\ImEx\ImExService;
 use FAFI\entity\Player\Player;
@@ -32,9 +33,8 @@ function demoInstall(FAFI $fafi)
 function demoImport(FAFI $fafi)
 {
     $imExService = $fafi->getImExService();
-    $testDirPath = PATH_STORAGE . 'in_test' . DS;
 
-    $filePath = $testDirPath . '_test_players_setA.csv';
+    $filePath = $fafi->getInstallService()::IMEX_SAMPLE_DIR_PATH . 'players' . CsvFileHandlerInterface::FILE_EXT;
     $imExService->importEntity($filePath, ImExService::ENTITIES_PLAYERS);
 }
 

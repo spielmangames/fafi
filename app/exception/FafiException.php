@@ -11,4 +11,6 @@ class FafiException extends Exception
 
     public const E_TAB_NOT_SET = 'Tab is not set for %s.';
     public const E_TAB_NOT_SUPPORTED = 'Tab %s is not supported for %s.';
+
+    public const E_IMPORT_FILE_HEADER_INVALID = 'File header must be separated from data with an empty line.';
 }

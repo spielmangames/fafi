@@ -4,7 +4,7 @@ namespace FAFI\entity\ImEx\Entity;
 
 use FAFI\entity\GeoCountry\Country;
 use FAFI\entity\GeoCountry\CountryService;
-use FAFI\entity\ImEx\Transformer\CountryTrHydrator;
+use FAFI\entity\ImEx\Transformer\Hydrator\CountryTrHydrator;
 use FAFI\exception\FafiException;
 
 class ImportCountries extends AbstractEntityImport

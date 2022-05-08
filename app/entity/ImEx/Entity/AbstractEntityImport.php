@@ -45,8 +45,13 @@ abstract class AbstractEntityImport
      */
     private function removeHeaderDelimiterLine(array $extracted): array
     {
-        $removeLine = array_shift($extracted);
-        $this->fileValidator->validateLineEmpty($removeLine);
+        try {
+            $removeLine = array_shift($extracted);
+            $this->fileValidator->validateLineEmpty($removeLine);
+        } catch (FafiException $e) {
+            $e = implode(EOL, [$e->getMessage(), FafiException::E_IMPORT_FILE_HEADER_INVALID]);
+            throw new FafiException($e);
+        }
 
         return $extracted;
     }

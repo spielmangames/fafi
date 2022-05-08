@@ -1,8 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace FAFI\entity\ImEx\Entity;
 
-use FAFI\entity\ImEx\Transformer\PlayerTrHydrator;
+use FAFI\entity\ImEx\Transformer\Hydrator\PlayerTrHydrator;
 use FAFI\entity\Player\Player;
 use FAFI\entity\Player\PlayerService;
 use FAFI\exception\FafiException;

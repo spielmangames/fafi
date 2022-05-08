@@ -2,7 +2,7 @@
 
 namespace FAFI\entity\ImEx\Entity;
 
-use FAFI\entity\ImEx\Transformer\PositionTrHydrator;
+use FAFI\entity\ImEx\Transformer\Hydrator\PositionTrHydrator;
 use FAFI\entity\Position\Position;
 use FAFI\entity\Position\PositionService;
 use FAFI\exception\FafiException;
