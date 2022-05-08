@@ -12,12 +12,4 @@ class CountryFileSchema extends AbstractFileSchema
 
         self::NAME,
     ];
-
-
-    public function getMandatoryFieldsOnCreate(): array
-    {
-        return [
-            self::NAME,
-        ];
-    }
 }

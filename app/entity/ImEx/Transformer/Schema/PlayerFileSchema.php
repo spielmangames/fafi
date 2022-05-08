@@ -26,13 +26,4 @@ class PlayerFileSchema extends AbstractFileSchema
         self::FOOT,
         self::INJURE_FACTOR,
     ];
-
-
-    public function getMandatoryFieldsOnCreate(): array
-    {
-        return [
-            self::SURNAME,
-            self::FOOT,
-        ];
-    }
 }

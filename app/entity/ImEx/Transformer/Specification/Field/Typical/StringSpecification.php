@@ -9,7 +9,7 @@ use FAFI\exception\FafiException;
 
 class StringSpecification implements ImExFieldSpecification
 {
-    private const E_VALUE_TYPE_INVALID = 'Property %s must be string.';
+    private const E_VALUE_TYPE_INVALID = 'Property "%s" is not string.';
 
 
     public function validate(string $property, $value): void

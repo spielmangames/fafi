@@ -13,7 +13,7 @@ class BooleanSpecification implements ImExFieldSpecification
     public const FALSE_FIELD = 'FALSE';
 
 
-    private const E_VALUE_TYPE_INVALID = 'Property %s must be boolean.';
+    private const E_VALUE_TYPE_INVALID = '"%s" is not boolean.';
 
 
     public function validate(string $property, $value): void

@@ -9,7 +9,7 @@ use FAFI\exception\FafiException;
 
 class IntegerSpecification implements ImExFieldSpecification
 {
-    private const E_VALUE_TYPE_INVALID = 'Property %s must be integer.';
+    private const E_VALUE_TYPE_INVALID = 'Property "%s" is not integer.';
 
 
     public function validate(string $property, $value): void

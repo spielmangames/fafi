@@ -32,4 +32,12 @@ class PlayerSpecification implements ImExEntitySpecification
 //    {
 //        return [];
 //    }
+
+    public function getMandatoryFieldsOnCreate(): array
+    {
+        return [
+            PlayerFileSchema::SURNAME,
+            PlayerFileSchema::FOOT,
+        ];
+    }
 }

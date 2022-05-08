@@ -13,7 +13,7 @@ class OneOfSpecification implements ImExFieldSpecification
     public const FALSE_FIELD = 'FALSE';
 
 
-    private const E_VALUE_TYPE_INVALID = 'Property %s must be boolean.';
+    private const E_VALUE_TYPE_INVALID = 'Property "%s" is not allowed.';
 
 
     public function validate(string $property, $value): void
@@ -30,7 +30,8 @@ class OneOfSpecification implements ImExFieldSpecification
      */
     private function assertInList(string $property, $value): void
     {
-        if (!is_bool($value)) {
+        $allowed = [];
+        if (!in_array($value, $allowed)) {
             throw new FafiException(sprintf(self::E_VALUE_TYPE_INVALID, $property));
         }
     }

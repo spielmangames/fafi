@@ -8,4 +8,7 @@ interface ImExEntitySpecification
 {
     public function getFieldSpecifications(): array;
 //    public function getFieldTransformers(): array;
+
+    /** @return string[] */
+    public function getMandatoryFieldsOnCreate(): array;
 }
