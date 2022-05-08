@@ -12,9 +12,9 @@ class IntegerSpecification implements ImExFieldSpecification
     private const E_VALUE_TYPE_INVALID = 'Property %s must be integer.';
 
 
-    public function validate(string $property, $value): bool
+    public function validate(string $property, $value): void
     {
-        return false;
+        $this->assertInt($property, $value);
     }
 
     /**

@@ -12,9 +12,9 @@ class StringSpecification implements ImExFieldSpecification
     private const E_VALUE_TYPE_INVALID = 'Property %s must be string.';
 
 
-    public function validate(string $property, $value): bool
+    public function validate(string $property, $value): void
     {
-        return false;
+        $this->assertStr($property, $value);
     }
 
     /**

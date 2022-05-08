@@ -16,9 +16,9 @@ class OneOfSpecification implements ImExFieldSpecification
     private const E_VALUE_TYPE_INVALID = 'Property %s must be boolean.';
 
 
-    public function validate(string $property, $value): bool
+    public function validate(string $property, $value): void
     {
-        return false;
+        $this->assertInList($property, $value);
     }
 
     /**
