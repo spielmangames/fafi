@@ -12,7 +12,10 @@ use FAFI\exception\FafiException;
 
 abstract class AbstractEntityImport
 {
-    private const IM_FILE_LIMIT = 1048576;
+    private const IM_FILE_SIZE_LIMIT = 1048576;
+
+
+    protected int $line;
 
 
     private FileValidator $fileValidator;
@@ -35,7 +38,7 @@ abstract class AbstractEntityImport
      */
     public function extract(string $filePath): array
     {
-        $this->fileValidator->validateFile($filePath, ImExService::FILE_EXT, self::IM_FILE_LIMIT);
+        $this->fileValidator->validateFile($filePath, ImExService::FILE_EXT, self::IM_FILE_SIZE_LIMIT);
         $extracted = $this->fileHandler->read($filePath);
         $this->fileValidator->validateFileContentPresent($filePath, $extracted);
 
@@ -50,9 +53,11 @@ abstract class AbstractEntityImport
      */
     private function removeHeaderDelimiterLine(array $extracted): array
     {
+        $lineToRemove = 2;
         try {
-            $removeLine = array_shift($extracted);
+            $removeLine = $extracted[$lineToRemove];
             $this->fileValidator->validateLineEmpty($removeLine);
+            unset($extracted[$lineToRemove]);
         } catch (FafiException $e) {
             $e = implode(EOL, [$e->getMessage(), FafiException::E_IMPORT_FILE_HEADER_INVALID]);
             throw new FafiException($e);
@@ -98,14 +103,25 @@ abstract class AbstractEntityImport
         return $fieldSpecifications;
     }
 
+    /**
+     * @param array $entity
+     * @param array $fieldSpecifications
+     *
+     * @return array
+     * @throws FafiException
+     */
     private function transformEntity(array $entity, array $fieldSpecifications): array
     {
         $result = [];
 
         /** @var ImExFieldSpecification $fieldSpecification */
         foreach ($fieldSpecifications as $fieldName => $fieldSpecification) {
-            $validation = $fieldSpecification->validate($fieldName, $entity[$fieldName]);
-
+            try {
+                $fieldSpecification->validate($fieldName, $entity[$fieldName]);
+            } catch (FafiException $e) {
+                $e = implode(EOL, [sprintf(FafiException::E_IMPORT_FAILED, $this->line), $e->getMessage()]);
+                throw new FafiException($e);
+            }
             $zzz = 1;
         }
 

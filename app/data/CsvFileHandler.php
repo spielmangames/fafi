@@ -12,10 +12,10 @@ class CsvFileHandler implements CsvFileHandlerInterface
         // TODO: Implement write() method.
     }
 
-    public function read(string $filePath): array
+    public function read(string $filePath, int $limit = self::FILE_LENGTH_LIMIT): array
     {
         try {
-            $content = parseCsvTable($filePath);
+            $content = parseCsvTable($filePath, $limit);
         } catch (Exception $e) {
             throw new FafiException($e->getMessage());
         }
