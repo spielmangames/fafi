@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace FAFI\entity\ImEx\Transformer\Field\Specification\Typical;
+namespace FAFI\entity\ImEx\Transformer\Specification\Field\Typical;
 
 use FAFI\exception\FafiException;
 
