@@ -9,6 +9,7 @@ use FAFI\entity\ImEx\Transformer\Schema\AbstractFileSchema;
 use FAFI\entity\ImEx\Transformer\Specification\Entity\ImExEntitySpecification;
 use FAFI\entity\ImEx\Transformer\Specification\Field\ImExFieldSpecification;
 use FAFI\entity\ImEx\Transformer\Specification\Field\ImExFieldSpecificationFactory;
+use FAFI\entity\Player\Player;
 use FAFI\exception\FafiException;
 
 abstract class AbstractEntityImport
@@ -109,11 +110,19 @@ abstract class AbstractEntityImport
      */
     private function validateMandatory(int $line, array $entity, ImExEntitySpecification $entitySpecification): void
     {
+        $missed = [];
         foreach ($entitySpecification->getMandatoryFieldsOnCreate() as $mandatory) {
             if (!isset($entity[$mandatory])) {
-                $e = sprintf(FafiException::E_IMPORT_FAILED, $line);
-                throw new FafiException($e);
+               $missed[] = $mandatory;
             }
+        }
+
+        if (!empty($missed)) {
+            $e = [
+                sprintf(FafiException::E_IMPORT_FAILED, $line),
+                sprintf(FafiException::E_REQ_MISSED, Player::ENTITY, implode('", "', $missed)),
+            ];
+            throw new FafiException(FafiException::combine($e));
         }
     }
 
@@ -129,8 +138,11 @@ abstract class AbstractEntityImport
     {
         $reserved = [AbstractFileSchema::ID];
         if (count($entity) <= count($reserved)) {
-            $e = sprintf(FafiException::E_IMPORT_FAILED, $line);
-            throw new FafiException($e);
+            $e = [
+                sprintf(FafiException::E_IMPORT_FAILED, $line),
+                sprintf(FafiException::E_IMPORT_DATA_ABSENT, Player::ENTITY),
+            ];
+            throw new FafiException(FafiException::combine($e));
         }
     }
 

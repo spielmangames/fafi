@@ -14,4 +14,11 @@ class FafiException extends Exception
 
     public const E_IMPORT_FILE_HEADER_INVALID = 'File header must be separated from data with an empty line.';
     public const E_IMPORT_FAILED = 'Importing failed on line %d.';
+    public const E_IMPORT_DATA_ABSENT = 'There is no data to update %s.';
+
+
+    public static function combine(array $messages): string
+    {
+        return implode(' ', $messages);
+    }
 }
