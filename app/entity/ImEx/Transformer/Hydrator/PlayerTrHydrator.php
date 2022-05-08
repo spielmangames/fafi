@@ -1,6 +1,8 @@
 <?php
 
-namespace FAFI\entity\ImEx\Transformer;
+declare(strict_types=1);
+
+namespace FAFI\entity\ImEx\Transformer\Hydrator;
 
 use FAFI\entity\ImEx\Transformer\Schema\PlayerFileSchema;
 use FAFI\entity\Player\Player;
@@ -30,7 +32,7 @@ class PlayerTrHydrator
      */
     public function hydrate(array $data): Player
     {
-        $attributes = [];
+        $attributes = null;
 
         return new Player(
             isset($data[PlayerFileSchema::ID]) ? $data[PlayerFileSchema::ID] : null,

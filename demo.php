@@ -48,8 +48,8 @@ function demoPlayerService(FAFI $fafi)
     $playerService = $fafi->getPlayerService();
 
     $filtersRead = [
-        'all' =>  new PlayersFilter(),
-        'by IDs' =>  new PlayersFilter([18, 19, 20]),
+        'all' => new PlayersFilter(),
+        'by IDs' => new PlayersFilter([18, 19, 20]),
 
         'with: surname contains "Rose"' =>  new PlayersFilter(),
         'with: att_min from 3 & def_min from 1 & def_min to 3' =>  new PlayersFilter(),

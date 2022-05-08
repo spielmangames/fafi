@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace FAFI\entity\ImEx\Transformer;
+namespace FAFI\entity\ImEx\Transformer\Hydrator;
 
 use FAFI\entity\Position\Position;
 

@@ -1,6 +1,8 @@
 <?php
 
-namespace FAFI\entity\ImEx\Transformer;
+declare(strict_types=1);
+
+namespace FAFI\entity\ImEx\Transformer\Hydrator;
 
 use FAFI\entity\GeoCountry\Country;
 use FAFI\entity\ImEx\Transformer\Schema\CountryFileSchema;
