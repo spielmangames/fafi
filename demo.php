@@ -72,7 +72,7 @@ function demoPlayerServiceRead(PlayerService $playerService, array $filters): ar
 {
     $result = [];
     foreach ($filters as $f => $filter) {
-        $players = $playerService->read($filter);
+        $players = $playerService->readPlayers($filter);
         $result[$f] = $players;
     }
 
@@ -89,7 +89,7 @@ function demoFront(FAFI $fafi)
     $playerService = $fafi->getPlayerService();
 
     $filter = new PlayersFilter([18]);
-    $players = $playerService->read($filter);
+    $players = $playerService->readPlayers($filter);
 
 
     $storefrontService = $fafi->getStorefrontService();

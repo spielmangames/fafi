@@ -21,7 +21,7 @@ class CountryService
      * @return Country
      * @throws FafiException
      */
-    public function create(Country $country): Country
+    public function createCountry(Country $country): Country
     {
         return $this->countryRepository->save($country);
     }

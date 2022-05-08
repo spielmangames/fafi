@@ -6,7 +6,7 @@ namespace FAFI\entity\ImEx\Transformer\Specification\Field\Typical;
 
 use FAFI\exception\FafiException;
 
-class BooleanSpecification implements ImExFieldSpecification
+class OneOfSpecification implements ImExFieldSpecification
 {
     public const TRUE_FIELD = 'TRUE';
     public const FALSE_FIELD = 'FALSE';
@@ -27,7 +27,7 @@ class BooleanSpecification implements ImExFieldSpecification
      * @return void
      * @throws FafiException
      */
-    private function assertBool(string $property, $value): void
+    private function assertInList(string $property, $value): void
     {
         if (!is_bool($value)) {
             throw new FafiException(sprintf(self::E_VALUE_TYPE_INVALID, $property));

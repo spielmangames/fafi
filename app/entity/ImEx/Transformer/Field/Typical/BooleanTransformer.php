@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace FAFI\entity\ImEx\Transformer\Field\Typical;
 
-use FAFI\entity\ImEx\Transformer\Field\Specification\Typical\BooleanSpecification;
+use FAFI\entity\ImEx\Transformer\Specification\Field\Typical\BooleanSpecification;
 use FAFI\exception\FafiException;
 
 class BooleanTransformer

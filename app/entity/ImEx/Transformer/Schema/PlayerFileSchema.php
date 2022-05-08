@@ -14,6 +14,20 @@ class PlayerFileSchema extends AbstractFileSchema
     public const INJURE_FACTOR = 'injure_factor';
 
 
+    public const FILE_HEADER = [
+        self::ID,
+
+        self::NAME,
+        self::PARTICLE,
+        self::SURNAME,
+        self::FAFI_SURNAME,
+
+        self::HEIGHT,
+        self::FOOT,
+        self::INJURE_FACTOR,
+    ];
+
+
     public function getMandatoryFieldsOnCreate(): array
     {
         return [

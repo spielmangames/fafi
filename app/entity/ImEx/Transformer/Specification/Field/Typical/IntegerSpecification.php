@@ -6,10 +6,15 @@ namespace FAFI\entity\ImEx\Transformer\Specification\Field\Typical;
 
 use FAFI\exception\FafiException;
 
-class IntegerSpecification
+class IntegerSpecification implements ImExFieldSpecification
 {
-    private const E_VALUE_NOT_INT = 'Property %s must be integer.';
+    private const E_VALUE_TYPE_INVALID = 'Property %s must be integer.';
 
+
+    public function validate(): bool
+    {
+        return false;
+    }
 
     /**
      * @param string $property
@@ -18,10 +23,10 @@ class IntegerSpecification
      * @return void
      * @throws FafiException
      */
-    public function assertInt(string $property, $value): void
+    private function assertInt(string $property, $value): void
     {
         if (!is_int($value)) {
-            throw new FafiException(sprintf(self::E_VALUE_NOT_INT, $property));
+            throw new FafiException(sprintf(self::E_VALUE_TYPE_INVALID, $property));
         }
     }
 }

@@ -19,31 +19,33 @@ class PlayerService
 
     /**
      * @param Player $player
+     *
      * @return Player
      * @throws FafiException
      */
-    public function create(Player $player): Player
+    public function createPlayer(Player $player): Player
     {
         return $this->playerRepository->save($player);
     }
 
     /**
      * @param PlayersFilter $filter
+     *
      * @return Player[]
      * @throws FafiException
      */
-    public function read(PlayersFilter $filter): array
+    public function readPlayers(PlayersFilter $filter): array
     {
         $criteria = new PlayerCriteria($filter->getPlayerIds());
         return $this->playerRepository->findCollection($criteria);
     }
 
-    public function update()
+    public function updatePlayers()
     {
         // TO BE IMPLEMENTED
     }
 
-    public function delete()
+    public function deletePlayers()
     {
         // TO BE IMPLEMENTED
     }

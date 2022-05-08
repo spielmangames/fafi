@@ -34,39 +34,6 @@ class Player
     protected ?array $attributes;
 
 
-    public function __construct(
-        ?int $id,
-
-        ?string $name,
-        ?string $particle,
-        ?string $surname,
-        ?string $fafiSurname,
-//        ?string $birthCountry,
-//        ?string $birthCity,
-//        ?string $birthDate,
-        ?int $height,
-        ?string $foot,
-        ?bool $injureFactor,
-        ?array $attributes
-    ) {
-        $this->id = $id;
-
-        $this->name = $name;
-        $this->particle = $particle;
-        $this->surname = $surname;
-        $this->fafiSurname = $fafiSurname;
-//        $this->birthCountry = $birthCountry;
-//        $this->birthCity = $birthCity;
-//        $this->birthDate = $birthDate;
-
-        $this->height = $height;
-        $this->foot = $foot;
-        $this->injureFactor = $injureFactor;
-
-        $this->attributes = $attributes;
-    }
-
-
     public function getId(): ?int
     {
         return $this->id;

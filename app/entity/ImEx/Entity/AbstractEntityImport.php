@@ -5,6 +5,7 @@ namespace FAFI\entity\ImEx\Entity;
 use FAFI\data\CsvFileHandler;
 use FAFI\data\FileValidator;
 use FAFI\entity\ImEx\ImExService;
+use FAFI\entity\ImEx\Transformer\Specification\Entity\ImExEntitySpecification;
 use FAFI\exception\FafiException;
 
 abstract class AbstractEntityImport
@@ -54,5 +55,21 @@ abstract class AbstractEntityImport
         }
 
         return $extracted;
+    }
+
+    public function transform(array $entities, ImExEntitySpecification $entitySpecification): array
+    {
+        $result = [];
+
+        $fieldSpecifications = $entitySpecification->getFieldSpecifications();
+
+        /**
+         * @var $fieldSpecification
+         */
+        foreach ($fieldSpecifications as $field => $fieldSpecification) {
+//            $validation = $fieldSpecification->
+        }
+
+        return $result;
     }
 }

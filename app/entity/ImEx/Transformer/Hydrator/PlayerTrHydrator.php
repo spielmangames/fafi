@@ -34,6 +34,8 @@ class PlayerTrHydrator
     {
         $attributes = null;
 
+        $data = $this->hydrateFields($data);
+
         return new Player(
             isset($data[PlayerFileSchema::ID]) ? $data[PlayerFileSchema::ID] : null,
 
@@ -48,6 +50,24 @@ class PlayerTrHydrator
 
             $attributes
         );
+    }
+
+    private function hydrateFields(array $fields)
+    {
+        $result = [];
+
+        foreach ($fields as $fieldName => $fieldValue) {
+            $result = $this->addHydratedField($result, $fieldName, $fieldValue);
+        }
+
+        return $result;
+    }
+
+    private function addHydratedField(array $model, string $fieldName, $fieldValue): array
+    {
+        if(array_key)
+
+        return $model;
     }
 
 
