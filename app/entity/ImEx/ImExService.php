@@ -6,8 +6,8 @@ namespace FAFI\entity\ImEx;
 
 use FAFI\data\CsvFileHandlerInterface;
 use FAFI\entity\ImEx\Entity\ImportCountries;
+use FAFI\entity\ImEx\Entity\ImportPlayers;
 use FAFI\entity\ImEx\Entity\ImportPositions;
-use FAFI\entity\ImEx\Entity\Player\ImportPlayers;
 use FAFI\exception\FafiException;
 
 class ImExService

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace FAFI\entity\ImEx\Entity;
 
 use FAFI\entity\ImEx\Transformer\Hydrator\PositionTrHydrator;
@@ -9,29 +11,16 @@ use FAFI\exception\FafiException;
 
 class ImportPositions extends AbstractEntityImport
 {
-    private PositionSpecification $positionSpecification;
+    private PositionSpecification $entitySpecification;
     private PositionService $positionService;
 
     public function __construct()
     {
         parent::__construct();
-        $this->positionSpecification = new PositionSpecification();
+        $this->entitySpecification = new PositionSpecification();
         $this->positionService = new PositionService();
     }
 
-
-    /**
-     * @param string $filePath
-     *
-     * @return void
-     * @throws FafiException
-     */
-    public function import(string $filePath): void
-    {
-        $extracted = $this->importExtractor->extract($filePath);
-        $transformed = $this->importTransformer->transform($extracted, $this->positionSpecification);
-        $this->load($transformed);
-    }
 
     /**
      * @param array[] $entities

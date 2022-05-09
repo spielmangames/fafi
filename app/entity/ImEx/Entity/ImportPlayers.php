@@ -2,9 +2,8 @@
 
 declare(strict_types=1);
 
-namespace FAFI\entity\ImEx\Entity\Player;
+namespace FAFI\entity\ImEx\Entity;
 
-use FAFI\entity\ImEx\Entity\AbstractEntityImport;
 use FAFI\entity\ImEx\Transformer\Hydrator\PlayerTrHydrator;
 use FAFI\entity\ImEx\Transformer\Specification\Entity\PlayerSpecification;
 use FAFI\entity\Player\Player;
@@ -13,31 +12,18 @@ use FAFI\exception\FafiException;
 
 class ImportPlayers extends AbstractEntityImport
 {
-    private PlayerSpecification $playerSpecification;
+    private PlayerSpecification $entitySpecification;
     private PlayerTrHydrator $playerTrHydrator;
     private PlayerService $playerService;
 
     public function __construct()
     {
         parent::__construct();
-        $this->playerSpecification = new PlayerSpecification();
+        $this->entitySpecification = new PlayerSpecification();
         $this->playerTrHydrator = new PlayerTrHydrator();
         $this->playerService = new PlayerService();
     }
 
-
-    /**
-     * @param string $filePath
-     *
-     * @return void
-     * @throws FafiException
-     */
-    public function import(string $filePath): void
-    {
-        $extracted = $this->importExtractor->extract($filePath);
-        $transformed = $this->importTransformer->transform($extracted, $this->playerSpecification);
-        $this->load($transformed);
-    }
 
     /**
      * @param array $entities

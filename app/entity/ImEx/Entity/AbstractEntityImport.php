@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace FAFI\entity\ImEx\Entity;
 
 use FAFI\entity\ImEx\Transformer\Schema\AbstractFileSchema;
@@ -16,10 +18,23 @@ abstract class AbstractEntityImport
     protected ImportExtractor $importExtractor;
     protected ImportTransformer $importTransformer;
 
-
     public function __construct()
     {
         $this->importExtractor = new ImportExtractor();
         $this->importTransformer = new ImportTransformer();
+    }
+
+
+    /**
+     * @param string $filePath
+     *
+     * @return void
+     * @throws FafiException
+     */
+    public function import(string $filePath): void
+    {
+        $extracted = $this->importExtractor->extract($filePath);
+        $transformed = $this->importTransformer->transform($extracted, $this->entitySpecification);
+        $this->load($transformed);
     }
 }
