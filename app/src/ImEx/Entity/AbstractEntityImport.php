@@ -4,11 +4,6 @@ declare(strict_types=1);
 
 namespace FAFI\src\ImEx\Entity;
 
-use FAFI\src\ImEx\Transformer\Schema\AbstractFileSchema;
-use FAFI\src\ImEx\Transformer\Specification\Entity\ImExEntitySpecification;
-use FAFI\src\ImEx\Transformer\Specification\Field\ImExFieldSpecification;
-use FAFI\src\ImEx\Transformer\Specification\Field\ImExFieldSpecificationFactory;
-use FAFI\src\Player\Player;
 use FAFI\exception\FafiException;
 use FAFI\ImEx\Extractor\ImportExtractor;
 use FAFI\ImEx\Transformer\ImportTransformer;
