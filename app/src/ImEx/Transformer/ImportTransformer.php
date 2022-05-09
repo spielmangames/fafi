@@ -4,20 +4,19 @@ declare(strict_types=1);
 
 namespace FAFI\src\ImEx\Transformer;
 
-
-use FAFI\src\ImEx\Transformer\Schema\AbstractFileSchema;
 use FAFI\src\ImEx\Transformer\Specification\Entity\ImExEntitySpecification;
 use FAFI\src\ImEx\Transformer\Specification\Field\ImExFieldSpecification;
 use FAFI\src\ImEx\Transformer\Specification\Field\ImExFieldSpecificationFactory;
-use FAFI\src\Player\Player;
 use FAFI\exception\FafiException;
 
 class ImportTransformer
 {
+    private ImportEntityValidator $entityValidator;
     private ImExFieldSpecificationFactory $fieldSpecificationFactory;
 
     public function __construct()
     {
+        $this->entityValidator = new ImportEntityValidator();
         $this->fieldSpecificationFactory = new ImExFieldSpecificationFactory();
     }
 
@@ -35,7 +34,7 @@ class ImportTransformer
 
         $fieldSpecifications = $this->prepareFieldSpecifications($entitySpecification);
         foreach ($entities as $line => $entity) {
-            $this->validateEntityContent($line, $entity, $entitySpecification);
+            $this->entityValidator->validateEntity($line, $entity, $entitySpecification);
             $this->transformEntity($line, $entity, $fieldSpecifications);
         }
 
@@ -58,67 +57,6 @@ class ImportTransformer
         }
 
         return $fieldSpecifications;
-    }
-
-    /**
-     * @param int $line
-     * @param array $entity
-     * @param ImExEntitySpecification $entitySpecification
-     *
-     * @return void
-     * @throws FafiException
-     */
-    private function validateEntityContent(int $line, array $entity, ImExEntitySpecification $entitySpecification): void
-    {
-        array_key_exists(AbstractFileSchema::ID, $entity)
-            ? $this->validateMandatory($line, $entity, $entitySpecification)
-            : $this->validateContentPresent($line, $entity, $entitySpecification);
-    }
-
-    /**
-     * @param int $line
-     * @param array $entity
-     * @param ImExEntitySpecification $entitySpecification
-     *
-     * @return void
-     * @throws FafiException
-     */
-    private function validateMandatory(int $line, array $entity, ImExEntitySpecification $entitySpecification): void
-    {
-        $missed = [];
-        foreach ($entitySpecification->getMandatoryFieldsOnCreate() as $mandatory) {
-            if (!isset($entity[$mandatory])) {
-                $missed[] = $mandatory;
-            }
-        }
-
-        if (!empty($missed)) {
-            $e = [
-                sprintf(FafiException::E_IMPORT_FAILED, $line),
-                sprintf(FafiException::E_REQ_MISSED, Player::ENTITY, implode('", "', $missed)),
-            ];
-            throw new FafiException(FafiException::combine($e));
-        }
-    }
-
-    /**
-     * @param int $line
-     * @param array $entity
-     * @param ImExEntitySpecification $entitySpecification
-     *
-     * @return void
-     * @throws FafiException
-     */
-    private function validateContentPresent(int $line, array $entity, ImExEntitySpecification $entitySpecification): void
-    {
-        $reserved = [AbstractFileSchema::ID];
-        if (count($entity) <= count($reserved)) {
-            $e = [
-                sprintf(FafiException::E_IMPORT_FAILED, $line),
-                sprintf(FafiException::E_IMPORT_DATA_ABSENT, Player::ENTITY),
-            ];
-            throw new FafiException(FafiException::combine($e));
-        }
     }
 
     /**
@@ -155,18 +93,13 @@ class ImportTransformer
      * @return void
      * @throws FafiException
      */
-    private function transformEntityField(
-        int $line,
-        string $fieldName,
-        $fieldValue,
-        ImExFieldSpecification
-        $fieldSpecification
-    ): void {
+    private function transformEntityField(int $line, string $fieldName, $fieldValue, ImExFieldSpecification $fieldSpecification): void
+    {
         try {
             $fieldSpecification->validate($fieldName, $fieldValue);
         } catch (FafiException $e) {
-            $e = sprintf(FafiException::E_IMPORT_FAILED, $line) . ' ' . $e->getMessage();
-            throw new FafiException($e);
+            $e = [sprintf(FafiException::E_IMPORT_FAILED, $line), $e->getMessage()];
+            throw new FafiException(FafiException::combine($e));
         }
     }
 }
