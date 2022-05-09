@@ -2,7 +2,7 @@
 
 namespace FAFI\FE\Themes\Printer\Custom\Player;
 
-use FAFI\entity\Player\Player;
+use FAFI\src\Player\Player;
 use FAFI\exception\FafiException;
 use FAFI\FE\Themes\Printer\Basic\PageSections\AbstractTitle;
 

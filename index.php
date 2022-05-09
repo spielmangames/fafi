@@ -3,7 +3,7 @@
 require_once 'app/boot/bootstrap.php';
 require_once 'demo.php';
 
-use FAFI\entity\FAFI;
+use FAFI\src\FAFI;
 
 
 echo EOL;
