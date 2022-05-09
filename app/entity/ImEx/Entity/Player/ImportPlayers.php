@@ -35,7 +35,7 @@ class ImportPlayers extends AbstractEntityImport
     public function import(string $filePath): void
     {
         $extracted = $this->importExtractor->extract($filePath);
-        $transformed = $this->transform($extracted, $this->playerSpecification);
+        $transformed = $this->importTransformer->transform($extracted, $this->playerSpecification);
         $this->load($transformed);
     }
 

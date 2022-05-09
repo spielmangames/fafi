@@ -31,7 +31,7 @@ class CountryService
      * @return Country[]
      * @throws FafiException
      */
-    public function read(CountryFilter $filter): array
+    public function readCountries(CountryFilter $filter): array
     {
         $criteria = new CountryCriteria($filter->getIds());
         return $this->countryRepository->findCollection($criteria);

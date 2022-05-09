@@ -10,14 +10,12 @@ use FAFI\exception\FafiException;
 class ImportPositions extends AbstractEntityImport
 {
     private PositionSpecification $positionSpecification;
-    private PositionTrHydrator $positionTrHydrator;
     private PositionService $positionService;
 
     public function __construct()
     {
         parent::__construct();
         $this->positionSpecification = new PositionSpecification();
-        $this->positionTrHydrator = new PositionTrHydrator();
         $this->positionService = new PositionService();
     }
 
@@ -31,7 +29,7 @@ class ImportPositions extends AbstractEntityImport
     public function import(string $filePath): void
     {
         $extracted = $this->importExtractor->extract($filePath);
-        $transformed = $this->transform($extracted, $this->positionSpecification);
+        $transformed = $this->importTransformer->transform($extracted, $this->positionSpecification);
         $this->load($transformed);
     }
 
@@ -44,7 +42,7 @@ class ImportPositions extends AbstractEntityImport
     public function load(array $entities): void
     {
         foreach ($entities as $entity) {
-            $this->positionService->create($entity);
+            $this->positionService->createPosition($entity);
         }
     }
 }

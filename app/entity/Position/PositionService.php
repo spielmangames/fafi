@@ -22,7 +22,7 @@ class PositionService
      * @return Position
      * @throws FafiException
      */
-    public function create(Position $position): Position
+    public function createPosition(Position $position): Position
     {
         return $this->positionRepository->save($position);
     }
@@ -32,7 +32,7 @@ class PositionService
      * @return Position[]
      * @throws FafiException
      */
-    public function read(PositionsFilter $filter): array
+    public function readPositions(PositionsFilter $filter): array
     {
         $criteria = new PositionCriteria($filter->getPositionIds());
         return $this->positionRepository->findCollection($criteria);
