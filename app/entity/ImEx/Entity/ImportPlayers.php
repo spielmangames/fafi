@@ -26,7 +26,7 @@ class ImportPlayers extends AbstractEntityImport
 
 
     /**
-     * @param array $entities
+     * @param array[] $entities
      *
      * @return void
      * @throws FafiException
