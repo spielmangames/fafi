@@ -12,9 +12,6 @@ use FAFI\exception\FafiException;
 
 class ImExFieldSpecificationFactory
 {
-    private const E_SPECIFICATION_ABSENT = 'Specification class "%s" is absent.';
-
-
     /**
      * @param string $class
      *
@@ -34,7 +31,7 @@ class ImExFieldSpecificationFactory
                 return new StringSpecification();
 
             default:
-                throw new FafiException(sprintf(self::E_SPECIFICATION_ABSENT, $class));
+                throw new FafiException(sprintf(FafiException::E_CLASS_ABSENT, $class));
         }
     }
 }

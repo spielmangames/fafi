@@ -11,59 +11,19 @@ use FAFI\entity\ImEx\Transformer\Specification\Field\ImExFieldSpecification;
 use FAFI\entity\ImEx\Transformer\Specification\Field\ImExFieldSpecificationFactory;
 use FAFI\entity\Player\Player;
 use FAFI\exception\FafiException;
+use FAFI\ImEx\Extractor\ImportExtractor;
 
 abstract class AbstractEntityImport
 {
-    private const IM_FILE_SIZE_LIMIT = 1048576;
-
-
-    private FileValidator $fileValidator;
-    private CsvFileHandler $fileHandler;
+    protected ImportExtractor $importExtractor;
     private ImExFieldSpecificationFactory $fieldSpecificationFactory;
 
     public function __construct()
     {
-        $this->fileValidator = new FileValidator();
-        $this->fileHandler = new CsvFileHandler();
+        $this->importExtractor = new ImportExtractor();
         $this->fieldSpecificationFactory = new ImExFieldSpecificationFactory();
     }
 
-
-    /**
-     * @param string $filePath
-     *
-     * @return array
-     * @throws FafiException
-     */
-    public function extract(string $filePath): array
-    {
-        $this->fileValidator->validateFile($filePath, ImExService::FILE_EXT, self::IM_FILE_SIZE_LIMIT);
-        $extracted = $this->fileHandler->read($filePath);
-        $this->fileValidator->validateFileContentPresent($filePath, $extracted);
-
-        return $this->removeHeaderDelimiterLine($extracted);
-    }
-
-    /**
-     * @param array $extracted
-     *
-     * @return array
-     * @throws FafiException
-     */
-    private function removeHeaderDelimiterLine(array $extracted): array
-    {
-        $lineToRemove = 2;
-        try {
-            $removeLine = $extracted[$lineToRemove];
-            $this->fileValidator->validateLineEmpty($removeLine);
-            unset($extracted[$lineToRemove]);
-        } catch (FafiException $e) {
-            $e = implode(EOL, [$e->getMessage(), FafiException::E_IMPORT_FILE_HEADER_INVALID]);
-            throw new FafiException($e);
-        }
-
-        return $extracted;
-    }
 
     /**
      * @param array $entities

@@ -30,7 +30,7 @@ class ImportCountries extends AbstractEntityImport
      */
     public function import(string $filePath): void
     {
-        $extracted = $this->extract($filePath);
+        $extracted = $this->importExtractor->extract($filePath);
         $transformed = $this->transform($extracted, $this->countrySpecification);
         $this->load($transformed);
     }

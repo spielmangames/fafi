@@ -2,8 +2,9 @@
 
 declare(strict_types=1);
 
-namespace FAFI\entity\ImEx\Entity;
+namespace FAFI\entity\ImEx\Entity\Player;
 
+use FAFI\entity\ImEx\Entity\AbstractEntityImport;
 use FAFI\entity\ImEx\Transformer\Hydrator\PlayerTrHydrator;
 use FAFI\entity\ImEx\Transformer\Specification\Entity\PlayerSpecification;
 use FAFI\entity\Player\Player;
@@ -33,7 +34,7 @@ class ImportPlayers extends AbstractEntityImport
      */
     public function import(string $filePath): void
     {
-        $extracted = $this->extract($filePath);
+        $extracted = $this->importExtractor->extract($filePath);
         $transformed = $this->transform($extracted, $this->playerSpecification);
         $this->load($transformed);
     }
