@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace FAFI\src\ImEx\Transformer\Hydrator;
 
-use FAFI\src\ImEx\Transformer\Schema\PlayerFileSchema;
+use FAFI\src\ImEx\Transformer\Schema\File\PlayerFileSchema;
 use FAFI\src\Player\Player;
 
 class PlayerTrHydrator

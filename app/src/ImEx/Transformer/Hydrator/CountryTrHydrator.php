@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace FAFI\src\ImEx\Transformer\Hydrator;
 
 use FAFI\src\GeoCountry\Country;
-use FAFI\src\ImEx\Transformer\Schema\CountryFileSchema;
+use FAFI\src\ImEx\Transformer\Schema\File\CountryFileSchema;
 
 class CountryTrHydrator
 {

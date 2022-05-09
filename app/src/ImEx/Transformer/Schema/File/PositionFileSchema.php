@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace FAFI\src\ImEx\Transformer\Schema;
+namespace FAFI\src\ImEx\Transformer\Schema\File;
 
-class CountryFileSchema extends AbstractFileSchema
+class PositionFileSchema extends AbstractFileSchema
 {
     public const NAME = 'name';
 

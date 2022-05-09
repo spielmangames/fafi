@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace FAFI\src\ImEx\Transformer\Specification\Entity;
 
-use FAFI\src\ImEx\Transformer\Schema\PlayerFileSchema;
+use FAFI\src\ImEx\Transformer\Schema\File\PlayerFileSchema;
 use FAFI\src\ImEx\Transformer\Specification\Field\Typical\BooleanSpecification;
 use FAFI\src\ImEx\Transformer\Specification\Field\Typical\IntegerSpecification;
 use FAFI\src\ImEx\Transformer\Specification\Field\Typical\OneOfSpecification;

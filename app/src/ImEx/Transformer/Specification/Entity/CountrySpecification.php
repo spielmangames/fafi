@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace FAFI\src\ImEx\Transformer\Specification\Entity;
 
-use FAFI\src\ImEx\Transformer\Schema\CountryFileSchema;
+use FAFI\src\ImEx\Transformer\Schema\File\CountryFileSchema;
 
 class CountrySpecification implements ImExEntitySpecification
 {

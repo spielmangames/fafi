@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace FAFI\src\ImEx\Transformer\Schema;
+namespace FAFI\src\ImEx\Transformer\Schema\File;
 
 class PlayerFileSchema extends AbstractFileSchema
 {
