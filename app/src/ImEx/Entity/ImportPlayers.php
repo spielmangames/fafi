@@ -12,7 +12,7 @@ use FAFI\exception\FafiException;
 
 class ImportPlayers extends AbstractEntityImport
 {
-    private PlayerSpecification $entitySpecification;
+    protected PlayerSpecification $entitySpecification;
     private PlayerTrHydrator $playerTrHydrator;
     private PlayerService $playerService;
 

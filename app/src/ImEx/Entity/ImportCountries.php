@@ -10,7 +10,7 @@ use FAFI\exception\FafiException;
 
 class ImportCountries extends AbstractEntityImport
 {
-    private CountrySpecification $entitySpecification;
+    protected CountrySpecification $entitySpecification;
     private CountryService $countryService;
 
     public function __construct()

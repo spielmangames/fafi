@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace FAFI\src\ImEx\Entity;
 
 use FAFI\exception\FafiException;
-use FAFI\ImEx\Extractor\ImportExtractor;
-use FAFI\ImEx\Transformer\ImportTransformer;
+use FAFI\src\ImEx\Extractor\ImportExtractor;
+use FAFI\src\ImEx\Transformer\ImportTransformer;
 
 abstract class AbstractEntityImport
 {

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace FAFI\ImEx\Transformer;
+namespace FAFI\src\ImEx\Transformer;
 
 
 use FAFI\src\ImEx\Transformer\Schema\AbstractFileSchema;

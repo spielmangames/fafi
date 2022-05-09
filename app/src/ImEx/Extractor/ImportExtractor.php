@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace FAFI\ImEx\Extractor;
+namespace FAFI\src\ImEx\Extractor;
 
 use FAFI\data\CsvFileHandler;
 use FAFI\data\FileValidator;
