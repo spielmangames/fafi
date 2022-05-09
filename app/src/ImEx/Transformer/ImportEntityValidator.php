@@ -7,6 +7,7 @@ namespace FAFI\src\ImEx\Transformer;
 use FAFI\exception\FafiException;
 use FAFI\src\ImEx\Transformer\Schema\AbstractFileSchema;
 use FAFI\src\ImEx\Transformer\Specification\Entity\ImExEntitySpecification;
+use FAFI\src\ImEx\Transformer\Specification\Field\ImExFieldSpecification;
 use FAFI\src\Player\Player;
 
 class ImportEntityValidator
@@ -70,6 +71,31 @@ class ImportEntityValidator
                 sprintf(FafiException::E_IMPORT_FAILED, $line),
                 sprintf(FafiException::E_IMPORT_DATA_ABSENT, Player::ENTITY),
             ];
+            throw new FafiException(FafiException::combine($e));
+        }
+    }
+
+
+    public function validateEntityField(int $line, string $fieldName, ImExFieldSpecification $specification): void
+    {
+
+    }
+
+    /**
+     * @param int $line
+     * @param string $fieldName
+     * @param $fieldValue
+     * @param ImExFieldSpecification $fieldSpecification
+     *
+     * @return void
+     * @throws FafiException
+     */
+    private function assertEntityField(int $line, string $fieldName, $fieldValue, ImExFieldSpecification $specification): void
+    {
+        try {
+            $specification->validate($fieldName, $fieldValue);
+        } catch (FafiException $e) {
+            $e = [sprintf(FafiException::E_IMPORT_FAILED, $line), $e->getMessage()];
             throw new FafiException(FafiException::combine($e));
         }
     }

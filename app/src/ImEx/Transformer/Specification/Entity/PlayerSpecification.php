@@ -12,7 +12,7 @@ use FAFI\src\ImEx\Transformer\Specification\Field\Typical\StringSpecification;
 
 class PlayerSpecification implements ImExEntitySpecification
 {
-    public function getFieldSpecifications(): array
+    public function getFieldSpecificationsMap(): array
     {
         return [
             PlayerFileSchema::ID => IntegerSpecification::class,
@@ -27,11 +27,6 @@ class PlayerSpecification implements ImExEntitySpecification
             PlayerFileSchema::INJURE_FACTOR => BooleanSpecification::class,
         ];
     }
-
-//    public function getFieldTransformers(): array
-//    {
-//        return [];
-//    }
 
     public function getMandatoryFieldsOnCreate(): array
     {

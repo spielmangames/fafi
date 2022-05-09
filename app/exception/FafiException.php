@@ -19,6 +19,9 @@ class FafiException extends Exception
     public const E_IMPORT_DATA_ABSENT = 'There is no data to update %s.';
 
 
+    public const E_IMPORT_ENTITY_FIELD_SPEC_ASSIGN_ABSENT = 'Field "%s" is absent in %s specification.';
+
+
     public static function combine(array $messages): string
     {
         return implode(' ', $messages);

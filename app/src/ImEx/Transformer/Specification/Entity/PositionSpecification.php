@@ -8,18 +8,12 @@ use FAFI\src\ImEx\Transformer\Schema\PositionFileSchema;
 
 class PositionSpecification implements ImExEntitySpecification
 {
-    public function getFieldSpecifications(): array
+    public function getFieldSpecificationsMap(): array
     {
         return [
             PositionFileSchema::NAME,
         ];
     }
-
-//    public function getFieldTransformers(): array
-//    {
-//        return [];
-//    }
-
 
     public function getMandatoryFieldsOnCreate(): array
     {

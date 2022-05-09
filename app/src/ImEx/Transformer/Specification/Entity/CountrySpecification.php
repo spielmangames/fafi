@@ -8,17 +8,12 @@ use FAFI\src\ImEx\Transformer\Schema\CountryFileSchema;
 
 class CountrySpecification implements ImExEntitySpecification
 {
-    public function getFieldSpecifications(): array
+    public function getFieldSpecificationsMap(): array
     {
         return [
             CountryFileSchema::NAME,
         ];
     }
-
-//    public function getFieldTransformers(): array
-//    {
-//        return [];
-//    }
 
     public function getMandatoryFieldsOnCreate(): array
     {

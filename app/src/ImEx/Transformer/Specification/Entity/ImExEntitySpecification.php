@@ -6,8 +6,7 @@ namespace FAFI\src\ImEx\Transformer\Specification\Entity;
 
 interface ImExEntitySpecification
 {
-    public function getFieldSpecifications(): array;
-//    public function getFieldTransformers(): array;
+    public function getFieldSpecificationsMap(): array;
 
     /** @return string[] */
     public function getMandatoryFieldsOnCreate(): array;

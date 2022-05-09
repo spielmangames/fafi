@@ -33,7 +33,6 @@ class ImportPlayers extends AbstractEntityImport
      */
     public function load(array $entities): void
     {
-        $hydrated = $this->playerTrHydrator->hydrateCollection($entities);
         foreach ($entities as $entity) {
             $player = new Player();
 

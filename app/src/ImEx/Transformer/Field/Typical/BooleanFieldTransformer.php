@@ -7,7 +7,7 @@ namespace FAFI\src\ImEx\Transformer\Field\Typical;
 use FAFI\src\ImEx\Transformer\Specification\Field\Typical\BooleanSpecification;
 use FAFI\exception\FafiException;
 
-class BooleanTransformer
+class BooleanFieldTransformer
 {
     private BooleanSpecification $booleanSpecification;
 
