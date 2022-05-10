@@ -8,7 +8,8 @@
         "ext-mysqli": "*",
         "laminas/laminas-dom": "^2.7@dev",
         "vil11/hlpr": "dev-master",
-        "ext-mbstring": "*"
+        "ext-mbstring": "*",
+        "ext-ctype": "*"
     },
     "require-dev": {
         "phpunit/phpunit": "^9.0"

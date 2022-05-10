@@ -19,7 +19,8 @@ class FafiException extends Exception
     public const E_IMPORT_DATA_ABSENT = 'There is no data to update %s.';
 
 
-    public const E_IMPORT_ENTITY_FIELD_SPEC_ASSIGN_ABSENT = 'Field "%s" is absent in %s specification.';
+    public const E_IMPORT_ENTITY_FIELD_SPEC_ASSIGN_ABSENT = 'Field "%s" Specification is absent in %s Config.';
+    public const E_IMPORT_ENTITY_FIELD_HYDRATOR_ASSIGN_ABSENT = 'Field "%s" Hydrator is absent in %s Config.';
 
 
     public static function combine(array $messages): string

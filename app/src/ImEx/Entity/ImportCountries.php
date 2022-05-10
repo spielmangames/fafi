@@ -11,6 +11,7 @@ use FAFI\exception\FafiException;
 class ImportCountries extends AbstractEntityImport
 {
     protected CountrySpecification $entitySpecification;
+    protected $entityHydrator;
     private CountryService $countryService;
 
     public function __construct()

@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace FAFI\src\ImEx\Transformer;
 
 use FAFI\exception\FafiException;
-use FAFI\src\ImEx\Transformer\Schema\AbstractFileSchema;
+use FAFI\src\ImEx\Transformer\Schema\File\AbstractFileSchema;
 use FAFI\src\ImEx\Transformer\Specification\Entity\ImExEntitySpecification;
 use FAFI\src\ImEx\Transformer\Specification\Field\ImExFieldSpecification;
 use FAFI\src\Player\Player;

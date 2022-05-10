@@ -4,23 +4,19 @@ declare(strict_types=1);
 
 namespace FAFI\src\ImEx\Entity;
 
-use FAFI\src\ImEx\Transformer\Hydrator\PlayerTrHydrator;
-use FAFI\src\ImEx\Transformer\Specification\Entity\PlayerSpecification;
+use FAFI\src\ImEx\Transformer\Schema\PlayerConfigSchema;
 use FAFI\src\Player\Player;
 use FAFI\src\Player\PlayerService;
 use FAFI\exception\FafiException;
 
 class ImportPlayers extends AbstractEntityImport
 {
-    protected PlayerSpecification $entitySpecification;
-    private PlayerTrHydrator $playerTrHydrator;
     private PlayerService $playerService;
 
     public function __construct()
     {
         parent::__construct();
-        $this->entitySpecification = new PlayerSpecification();
-        $this->playerTrHydrator = new PlayerTrHydrator();
+        $this->entityConfig = new PlayerConfigSchema();
         $this->playerService = new PlayerService();
     }
 
