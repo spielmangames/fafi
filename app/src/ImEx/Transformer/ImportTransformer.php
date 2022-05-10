@@ -58,11 +58,17 @@ class ImportTransformer
         $transformed = [];
 
         foreach ($entity as $fieldName => $fieldValue) {
-            $fieldTransformer = $this->prepareFieldTransformer($line, $entitySpecification, $fieldName);
-            $fieldValue = $fieldTransformer->fromStr($fieldName, $fieldValue);
+            if ($fieldValue === '') {
+                $fieldValue = null;
+            } else {
+                $fieldTransformer = $this->prepareFieldTransformer($line, $entitySpecification, $fieldName);
+                $fieldValue = $fieldTransformer->fromStr($fieldName, $fieldValue);
 
-            $fieldSpecification = $this->prepareFieldSpecification($line, $entitySpecification, $fieldName);
-            $fieldSpecification->validate($fieldName, $fieldValue);
+                $fieldSpecification = $this->prepareFieldSpecification($line, $entitySpecification, $fieldName);
+                $fieldSpecification->validate($fieldName, $fieldValue);
+            }
+
+            $transformed[$fieldName] = $fieldValue;
         }
 
         return $transformed;

@@ -6,26 +6,10 @@ namespace FAFI\src\ImEx\Transformer\Field\Typical;
 
 use FAFI\src\ImEx\Transformer\Field\ImExFieldTransformer;
 use FAFI\src\ImEx\Transformer\Specification\Field\Typical\BooleanSpecification;
-use FAFI\exception\FafiException;
 
 class BooleanFieldTransformer implements ImExFieldTransformer
 {
-    private BooleanSpecification $booleanSpecification;
-
-    public function __construct()
-    {
-        $this->booleanSpecification = new BooleanSpecification();
-    }
-
-
-    /**
-     * @param string $property
-     * @param string $value
-     *
-     * @return bool
-     * @throws FafiException
-     */
-    public function fromStr(string $property, string $value): bool
+    public function fromStr(string $property, string $value)
     {
         switch ($value) {
             case BooleanSpecification::TRUE_FIELD:
@@ -35,8 +19,6 @@ class BooleanFieldTransformer implements ImExFieldTransformer
                 $value = false;
                 break;
         }
-
-//        $this->booleanSpecification->validate($property, $value);
 
         return $value;
     }
