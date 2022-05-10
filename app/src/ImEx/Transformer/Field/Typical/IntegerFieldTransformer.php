@@ -4,10 +4,11 @@ declare(strict_types=1);
 
 namespace FAFI\src\ImEx\Transformer\Field\Typical;
 
+use FAFI\src\ImEx\Transformer\Field\ImExFieldTransformer;
 use FAFI\src\ImEx\Transformer\Specification\Field\Typical\IntegerSpecification;
 use FAFI\exception\FafiException;
 
-class IntegerFieldTransformer
+class IntegerFieldTransformer implements ImExFieldTransformer
 {
     private IntegerSpecification $integerSpecification;
 

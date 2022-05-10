@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace FAFI\src\ImEx\Transformer\Specification\Entity;
 
+use FAFI\src\ImEx\Transformer\Field\Typical\BooleanFieldTransformer;
+use FAFI\src\ImEx\Transformer\Field\Typical\IntegerFieldTransformer;
+use FAFI\src\ImEx\Transformer\Field\Typical\StringFieldTransformer;
 use FAFI\src\ImEx\Transformer\Schema\File\PlayerFileSchema;
 use FAFI\src\ImEx\Transformer\Specification\Field\Typical\BooleanSpecification;
 use FAFI\src\ImEx\Transformer\Specification\Field\Typical\IntegerSpecification;
@@ -25,6 +28,22 @@ class PlayerSpecification implements ImExEntitySpecification
             PlayerFileSchema::HEIGHT => IntegerSpecification::class,
             PlayerFileSchema::FOOT => OneOfSpecification::class,
             PlayerFileSchema::INJURE_FACTOR => BooleanSpecification::class,
+        ];
+    }
+
+    public function getFieldTransformersMap(): array
+    {
+        return [
+            PlayerFileSchema::ID => IntegerFieldTransformer::class,
+
+            PlayerFileSchema::NAME => StringFieldTransformer::class,
+            PlayerFileSchema::PARTICLE => StringFieldTransformer::class,
+            PlayerFileSchema::SURNAME => StringFieldTransformer::class,
+            PlayerFileSchema::FAFI_SURNAME => StringFieldTransformer::class,
+
+            PlayerFileSchema::HEIGHT => IntegerFieldTransformer::class,
+//            PlayerFileSchema::FOOT => OneOfFieldTransformer::class,
+            PlayerFileSchema::INJURE_FACTOR => BooleanFieldTransformer::class,
         ];
     }
 

@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace FAFI\src\ImEx\Transformer;
 
+use FAFI\src\ImEx\Transformer\Field\ImExFieldTransformer;
+use FAFI\src\ImEx\Transformer\Field\ImExFieldTransformerFactory;
 use FAFI\src\ImEx\Transformer\Specification\Entity\ImExEntitySpecification;
 use FAFI\src\ImEx\Transformer\Specification\Field\ImExFieldSpecification;
 use FAFI\src\ImEx\Transformer\Specification\Field\ImExFieldSpecificationFactory;
@@ -12,14 +14,14 @@ use FAFI\src\Player\Player;
 
 class ImportTransformer
 {
+    private ImExFieldTransformerFactory $fieldTransformerFactory;
     private ImExFieldSpecificationFactory $fieldSpecificationFactory;
-    private ImportEntityTransformer $transformer;
     private ImportEntityValidator $entityValidator;
 
     public function __construct()
     {
+        $this->fieldTransformerFactory = new ImExFieldTransformerFactory();
         $this->fieldSpecificationFactory = new ImExFieldSpecificationFactory();
-        $this->transformer = new ImportEntityTransformer();
         $this->entityValidator = new ImportEntityValidator();
     }
 
@@ -54,19 +56,12 @@ class ImportTransformer
     private function transformEntity(int $line, array $entity, ImExEntitySpecification $entitySpecification): array
     {
         $transformed = [];
-        $fieldSpecifications = $this->prepareFieldSpecifications($entitySpecification);
 
         foreach ($entity as $fieldName => $fieldValue) {
-            if (!isset($fieldSpecifications[$fieldName])) {
-                $e = [
-                    sprintf(FafiException::E_IMPORT_FAILED, $line),
-                    sprintf(FafiException::E_IMPORT_ENTITY_FIELD_SPEC_ASSIGN_ABSENT, $fieldName, Player::ENTITY),
-                ];
-                throw new FafiException(FafiException::combine($e));
-            }
-            $fieldSpecification = $fieldSpecifications[$fieldName];
+            $fieldTransformer = $this->prepareFieldTransformer($line, $entitySpecification, $fieldName);
+            $fieldValue = $fieldTransformer->fromStr($fieldName, $fieldValue);
 
-            $fieldValue = $this->transformer->transformField($fieldValue, $fieldSpecification);
+            $fieldSpecification = $this->prepareFieldSpecification($line, $entitySpecification, $fieldName);
             $fieldSpecification->validate($fieldName, $fieldValue);
         }
 
@@ -74,20 +69,48 @@ class ImportTransformer
     }
 
     /**
+     * @param int $line
      * @param ImExEntitySpecification $entitySpecification
+     * @param string $fieldName
      *
-     * @return ImExFieldSpecification[]
+     * @return ImExFieldSpecification
      * @throws FafiException
      */
-    private function prepareFieldSpecifications(ImExEntitySpecification $entitySpecification): array
+    private function prepareFieldSpecification(int $line, ImExEntitySpecification $entitySpecification, string $fieldName): ImExFieldSpecification
     {
-        $fieldSpecifications = [];
-
         $fieldSpecificationsMap = $entitySpecification->getFieldSpecificationsMap();
-        foreach ($fieldSpecificationsMap as $fieldName => $className) {
-            $fieldSpecifications[$fieldName] = $this->fieldSpecificationFactory->create($className);
+
+        if (!isset($fieldSpecificationsMap[$fieldName])) {
+            $e = [
+                sprintf(FafiException::E_IMPORT_FAILED, $line),
+                sprintf(FafiException::E_IMPORT_ENTITY_FIELD_SPEC_ASSIGN_ABSENT, $fieldName, Player::ENTITY),
+            ];
+            throw new FafiException(FafiException::combine($e));
         }
 
-        return $fieldSpecifications;
+        return $this->fieldSpecificationFactory->create($fieldSpecificationsMap[$fieldName]);
+    }
+
+    /**
+     * @param int $line
+     * @param ImExEntitySpecification $entitySpecification
+     * @param string $fieldName
+     *
+     * @return ImExFieldTransformer
+     * @throws FafiException
+     */
+    private function prepareFieldTransformer(int $line, ImExEntitySpecification $entitySpecification, string $fieldName): ImExFieldTransformer
+    {
+        $fieldTransformersMap = $entitySpecification->getFieldTransformersMap();
+
+        if (!isset($fieldTransformersMap[$fieldName])) {
+            $e = [
+                sprintf(FafiException::E_IMPORT_FAILED, $line),
+                sprintf(FafiException::E_IMPORT_ENTITY_FIELD_HYDRATOR_ASSIGN_ABSENT, $fieldName, Player::ENTITY),
+            ];
+            throw new FafiException(FafiException::combine($e));
+        }
+
+        return $this->fieldTransformerFactory->create($fieldTransformersMap[$fieldName]);
     }
 }

@@ -4,10 +4,11 @@ declare(strict_types=1);
 
 namespace FAFI\src\ImEx\Transformer\Field\Typical;
 
+use FAFI\src\ImEx\Transformer\Field\ImExFieldTransformer;
 use FAFI\src\ImEx\Transformer\Specification\Field\Typical\BooleanSpecification;
 use FAFI\exception\FafiException;
 
-class BooleanFieldTransformer
+class BooleanFieldTransformer implements ImExFieldTransformer
 {
     private BooleanSpecification $booleanSpecification;
 
