@@ -7,13 +7,11 @@ namespace FAFI\src\ImEx\Transformer\Specification\Field\Typical;
 use FAFI\src\ImEx\Transformer\Specification\Field\ImExFieldSpecification;
 use FAFI\exception\FafiException;
 
-class OneOfSpecification implements ImExFieldSpecification
+abstract class OneOfSpecification implements ImExFieldSpecification
 {
-    public const TRUE_FIELD = 'TRUE';
-    public const FALSE_FIELD = 'FALSE';
+    private const E_VALUE_TYPE_INVALID = 'Property "%s" value is not allowed.';
 
-
-    private const E_VALUE_TYPE_INVALID = 'Property "%s" is not allowed.';
+    public array $allowed;
 
 
     public function validate(string $property, $value): void
@@ -30,8 +28,7 @@ class OneOfSpecification implements ImExFieldSpecification
      */
     private function assertInList(string $property, $value): void
     {
-        $allowed = [];
-        if (!in_array($value, $allowed)) {
+        if (!in_array($value, $this->allowed)) {
             throw new FafiException(sprintf(self::E_VALUE_TYPE_INVALID, $property));
         }
     }

@@ -10,19 +10,19 @@ use FAFI\src\ImEx\Transformer\Schema\File\PositionFileSchema;
 
 class PositionSpecification implements ImExEntitySpecification
 {
-    public function getFieldSpecificationsMap(): array
-    {
-        return [
-            PositionFileSchema::NAME,
-        ];
-    }
-
     public function getFieldTransformersMap(): array
     {
         return [
             PositionFileSchema::ID => IntegerFieldTransformer::class,
 
             PositionFileSchema::NAME => StringFieldTransformer::class,
+        ];
+    }
+
+    public function getFieldSpecificationsMap(): array
+    {
+        return [
+            PositionFileSchema::NAME,
         ];
     }
 

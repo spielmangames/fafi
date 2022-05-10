@@ -89,7 +89,7 @@ class ImportTransformer
         if (!isset($fieldSpecificationsMap[$fieldName])) {
             $e = [
                 sprintf(FafiException::E_IMPORT_FAILED, $line),
-                sprintf(FafiException::E_IMPORT_ENTITY_FIELD_SPEC_ASSIGN_ABSENT, $fieldName, Player::ENTITY),
+                sprintf(FafiException::E_IMPORT_ENTITY_FIELD_SPECIFICATION_ABSENT, $fieldName, Player::ENTITY),
             ];
             throw new FafiException(FafiException::combine($e));
         }
@@ -112,7 +112,7 @@ class ImportTransformer
         if (!isset($fieldTransformersMap[$fieldName])) {
             $e = [
                 sprintf(FafiException::E_IMPORT_FAILED, $line),
-                sprintf(FafiException::E_IMPORT_ENTITY_FIELD_HYDRATOR_ASSIGN_ABSENT, $fieldName, Player::ENTITY),
+                sprintf(FafiException::E_IMPORT_ENTITY_FIELD_TRANSFORMER_ABSENT, $fieldName, Player::ENTITY),
             ];
             throw new FafiException(FafiException::combine($e));
         }
