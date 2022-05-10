@@ -12,7 +12,6 @@ use FAFI\exception\FafiException;
 class ImportPositions extends AbstractEntityImport
 {
     protected PositionSpecification $entitySpecification;
-    protected $entityHydrator;
     private PositionService $positionService;
 
     public function __construct()

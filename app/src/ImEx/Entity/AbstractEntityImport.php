@@ -12,7 +12,6 @@ abstract class AbstractEntityImport
 {
     protected ImportExtractor $importExtractor;
     protected ImportTransformer $importTransformer;
-    protected $entityConfig;
 //    protected ImportLoader $importLoader;
 
     public function __construct()
@@ -32,7 +31,7 @@ abstract class AbstractEntityImport
     public function import(string $filePath): void
     {
         $extracted = $this->importExtractor->extract($filePath);
-        $transformed = $this->importTransformer->transform($extracted, $this->entityConfig);
+        $transformed = $this->importTransformer->transform($extracted, $this->entitySpecification);
         $this->load($transformed);
     }
 }

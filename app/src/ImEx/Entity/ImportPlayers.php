@@ -4,19 +4,20 @@ declare(strict_types=1);
 
 namespace FAFI\src\ImEx\Entity;
 
-use FAFI\src\ImEx\Transformer\Schema\PlayerConfigSchema;
+use FAFI\src\ImEx\Transformer\Specification\Entity\PlayerSpecification;
 use FAFI\src\Player\Player;
 use FAFI\src\Player\PlayerService;
 use FAFI\exception\FafiException;
 
 class ImportPlayers extends AbstractEntityImport
 {
+    protected PlayerSpecification $entitySpecification;
     private PlayerService $playerService;
 
     public function __construct()
     {
         parent::__construct();
-        $this->entityConfig = new PlayerConfigSchema();
+        $this->entitySpecification = new PlayerSpecification();
         $this->playerService = new PlayerService();
     }
 
