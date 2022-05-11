@@ -2,7 +2,7 @@
 
 namespace FAFI\FE;
 
-use FAFI\src\Player\Player;
+use FAFI\BE\Player\Player;
 use FAFI\exception\FafiException;
 use FAFI\FE\Structure\Page\PageInterface;
 use FAFI\FE\Themes\ThemeFactory;

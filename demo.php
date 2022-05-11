@@ -5,11 +5,11 @@
 require_once 'app/boot/bootstrap.php';
 
 use FAFI\data\CsvFileHandlerInterface;
-use FAFI\src\FAFI;
-use FAFI\src\ImEx\ImExService;
-use FAFI\src\Player\Player;
-use FAFI\src\Player\PlayerService;
-use FAFI\src\Player\Repository\PlayersFilter;
+use FAFI\BE\FAFI;
+use FAFI\BE\ImEx\ImExService;
+use FAFI\BE\Player\Player;
+use FAFI\BE\Player\PlayerService;
+use FAFI\BE\Player\Repository\PlayersFilter;
 use FAFI\exception\FafiException;
 
 

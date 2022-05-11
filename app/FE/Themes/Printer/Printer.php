@@ -2,7 +2,7 @@
 
 namespace FAFI\FE\Themes\Printer;
 
-use FAFI\src\Player\Player;
+use FAFI\BE\Player\Player;
 use FAFI\FE\Structure\Page\PageInterface;
 use FAFI\FE\Themes\Printer\Custom\Player\PlayerPage;
 use FAFI\FE\Themes\ThemeInterface;
