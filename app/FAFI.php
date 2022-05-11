@@ -1,6 +1,6 @@
 <?php
 
-namespace FAFI\src\BE;
+namespace FAFI;
 
 use FAFI\src\BE\GeoCountry\CountryService;
 use FAFI\src\BE\ImEx\ImExService;

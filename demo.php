@@ -6,7 +6,7 @@ require_once 'app/boot/bootstrap.php';
 
 use FAFI\data\CsvFileHandlerInterface;
 use FAFI\exception\FafiException;
-use FAFI\src\BE\FAFI;
+use FAFI\FAFI;
 use FAFI\src\BE\ImEx\ImExService;
 use FAFI\src\BE\Player\Player;
 use FAFI\src\BE\Player\PlayerService;
