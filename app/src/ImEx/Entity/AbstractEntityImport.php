@@ -5,20 +5,21 @@ declare(strict_types=1);
 namespace FAFI\src\ImEx\Entity;
 
 use FAFI\exception\FafiException;
-use FAFI\src\ImEx\Extractor\ImportExtractor;
+use FAFI\src\ImEx\Persistence\ImportLoader;
+use FAFI\src\ImEx\Storage\ImportExtractor;
 use FAFI\src\ImEx\Transformer\ImportTransformer;
 
 abstract class AbstractEntityImport
 {
     protected ImportExtractor $importExtractor;
     protected ImportTransformer $importTransformer;
-//    protected ImportLoader $importLoader;
+    protected ImportLoader $importLoader;
 
     public function __construct()
     {
         $this->importExtractor = new ImportExtractor();
         $this->importTransformer = new ImportTransformer();
-//        $this->importLoader = new ImportLoader();
+        $this->importLoader = new ImportLoader();
     }
 
 
@@ -32,6 +33,6 @@ abstract class AbstractEntityImport
     {
         $extracted = $this->importExtractor->extract($filePath);
         $transformed = $this->importTransformer->transform($extracted, $this->entitySpecification);
-        $this->load($transformed);
+        $this->importLoader->load($transformed, $this->entityHydrator, $this->entityLoader);
     }
 }

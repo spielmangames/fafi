@@ -3,8 +3,9 @@
 namespace FAFI\src\Player;
 
 use FAFI\src\PlayerAttribute\PlayerAttribute;
+use FAFI\src\Structure\EntityInterface;
 
-class Player
+class Player implements EntityInterface
 {
     use PlayerDataHelperTrait;
 
@@ -33,6 +34,12 @@ class Player
     /** @var PlayerAttribute[]|null $attributes */
     protected ?array $attributes;
 
+
+    public function setId(int $id): self
+    {
+        $this->id = $id;
+        return $this;
+    }
 
     public function getId(): ?int
     {

@@ -2,7 +2,9 @@
 
 namespace FAFI\src\GeoCountry;
 
-class Country
+use FAFI\src\Structure\EntityInterface;
+
+class Country implements EntityInterface
 {
     public const ENTITY = 'Country';
 
@@ -12,16 +14,11 @@ class Country
     protected ?string $name;
 
 
-    public function __construct(
-        ?int $id,
-
-        ?string $name
-    ) {
+    public function setId(int $id): self
+    {
         $this->id = $id;
-
-        $this->name = $name;
+        return $this;
     }
-
 
     public function getId(): ?int
     {

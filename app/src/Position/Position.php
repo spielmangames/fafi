@@ -2,7 +2,9 @@
 
 namespace FAFI\src\Position;
 
-class Position
+use FAFI\src\Structure\EntityInterface;
+
+class Position implements EntityInterface
 {
     public const ENTITY = 'Position';
 
@@ -57,14 +59,12 @@ class Position
     private ?int $id;
     protected ?string $name;
 
-    public function __construct(
-        ?int $id,
-        ?string $name
-    ) {
-        $this->id = $id;
-        $this->name = $name;
-    }
 
+    public function setId(int $id): self
+    {
+        $this->id = $id;
+        return $this;
+    }
 
     public function getId(): ?int
     {
