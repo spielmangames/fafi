@@ -2,8 +2,8 @@
 
 namespace FAFI\src\FE\Themes\Printer\Custom\Player;
 
-use FAFI\BE\Player\Player;
 use FAFI\exception\FafiException;
+use FAFI\src\BE\Player\Player;
 use FAFI\src\FE\Themes\Printer\Basic\PageSections\AbstractTitle;
 
 class PlayerTitle extends AbstractTitle

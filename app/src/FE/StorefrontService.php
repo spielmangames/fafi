@@ -2,8 +2,8 @@
 
 namespace FAFI\src\FE;
 
-use FAFI\BE\Player\Player;
 use FAFI\exception\FafiException;
+use FAFI\src\BE\Player\Player;
 use FAFI\src\FE\Structure\Page\PageInterface;
 use FAFI\src\FE\Themes\ThemeFactory;
 use FAFI\src\FE\Themes\ThemeInterface;

@@ -2,7 +2,7 @@
 
 namespace FAFI\src\FE\Themes\Printer\Custom\Player;
 
-use FAFI\BE\Player\Player;
+use FAFI\src\BE\Player\Player;
 use FAFI\src\FE\Structure\PageSection\PageSectionInterface;
 use FAFI\src\FE\Themes\Printer\Basic\PageSections\AbstractBody;
 use FAFI\src\FE\Themes\Printer\Basic\Widgets\TabsPanelWidget;
