@@ -7,8 +7,8 @@ use FAFI\BE\ImEx\ImExService;
 use FAFI\BE\Install\InstallService;
 use FAFI\BE\Player\PlayerService;
 use FAFI\BE\Position\PositionService;
-use FAFI\FE\StorefrontService;
-use FAFI\FE\Themes\ThemeFactory;
+use FAFI\src\FE\StorefrontService;
+use FAFI\src\FE\Themes\ThemeFactory;
 
 class FAFI
 {
