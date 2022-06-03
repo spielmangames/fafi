@@ -47,6 +47,8 @@ function demoPlayerService(FAFI $fafi)
 {
     $playerService = $fafi->getPlayerService();
 
+
+    // test A
     $filtersRead = [
         'all' => new PlayersFilter(),
         'by IDs' => new PlayersFilter([18, 19, 20]),
@@ -57,7 +59,18 @@ function demoPlayerService(FAFI $fafi)
         'with: Nationality & age range' =>  new PlayersFilter(),
     ];
 
-    $selection = demoPlayerServiceRead($playerService, $filtersRead);
+
+    // [test B1] C(mandatory)+R + U(full)+R + D+R
+    $player = new Player();
+    $player
+        ->setSurname('Serginho')
+        ->setFafiSurname('Zerginho');
+    $id = $playerService->createPlayer($player)->getId();
+    $selection = $playerService->readPlayers(new PlayersFilter([$id]));
+
+//    $selection = $playerService->updatePlayers();
+//    $selection = $playerService->deletePlayers();
+
     var_dump($selection);
 }
 

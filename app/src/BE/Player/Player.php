@@ -14,25 +14,25 @@ class Player implements EntityInterface
 
 
     // profile: basic
-    private ?int $id;
+    private ?int $id = null;
 
     // personal: origin
-    protected ?string $name;
-    protected ?string $particle;
-    protected ?string $surname;
-    protected ?string $fafiSurname;
+    protected ?string $name = null;
+    protected ?string $particle = null;
+    protected ?string $surname = null;
+    protected ?string $fafiSurname = null;
 //    protected ?string $birthCountry;
 //    protected ?string $birthCity;
 //    protected ?string $birthDate;
 
     // skills: shape
-    protected ?int $height;
-    protected ?string $foot;
-    protected ?bool $injureFactor;
+    protected ?int $height = null;
+    protected ?string $foot = null;
+    protected ?bool $injureFactor = null;
 
     // skills: attributes per positions
     /** @var PlayerAttribute[]|null $attributes */
-    protected ?array $attributes;
+    protected ?array $attributes = null;
 
 
     public function setId(int $id): self
@@ -90,39 +90,6 @@ class Player implements EntityInterface
     {
         return $this->fafiSurname;
     }
-
-//    public function setBirthCountry(string $birthCountry): self
-//    {
-//        $this->birthCountry = $birthCountry;
-//        return $this;
-//    }
-//
-//    public function getBirthCountry(): ?string
-//    {
-//        return $this->birthCountry;
-//    }
-//
-//    public function setBirthCity(string $birthCity): self
-//    {
-//        $this->birthCity = $birthCity;
-//        return $this;
-//    }
-//
-//    public function getBirthCity(): ?string
-//    {
-//        return $this->birthCity;
-//    }
-//
-//    public function setBirthDate(string $birthDate): self
-//    {
-//        $this->birthDate = $birthDate;
-//        return $this;
-//    }
-//
-//    public function getBirthDate(): ?string
-//    {
-//        return $this->birthDate;
-//    }
 
 
     public function setHeight(int $height): self

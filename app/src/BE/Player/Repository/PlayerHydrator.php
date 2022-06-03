@@ -5,20 +5,23 @@ namespace FAFI\src\BE\Player\Repository;
 use FAFI\exception\FafiException;
 use FAFI\src\BE\Player\Player;
 use FAFI\src\BE\PlayerAttribute\Repository\PlayerAttributeHydrator;
+use FAFI\src\BE\Structure\Repository\EntityValidator;
 
 class PlayerHydrator
 {
-    private array $requiredFields = [
+    public const REQUIRED_FIELDS = [
         PlayerResource::SURNAME_FIELD,
         PlayerResource::FAFI_SURNAME_FIELD,
     ];
 
 
     private PlayerAttributeHydrator $playerAttributeHydrator;
+    private EntityValidator $entityValidator;
 
     public function __construct()
     {
         $this->playerAttributeHydrator = new PlayerAttributeHydrator();
+        $this->entityValidator = new EntityValidator();
     }
 
 
@@ -39,75 +42,52 @@ class PlayerHydrator
         return $transformed;
     }
 
-    /**
-     * @param array $data
-     *
-     * @return Player
-     * @throws FafiException
-     */
     public function hydrate(array $data): Player
     {
-        $this->validateRequiredFieldsOnHydration($data);
-
 //        $attributes = $data['attributes'] ?? $this->playerAttributeHydrator->hydrateCollection($data['attributes']);
         $attributes = $data['attributes'] ?? null;
 
-        return new Player(
-            isset($data[PlayerResource::ID_FIELD]) ? (int)$data[PlayerResource::ID_FIELD] : null,
+        $player = new Player();
 
-            $data[PlayerResource::NAME_FIELD],
-            $data[PlayerResource::PARTICLE_FIELD],
-            $data[PlayerResource::SURNAME_FIELD],
-            $data[PlayerResource::FAFI_SURNAME_FIELD],
-//            $data[PlayerResource::BIRTH_COUNTRY_FIELD],
-//            $data[PlayerResource::BIRTH_CITY_FIELD],
-//            $data[PlayerResource::BIRTH_DATE_FIELD],
+        !isset($data[PlayerResource::ID_FIELD]) ?: $player->setId($data[PlayerResource::ID_FIELD]);
 
-            $data[PlayerResource::HEIGHT_FIELD],
-            $data[PlayerResource::FOOT_FIELD],
-            $data[PlayerResource::INJURE_FACTOR_FIELD],
+        !isset($data[PlayerResource::NAME_FIELD]) ?: $player->setName($data[PlayerResource::NAME_FIELD]);
+        !isset($data[PlayerResource::PARTICLE_FIELD]) ?: $player->setParticle($data[PlayerResource::PARTICLE_FIELD]);
+        !isset($data[PlayerResource::SURNAME_FIELD]) ?: $player->setSurname($data[PlayerResource::SURNAME_FIELD]);
+        !isset($data[PlayerResource::FAFI_SURNAME_FIELD]) ?: $player->setFafiSurname($data[PlayerResource::FAFI_SURNAME_FIELD]);
 
-            $attributes
-        );
+        !isset($data[PlayerResource::HEIGHT_FIELD]) ?: $player->setHeight($data[PlayerResource::HEIGHT_FIELD]);
+        !isset($data[PlayerResource::FOOT_FIELD]) ?: $player->setFoot($data[PlayerResource::FOOT_FIELD]);
+        !isset($data[PlayerResource::INJURE_FACTOR_FIELD]) ?: $player->setInjureFactor($data[PlayerResource::INJURE_FACTOR_FIELD]);
+
+        return $player;
     }
 
     /**
-     * @param array $data
+     * @param Player $player
      *
-     * @return void
+     * @return array
      * @throws FafiException
      */
-    private function validateRequiredFieldsOnHydration(array $data): void
+    public function extract(Player $player): array
     {
-        $missed = [];
-        foreach ($this->requiredFields as $field) {
-            if (!isset($data[$field])) {
-                $missed[] = $field;
-            }
-        }
+        $data = [
+            PlayerResource::ID_FIELD => $player->getId(),
 
-        if (!empty($missed)) {
-            $e = sprintf(FafiException::E_REQ_MISSED, Player::ENTITY, implode('", "', $missed));
-            throw new FafiException($e);
-        }
-    }
-
-    public function extract(Player $entity): array
-    {
-        return [
-            PlayerResource::ID_FIELD => $entity->getId(),
-
-            PlayerResource::NAME_FIELD => $entity->getName(),
-            PlayerResource::PARTICLE_FIELD => $entity->getParticle(),
-            PlayerResource::SURNAME_FIELD => $entity->getSurname(),
-            PlayerResource::FAFI_SURNAME_FIELD => $entity->getFafiSurname(),
+            PlayerResource::NAME_FIELD => $player->getName(),
+            PlayerResource::PARTICLE_FIELD => $player->getParticle(),
+            PlayerResource::SURNAME_FIELD => $player->getSurname(),
+            PlayerResource::FAFI_SURNAME_FIELD => $player->getFafiSurname(),
 //            PlayerResource::BIRTH_COUNTRY_FIELD => $player->getBirthCountry(),
 //            PlayerResource::BIRTH_CITY_FIELD => $player->getBirthCity(),
 //            PlayerResource::BIRTH_DATE_FIELD => $player->getBirthDate(),
 
-            PlayerResource::HEIGHT_FIELD => $entity->getHeight(),
-            PlayerResource::FOOT_FIELD => $entity->getFoot(),
-            PlayerResource::INJURE_FACTOR_FIELD => $entity->getInjureFactor(),
+            PlayerResource::HEIGHT_FIELD => $player->getHeight(),
+            PlayerResource::FOOT_FIELD => $player->getFoot(),
+            PlayerResource::INJURE_FACTOR_FIELD => $player->getInjureFactor(),
         ];
+
+        $this->entityValidator->assertRequiredFieldsPresent(Player::ENTITY, $data, self::REQUIRED_FIELDS);
+        return $data;
     }
 }
