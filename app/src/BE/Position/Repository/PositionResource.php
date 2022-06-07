@@ -14,6 +14,10 @@ class PositionResource extends AbstractResource
 
         self::NAME_FIELD,
     ];
+    public const REQUIRED_FIELDS = [
+        self::NAME_FIELD,
+    ];
+
 
     public const NAME_FIELD = 'name';
 
@@ -40,6 +44,7 @@ class PositionResource extends AbstractResource
         }
 
         $data = $this->hydrator->extract($entity);
+        $this->entityValidator->assertRequiredFieldsPresent(Position::ENTITY, $data, self::REQUIRED_FIELDS);
         $id = $this->insertRecord(self::TABLE, $data);
 
         $criteria = new PositionCriteria([$id]);

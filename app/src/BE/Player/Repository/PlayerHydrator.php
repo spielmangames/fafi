@@ -2,26 +2,16 @@
 
 namespace FAFI\src\BE\Player\Repository;
 
-use FAFI\exception\FafiException;
 use FAFI\src\BE\Player\Player;
 use FAFI\src\BE\PlayerAttribute\Repository\PlayerAttributeHydrator;
-use FAFI\src\BE\Structure\Repository\EntityValidator;
 
 class PlayerHydrator
 {
-    public const REQUIRED_FIELDS = [
-        PlayerResource::SURNAME_FIELD,
-        PlayerResource::FAFI_SURNAME_FIELD,
-    ];
-
-
     private PlayerAttributeHydrator $playerAttributeHydrator;
-    private EntityValidator $entityValidator;
 
     public function __construct()
     {
         $this->playerAttributeHydrator = new PlayerAttributeHydrator();
-        $this->entityValidator = new EntityValidator();
     }
 
 
@@ -29,17 +19,15 @@ class PlayerHydrator
      * @param array $data
      *
      * @return Player[]
-     * @throws FafiException
      */
     public function hydrateCollection(array $data): array
     {
-        $transformed = [];
+        $hydrated = [];
         foreach ($data as $row) {
-            $entity = $this->hydrate($row);
-            $transformed[] = $entity;
+            $hydrated[] = $this->hydrate($row);
         }
 
-        return $transformed;
+        return $hydrated;
     }
 
     public function hydrate(array $data): Player
@@ -63,12 +51,6 @@ class PlayerHydrator
         return $player;
     }
 
-    /**
-     * @param Player $player
-     *
-     * @return array
-     * @throws FafiException
-     */
     public function extract(Player $player): array
     {
         $data = [
@@ -78,16 +60,12 @@ class PlayerHydrator
             PlayerResource::PARTICLE_FIELD => $player->getParticle(),
             PlayerResource::SURNAME_FIELD => $player->getSurname(),
             PlayerResource::FAFI_SURNAME_FIELD => $player->getFafiSurname(),
-//            PlayerResource::BIRTH_COUNTRY_FIELD => $player->getBirthCountry(),
-//            PlayerResource::BIRTH_CITY_FIELD => $player->getBirthCity(),
-//            PlayerResource::BIRTH_DATE_FIELD => $player->getBirthDate(),
 
             PlayerResource::HEIGHT_FIELD => $player->getHeight(),
             PlayerResource::FOOT_FIELD => $player->getFoot(),
             PlayerResource::INJURE_FACTOR_FIELD => $player->getInjureFactor(),
         ];
 
-        $this->entityValidator->assertRequiredFieldsPresent(Player::ENTITY, $data, self::REQUIRED_FIELDS);
         return $data;
     }
 }

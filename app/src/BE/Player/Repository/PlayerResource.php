@@ -24,6 +24,10 @@ class PlayerResource extends AbstractResource
         self::FOOT_FIELD,
         self::INJURE_FACTOR_FIELD,
     ];
+    public const REQUIRED_FIELDS = [
+        self::SURNAME_FIELD,
+        self::FAFI_SURNAME_FIELD,
+    ];
 
 
     // personal origin
@@ -58,14 +62,17 @@ class PlayerResource extends AbstractResource
      */
     public function create(Player $entity): Player
     {
-        if ($entity->getId()) {
-            throw new FafiException(sprintf(self::E_ID_PRESENT, Player::ENTITY));
-        }
-
+        $this->entityValidator->assertEntityHasNoId($entity, Player::ENTITY);
         $data = $this->hydrator->extract($entity);
-        $id = $this->insertRecord(self::TABLE, $data);
 
-        $criteria = new PlayerCriteria([$id]);
+        $this->entityValidator->assertRequiredFieldsPresent(Player::ENTITY, $data, self::REQUIRED_FIELDS);
+        $this->assertEntityUnique(self::TABLE, Player::ENTITY, $data, self::FAFI_SURNAME_FIELD);
+
+        $query = $this->queryBuilder->insert(self::TABLE, $data);
+        $id = $this->insertRecord($query);
+
+        $criteria = new PlayerCriteria();
+        $criteria->setIds([$entity->getId()]);
         $result = $this->readFirst($criteria);
         if (!$result) {
             throw new FafiException(sprintf(self::E_ENTITY_ABSENT, Player::ENTITY, $id));
@@ -110,12 +117,10 @@ class PlayerResource extends AbstractResource
      */
     public function update(Player $entity): Player
     {
-        if (!$entity->getId()) {
-            throw new FafiException(self::E_ID_ABSENT, Player::ENTITY);
-        }
+        $this->entityValidator->assertEntityHasId($entity, Player::ENTITY);
         $id = $entity->getId();
-
         $data = $this->hydrator->extract($entity);
+
         $this->updateRecord(self::TABLE, $data, new PlayerCriteria([$id]));
 
         $criteria = new PlayerCriteria([$id]);

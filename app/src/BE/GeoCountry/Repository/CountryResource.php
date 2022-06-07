@@ -14,6 +14,9 @@ class CountryResource extends AbstractResource
 
         self::NAME_FIELD,
     ];
+    public const REQUIRED_FIELDS = [
+        self::NAME_FIELD,
+    ];
 
 
     public const NAME_FIELD = 'name';
@@ -41,6 +44,7 @@ class CountryResource extends AbstractResource
         }
 
         $data = $this->hydrator->extract($entity);
+        $this->entityValidator->assertRequiredFieldsPresent(Country::ENTITY, $data, self::REQUIRED_FIELDS);
         $id = $this->insertRecord(self::TABLE, $data);
 
         $criteria = new CountryCriteria([$id]);

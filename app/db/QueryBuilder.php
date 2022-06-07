@@ -2,99 +2,80 @@
 
 namespace FAFI\db;
 
-use FAFI\src\BE\Structure\Repository\AbstractResource;
-use FAFI\src\BE\Structure\Repository\EntityCriteriaInterface;
-
 class QueryBuilder
 {
-    private const INSERT = 'INSERT INTO %s (%s) VALUES (%s);';
-    private const UPDATE = 'UPDATE %s SET %s %s;';
-    private const SELECT = 'SELECT %s FROM %s %s;';
-    private const WHERE = 'WHERE ';
-    private const ALL = '*';
+    public const STATEMENT_SELECT = 'SELECT %s FROM %s%s';
+    public const STATEMENT_WHERE = ' WHERE %s';
+    public const STATEMENT_INSERT = 'INSERT INTO %s (%s) VALUES (%s)';
+
+    public const OPERATOR_ALL = '*';
+    public const OPERATOR_IN = 'in';
+    public const OPERATOR_IS = '=';
+    public const OPERATOR_CLOSE = ';';
+
+    public const WRAPPER_VALUE = "'";
+    public const SEPARATOR_LIST = ', ';
+    public const SEPARATOR_AND = ' AND ';
 
 
-    private string $query;
-
-
-    public function formInsert(string $table, array $data): string
+    public function select(string $destination, array $conditions = [], array $fields = []): string
     {
-        return sprintf(self::INSERT, $table, $this->formInsertColumns($data), $this->formInsertValues($data));
+        $what = $this->formWhat($fields);
+        $where = $this->formWhere($conditions);
+
+        return sprintf(self::STATEMENT_SELECT, $what, $destination, $where);
     }
 
-    private function formInsertColumns(array $data): string
+    public function insert(string $destination, array $data): string
     {
-        return implode(', ', array_keys($data));
+        $columns = $this->formWhat(array_keys($data));
+        $values = $this->formValues($data);
+
+        return sprintf(self::STATEMENT_INSERT, $destination, $columns, $values);
     }
 
-    private function formInsertValues(array $data): string
+    public function close(string $query): string
     {
-        return '"' . implode('", "', $data) . '"';
+        return $query . self::OPERATOR_CLOSE;
     }
 
 
-    public function formUpdate(string $table, array $data, EntityCriteriaInterface $criteria): string
+    private function formWhat(array $fields): string
     {
-        return sprintf(self::UPDATE, $table, $this->formUpdateData($data), $this->formWhere($criteria));
-    }
-
-    private function formUpdateData(array $data): string
-    {
-        $set = [];
-        foreach  ($data as $column => $value) {
-            $set[] = sprintf('%s = "%s"', $column, $value);
+        if (empty($fields)) {
+            return self::OPERATOR_ALL;
         }
 
-        return implode(', ', $set);
+        return implode(self::SEPARATOR_LIST, $fields);
     }
 
-
-    public function formSelect(string $table, EntityCriteriaInterface $criteria): string
+    private function formWhere(array $conditions): string
     {
-        return sprintf(self::SELECT, self::ALL, $table, $this->formWhere($criteria));
-    }
-
-
-    private function formWhere(EntityCriteriaInterface $criteria): string
-    {
-        if ($criteria->isEmpty()) {
+        if (empty($conditions)) {
             return '';
         }
 
-        // SELECT * FROM players WHERE id IN (17,18,19,22) AND surname = 'Serginho';
-
-        $conditions = [];
-
-        if ($criteria->getIds()) {
-            $ids = $criteria->getIds();
-            $ids = implode(', ', $ids);
-            $conditions[] = sprintf(' %s IN (%s)', AbstractResource::ID_FIELD, $ids);
+        $converted = [];
+        foreach ($conditions as $condition) {
+            $condition[2] = $this->wrapValue($condition[2]);
+            $converted[] = implode(' ', $condition);
         }
 
-        $query = implode(' AND ', $conditions);
-
-        return self::WHERE . $query;
+        return sprintf(self::STATEMENT_WHERE, implode(self::SEPARATOR_AND, $converted));
     }
 
+    private function formValues(array $data): string
+    {
+        $values = [];
+        foreach ($data as $value) {
+            $values[] = $this->wrapValue($value);
+        }
 
-//    public function add(string $add): string
-//    {
-//        return $this->query . ' ' . $add;
-//    }
+        return implode(self::SEPARATOR_LIST, $values);
+    }
 
-//    private function close(): string
-//    {
-//        $query = $this->query;
-//        $end = substr($query, -1);
-//        if ($end !== ';') {
-//            $query .= ';';
-//        }
-//
-//        return $query;
-//    }
-
-//    public function getQuery(): string
-//    {
-//        return $this->query;
-//    }
+    private function wrapValue($value): string
+    {
+        return self::WRAPPER_VALUE . $value . self::WRAPPER_VALUE;
+    }
 }
