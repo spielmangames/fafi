@@ -44,7 +44,7 @@ class CountryResource extends AbstractResource
         }
 
         $data = $this->hydrator->extract($entity);
-        $this->entityValidator->assertRequiredFieldsPresent(Country::ENTITY, $data, self::REQUIRED_FIELDS);
+        $this->entityValidator->assertEntityMandatoryDataPresent(Country::ENTITY, $data, self::REQUIRED_FIELDS);
         $id = $this->queryExecutor->createRecord(self::TABLE, $data);
 
         $criteria = new CountryCriteria([$id]);

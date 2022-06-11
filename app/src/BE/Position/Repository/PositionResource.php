@@ -44,7 +44,7 @@ class PositionResource extends AbstractResource
         }
 
         $data = $this->hydrator->extract($entity);
-        $this->entityValidator->assertRequiredFieldsPresent(Position::ENTITY, $data, self::REQUIRED_FIELDS);
+        $this->entityValidator->assertEntityMandatoryDataPresent(Position::ENTITY, $data, self::REQUIRED_FIELDS);
         $id = $this->queryExecutor->createRecord(self::TABLE, $data);
 
         $criteria = new PositionCriteria([$id]);

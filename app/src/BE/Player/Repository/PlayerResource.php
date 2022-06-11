@@ -82,8 +82,8 @@ class PlayerResource extends AbstractResource
     protected function verifyConstraintsOnCreate(string $table, EntityInterface $entity, array $data): void
     {
         $this->entityValidator->assertEntityIdAbsent($entity);
-        $this->entityValidator->assertRequiredFieldsPresent($entity, $data, self::REQUIRED_FIELDS);
-        $this->assertResourcePropertyUnique($table, $entity, $data, self::FAFI_SURNAME_FIELD);
+        $this->entityValidator->assertEntityMandatoryDataPresent($entity, $data, self::REQUIRED_FIELDS);
+        $this->dbValidator->assertResourcePropertyUnique($table, $entity, $data, self::FAFI_SURNAME_FIELD);
     }
 
     /**

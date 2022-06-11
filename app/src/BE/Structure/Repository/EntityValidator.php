@@ -23,9 +23,9 @@ class EntityValidator
      * @return void
      * @throws FafiException
      */
-    public function assertRequiredFieldsPresent(string $entityName, array $entityData, array $mandatory): void
+    public function assertEntityMandatoryDataPresent(EntityInterface $entity, array $entityData, array $mandatory): void
     {
-        $this->dataValidator->assertRequiredFieldsPresent($entityName, $entityData, $mandatory);
+        $this->dataValidator->assertRequiredFieldsPresent($entity, $entityData, $mandatory);
     }
 
 
