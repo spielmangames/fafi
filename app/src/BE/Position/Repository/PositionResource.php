@@ -2,9 +2,13 @@
 
 namespace FAFI\src\BE\Position\Repository;
 
+use FAFI\db\QueryBuilder;
 use FAFI\exception\FafiException;
+use FAFI\src\BE\Player\Repository\Criteria;
 use FAFI\src\BE\Position\Position;
+use FAFI\src\BE\Structure\EntityInterface;
 use FAFI\src\BE\Structure\Repository\AbstractResource;
+use FAFI\src\BE\Structure\Repository\EntityCriteriaInterface;
 
 class PositionResource extends AbstractResource
 {
@@ -22,7 +26,7 @@ class PositionResource extends AbstractResource
     public const NAME_FIELD = 'name';
 
 
-    private PositionHydrator $hydrator;
+    protected PositionHydrator $hydrator;
 
     public function __construct()
     {
@@ -39,33 +43,37 @@ class PositionResource extends AbstractResource
      */
     public function create(Position $entity): Position
     {
-        if ($entity->getId()) {
-            throw new FafiException(sprintf(FafiException::E_ID_PRESENT, Position::ENTITY));
-        }
-
         $data = $this->hydrator->extract($entity);
-        $this->entityValidator->assertEntityMandatoryDataPresent(Position::ENTITY, $data, self::REQUIRED_FIELDS);
+
+        $this->verifyConstraintsOnCreate(self::TABLE, $entity, $data);
         $id = $this->queryExecutor->createRecord(self::TABLE, $data);
 
-        $criteria = new PositionCriteria([$id]);
-        $result = $this->readFirst($criteria);
+        $criteria = new Criteria(self::ID_FIELD, QueryBuilder::OPERATOR_IS, [$id]);
+        $result = $this->readFirst([$criteria]);
         if (!$result) {
-            throw new FafiException(sprintf(FafiException::E_ENTITY_ABSENT, Position::ENTITY, $id));
+            throw new FafiException(sprintf(FafiException::E_ENTITY_ABSENT, $entity, $id));
         }
 
         return $result;
     }
 
+    protected function verifyConstraintsOnCreate(string $table, EntityInterface $entity, array $data): void
+    {
+        // to implement
+    }
+
     /**
-     * @param PositionCriteria $criteria
+     * @param EntityCriteriaInterface[] $conditions
      *
      * @return Position[]|null
      * @throws FafiException
      */
-    public function read(PositionCriteria $criteria): ?array
+    public function read(array $conditions = []): ?array
     {
+        $selection = $this->queryExecutor->readRecords(self::TABLE, $conditions);
+
         $result = [];
-        foreach ($this->queryExecutor->readRecords(self::TABLE, $criteria) as $record) {
+        foreach ($selection as $record) {
             $result[] = $this->hydrator->hydrate($record);
         }
 
@@ -73,15 +81,15 @@ class PositionResource extends AbstractResource
     }
 
     /**
-     * @param PositionCriteria $criteria
+     * @param EntityCriteriaInterface[] $conditions
      *
      * @return Position|null
      * @throws FafiException
      */
-    public function readFirst(PositionCriteria $criteria): ?Position
+    public function readFirst(array $conditions): ?Position
     {
-        $result = $this->queryExecutor->readRecords(self::TABLE, $criteria);
-        return (!empty($result)) ? $this->hydrator->hydrate($result[0]) : null;
+        $selection = $this->read($conditions);
+        return !empty($selection) ? array_shift($selection) : null;
     }
 
     /**

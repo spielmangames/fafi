@@ -2,9 +2,13 @@
 
 namespace FAFI\src\BE\PlayerAttribute\Repository;
 
+use FAFI\db\QueryBuilder;
 use FAFI\exception\FafiException;
+use FAFI\src\BE\Player\Repository\Criteria;
 use FAFI\src\BE\PlayerAttribute\PlayerAttribute;
+use FAFI\src\BE\Structure\EntityInterface;
 use FAFI\src\BE\Structure\Repository\AbstractResource;
+use FAFI\src\BE\Structure\Repository\EntityCriteriaInterface;
 
 class PlayerAttributeResource extends AbstractResource
 {
@@ -20,6 +24,8 @@ class PlayerAttributeResource extends AbstractResource
         self::DEF_MIN_FIELD,
         self::DEF_MAX_FIELD,
     ];
+    public const REQUIRED_FIELDS = [];
+
 
     public const PLAYER_ID_FIELD = 'player_id';
     public const POSITION_ID_FIELD = 'position_id';
@@ -30,7 +36,7 @@ class PlayerAttributeResource extends AbstractResource
     public const DEF_MAX_FIELD = 'def_max';
 
 
-    private PlayerAttributeHydrator $hydrator;
+    protected PlayerAttributeHydrator $hydrator;
 
     public function __construct()
     {
@@ -47,32 +53,37 @@ class PlayerAttributeResource extends AbstractResource
      */
     public function create(PlayerAttribute $entity): PlayerAttribute
     {
-        if ($entity->getId()) {
-            throw new FafiException(sprintf(FafiException::E_ID_PRESENT, PlayerAttribute::ENTITY));
-        }
-
         $data = $this->hydrator->extract($entity);
+
+        $this->verifyConstraintsOnCreate(self::TABLE, $entity, $data);
         $id = $this->queryExecutor->createRecord(self::TABLE, $data);
 
-        $criteria = new PlayerAttributeCriteria([$id]);
-        $result = $this->readFirst($criteria);
+        $criteria = new Criteria(self::ID_FIELD, QueryBuilder::OPERATOR_IS, [$id]);
+        $result = $this->readFirst([$criteria]);
         if (!$result) {
-            throw new FafiException(sprintf(FafiException::E_ENTITY_ABSENT, PlayerAttribute::ENTITY, $id));
+            throw new FafiException(sprintf(FafiException::E_ENTITY_ABSENT, $entity, $id));
         }
 
         return $result;
     }
 
+    protected function verifyConstraintsOnCreate(string $table, EntityInterface $entity, array $data): void
+    {
+        // to implement
+    }
+
     /**
-     * @param PlayerAttributeCriteria $criteria
+     * @param EntityCriteriaInterface[] $conditions
      *
      * @return PlayerAttribute[]|null
      * @throws FafiException
      */
-    public function read(PlayerAttributeCriteria $criteria): ?array
+    public function read(array $conditions = []): ?array
     {
+        $selection = $this->queryExecutor->readRecords(self::TABLE, $conditions);
+
         $result = [];
-        foreach ($this->queryExecutor->readRecords(self::TABLE, $criteria) as $record) {
+        foreach ($selection as $record) {
             $result[] = $this->hydrator->hydrate($record);
         }
 
@@ -80,15 +91,15 @@ class PlayerAttributeResource extends AbstractResource
     }
 
     /**
-     * @param PlayerAttributeCriteria $criteria
+     * @param EntityCriteriaInterface[] $conditions
      *
      * @return PlayerAttribute|null
      * @throws FafiException
      */
-    public function readFirst(PlayerAttributeCriteria $criteria): ?PlayerAttribute
+    public function readFirst(array $conditions): ?PlayerAttribute
     {
-        $result = $this->queryExecutor->readRecords(self::TABLE, $criteria);
-        return (!empty($result)) ? $this->hydrator->hydrate($result[0]) : null;
+        $selection = $this->read($conditions);
+        return !empty($selection) ? array_shift($selection) : null;
     }
 
     /**
