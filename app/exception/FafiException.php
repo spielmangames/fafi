@@ -11,6 +11,7 @@ class FafiException extends Exception
     public const E_ID_PRESENT = '"id" must be absent for creating %s.';
     public const E_ID_ABSENT = 'ID is required for updating %s and can not be null.';
     public const E_ENTITY_ABSENT = '%s (id = %d) is absent in storage.';
+    public const E_ENTITY_OPERATION_FAILED = 'Failed to operate with items in storage.';
 
     public const E_PLAYER_IS_MISSED = 'Player is required for %s.';
 

@@ -52,7 +52,7 @@ class PlayerAttributeResource extends AbstractResource
         }
 
         $data = $this->hydrator->extract($entity);
-        $id = $this->insertRecord(self::TABLE, $data);
+        $id = $this->createRecord(self::TABLE, $data);
 
         $criteria = new PlayerAttributeCriteria([$id]);
         $result = $this->readFirst($criteria);
@@ -72,7 +72,7 @@ class PlayerAttributeResource extends AbstractResource
     public function read(PlayerAttributeCriteria $criteria): ?array
     {
         $result = [];
-        foreach ($this->selectRecords(self::TABLE, $criteria) as $record) {
+        foreach ($this->readRecords(self::TABLE, $criteria) as $record) {
             $result[] = $this->hydrator->hydrate($record);
         }
 
@@ -87,7 +87,7 @@ class PlayerAttributeResource extends AbstractResource
      */
     public function readFirst(PlayerAttributeCriteria $criteria): ?PlayerAttribute
     {
-        $result = $this->selectRecords(self::TABLE, $criteria);
+        $result = $this->readRecords(self::TABLE, $criteria);
         return (!empty($result)) ? $this->hydrator->hydrate($result[0]) : null;
     }
 

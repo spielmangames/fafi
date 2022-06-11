@@ -69,7 +69,7 @@ class PlayerResource extends AbstractResource
 
         $this->entityValidator->assertRequiredFieldsPresent($entity, $data, self::REQUIRED_FIELDS);
         $this->assertResourcePropertyUnique(self::TABLE, $entity, $data, self::FAFI_SURNAME_FIELD);
-        $id = $this->insertRecord(self::TABLE, $data);
+        $id = $this->createRecord(self::TABLE, $data);
 
         $criteria = new Criteria(self::ID_FIELD, QueryBuilder::OPERATOR_IS, [$id]);
         $result = $this->readFirst([$criteria]);
@@ -88,7 +88,7 @@ class PlayerResource extends AbstractResource
      */
     public function read(array $conditions = []): ?array
     {
-        $selection = $this->selectRecords(self::TABLE, $conditions);
+        $selection = $this->readRecords(self::TABLE, $conditions);
 
         $result = [];
         foreach ($selection as $record) {

@@ -6,9 +6,11 @@ use FAFI\src\BE\Structure\Repository\EntityCriteriaInterface;
 
 class QueryBuilder
 {
-    public const STATEMENT_SELECT = 'SELECT %s FROM %s%s';
-    public const STATEMENT_WHERE = ' WHERE %s';
     public const STATEMENT_INSERT = 'INSERT INTO %s (%s) VALUES (%s)';
+    public const STATEMENT_SELECT = 'SELECT %s FROM %s%s';
+    public const STATEMENT_UPDATE = 'UPDATE %s SET %s%s';
+    public const STATEMENT_DELETE = 'DELETE FROM %s%s';
+    public const STATEMENT_WHERE = ' WHERE %s';
 
     public const OPERATOR_ALL = '*';
     public const OPERATOR_IN = 'in';
@@ -20,6 +22,14 @@ class QueryBuilder
     public const SEPARATOR_AND = ' AND ';
 
 
+    public function insert(string $destination, array $data): string
+    {
+        $columns = $this->formWhat(array_keys($data));
+        $values = $this->formValues($data);
+
+        return sprintf(self::STATEMENT_INSERT, $destination, $columns, $values);
+    }
+
     public function select(string $destination, array $conditions = [], array $fields = []): string
     {
         $what = $this->formWhat($fields);
@@ -28,12 +38,19 @@ class QueryBuilder
         return sprintf(self::STATEMENT_SELECT, $what, $destination, $where);
     }
 
-    public function insert(string $destination, array $data): string
+    public function update(string $destination, array $data, array $conditions = []): string
     {
-        $columns = $this->formWhat(array_keys($data));
         $values = $this->formValues($data);
+        $where = $this->formWhere($conditions);
 
-        return sprintf(self::STATEMENT_INSERT, $destination, $columns, $values);
+        return sprintf(self::STATEMENT_UPDATE, $destination, $values, $where);
+    }
+
+    public function delete(string $destination, array $conditions = []): string
+    {
+        $where = $this->formWhere($conditions);
+
+        return sprintf(self::STATEMENT_DELETE, $destination, $where);
     }
 
     public function close(string $query): string
