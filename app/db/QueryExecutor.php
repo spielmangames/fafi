@@ -7,13 +7,13 @@ use FAFI\src\BE\Structure\Repository\EntityCriteriaInterface;
 
 class QueryExecutor
 {
-    protected DatabaseDispatcher $dbDispatcher;
     protected QueryBuilder $queryBuilder;
+    protected DatabaseDispatcher $dbDispatcher;
 
     public function __construct()
     {
-        $this->dbDispatcher = new DatabaseDispatcher();
         $this->queryBuilder = new QueryBuilder();
+        $this->dbDispatcher = new DatabaseDispatcher();
     }
 
 
