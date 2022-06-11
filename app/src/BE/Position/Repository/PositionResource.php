@@ -98,4 +98,9 @@ class PositionResource extends AbstractResource
 
         return $result;
     }
+
+    protected function verifyConstraintsOnUpdate(string $table, EntityInterface $entity, array $data): void
+    {
+        // to implement
+    }
 }

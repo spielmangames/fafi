@@ -14,6 +14,8 @@ interface QuerySyntax
     public const OPERATOR_IN = 'in';
     public const OPERATOR_IS = '=';
 
+    public const VALUE_ABSENT = 'null';
+
     public const WRAPPER_CLOSE = ';';
     public const WRAPPER_VALUE = "'";
     public const SEPARATOR_LIST = ', ';

@@ -7,7 +7,7 @@ use mysqli;
 
 class DatabaseConnector
 {
-    private const E_DB_CONNECT_FAILED = 'Connection failed: %s';
+    private const E_DB_CONNECT_FAILED = 'Connection failed.';
     private const E_DB_CONNECT_CLOSING_FAILED = 'Failure on closing the database connection.';
 
 
@@ -30,7 +30,7 @@ class DatabaseConnector
     public function verifyConnect(mysqli $connection): void
     {
         if ($connection->connect_error) {
-            die(sprintf(self::E_DB_CONNECT_FAILED, $connection->connect_error));
+            die(self::E_DB_CONNECT_FAILED . EOL . $connection->connect_error);
         }
     }
 

@@ -83,16 +83,34 @@ class PlayerResource extends AbstractResource
     protected function verifyConstraintsOnCreate(string $table, EntityInterface $entity, array $data): void
     {
         $this->entityValidator->assertEntityIdAbsent($entity);
-        $this->entityValidator->assertEntityMandatoryDataPresent($entity, $data, self::REQUIRED_FIELDS);
 
-        $this->entityValidator->assertEntityPropertyStr($entity, $data, self::NAME_FIELD, null, 32);
-        $this->entityValidator->assertEntityPropertyStr($entity, $data, self::PARTICLE_FIELD, null, 8);
-        $this->entityValidator->assertEntityPropertyStr($entity, $data, self::SURNAME_FIELD, 1, 32);
-        $this->entityValidator->assertEntityPropertyStr($entity, $data, self::FAFI_SURNAME_FIELD, 1, 32);
-        $this->entityValidator->assertEntityPropertyInt($entity, $data, self::HEIGHT_FIELD, 111, 222);
-        $this->entityValidator->assertEntityPropertyEnum($entity, $data, self::FOOT_FIELD, self::FOOT_ALLOWED);
+        $this->entityValidator->assertEntityMandatoryDataPresent($entity, $data, self::REQUIRED_FIELDS);
+        $this->verifyProperties($entity, $data);
 
         $this->dbValidator->assertResourcePropertyUnique($table, $entity, $data, self::FAFI_SURNAME_FIELD);
+    }
+
+    private function verifyProperties(EntityInterface $entity, array $data): void
+    {
+        if (isset($data[self::NAME_FIELD])) {
+            $this->entityValidator->assertEntityPropertyStr($entity, $data, self::NAME_FIELD, null, 32);
+        }
+        if (isset($data[self::PARTICLE_FIELD])) {
+            $this->entityValidator->assertEntityPropertyStr($entity, $data, self::PARTICLE_FIELD, null, 8);
+        }
+        if (isset($data[self::SURNAME_FIELD])) {
+            $this->entityValidator->assertEntityPropertyStr($entity, $data, self::SURNAME_FIELD, 1, 32);
+        }
+        if (isset($data[self::FAFI_SURNAME_FIELD])) {
+            $this->entityValidator->assertEntityPropertyStr($entity, $data, self::FAFI_SURNAME_FIELD, 1, 32);
+        }
+
+        if (isset($data[self::HEIGHT_FIELD])) {
+            $this->entityValidator->assertEntityPropertyInt($entity, $data, self::HEIGHT_FIELD, 111, 222);
+        }
+        if (isset($data[self::FOOT_FIELD])) {
+            $this->entityValidator->assertEntityPropertyEnum($entity, $data, self::FOOT_FIELD, self::FOOT_ALLOWED);
+        }
     }
 
     /**
@@ -135,6 +153,16 @@ class PlayerResource extends AbstractResource
         $result = parent::update($entity);
 
         return $result;
+    }
+
+    protected function verifyConstraintsOnUpdate(string $table, EntityInterface $entity, array $data): void
+    {
+        $this->entityValidator->assertEntityIdPresent($entity);
+
+        $this->entityValidator->assertEntityMandatoryDataPresent($entity, $data, self::REQUIRED_FIELDS);
+        $this->verifyProperties($entity, $data);
+
+        $this->dbValidator->assertResourcePropertyUnique($table, $entity, $data, self::FAFI_SURNAME_FIELD);
     }
 
 

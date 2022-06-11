@@ -52,6 +52,21 @@ class QueryBuilder
         return implode(QuerySyntax::SEPARATOR_LIST, $fields);
     }
 
+    private function formValues(array $data): string
+    {
+        $values = [];
+        foreach ($data as $value) {
+            $values[] = is_null($value) ? QuerySyntax::VALUE_ABSENT : $this->wrapValue($value);
+        }
+
+        return implode(QuerySyntax::SEPARATOR_LIST, $values);
+    }
+
+    private function wrapValue($value): string
+    {
+        return QuerySyntax::WRAPPER_VALUE . $value . QuerySyntax::WRAPPER_VALUE;
+    }
+
     /**
      * @param EntityCriteriaInterface[] $conditions
      *
@@ -75,20 +90,5 @@ class QueryBuilder
         }
 
         return sprintf(QuerySyntax::STATEMENT_WHERE, implode(QuerySyntax::SEPARATOR_AND, $converted));
-    }
-
-    private function formValues(array $data): string
-    {
-        $values = [];
-        foreach ($data as $value) {
-            $values[] = $this->wrapValue($value);
-        }
-
-        return implode(QuerySyntax::SEPARATOR_LIST, $values);
-    }
-
-    private function wrapValue($value): string
-    {
-        return QuerySyntax::WRAPPER_VALUE . $value . QuerySyntax::WRAPPER_VALUE;
     }
 }

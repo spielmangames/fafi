@@ -39,8 +39,8 @@ abstract class AbstractResource
     public function create(EntityInterface $entity): EntityInterface
     {
         $data = $this->hydrator->extract($entity);
-
         $this->verifyConstraintsOnCreate($this->getTable(), $entity, $data);
+
         $id = $this->queryExecutor->createRecord($this->getTable(), $data);
 
         $criteria = new Criteria(self::ID_FIELD, QuerySyntax::OPERATOR_IS, [$id]);
@@ -86,11 +86,10 @@ abstract class AbstractResource
      */
     public function update(EntityInterface $entity): EntityInterface
     {
-        $this->entityValidator->assertEntityIdPresent($entity);
-        $id = $entity->getId();
         $data = $this->hydrator->extract($entity);
+        $this->verifyConstraintsOnUpdate($this->getTable(), $entity, $data);
 
-        // assert constraints before operation
+        $id = $entity->getId();
         $criteria = new Criteria(self::ID_FIELD, QuerySyntax::OPERATOR_IS, [$id]);
         $this->queryExecutor->updateRecord($this->getTable(), $data, [$criteria]);
 
@@ -102,6 +101,8 @@ abstract class AbstractResource
 
         return $result;
     }
+
+    abstract protected function verifyConstraintsOnUpdate(string $table, EntityInterface $entity, array $data): void;
 
     /**
      * @param EntityCriteriaInterface[] $conditions
