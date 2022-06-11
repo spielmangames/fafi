@@ -20,7 +20,7 @@ class DemoImportService
 
 
     /**
-     * [QC.Import_Players.01] C(all)
+     * [QC.Import_Players.01] C(full_header)
      *
      * @return void
      * @throws FafiException

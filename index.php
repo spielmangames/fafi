@@ -13,8 +13,8 @@ echo EOL;
 
 $fafi = new FAFI();
 
-demoPlayerService($fafi);
-//demoImport($fafi);
+//demoPlayerService($fafi);
+demoImport($fafi);
 //demoInstall($fafi);
 //demoFront($fafi);
 
