@@ -2,7 +2,6 @@
 
 namespace FAFI\src\BE\Player\Repository;
 
-use FAFI\db\QueryBuilder;
 use FAFI\exception\FafiException;
 use FAFI\src\BE\Player\Player;
 use FAFI\src\BE\Structure\EntityInterface;
@@ -11,7 +10,7 @@ use FAFI\src\BE\Structure\Repository\EntityCriteriaInterface;
 
 class PlayerResource extends AbstractResource
 {
-    public const TABLE = 'players';
+    private const TABLE = 'players';
     public const COLUMNS = [
         self::ID_FIELD,
 
@@ -56,6 +55,11 @@ class PlayerResource extends AbstractResource
         $this->hydrator = new PlayerHydrator();
     }
 
+    protected function getTable(): string
+    {
+        return self::TABLE;
+    }
+
 
     /**
      * @param Player $entity
@@ -63,18 +67,10 @@ class PlayerResource extends AbstractResource
      * @return Player
      * @throws FafiException
      */
-    public function create(Player $entity): Player
+    public function create($entity): Player
     {
-        $data = $this->hydrator->extract($entity);
-
-        $this->verifyConstraintsOnCreate(self::TABLE, $entity, $data);
-        $id = $this->queryExecutor->createRecord(self::TABLE, $data);
-
-        $criteria = new Criteria(self::ID_FIELD, QueryBuilder::OPERATOR_IS, [$id]);
-        $result = $this->readFirst([$criteria]);
-        if (!$result) {
-            throw new FafiException(sprintf(FafiException::E_ENTITY_ABSENT, $entity, $id));
-        }
+        /** @var Player $result */
+        $result = parent::create($entity);
 
         return $result;
     }
@@ -94,12 +90,8 @@ class PlayerResource extends AbstractResource
      */
     public function read(array $conditions = []): ?array
     {
-        $selection = $this->queryExecutor->readRecords(self::TABLE, $conditions);
-
-        $result = [];
-        foreach ($selection as $record) {
-            $result[] = $this->hydrator->hydrate($record);
-        }
+        /** @var Player[]|null $result */
+        $result = parent::read($conditions);
 
         return $result;
     }
@@ -112,8 +104,10 @@ class PlayerResource extends AbstractResource
      */
     public function readFirst(array $conditions): ?Player
     {
-        $selection = $this->read($conditions);
-        return !empty($selection) ? array_shift($selection) : null;
+        /** @var Player|null $result */
+        $result = parent::readFirst($conditions);
+
+        return $result;
     }
 
     /**
@@ -122,21 +116,10 @@ class PlayerResource extends AbstractResource
      * @return Player
      * @throws FafiException
      */
-    public function update(Player $entity): Player
+    public function update($entity): Player
     {
-        $this->entityValidator->assertEntityIdPresent($entity);
-        $id = $entity->getId();
-        $data = $this->hydrator->extract($entity);
-
-        // assert constraints before operation
-        $criteria = new Criteria(self::ID_FIELD, QueryBuilder::OPERATOR_IS, [$id]);
-        $this->queryExecutor->updateRecord(self::TABLE, $data, [$criteria]);
-
-        $criteria = new Criteria(self::ID_FIELD, QueryBuilder::OPERATOR_IS, [$id]);
-        $result = $this->readFirst([$criteria]);
-        if (!$result) {
-            throw new FafiException(sprintf(FafiException::E_ENTITY_ABSENT, Player::ENTITY, $id));
-        }
+        /** @var Player $result */
+        $result = parent::update($entity);
 
         return $result;
     }

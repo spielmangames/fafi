@@ -2,7 +2,9 @@
 
 namespace FAFI\src\BE\PlayerAttribute;
 
-class PlayerAttribute
+use FAFI\src\BE\Structure\EntityInterface;
+
+class PlayerAttribute implements EntityInterface
 {
     public const ENTITY = 'Player Attribute';
 
@@ -112,5 +114,11 @@ class PlayerAttribute
     public function getDefMax(): ?int
     {
         return $this->defMax;
+    }
+
+
+    public function __toString(): string
+    {
+        return self::ENTITY;
     }
 }
