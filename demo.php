@@ -16,10 +16,12 @@ use FAFI\FAFI;
  * @param FAFI $fafi
  * @throws FafiException
  */
-function demoInstall(FAFI $fafi)
+function demoPlayerService(FAFI $fafi)
 {
-    $session = new DemoInstallService($fafi->getInstallService());
-    $session->demoInstall();
+    $session = new DemoPlayerRepo($fafi->getPlayerService()->getPlayerRepo());
+    $session->demoModifyScenario();
+    $session->demoListSimpleScenario();
+    $session->demoListAdvancedScenario();
 }
 
 
@@ -38,12 +40,10 @@ function demoImport(FAFI $fafi)
  * @param FAFI $fafi
  * @throws FafiException
  */
-function demoPlayerService(FAFI $fafi)
+function demoInstall(FAFI $fafi)
 {
-    $session = new DemoPlayerRepo($fafi->getPlayerService()->getPlayerRepo());
-    $session->demoModifyScenario();
-    $session->demoListSimpleScenario();
-    $session->demoListAdvancedScenario();
+    $session = new DemoInstallService($fafi->getInstallService());
+    $session->demoInstall();
 }
 
 
