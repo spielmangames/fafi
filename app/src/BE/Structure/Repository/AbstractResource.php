@@ -31,13 +31,17 @@ class AbstractResource
 
 
     /**
-     * @param string $query
+     * @param string $table
+     * @param array $data
      *
      * @return int
      * @throws FafiException
      */
-    protected function insertRecord(string $query): int
+    protected function insertRecord(string $table, array $data): int
     {
+        $query = $this->queryBuilder->insert($table, $data);
+        $query = $this->queryBuilder->close($query);
+
         $connect = $this->dbConnect->open();
 
         $connect->begin_transaction();
@@ -60,18 +64,21 @@ class AbstractResource
         $connect->commit();
 
         $this->dbConnect->close();
-
         return $id;
     }
 
     /**
-     * @param string $query
+     * @param string $table
+     * @param EntityCriteriaInterface[] $conditions
      *
      * @return array
      * @throws FafiException
      */
-    protected function selectRecords(string $query): array
+    protected function selectRecords(string $table, array $conditions): array
     {
+        $query = $this->queryBuilder->select($table, $conditions);
+        $query = $this->queryBuilder->close($query);
+
         $connect = $this->dbConnect->open();
 
         $connect->begin_transaction();
@@ -94,7 +101,6 @@ class AbstractResource
         $connect->commit();
 
         $this->dbConnect->close();
-
         return $selection;
     }
 

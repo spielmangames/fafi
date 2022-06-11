@@ -69,10 +69,7 @@ class PlayerResource extends AbstractResource
 
         $this->entityValidator->assertRequiredFieldsPresent($entity, $data, self::REQUIRED_FIELDS);
         $this->assertResourcePropertyUnique(self::TABLE, $entity, $data, self::FAFI_SURNAME_FIELD);
-
-        $query = $this->queryBuilder->insert(self::TABLE, $data);
-        $query = $this->queryBuilder->close($query);
-        $id = $this->insertRecord($query);
+        $id = $this->insertRecord(self::TABLE, $data);
 
         $criteria = new Criteria(self::ID_FIELD, QueryBuilder::OPERATOR_IS, [$id]);
         $result = $this->readFirst([$criteria]);
@@ -89,13 +86,12 @@ class PlayerResource extends AbstractResource
      * @return Player[]|null
      * @throws FafiException
      */
-    public function read(array $conditions): ?array
+    public function read(array $conditions = []): ?array
     {
-        $query = $this->queryBuilder->select(self::TABLE, $conditions);
-        $query = $this->queryBuilder->close($query);
+        $selection = $this->selectRecords(self::TABLE, $conditions);
 
         $result = [];
-        foreach ($this->selectRecords($query) as $record) {
+        foreach ($selection as $record) {
             $result[] = $this->hydrator->hydrate($record);
         }
 
