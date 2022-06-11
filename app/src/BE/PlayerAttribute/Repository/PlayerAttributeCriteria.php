@@ -4,7 +4,8 @@ namespace FAFI\src\BE\PlayerAttribute\Repository;
 
 use FAFI\src\BE\Structure\Repository\EntityCriteriaInterface;
 
-class PlayerAttributeCriteria implements EntityCriteriaInterface
+class PlayerAttributeCriteria
+//    implements EntityCriteriaInterface
 {
     private ?array $positionIds;
     private ?string $statuses;

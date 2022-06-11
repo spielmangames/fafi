@@ -3,7 +3,7 @@
 namespace FAFI\src\BE\Player;
 
 use FAFI\exception\FafiException;
-use FAFI\src\BE\Player\Repository\PlayerCriteria;
+use FAFI\src\BE\Player\Repository\Criteria;
 use FAFI\src\BE\Player\Repository\PlayerRepository;
 use FAFI\src\BE\Player\Repository\PlayersFilter;
 
@@ -36,7 +36,7 @@ class PlayerService
      */
     public function readPlayers(PlayersFilter $filter): array
     {
-        $criteria = new PlayerCriteria($filter->getPlayerIds());
+        $criteria = new Criteria($filter->getPlayerIds());
         return $this->playerRepository->findCollection($criteria);
     }
 

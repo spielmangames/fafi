@@ -2,9 +2,11 @@
 
 namespace FAFI\src\BE\Player\Repository;
 
+use FAFI\db\QueryBuilder;
 use FAFI\exception\FafiException;
 use FAFI\src\BE\Player\Player;
 use FAFI\src\BE\Structure\Repository\AbstractResource;
+use FAFI\src\BE\Structure\Repository\EntityCriteriaInterface;
 
 class PlayerResource extends AbstractResource
 {
@@ -62,35 +64,38 @@ class PlayerResource extends AbstractResource
      */
     public function create(Player $entity): Player
     {
-        $this->entityValidator->assertEntityHasNoId($entity, Player::ENTITY);
+        $entityName = Player::ENTITY;
+        $this->entityValidator->assertEntityHasNoId($entity, $entityName);
         $data = $this->hydrator->extract($entity);
 
-        $this->entityValidator->assertRequiredFieldsPresent(Player::ENTITY, $data, self::REQUIRED_FIELDS);
-        $this->assertEntityUnique(self::TABLE, Player::ENTITY, $data, self::FAFI_SURNAME_FIELD);
+        $this->entityValidator->assertRequiredFieldsPresent($entityName, $data, self::REQUIRED_FIELDS);
+        $this->assertEntityUnique(self::TABLE, $entityName, $data, self::FAFI_SURNAME_FIELD);
 
         $query = $this->queryBuilder->insert(self::TABLE, $data);
         $id = $this->insertRecord($query);
 
-        $criteria = new PlayerCriteria();
-        $criteria->setIds([$entity->getId()]);
-        $result = $this->readFirst($criteria);
+        $criteria = new Criteria(self::ID_FIELD, QueryBuilder::OPERATOR_IS, [$entity->getId()]);
+        $result = $this->readFirst([$criteria]);
         if (!$result) {
-            throw new FafiException(sprintf(self::E_ENTITY_ABSENT, Player::ENTITY, $id));
+            throw new FafiException(sprintf(self::E_ENTITY_ABSENT, $entityName, $id));
         }
 
         return $result;
     }
 
     /**
-     * @param PlayerCriteria $criteria
+     * @param EntityCriteriaInterface[] $conditions
      *
      * @return Player[]|null
      * @throws FafiException
      */
-    public function read(PlayerCriteria $criteria): ?array
+    public function read(array $conditions): ?array
     {
+        $query = $this->queryBuilder->select(self::TABLE, $conditions);
+        $query = $this->queryBuilder->close($query);
+
         $result = [];
-        foreach ($this->selectRecords(self::TABLE, $criteria) as $record) {
+        foreach ($this->selectRecords($query) as $record) {
             $result[] = $this->hydrator->hydrate($record);
         }
 
@@ -98,15 +103,15 @@ class PlayerResource extends AbstractResource
     }
 
     /**
-     * @param PlayerCriteria $criteria
+     * @param EntityCriteriaInterface[] $conditions
      *
      * @return Player|null
      * @throws FafiException
      */
-    public function readFirst(PlayerCriteria $criteria): ?Player
+    public function readFirst(array $conditions): ?Player
     {
-        $result = $this->selectRecords(self::TABLE, $criteria);
-        return (!empty($result)) ? $this->hydrator->hydrate($result[0]) : null;
+        $selection = $this->read($conditions);
+        return (!empty($selection)) ? $selection[0] : null;
     }
 
     /**
@@ -121,9 +126,9 @@ class PlayerResource extends AbstractResource
         $id = $entity->getId();
         $data = $this->hydrator->extract($entity);
 
-        $this->updateRecord(self::TABLE, $data, new PlayerCriteria([$id]));
+        $this->updateRecord(self::TABLE, $data, new Criteria([$id]));
 
-        $criteria = new PlayerCriteria([$id]);
+        $criteria = new Criteria([$id]);
         $result = $this->readFirst($criteria);
         if (!$result) {
             throw new FafiException(sprintf(self::E_ENTITY_ABSENT, Player::ENTITY, $id));

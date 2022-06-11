@@ -59,6 +59,7 @@ function demoPlayerService(FAFI $fafi)
         'with: Nationality & age range' =>  new PlayersFilter(),
     ];
 
+//    $selection = $playerService->readPlayers(new PlayersFilter([7]));
 
     // [test B1] C(mandatory)+R + U(full)+R + D+R
     $player = new Player();

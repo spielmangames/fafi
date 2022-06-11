@@ -4,7 +4,8 @@ namespace FAFI\src\BE\Position\Repository;
 
 use FAFI\src\BE\Structure\Repository\EntityCriteriaInterface;
 
-class PositionCriteria implements EntityCriteriaInterface
+class PositionCriteria
+//    implements EntityCriteriaInterface
 {
     private ?array $positionIds;
     private ?string $statuses;

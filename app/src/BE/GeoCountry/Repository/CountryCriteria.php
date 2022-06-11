@@ -4,7 +4,8 @@ namespace FAFI\src\BE\GeoCountry\Repository;
 
 use FAFI\src\BE\Structure\Repository\EntityCriteriaInterface;
 
-class CountryCriteria implements EntityCriteriaInterface
+class CountryCriteria
+//    implements EntityCriteriaInterface
 {
     /** @var int[]|null */
     private ?array $ids;
