@@ -64,20 +64,20 @@ class PlayerResource extends AbstractResource
      */
     public function create(Player $entity): Player
     {
-        $entityName = Player::ENTITY;
-        $this->entityValidator->assertEntityHasNoId($entity, $entityName);
+        $this->entityValidator->assertEntityIdAbsent($entity);
         $data = $this->hydrator->extract($entity);
 
-        $this->entityValidator->assertRequiredFieldsPresent($entityName, $data, self::REQUIRED_FIELDS);
-        $this->assertEntityUnique(self::TABLE, $entityName, $data, self::FAFI_SURNAME_FIELD);
+        $this->entityValidator->assertRequiredFieldsPresent($entity, $data, self::REQUIRED_FIELDS);
+        $this->assertEntityUnique(self::TABLE, $entity, $data, self::FAFI_SURNAME_FIELD);
 
         $query = $this->queryBuilder->insert(self::TABLE, $data);
+        $query = $this->queryBuilder->close($query);
         $id = $this->insertRecord($query);
 
-        $criteria = new Criteria(self::ID_FIELD, QueryBuilder::OPERATOR_IS, [$entity->getId()]);
+        $criteria = new Criteria(self::ID_FIELD, QueryBuilder::OPERATOR_IS, [$id]);
         $result = $this->readFirst([$criteria]);
         if (!$result) {
-            throw new FafiException(sprintf(self::E_ENTITY_ABSENT, $entityName, $id));
+            throw new FafiException(sprintf(self::E_ENTITY_ABSENT, $entity, $id));
         }
 
         return $result;
