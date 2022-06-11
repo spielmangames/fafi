@@ -69,7 +69,7 @@ class PlayerResource extends AbstractResource
 
         $this->entityValidator->assertRequiredFieldsPresent($entity, $data, self::REQUIRED_FIELDS);
         $this->assertResourcePropertyUnique(self::TABLE, $entity, $data, self::FAFI_SURNAME_FIELD);
-        $id = $this->createRecord(self::TABLE, $data);
+        $id = $this->queryRunner->createRecord(self::TABLE, $data);
 
         $criteria = new Criteria(self::ID_FIELD, QueryBuilder::OPERATOR_IS, [$id]);
         $result = $this->readFirst([$criteria]);
@@ -88,7 +88,7 @@ class PlayerResource extends AbstractResource
      */
     public function read(array $conditions = []): ?array
     {
-        $selection = $this->readRecords(self::TABLE, $conditions);
+        $selection = $this->queryRunner->readRecords(self::TABLE, $conditions);
 
         $result = [];
         foreach ($selection as $record) {
@@ -107,7 +107,7 @@ class PlayerResource extends AbstractResource
     public function readFirst(array $conditions): ?Player
     {
         $selection = $this->read($conditions);
-        return (!empty($selection)) ? $selection[0] : null;
+        return (!empty($selection)) ? array_shift($selection) : null;
     }
 
     /**
@@ -122,10 +122,12 @@ class PlayerResource extends AbstractResource
         $id = $entity->getId();
         $data = $this->hydrator->extract($entity);
 
-        $this->updateRecord(self::TABLE, $data, new Criteria([$id]));
+        // assert constraints
+        $criteria = new Criteria(self::ID_FIELD, QueryBuilder::OPERATOR_IS, [$id]);
+        $this->queryRunner->updateRecord(self::TABLE, $data, [$criteria]);
 
-        $criteria = new Criteria([$id]);
-        $result = $this->readFirst($criteria);
+        $criteria = new Criteria(self::ID_FIELD, QueryBuilder::OPERATOR_IS, [$id]);
+        $result = $this->readFirst([$criteria]);
         if (!$result) {
             throw new FafiException(sprintf(FafiException::E_ENTITY_ABSENT, Player::ENTITY, $id));
         }

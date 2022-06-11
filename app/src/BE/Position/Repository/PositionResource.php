@@ -45,7 +45,7 @@ class PositionResource extends AbstractResource
 
         $data = $this->hydrator->extract($entity);
         $this->entityValidator->assertRequiredFieldsPresent(Position::ENTITY, $data, self::REQUIRED_FIELDS);
-        $id = $this->createRecord(self::TABLE, $data);
+        $id = $this->queryRunner->createRecord(self::TABLE, $data);
 
         $criteria = new PositionCriteria([$id]);
         $result = $this->readFirst($criteria);
@@ -65,7 +65,7 @@ class PositionResource extends AbstractResource
     public function read(PositionCriteria $criteria): ?array
     {
         $result = [];
-        foreach ($this->readRecords(self::TABLE, $criteria) as $record) {
+        foreach ($this->queryRunner->readRecords(self::TABLE, $criteria) as $record) {
             $result[] = $this->hydrator->hydrate($record);
         }
 
@@ -80,7 +80,7 @@ class PositionResource extends AbstractResource
      */
     public function readFirst(PositionCriteria $criteria): ?Position
     {
-        $result = $this->readRecords(self::TABLE, $criteria);
+        $result = $this->queryRunner->readRecords(self::TABLE, $criteria);
         return (!empty($result)) ? $this->hydrator->hydrate($result[0]) : null;
     }
 
@@ -98,7 +98,7 @@ class PositionResource extends AbstractResource
         $id = $entity->getId();
 
         $data = $this->hydrator->extract($entity);
-        $this->updateRecord(self::TABLE, $data, new PositionCriteria([$id]));
+        $this->queryRunner->updateRecord(self::TABLE, $data, new PositionCriteria([$id]));
 
         $criteria = new PositionCriteria([$id]);
         $result = $this->readFirst($criteria);

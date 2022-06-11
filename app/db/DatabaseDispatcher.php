@@ -17,33 +17,6 @@ class DatabaseDispatcher
     /**
      * @param string $query
      *
-     * @return void
-     * @throws FafiException
-     */
-    public function write(string $query): void
-    {
-        $connect = $this->dbConnector->open();
-        $connect->begin_transaction();
-
-        try {
-            $result = $connect->query($query);
-            if (!$result) {
-                throw new FafiException(FafiException::E_ENTITY_OPERATION_FAILED . EOL . $connect->error);
-            }
-        } catch (FafiException $e) {
-            $connect->rollback();
-            $this->dbConnector->close();
-
-            throw $e;
-        }
-
-        $connect->commit();
-        $this->dbConnector->close();
-    }
-
-    /**
-     * @param string $query
-     *
      * @return array
      * @throws FafiException
      */
@@ -75,7 +48,13 @@ class DatabaseDispatcher
         return $selection;
     }
 
-    public function writeRead(string $query): int
+    /**
+     * @param string $query
+     *
+     * @return int
+     * @throws FafiException
+     */
+    public function write(string $query): int
     {
         $connect = $this->dbConnector->open();
         $connect->begin_transaction();
@@ -88,6 +67,35 @@ class DatabaseDispatcher
 
             $id = $connect->insert_id;
             if (!$id) {
+                throw new FafiException(FafiException::E_ENTITY_OPERATION_FAILED . EOL . $connect->error);
+            }
+        } catch (FafiException $e) {
+            $connect->rollback();
+            $this->dbConnector->close();
+
+            throw $e;
+        }
+
+        $connect->commit();
+        $this->dbConnector->close();
+
+        return $id;
+    }
+
+    /**
+     * @param string $query
+     *
+     * @return void
+     * @throws FafiException
+     */
+    public function rewrite(string $query): void
+    {
+        $connect = $this->dbConnector->open();
+        $connect->begin_transaction();
+
+        try {
+            $result = $connect->query($query);
+            if (!$result) {
                 throw new FafiException(FafiException::E_ENTITY_OPERATION_FAILED . EOL . $connect->error);
             }
         } catch (FafiException $e) {
