@@ -66,7 +66,7 @@ class EntityValidator
         $value = $entityData[$property];
 
         if (!in_array($value, $allowed)) {
-            throw new FafiException('ERRRORORRR!!!!');
+            throw new FafiException(sprintf(FafiException::E_VALUE_TYPE_INVALID_ENUM, $property));
         }
     }
 

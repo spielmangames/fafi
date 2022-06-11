@@ -31,14 +31,14 @@ class DemoPlayerRepo
         $player = new Player();
         $player->setSurname('Serginho')->setFafiSurname('Zerginho');
         $id = $this->playerRepo->save($player)->getId();
-        $selection = $this->playerRepo->findById($id);
+        $player = $this->playerRepo->findById($id);
 
-        $player = $selection->setFoot('LEFTY');
-        $selection = $this->playerRepo->save($player);
-        $selection = $this->playerRepo->findById($id);
+        $player->setFoot('L');
+        $player = $this->playerRepo->save($player);
+        $player = $this->playerRepo->findById($id);
 
         $this->playerRepo->deleteById($id);
-        $selection = $this->playerRepo->findById($id);
+        $player = $this->playerRepo->findById($id);
     }
 
     /**

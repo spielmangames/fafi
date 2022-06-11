@@ -14,6 +14,8 @@ class FafiException extends Exception
     public const E_ENTITY_PRESENT = '%s (id = %d) is present in storage.';
     public const E_ENTITY_OPERATION_FAILED = 'Failed to operate with items in storage.';
 
+    public const E_VALUE_TYPE_INVALID_ENUM = 'Property "%s" value is not supported.';
+
     public const E_PLAYER_IS_MISSED = 'Player is required for %s.';
 
     public const E_CLASS_ABSENT = 'Class "%s" is absent.';

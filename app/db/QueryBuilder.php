@@ -24,7 +24,7 @@ class QueryBuilder
 
     public function update(string $destination, array $data, array $conditions = []): string
     {
-        $values = $this->formValues($data);
+        $values = $this->formData($data);
         $where = $this->formWhere($conditions);
 
         return sprintf(QuerySyntax::STATEMENT_UPDATE, $destination, $values, $where);
@@ -52,11 +52,21 @@ class QueryBuilder
         return implode(QuerySyntax::SEPARATOR_LIST, $fields);
     }
 
+    private function formData(array $data): string
+    {
+        $converted = [];
+        foreach ($data as $column => $value) {
+            $converted[] = $column . QuerySyntax::OPERATOR_IS . $this->wrapValue($value);
+        }
+
+        return implode(QuerySyntax::SEPARATOR_LIST, $converted);
+    }
+
     private function formValues(array $data): string
     {
         $values = [];
         foreach ($data as $value) {
-            $values[] = is_null($value) ? QuerySyntax::VALUE_ABSENT : $this->wrapValue($value);
+            $values[] = $this->wrapValue($value);
         }
 
         return implode(QuerySyntax::SEPARATOR_LIST, $values);
@@ -64,7 +74,9 @@ class QueryBuilder
 
     private function wrapValue($value): string
     {
-        return QuerySyntax::WRAPPER_VALUE . $value . QuerySyntax::WRAPPER_VALUE;
+        return is_null($value)
+            ? QuerySyntax::VALUE_ABSENT
+            : QuerySyntax::WRAPPER_VALUE . $value . QuerySyntax::WRAPPER_VALUE;
     }
 
     /**
