@@ -63,13 +63,7 @@ abstract class AbstractResource
     public function read(array $conditions = []): ?array
     {
         $selection = $this->queryExecutor->readRecords($this->getTable(), $conditions);
-
-        $result = [];
-        foreach ($selection as $record) {
-            $result[] = $this->hydrator->hydrate($record);
-        }
-
-        return $result;
+        return $this->hydrator->hydrateCollection($selection);
     }
 
     /**

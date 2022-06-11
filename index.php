@@ -13,9 +13,9 @@ echo EOL;
 
 $fafi = new FAFI();
 
+demoPlayerService($fafi);
 //demoImport($fafi);
 //demoInstall($fafi);
-demoPlayerService($fafi);
 //demoFront($fafi);
 
 

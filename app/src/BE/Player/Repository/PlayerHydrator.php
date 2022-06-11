@@ -2,6 +2,7 @@
 
 namespace FAFI\src\BE\Player\Repository;
 
+use FAFI\exception\FafiException;
 use FAFI\src\BE\Player\Player;
 use FAFI\src\BE\PlayerAttribute\Repository\PlayerAttributeHydrator;
 

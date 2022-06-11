@@ -28,6 +28,48 @@ class EntityValidator
         $this->dataValidator->assertRequiredFieldsPresent($entity, $entityData, $mandatory);
     }
 
+    public function assertEntityPropertyStr(string $entityName, array $entityData, string $property, ?int $lengthMin = null, ?int $lengthMax = null): void
+    {
+        $value = $entityData[$property];
+        $length = mb_strlen($value);
+
+        if (!is_int($length)) {
+            throw new FafiException('ERRRORORRR!!!!');
+        }
+
+        if (!is_null($lengthMin) && $length < $lengthMin) {
+            throw new FafiException('ERRRORORRR!!!!');
+        }
+        if (!is_null($lengthMax) && $length > $lengthMax) {
+            throw new FafiException('ERRRORORRR!!!!');
+        }
+    }
+
+    public function assertEntityPropertyInt(string $entityName, array $entityData, string $property, ?int $min = null, ?int $max = null): void
+    {
+        $value = $entityData[$property];
+
+        if (!is_int($value)) {
+            throw new FafiException('ERRRORORRR!!!!');
+        }
+
+        if (!is_null($min) && $value < $min) {
+            throw new FafiException('ERRRORORRR!!!!');
+        }
+        if (!is_null($max) && $value > $max) {
+            throw new FafiException('ERRRORORRR!!!!');
+        }
+    }
+
+    public function assertEntityPropertyEnum(string $entityName, array $entityData, string $property, array $allowed): void
+    {
+        $value = $entityData[$property];
+
+        if (!in_array($value, $allowed)) {
+            throw new FafiException('ERRRORORRR!!!!');
+        }
+    }
+
 
     /**
      * @param EntityInterface $entity

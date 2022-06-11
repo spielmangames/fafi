@@ -32,6 +32,11 @@ class PlayerResource extends AbstractResource
     ];
 
 
+    public const FOOT_LEFT = 'L';
+    public const FOOT_RIGHT = 'R';
+    public const FOOT_ALLOWED = [self::FOOT_LEFT, self::FOOT_RIGHT];
+
+
     // personal origin
     public const NAME_FIELD = 'name';
     public const PARTICLE_FIELD = 'particle';
@@ -79,6 +84,14 @@ class PlayerResource extends AbstractResource
     {
         $this->entityValidator->assertEntityIdAbsent($entity);
         $this->entityValidator->assertEntityMandatoryDataPresent($entity, $data, self::REQUIRED_FIELDS);
+
+        $this->entityValidator->assertEntityPropertyStr($entity, $data, self::NAME_FIELD, null, 32);
+        $this->entityValidator->assertEntityPropertyStr($entity, $data, self::PARTICLE_FIELD, null, 8);
+        $this->entityValidator->assertEntityPropertyStr($entity, $data, self::SURNAME_FIELD, 1, 32);
+        $this->entityValidator->assertEntityPropertyStr($entity, $data, self::FAFI_SURNAME_FIELD, 1, 32);
+        $this->entityValidator->assertEntityPropertyInt($entity, $data, self::HEIGHT_FIELD, 111, 222);
+        $this->entityValidator->assertEntityPropertyEnum($entity, $data, self::FOOT_FIELD, self::FOOT_ALLOWED);
+
         $this->dbValidator->assertResourcePropertyUnique($table, $entity, $data, self::FAFI_SURNAME_FIELD);
     }
 
