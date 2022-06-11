@@ -5,12 +5,15 @@
 require_once 'app/boot/bootstrap.php';
 
 use FAFI\data\CsvFileHandlerInterface;
+use FAFI\db\QuerySyntax;
 use FAFI\exception\FafiException;
 use FAFI\FAFI;
 use FAFI\src\BE\ImEx\ImExService;
 use FAFI\src\BE\Player\Player;
 use FAFI\src\BE\Player\PlayerService;
+use FAFI\src\BE\Player\Repository\Criteria;
 use FAFI\src\BE\Player\Repository\PlayersFilter;
+use FAFI\src\BE\Structure\Repository\AbstractResource;
 
 
 /**
@@ -45,52 +48,37 @@ function demoImport(FAFI $fafi)
  */
 function demoPlayerService(FAFI $fafi)
 {
-    $playerService = $fafi->getPlayerService();
+    $playerRepo = $fafi->getPlayerService()->getPlayerRepo();
 
 
-    // test A
-    $filtersRead = [
-        'all' => new PlayersFilter(),
-        'by IDs' => new PlayersFilter([18, 19, 20]),
+    // [QC.Player.01] L(simple)
+    $selection = $playerRepo->findCollection();
 
-        'with: surname contains "Rose"' =>  new PlayersFilter(),
-        'with: att_min from 3 & def_min from 1 & def_min to 3' =>  new PlayersFilter(),
-        'with: att_min from 3 & def_min from 1 & position is CM & foot is R' =>  new PlayersFilter(),
-        'with: Nationality & age range' =>  new PlayersFilter(),
-    ];
+    $condition = new Criteria(AbstractResource::ID_FIELD, QuerySyntax::OPERATOR_IN, [18, 19, 20]);
+    $filter = new PlayersFilter([18, 19, 20]);
+    $selection = $playerRepo->findCollection([$condition]);
 
-//    $selection = $playerService->readPlayers(new PlayersFilter([7]));
 
-    // [test B1] C(mandatory)+R + U(full)+R + D+R
+    // [QC.Player.02] L(advanced)
+//        'with: surname contains "Rose"' => new PlayersFilter(),
+//        'with: att_min from 3 & def_min from 1 & def_min to 3' => new PlayersFilter(),
+//        'with: att_min from 3 & def_min from 1 & position is CM & foot is R' => new PlayersFilter(),
+//        'with: Nationality & age range' => new PlayersFilter(),
+
+
+
+    // [QC.Player.11] C(mandatory)+R + U(full)+R + D+R
     $player = new Player();
     $player
         ->setSurname('Serginho')
         ->setFafiSurname('Zerginho');
-    $id = $playerService->createPlayer($player)->getId();
-    $selection = $playerService->readPlayers(new PlayersFilter([$id]));
+    $id = $playerRepo->save($player)->getId();
+    $selection = $playerRepo->findById($id);
 
 //    $selection = $playerService->updatePlayers();
 //    $selection = $playerService->deletePlayers();
 
     var_dump($selection);
-}
-
-/**
- * @param PlayerService $playerService
- * @param PlayersFilter[] $filters
- *
- * @return Player[]
- * @throws FafiException
- */
-function demoPlayerServiceRead(PlayerService $playerService, array $filters): array
-{
-    $result = [];
-    foreach ($filters as $f => $filter) {
-        $players = $playerService->readPlayers($filter);
-        $result[$f] = $players;
-    }
-
-    return $result;
 }
 
 

@@ -2,10 +2,7 @@
 
 namespace FAFI\src\BE\Player;
 
-use FAFI\exception\FafiException;
-use FAFI\src\BE\Player\Repository\Criteria;
 use FAFI\src\BE\Player\Repository\PlayerRepository;
-use FAFI\src\BE\Player\Repository\PlayersFilter;
 
 class PlayerService
 {
@@ -17,36 +14,8 @@ class PlayerService
     }
 
 
-    /**
-     * @param Player $player
-     *
-     * @return Player
-     * @throws FafiException
-     */
-    public function createPlayer(Player $player): Player
+    public function getPlayerRepo(): PlayerRepository
     {
-        return $this->playerRepository->save($player);
-    }
-
-    /**
-     * @param PlayersFilter $filter
-     *
-     * @return Player[]
-     * @throws FafiException
-     */
-    public function readPlayers(PlayersFilter $filter): array
-    {
-        $criteria = new Criteria($filter->getPlayerIds());
-        return $this->playerRepository->findCollection($criteria);
-    }
-
-    public function updatePlayers()
-    {
-        // TO BE IMPLEMENTED
-    }
-
-    public function deletePlayers()
-    {
-        // TO BE IMPLEMENTED
+        return $this->playerRepository;
     }
 }
