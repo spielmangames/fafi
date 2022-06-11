@@ -124,23 +124,12 @@ class PlayerResource extends AbstractResource
         return $result;
     }
 
+
 //    public function patch(int $playerId, array $fieldValues): int
 //    {
 //        return $this->connection->table(self::TABLE)
 //            ->where(self::ID_FIELD, '=', $playerId)
 //            ->update($fieldValues);
-//    }
-//
-//    public function delete(PlayerCriteria $criteria): bool
-//    {
-//        if ($criteria->isEmpty()) {
-//            throw new Exception('Criteria for delete query is not specified.');
-//        }
-//
-//        $query = $this->connection->table(self::TABLE);
-//        $this->buildWhere($query, $criteria);
-//
-//        return (bool)$query->delete();
 //    }
 //
 //    public function count(PlayerCriteria $criteria): int

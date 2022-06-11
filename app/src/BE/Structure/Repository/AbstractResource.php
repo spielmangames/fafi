@@ -3,8 +3,8 @@
 namespace FAFI\src\BE\Structure\Repository;
 
 use FAFI\db\DatabaseValidator;
-use FAFI\db\QueryBuilder;
 use FAFI\db\QueryExecutor;
+use FAFI\db\QuerySyntax;
 use FAFI\exception\FafiException;
 use FAFI\src\BE\Player\Repository\Criteria;
 use FAFI\src\BE\Structure\EntityInterface;
@@ -43,7 +43,7 @@ abstract class AbstractResource
         $this->verifyConstraintsOnCreate($this->getTable(), $entity, $data);
         $id = $this->queryExecutor->createRecord($this->getTable(), $data);
 
-        $criteria = new Criteria(self::ID_FIELD, QueryBuilder::OPERATOR_IS, [$id]);
+        $criteria = new Criteria(self::ID_FIELD, QuerySyntax::OPERATOR_IS, [$id]);
         $result = $this->readFirst([$criteria]);
         if (!$result) {
             throw new FafiException(sprintf(FafiException::E_ENTITY_ABSENT, $entity, $id));
@@ -97,15 +97,26 @@ abstract class AbstractResource
         $data = $this->hydrator->extract($entity);
 
         // assert constraints before operation
-        $criteria = new Criteria(self::ID_FIELD, QueryBuilder::OPERATOR_IS, [$id]);
+        $criteria = new Criteria(self::ID_FIELD, QuerySyntax::OPERATOR_IS, [$id]);
         $this->queryExecutor->updateRecord($this->getTable(), $data, [$criteria]);
 
-        $criteria = new Criteria(self::ID_FIELD, QueryBuilder::OPERATOR_IS, [$id]);
+        $criteria = new Criteria(self::ID_FIELD, QuerySyntax::OPERATOR_IS, [$id]);
         $result = $this->readFirst([$criteria]);
         if (!$result) {
             throw new FafiException(sprintf(FafiException::E_ENTITY_ABSENT, $entity, $id));
         }
 
         return $result;
+    }
+
+    /**
+     * @param EntityCriteriaInterface[] $conditions
+     *
+     * @return void
+     * @throws FafiException
+     */
+    public function delete(array $conditions = []): void
+    {
+        $this->queryExecutor->deleteRecords($this->getTable(), $conditions);
     }
 }

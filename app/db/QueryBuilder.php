@@ -6,28 +6,12 @@ use FAFI\src\BE\Structure\Repository\EntityCriteriaInterface;
 
 class QueryBuilder
 {
-    public const STATEMENT_INSERT = 'INSERT INTO %s (%s) VALUES (%s)';
-    public const STATEMENT_SELECT = 'SELECT %s FROM %s%s';
-    public const STATEMENT_UPDATE = 'UPDATE %s SET %s%s';
-    public const STATEMENT_DELETE = 'DELETE FROM %s%s';
-    public const STATEMENT_WHERE = ' WHERE %s';
-
-    public const OPERATOR_ALL = '*';
-    public const OPERATOR_IN = 'in';
-    public const OPERATOR_IS = '=';
-    public const OPERATOR_CLOSE = ';';
-
-    public const WRAPPER_VALUE = "'";
-    public const SEPARATOR_LIST = ', ';
-    public const SEPARATOR_AND = ' AND ';
-
-
     public function insert(string $destination, array $data): string
     {
         $columns = $this->formWhat(array_keys($data));
         $values = $this->formValues($data);
 
-        return sprintf(self::STATEMENT_INSERT, $destination, $columns, $values);
+        return sprintf(QuerySyntax::STATEMENT_INSERT, $destination, $columns, $values);
     }
 
     public function select(string $destination, array $conditions = [], array $fields = []): string
@@ -35,7 +19,7 @@ class QueryBuilder
         $what = $this->formWhat($fields);
         $where = $this->formWhere($conditions);
 
-        return sprintf(self::STATEMENT_SELECT, $what, $destination, $where);
+        return sprintf(QuerySyntax::STATEMENT_SELECT, $what, $destination, $where);
     }
 
     public function update(string $destination, array $data, array $conditions = []): string
@@ -43,29 +27,29 @@ class QueryBuilder
         $values = $this->formValues($data);
         $where = $this->formWhere($conditions);
 
-        return sprintf(self::STATEMENT_UPDATE, $destination, $values, $where);
+        return sprintf(QuerySyntax::STATEMENT_UPDATE, $destination, $values, $where);
     }
 
     public function delete(string $destination, array $conditions = []): string
     {
         $where = $this->formWhere($conditions);
 
-        return sprintf(self::STATEMENT_DELETE, $destination, $where);
+        return sprintf(QuerySyntax::STATEMENT_DELETE, $destination, $where);
     }
 
     public function close(string $query): string
     {
-        return $query . self::OPERATOR_CLOSE;
+        return $query . QuerySyntax::WRAPPER_CLOSE;
     }
 
 
     private function formWhat(array $fields): string
     {
         if (empty($fields)) {
-            return self::OPERATOR_ALL;
+            return QuerySyntax::OPERATOR_ALL;
         }
 
-        return implode(self::SEPARATOR_LIST, $fields);
+        return implode(QuerySyntax::SEPARATOR_LIST, $fields);
     }
 
     /**
@@ -90,7 +74,7 @@ class QueryBuilder
             $converted[] = implode(' ', $condition);
         }
 
-        return sprintf(self::STATEMENT_WHERE, implode(self::SEPARATOR_AND, $converted));
+        return sprintf(QuerySyntax::STATEMENT_WHERE, implode(QuerySyntax::SEPARATOR_AND, $converted));
     }
 
     private function formValues(array $data): string
@@ -100,11 +84,11 @@ class QueryBuilder
             $values[] = $this->wrapValue($value);
         }
 
-        return implode(self::SEPARATOR_LIST, $values);
+        return implode(QuerySyntax::SEPARATOR_LIST, $values);
     }
 
     private function wrapValue($value): string
     {
-        return self::WRAPPER_VALUE . $value . self::WRAPPER_VALUE;
+        return QuerySyntax::WRAPPER_VALUE . $value . QuerySyntax::WRAPPER_VALUE;
     }
 }

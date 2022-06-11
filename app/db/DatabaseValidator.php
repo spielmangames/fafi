@@ -26,7 +26,7 @@ class DatabaseValidator
      */
     public function assertResourcePropertyUnique(string $table, string $entityName, array $entityData, string $property): void
     {
-        $condition = new Criteria($property, QueryBuilder::OPERATOR_IS, [$entityData[$property]]);
+        $condition = new Criteria($property, QuerySyntax::OPERATOR_IS, [$entityData[$property]]);
         $result = $this->queryExecutor->readRecords($table, [$condition]);
 
         if ($result) {
