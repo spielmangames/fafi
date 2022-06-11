@@ -82,4 +82,10 @@ class Position implements EntityInterface
     {
         return $this->name;
     }
+
+
+    public function __toString(): string
+    {
+        return self::ENTITY;
+    }
 }

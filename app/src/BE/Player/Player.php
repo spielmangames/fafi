@@ -142,4 +142,10 @@ class Player implements EntityInterface
     {
         return $this->attributes;
     }
+
+
+    public function __toString(): string
+    {
+        return self::ENTITY;
+    }
 }
