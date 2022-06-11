@@ -2,6 +2,8 @@
 
 namespace FAFI\db;
 
+use FAFI\src\BE\Structure\Repository\EntityCriteriaInterface;
+
 class QueryBuilder
 {
     public const STATEMENT_SELECT = 'SELECT %s FROM %s%s';
@@ -49,6 +51,11 @@ class QueryBuilder
         return implode(self::SEPARATOR_LIST, $fields);
     }
 
+    /**
+     * @param EntityCriteriaInterface[] $conditions
+     *
+     * @return string
+     */
     private function formWhere(array $conditions): string
     {
         if (empty($conditions)) {
@@ -57,7 +64,12 @@ class QueryBuilder
 
         $converted = [];
         foreach ($conditions as $condition) {
-            $condition[2] = $this->wrapValue($condition[2]);
+            $condition = [
+                $condition->getFieldName(),
+                $condition->getOperator(),
+                $this->formValues($condition->getValues()),
+            ];
+
             $converted[] = implode(' ', $condition);
         }
 

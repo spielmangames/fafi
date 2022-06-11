@@ -5,10 +5,12 @@ namespace FAFI\src\BE\Structure\Repository;
 use FAFI\db\DatabaseConnector;
 use FAFI\db\QueryBuilder;
 use FAFI\exception\FafiException;
+use FAFI\src\BE\Player\Repository\Criteria;
 
 class AbstractResource
 {
     public const ID_FIELD = 'id';
+
 
     public const E_ENTITY_ABSENT = '%s (id = %d) is absent in storage.';
 
@@ -128,7 +130,7 @@ class AbstractResource
 
     protected function assertEntityUnique(string $table, string $entityName, array $entityData, string $fieldName): void
     {
-        $condition = [$fieldName, QueryBuilder::OPERATOR_IS, $entityData[$fieldName]];
+        $condition = new Criteria($fieldName, QueryBuilder::OPERATOR_IS, [$entityData[$fieldName]]);
         $query = $this->queryBuilder->select($table, [$condition]);
         $query = $this->queryBuilder->close($query);
         $result = $this->selectRecords($query);
