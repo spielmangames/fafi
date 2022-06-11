@@ -12,8 +12,6 @@ class AbstractResource
     public const ID_FIELD = 'id';
 
 
-    public const E_ENTITY_ABSENT = '%s (id = %d) is absent in storage.';
-
     public const E_ENTITY_CREATE_FAILED = 'Failed to create the item.';
     public const E_ENTITY_READ_FAILED = 'Failed to read the item.';
     public const E_ENTITY_UPDATE_FAILED = 'Failed to update the item.';
@@ -128,15 +126,24 @@ class AbstractResource
     }
 
 
-    protected function assertEntityUnique(string $table, string $entityName, array $entityData, string $fieldName): void
+    /**
+     * @param string $table
+     * @param string $entityName
+     * @param array $entityData
+     * @param string $property
+     *
+     * @return void
+     * @throws FafiException
+     */
+    protected function assertResourcePropertyUnique(string $table, string $entityName, array $entityData, string $property): void
     {
-        $condition = new Criteria($fieldName, QueryBuilder::OPERATOR_IS, [$entityData[$fieldName]]);
+        $condition = new Criteria($property, QueryBuilder::OPERATOR_IS, [$entityData[$property]]);
         $query = $this->queryBuilder->select($table, [$condition]);
         $query = $this->queryBuilder->close($query);
         $result = $this->selectRecords($query);
 
         if ($result) {
-            throw new FafiException(sprintf(FafiException::E_ENTITY_NOT_UNIQUE, $entityName, $fieldName));
+            throw new FafiException(sprintf(FafiException::E_ENTITY_NOT_UNIQUE, $entityName, $property));
         }
     }
 }

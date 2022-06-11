@@ -48,7 +48,7 @@ class PlayerAttributeResource extends AbstractResource
     public function create(PlayerAttribute $entity): PlayerAttribute
     {
         if ($entity->getId()) {
-            throw new FafiException(sprintf(self::E_ID_PRESENT, PlayerAttribute::ENTITY));
+            throw new FafiException(sprintf(FafiException::E_ID_PRESENT, PlayerAttribute::ENTITY));
         }
 
         $data = $this->hydrator->extract($entity);
@@ -57,7 +57,7 @@ class PlayerAttributeResource extends AbstractResource
         $criteria = new PlayerAttributeCriteria([$id]);
         $result = $this->readFirst($criteria);
         if (!$result) {
-            throw new FafiException(sprintf(self::E_ENTITY_ABSENT, PlayerAttribute::ENTITY, $id));
+            throw new FafiException(sprintf(FafiException::E_ENTITY_ABSENT, PlayerAttribute::ENTITY, $id));
         }
 
         return $result;
@@ -100,7 +100,7 @@ class PlayerAttributeResource extends AbstractResource
     public function update(PlayerAttribute $entity): PlayerAttribute
     {
         if (!$entity->getId()) {
-            throw new FafiException(self::E_ID_ABSENT, PlayerAttribute::ENTITY);
+            throw new FafiException(FafiException::E_ID_ABSENT, PlayerAttribute::ENTITY);
         }
         $id = $entity->getId();
 
@@ -110,7 +110,7 @@ class PlayerAttributeResource extends AbstractResource
         $criteria = new PlayerAttributeCriteria([$id]);
         $result = $this->readFirst($criteria);
         if (!$result) {
-            throw new FafiException(sprintf(self::E_ENTITY_ABSENT, PlayerAttribute::ENTITY, $id));
+            throw new FafiException(sprintf(FafiException::E_ENTITY_ABSENT, PlayerAttribute::ENTITY, $id));
         }
 
         return $result;

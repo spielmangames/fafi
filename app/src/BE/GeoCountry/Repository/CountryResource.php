@@ -40,7 +40,7 @@ class CountryResource extends AbstractResource
     public function create(Country $entity): Country
     {
         if ($entity->getId()) {
-            throw new FafiException(sprintf(self::E_ID_PRESENT, Country::ENTITY));
+            throw new FafiException(sprintf(FafiException::E_ID_PRESENT, Country::ENTITY));
         }
 
         $data = $this->hydrator->extract($entity);
@@ -50,7 +50,7 @@ class CountryResource extends AbstractResource
         $criteria = new CountryCriteria([$id]);
         $result = $this->readFirst($criteria);
         if (!$result) {
-            throw new FafiException(sprintf(self::E_ENTITY_ABSENT, Country::ENTITY, $id));
+            throw new FafiException(sprintf(FafiException::E_ENTITY_ABSENT, Country::ENTITY, $id));
         }
 
         return $result;
@@ -93,7 +93,7 @@ class CountryResource extends AbstractResource
     public function update(Country $entity): Country
     {
         if (!$entity->getId()) {
-            throw new FafiException(self::E_ID_ABSENT, Country::ENTITY);
+            throw new FafiException(FafiException::E_ID_ABSENT, Country::ENTITY);
         }
         $id = $entity->getId();
 
@@ -103,7 +103,7 @@ class CountryResource extends AbstractResource
         $criteria = new CountryCriteria([$id]);
         $result = $this->readFirst($criteria);
         if (!$result) {
-            throw new FafiException(sprintf(self::E_ENTITY_ABSENT, Country::ENTITY, $id));
+            throw new FafiException(sprintf(FafiException::E_ENTITY_ABSENT, Country::ENTITY, $id));
         }
 
         return $result;

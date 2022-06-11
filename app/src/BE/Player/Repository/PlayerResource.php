@@ -68,7 +68,7 @@ class PlayerResource extends AbstractResource
         $data = $this->hydrator->extract($entity);
 
         $this->entityValidator->assertRequiredFieldsPresent($entity, $data, self::REQUIRED_FIELDS);
-        $this->assertEntityUnique(self::TABLE, $entity, $data, self::FAFI_SURNAME_FIELD);
+        $this->assertResourcePropertyUnique(self::TABLE, $entity, $data, self::FAFI_SURNAME_FIELD);
 
         $query = $this->queryBuilder->insert(self::TABLE, $data);
         $query = $this->queryBuilder->close($query);
@@ -77,7 +77,7 @@ class PlayerResource extends AbstractResource
         $criteria = new Criteria(self::ID_FIELD, QueryBuilder::OPERATOR_IS, [$id]);
         $result = $this->readFirst([$criteria]);
         if (!$result) {
-            throw new FafiException(sprintf(self::E_ENTITY_ABSENT, $entity, $id));
+            throw new FafiException(sprintf(FafiException::E_ENTITY_ABSENT, $entity, $id));
         }
 
         return $result;
@@ -122,7 +122,7 @@ class PlayerResource extends AbstractResource
      */
     public function update(Player $entity): Player
     {
-        $this->entityValidator->assertEntityHasId($entity, Player::ENTITY);
+        $this->entityValidator->assertEntityIdPresent($entity);
         $id = $entity->getId();
         $data = $this->hydrator->extract($entity);
 
@@ -131,7 +131,7 @@ class PlayerResource extends AbstractResource
         $criteria = new Criteria([$id]);
         $result = $this->readFirst($criteria);
         if (!$result) {
-            throw new FafiException(sprintf(self::E_ENTITY_ABSENT, Player::ENTITY, $id));
+            throw new FafiException(sprintf(FafiException::E_ENTITY_ABSENT, Player::ENTITY, $id));
         }
 
         return $result;
