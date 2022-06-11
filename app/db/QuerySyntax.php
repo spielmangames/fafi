@@ -9,6 +9,7 @@ interface QuerySyntax
     public const STATEMENT_UPDATE = 'UPDATE %s SET %s%s';
     public const STATEMENT_DELETE = 'DELETE FROM %s%s';
     public const STATEMENT_WHERE = ' WHERE %s';
+    public const STATEMENT_IN = '(%s)';
 
     public const OPERATOR_ALL = '*';
     public const OPERATOR_IN = 'in';

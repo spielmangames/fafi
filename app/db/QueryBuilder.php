@@ -92,12 +92,14 @@ class QueryBuilder
 
         $converted = [];
         foreach ($conditions as $condition) {
-            $condition = [
-                $condition->getFieldName(),
-                $condition->getOperator(),
-                $this->formValues($condition->getValues()),
-            ];
+            $operator = $condition->getOperator();
+            $values = $this->formValues($condition->getValues());
 
+            if ($operator === QuerySyntax::OPERATOR_IN) {
+                $values = sprintf(QuerySyntax::STATEMENT_IN, $values);
+            }
+
+            $condition = [$condition->getFieldName(), $operator, $values];
             $converted[] = implode(' ', $condition);
         }
 

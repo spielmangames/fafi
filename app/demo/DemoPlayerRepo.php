@@ -21,7 +21,7 @@ class DemoPlayerRepo
 
 
     /**
-     * [QC.Player.01] C(mandatory)+R + U(full)+R + D+R
+     * [QC.Player.01] C(mandatory)+R + U(cross)+R + D+R
      *
      * @return void
      * @throws FafiException
@@ -29,11 +29,12 @@ class DemoPlayerRepo
     public function demoModifyScenario(): void
     {
         $player = new Player();
-        $player->setSurname('Serginho')->setFafiSurname('Zerginho');
+        $player->setSurname('Sirginho')->setFafiSurname('Zerginho');
+
         $id = $this->playerRepo->save($player)->getId();
         $player = $this->playerRepo->findById($id);
 
-        $player->setFoot('L');
+        $player->setSurname('Serginho')->setHeight(181)->setFoot('L');
         $player = $this->playerRepo->save($player);
         $player = $this->playerRepo->findById($id);
 
@@ -49,11 +50,36 @@ class DemoPlayerRepo
      */
     public function demoListSimpleScenario(): void
     {
-        $selection = $this->playerRepo->findCollection();
+        // setup
+        $ids = [];
+        $player = new Player();
+        $player->setSurname('Serginho')->setFafiSurname('Zerginho');
+        $ids[] = $this->playerRepo->save($player)->getId();
+        $player = new Player();
+        $player->setName('Clarence')->setSurname('Seedorf')->setFafiSurname('Zeedorf');
+        $ids[] = $this->playerRepo->save($player)->getId();
+        $player = new Player();
+        $player->setName('Jaap')->setSurname('Stam')->setFafiSurname('Steel');
+        $ids[] = $this->playerRepo->save($player)->getId();
 
-        $condition = new Criteria(AbstractResource::ID_FIELD, QuerySyntax::OPERATOR_IN, [18, 19, 20]);
-        $filter = new PlayersFilter([18, 19, 20]);
+
+        // request A
+        $players = $this->playerRepo->findCollection();
+
+        // request B
+        $condition = new Criteria(AbstractResource::ID_FIELD, QuerySyntax::OPERATOR_IN, $ids);
         $selection = $this->playerRepo->findCollection([$condition]);
+
+        // request C
+        array_shift($ids);
+        $condition = new Criteria(AbstractResource::ID_FIELD, QuerySyntax::OPERATOR_IN, $ids);
+        $selection = $this->playerRepo->findCollection([$condition]);
+
+
+        // teardown
+        foreach ($ids as $id) {
+            $this->playerRepo->deleteById($id);
+        }
     }
 
     /**

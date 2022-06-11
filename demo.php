@@ -20,7 +20,7 @@ function demoPlayerService(FAFI $fafi)
 {
     $session = new DemoPlayerRepo($fafi->getPlayerService()->getPlayerRepo());
     $session->demoModifyScenario();
-//    $session->demoListSimpleScenario();
+    $session->demoListSimpleScenario();
 //    $session->demoListAdvancedScenario();
 }
 
