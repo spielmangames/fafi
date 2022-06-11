@@ -7,6 +7,14 @@ use FAFI\src\BE\Structure\EntityInterface;
 
 class EntityValidator
 {
+    private DataValidator $dataValidator;
+
+    public function __construct()
+    {
+        $this->dataValidator = new DataValidator();
+    }
+
+
     /**
      * @param string $entityName
      * @param array $entityData
@@ -17,44 +25,33 @@ class EntityValidator
      */
     public function assertRequiredFieldsPresent(string $entityName, array $entityData, array $mandatory): void
     {
-        $missed = [];
-        foreach ($mandatory as $field) {
-            if (!isset($entityData[$field])) {
-                $missed[] = $field;
-            }
-        }
-
-        if (!empty($missed)) {
-            $e = sprintf(FafiException::E_REQ_MISSED, $entityName, implode('", "', $missed));
-            throw new FafiException($e);
-        }
+        $this->dataValidator->assertRequiredFieldsPresent($entityName, $entityData, $mandatory);
     }
+
 
     /**
      * @param EntityInterface $entity
-     * @param string $entityName
      *
      * @return void
      * @throws FafiException
      */
-    public function assertEntityHasId(EntityInterface $entity, string $entityName): void
+    public function assertEntityIdPresent(EntityInterface $entity): void
     {
         if (!$entity->getId()) {
-            throw new FafiException(sprintf(FafiException::E_ID_ABSENT, $entityName));
+            throw new FafiException(sprintf(FafiException::E_ID_ABSENT, $entity));
         }
     }
 
     /**
      * @param EntityInterface $entity
-     * @param string $entityName
      *
      * @return void
      * @throws FafiException
      */
-    public function assertEntityHasNoId(EntityInterface $entity, string $entityName): void
+    public function assertEntityIdAbsent(EntityInterface $entity): void
     {
         if ($entity->getId()) {
-            throw new FafiException(sprintf(FafiException::E_ID_PRESENT, $entityName));
+            throw new FafiException(sprintf(FafiException::E_ID_PRESENT, $entity));
         }
     }
 }

@@ -26,6 +26,10 @@ class FafiException extends Exception
     public const E_IMPORT_ENTITY_FIELD_TRANSFORMER_ABSENT = 'Field "%s" Transformer is absent in %s Config.';
 
 
+    public const LIST_SEPARATOR = ", ";
+    public const LIST_WRAPPED_SEPARATOR = '", "';
+
+
     public static function combine(array $messages): string
     {
         return implode(' ', $messages);
