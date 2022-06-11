@@ -5,6 +5,7 @@ namespace FAFI\src\BE\Player\Repository;
 use FAFI\db\QueryBuilder;
 use FAFI\exception\FafiException;
 use FAFI\src\BE\Player\Player;
+use FAFI\src\BE\Structure\EntityInterface;
 use FAFI\src\BE\Structure\Repository\AbstractResource;
 use FAFI\src\BE\Structure\Repository\EntityCriteriaInterface;
 
@@ -64,12 +65,10 @@ class PlayerResource extends AbstractResource
      */
     public function create(Player $entity): Player
     {
-        $this->entityValidator->assertEntityIdAbsent($entity);
         $data = $this->hydrator->extract($entity);
 
-        $this->entityValidator->assertRequiredFieldsPresent($entity, $data, self::REQUIRED_FIELDS);
-        $this->assertResourcePropertyUnique(self::TABLE, $entity, $data, self::FAFI_SURNAME_FIELD);
-        $id = $this->queryRunner->createRecord(self::TABLE, $data);
+        $this->verifyConstraintsOnCreate(self::TABLE, $entity, $data);
+        $id = $this->queryExecutor->createRecord(self::TABLE, $data);
 
         $criteria = new Criteria(self::ID_FIELD, QueryBuilder::OPERATOR_IS, [$id]);
         $result = $this->readFirst([$criteria]);
@@ -80,6 +79,13 @@ class PlayerResource extends AbstractResource
         return $result;
     }
 
+    protected function verifyConstraintsOnCreate(string $table, EntityInterface $entity, array $data): void
+    {
+        $this->entityValidator->assertEntityIdAbsent($entity);
+        $this->entityValidator->assertRequiredFieldsPresent($entity, $data, self::REQUIRED_FIELDS);
+        $this->assertResourcePropertyUnique($table, $entity, $data, self::FAFI_SURNAME_FIELD);
+    }
+
     /**
      * @param EntityCriteriaInterface[] $conditions
      *
@@ -88,7 +94,7 @@ class PlayerResource extends AbstractResource
      */
     public function read(array $conditions = []): ?array
     {
-        $selection = $this->queryRunner->readRecords(self::TABLE, $conditions);
+        $selection = $this->queryExecutor->readRecords(self::TABLE, $conditions);
 
         $result = [];
         foreach ($selection as $record) {
@@ -107,7 +113,7 @@ class PlayerResource extends AbstractResource
     public function readFirst(array $conditions): ?Player
     {
         $selection = $this->read($conditions);
-        return (!empty($selection)) ? array_shift($selection) : null;
+        return !empty($selection) ? array_shift($selection) : null;
     }
 
     /**
@@ -122,9 +128,9 @@ class PlayerResource extends AbstractResource
         $id = $entity->getId();
         $data = $this->hydrator->extract($entity);
 
-        // assert constraints
+        // assert constraints before operation
         $criteria = new Criteria(self::ID_FIELD, QueryBuilder::OPERATOR_IS, [$id]);
-        $this->queryRunner->updateRecord(self::TABLE, $data, [$criteria]);
+        $this->queryExecutor->updateRecord(self::TABLE, $data, [$criteria]);
 
         $criteria = new Criteria(self::ID_FIELD, QueryBuilder::OPERATOR_IS, [$id]);
         $result = $this->readFirst([$criteria]);
@@ -141,7 +147,7 @@ class PlayerResource extends AbstractResource
 //            ->where(self::ID_FIELD, '=', $playerId)
 //            ->update($fieldValues);
 //    }
-
+//
 //    public function delete(PlayerCriteria $criteria): bool
 //    {
 //        if ($criteria->isEmpty()) {
@@ -153,7 +159,7 @@ class PlayerResource extends AbstractResource
 //
 //        return (bool)$query->delete();
 //    }
-
+//
 //    public function count(PlayerCriteria $criteria): int
 //    {
 //        $query = $this->connection->table(self::TABLE);

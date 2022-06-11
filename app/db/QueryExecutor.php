@@ -5,7 +5,7 @@ namespace FAFI\db;
 use FAFI\exception\FafiException;
 use FAFI\src\BE\Structure\Repository\EntityCriteriaInterface;
 
-class QueryRunner
+class QueryExecutor
 {
     protected DatabaseDispatcher $dbDispatcher;
     protected QueryBuilder $queryBuilder;

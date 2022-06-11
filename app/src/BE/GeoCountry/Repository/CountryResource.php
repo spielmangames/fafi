@@ -45,7 +45,7 @@ class CountryResource extends AbstractResource
 
         $data = $this->hydrator->extract($entity);
         $this->entityValidator->assertRequiredFieldsPresent(Country::ENTITY, $data, self::REQUIRED_FIELDS);
-        $id = $this->queryRunner->createRecord(self::TABLE, $data);
+        $id = $this->queryExecutor->createRecord(self::TABLE, $data);
 
         $criteria = new CountryCriteria([$id]);
         $result = $this->readFirst($criteria);
@@ -65,7 +65,7 @@ class CountryResource extends AbstractResource
     public function read(CountryCriteria $criteria): ?array
     {
         $result = [];
-        foreach ($this->queryRunner->readRecords(self::TABLE, $criteria) as $record) {
+        foreach ($this->queryExecutor->readRecords(self::TABLE, $criteria) as $record) {
             $result[] = $this->hydrator->hydrate($record);
         }
 
@@ -80,7 +80,7 @@ class CountryResource extends AbstractResource
      */
     public function readFirst(CountryCriteria $criteria): ?Country
     {
-        $result = $this->queryRunner->readRecords(self::TABLE, $criteria);
+        $result = $this->queryExecutor->readRecords(self::TABLE, $criteria);
         return (!empty($result)) ? $this->hydrator->hydrate($result[0]) : null;
     }
 
@@ -98,7 +98,7 @@ class CountryResource extends AbstractResource
         $id = $entity->getId();
 
         $data = $this->hydrator->extract($entity);
-        $this->queryRunner->updateRecord(self::TABLE, $data, new CountryCriteria([$id]));
+        $this->queryExecutor->updateRecord(self::TABLE, $data, new CountryCriteria([$id]));
 
         $criteria = new CountryCriteria([$id]);
         $result = $this->readFirst($criteria);

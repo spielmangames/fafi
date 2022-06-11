@@ -52,7 +52,7 @@ class PlayerAttributeResource extends AbstractResource
         }
 
         $data = $this->hydrator->extract($entity);
-        $id = $this->queryRunner->createRecord(self::TABLE, $data);
+        $id = $this->queryExecutor->createRecord(self::TABLE, $data);
 
         $criteria = new PlayerAttributeCriteria([$id]);
         $result = $this->readFirst($criteria);
@@ -72,7 +72,7 @@ class PlayerAttributeResource extends AbstractResource
     public function read(PlayerAttributeCriteria $criteria): ?array
     {
         $result = [];
-        foreach ($this->queryRunner->readRecords(self::TABLE, $criteria) as $record) {
+        foreach ($this->queryExecutor->readRecords(self::TABLE, $criteria) as $record) {
             $result[] = $this->hydrator->hydrate($record);
         }
 
@@ -87,7 +87,7 @@ class PlayerAttributeResource extends AbstractResource
      */
     public function readFirst(PlayerAttributeCriteria $criteria): ?PlayerAttribute
     {
-        $result = $this->queryRunner->readRecords(self::TABLE, $criteria);
+        $result = $this->queryExecutor->readRecords(self::TABLE, $criteria);
         return (!empty($result)) ? $this->hydrator->hydrate($result[0]) : null;
     }
 
@@ -105,7 +105,7 @@ class PlayerAttributeResource extends AbstractResource
         $id = $entity->getId();
 
         $data = $this->hydrator->extract($entity);
-        $this->queryRunner->updateRecord(self::TABLE, $data, new PlayerAttributeCriteria([$id]));
+        $this->queryExecutor->updateRecord(self::TABLE, $data, new PlayerAttributeCriteria([$id]));
 
         $criteria = new PlayerAttributeCriteria([$id]);
         $result = $this->readFirst($criteria);

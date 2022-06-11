@@ -3,24 +3,27 @@
 namespace FAFI\src\BE\Structure\Repository;
 
 use FAFI\db\QueryBuilder;
-use FAFI\db\QueryRunner;
+use FAFI\db\QueryExecutor;
 use FAFI\exception\FafiException;
 use FAFI\src\BE\Player\Repository\Criteria;
+use FAFI\src\BE\Structure\EntityInterface;
 
-class AbstractResource
+abstract class AbstractResource
 {
     public const ID_FIELD = 'id';
 
 
     protected EntityValidator $entityValidator;
-    protected QueryRunner $queryRunner;
+    protected QueryExecutor $queryExecutor;
 
     public function __construct()
     {
         $this->entityValidator = new EntityValidator();
-        $this->queryRunner = new QueryRunner();
+        $this->queryExecutor = new QueryExecutor();
     }
 
+
+    abstract protected function verifyConstraintsOnCreate(string $table, EntityInterface $entity, array $data): void;
 
     /**
      * @param string $table
@@ -34,7 +37,7 @@ class AbstractResource
     protected function assertResourcePropertyUnique(string $table, string $entityName, array $entityData, string $property): void
     {
         $condition = new Criteria($property, QueryBuilder::OPERATOR_IS, [$entityData[$property]]);
-        $result = $this->queryRunner->readRecords($table, [$condition]);
+        $result = $this->queryExecutor->readRecords($table, [$condition]);
 
         if ($result) {
             throw new FafiException(sprintf(FafiException::E_ENTITY_NOT_UNIQUE, $entityName, $property));
