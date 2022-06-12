@@ -6,9 +6,6 @@ use Exception;
 
 class FafiException extends Exception
 {
-    public const E_ID_PRESENT = '"id" must be absent for creating %s.';
-    public const E_ID_ABSENT = 'ID is required for updating %s and can not be null.';
-
     public const E_VALUE_TYPE_INVALID_ENUM = 'Property "%s" value is not supported.';
 
     public const E_PLAYER_IS_MISSED = 'Player is required for %s.';

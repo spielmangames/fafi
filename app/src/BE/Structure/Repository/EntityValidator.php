@@ -2,6 +2,7 @@
 
 namespace FAFI\src\BE\Structure\Repository;
 
+use FAFI\exception\EntityErr;
 use FAFI\exception\FafiException;
 use FAFI\src\BE\Structure\EntityInterface;
 
@@ -80,7 +81,7 @@ class EntityValidator
     public function assertEntityIdPresent(EntityInterface $entity): void
     {
         if (!$entity->getId()) {
-            throw new FafiException(sprintf(FafiException::E_ID_ABSENT, $entity));
+            throw new FafiException(sprintf(EntityErr::ID_ABSENT, $entity));
         }
     }
 
@@ -93,7 +94,7 @@ class EntityValidator
     public function assertEntityIdAbsent(EntityInterface $entity): void
     {
         if ($entity->getId()) {
-            throw new FafiException(sprintf(FafiException::E_ID_PRESENT, $entity));
+            throw new FafiException(sprintf(EntityErr::ID_PRESENT, $entity));
         }
     }
 }
