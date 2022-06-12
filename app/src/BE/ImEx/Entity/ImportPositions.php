@@ -4,34 +4,21 @@ declare(strict_types=1);
 
 namespace FAFI\src\BE\ImEx\Entity;
 
-use FAFI\BE\ImEx\Transformer\Hydrator\PositionTrHydrator;
-use FAFI\exception\FafiException;
+use FAFI\src\BE\ImEx\Persistence\Client\PositionClient;
 use FAFI\src\BE\ImEx\Transformer\Specification\Entity\PositionSpecification;
-use FAFI\src\BE\Position\PositionService;
+use FAFI\src\BE\Position\Repository\PositionHydrator;
 
 class ImportPositions extends AbstractEntityImport
 {
     protected PositionSpecification $entitySpecification;
-    private PositionService $positionService;
+    protected PositionHydrator $entityHydrator;
+    protected PositionClient $entityLoader;
 
     public function __construct()
     {
         parent::__construct();
         $this->entitySpecification = new PositionSpecification();
-        $this->positionService = new PositionService();
-    }
-
-
-    /**
-     * @param array[] $entities
-     *
-     * @return void
-     * @throws FafiException
-     */
-    public function load(array $entities): void
-    {
-        foreach ($entities as $entity) {
-            $this->positionService->createPosition($entity);
-        }
+        $this->entityHydrator = new PositionHydrator();
+        $this->entityLoader = new PositionClient();
     }
 }

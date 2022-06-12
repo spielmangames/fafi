@@ -43,13 +43,13 @@ class CountryRepository
     }
 
     /**
-     * @param Country $player
+     * @param Country $country
      *
      * @return Country
      * @throws FafiException
      */
-    public function save(Country $player): Country
+    public function save(Country $country): Country
     {
-        return $player->getId() ? $this->countryResource->update($player) : $this->countryResource->create($player);
+        return $country->getId() ? $this->countryResource->update($country) : $this->countryResource->create($country);
     }
 }

@@ -4,33 +4,21 @@ declare(strict_types=1);
 
 namespace FAFI\src\BE\ImEx\Entity;
 
-use FAFI\exception\FafiException;
-use FAFI\src\BE\GeoCountry\CountryService;
+use FAFI\src\BE\GeoCountry\Repository\CountryHydrator;
+use FAFI\src\BE\ImEx\Persistence\Client\CountryClient;
 use FAFI\src\BE\ImEx\Transformer\Specification\Entity\CountrySpecification;
 
 class ImportCountries extends AbstractEntityImport
 {
     protected CountrySpecification $entitySpecification;
-    private CountryService $countryService;
+    protected CountryHydrator $entityHydrator;
+    protected CountryClient $entityLoader;
 
     public function __construct()
     {
         parent::__construct();
         $this->entitySpecification = new CountrySpecification();
-        $this->countryService = new CountryService();
-    }
-
-
-    /**
-     * @param array[] $entities
-     *
-     * @return void
-     * @throws FafiException
-     */
-    public function load(array $entities): void
-    {
-        foreach ($entities as $entity) {
-            $this->countryService->createCountry($entity);
-        }
+        $this->entityHydrator = new CountryHydrator();
+        $this->entityLoader = new CountryClient();
     }
 }
