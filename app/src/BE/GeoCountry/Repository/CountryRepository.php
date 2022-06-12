@@ -2,8 +2,12 @@
 
 namespace FAFI\src\BE\GeoCountry\Repository;
 
+use FAFI\db\Query\QuerySyntax;
 use FAFI\exception\FafiException;
 use FAFI\src\BE\GeoCountry\Country;
+use FAFI\src\BE\Player\Repository\Criteria;
+use FAFI\src\BE\Structure\Repository\AbstractResource;
+use FAFI\src\BE\Structure\Repository\EntityCriteriaInterface;
 
 class CountryRepository
 {
@@ -23,19 +27,19 @@ class CountryRepository
      */
     public function findById(int $id): ?Country
     {
-        $criteria = new CountryCriteria([$id]);
-        return $this->countryResource->readFirst($criteria);
+        $criteria = new Criteria(AbstractResource::ID_FIELD, QuerySyntax::OPERATOR_IS, [$id]);
+        return $this->countryResource->readFirst([$criteria]);
     }
 
     /**
-     * @param CountryCriteria $criteria
+     * @param EntityCriteriaInterface[] $conditions
      *
      * @return Country[]
      * @throws FafiException
      */
-    public function findCollection(CountryCriteria $criteria): array
+    public function findCollection(array $conditions): array
     {
-        return $this->countryResource->read($criteria);
+        return $this->countryResource->read($conditions);
     }
 
     /**
