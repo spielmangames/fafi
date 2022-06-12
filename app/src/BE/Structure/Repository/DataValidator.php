@@ -29,4 +29,11 @@ class DataValidator
             throw new FafiException(sprintf(EntityErr::REQ_MISSED, $entityName, $missed));
         }
     }
+
+    public function assertFieldOneOf($value, string $property, array $allowed): void
+    {
+        if (!in_array($value, $allowed)) {
+            throw new FafiException(sprintf(EntityErr::E_VALUE_TYPE_INVALID_ENUM, $property));
+        }
+    }
 }

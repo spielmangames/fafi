@@ -3,6 +3,7 @@
 namespace FAFI\src\FE\Themes\Printer\Basic\Widgets;
 
 use FAFI\exception\FafiException;
+use FAFI\exception\FrontErr;
 use FAFI\src\FE\Themes\Printer\Basic\PageSections\AbstractWidget;
 use FAFI\src\FE\Themes\Printer\PrinterDesign as PD;
 
@@ -46,7 +47,7 @@ class TabsPanelWidget extends AbstractWidget
     private function prepareTabsList(): string
     {
         if (!in_array($this->activeTab, $this->tabsList)) {
-            throw new FafiException(sprintf(FafiException::E_TAB_NOT_SUPPORTED, $this->activeTab, self::class));
+            throw new FafiException(sprintf(FrontErr::TAB_NOT_SUPPORTED, $this->activeTab, self::class));
         }
 
         $tabs = [];

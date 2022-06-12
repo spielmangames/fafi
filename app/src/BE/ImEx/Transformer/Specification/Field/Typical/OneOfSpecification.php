@@ -4,30 +4,24 @@ declare(strict_types=1);
 
 namespace FAFI\src\BE\ImEx\Transformer\Specification\Field\Typical;
 
-use FAFI\exception\FafiException;
 use FAFI\src\BE\ImEx\Transformer\Specification\Field\ImExFieldSpecification;
+use FAFI\src\BE\Structure\Repository\DataValidator;
 
 abstract class OneOfSpecification implements ImExFieldSpecification
 {
     public array $allowed;
 
 
-    public function validate(string $property, $value): void
+    private DataValidator $dataValidator;
+
+    public function __construct()
     {
-        $this->assertInList($property, $value);
+        $this->dataValidator = new DataValidator();
     }
 
-    /**
-     * @param string $property
-     * @param $value
-     *
-     * @return void
-     * @throws FafiException
-     */
-    private function assertInList(string $property, $value): void
+
+    public function validate(string $property, $value): void
     {
-        if (!in_array($value, $this->allowed)) {
-            throw new FafiException(sprintf(FafiException::E_VALUE_TYPE_INVALID_ENUM, $property));
-        }
+        $this->dataValidator->assertFieldOneOf($value, $property, $this->allowed);
     }
 }

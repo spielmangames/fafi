@@ -3,6 +3,7 @@
 namespace FAFI\src\FE\Themes\Printer\Basic\Pages;
 
 use FAFI\exception\FafiException;
+use FAFI\exception\FrontErr;
 use FAFI\src\FE\Structure\Page\PageInterface;
 use FAFI\src\FE\Themes\Printer\PrinterDesign as PD;
 
@@ -21,7 +22,7 @@ abstract class AbstractPrinterPage implements PageInterface
     public function setTabName(string $tabName): PageInterface
     {
         if (!in_array($tabName, $this->getTabsList())) {
-            throw new FafiException(sprintf(FafiException::E_TAB_NOT_SUPPORTED, $tabName, self::class));
+            throw new FafiException(sprintf(FrontErr::TAB_NOT_SUPPORTED, $tabName, self::class));
         }
         $this->tabName = $tabName;
 

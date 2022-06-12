@@ -3,6 +3,7 @@
 namespace FAFI\src\FE\Themes\Printer\Custom\Player;
 
 use FAFI\exception\FafiException;
+use FAFI\exception\FrontErr;
 use FAFI\src\BE\Player\Player;
 use FAFI\src\FE\Themes\Printer\Basic\PageSections\AbstractTitle;
 
@@ -30,7 +31,7 @@ class PlayerTitle extends AbstractTitle
     protected function prepareTitle(): string
     {
         if (!isset($this->player)) {
-            throw new FafiException(sprintf(FafiException::E_PLAYER_IS_MISSED, self::class));
+            throw new FafiException(sprintf(FrontErr::PLAYER_IS_MISSED, self::class));
         }
         /** @var Player $player */
         $player = $this->player;

@@ -3,6 +3,7 @@
 namespace FAFI\src\FE\Themes\Printer\Custom\Player;
 
 use FAFI\exception\FafiException;
+use FAFI\exception\FrontErr;
 use FAFI\src\BE\Player\Player;
 use FAFI\src\FE\Structure\ContentableInterface;
 use FAFI\src\FE\Structure\PageSection\PageSectionInterface;
@@ -118,7 +119,7 @@ class PlayerPage extends AbstractPrinterPage
     public function getContent(): array
     {
         if (!isset($this->tabName)) {
-            throw new FafiException(sprintf(FafiException::E_TAB_NOT_SET, self::class));
+            throw new FafiException(sprintf(FrontErr::TAB_NOT_SET, self::class));
         }
 
         $separator = PD::PAGE_Y_BORDER . EOL . PD::PAGE_Y_BORDER;

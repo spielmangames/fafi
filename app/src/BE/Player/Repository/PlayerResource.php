@@ -109,7 +109,7 @@ class PlayerResource extends AbstractResource
             $this->entityValidator->assertEntityPropertyInt($entity, $data, self::HEIGHT_FIELD, 111, 222);
         }
         if (isset($data[self::FOOT_FIELD])) {
-            $this->entityValidator->assertEntityPropertyEnum($entity, $data, self::FOOT_FIELD, self::FOOT_ALLOWED);
+            $this->entityValidator->assertEntityPropertyEnum($data[self::FOOT_FIELD], self::FOOT_FIELD, self::FOOT_ALLOWED);
         }
     }
 

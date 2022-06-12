@@ -62,13 +62,9 @@ class EntityValidator
         }
     }
 
-    public function assertEntityPropertyEnum(string $entityName, array $entityData, string $property, array $allowed): void
+    public function assertEntityPropertyEnum($value, string $property, array $allowed): void
     {
-        $value = $entityData[$property];
-
-        if (!in_array($value, $allowed)) {
-            throw new FafiException(sprintf(FafiException::E_VALUE_TYPE_INVALID_ENUM, $property));
-        }
+        $this->dataValidator->assertFieldOneOf($value, $property, $allowed);
     }
 
 
