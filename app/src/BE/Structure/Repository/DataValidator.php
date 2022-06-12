@@ -30,10 +30,40 @@ class DataValidator
         }
     }
 
+
     public function assertFieldOneOf($value, string $property, array $allowed): void
     {
         if (!in_array($value, $allowed)) {
-            throw new FafiException(sprintf(EntityErr::E_VALUE_TYPE_INVALID_ENUM, $property));
+            throw new FafiException(sprintf(EntityErr::VALUE_TYPE_INVALID_ENUM, $property));
+        }
+    }
+
+    public function assertFieldInt($value, string $property, ?int $min = null, ?int $max = null): void
+    {
+        if (!is_int($value)) {
+            throw new FafiException(sprintf(EntityErr::VALUE_TYPE_INVALID_INT, $property));
+        }
+
+        if (!is_null($min) && $value < $min) {
+            throw new FafiException(sprintf(EntityErr::VALUE_DIGIT_MIN_RANGE_CROSSED, $property, $min));
+        }
+        if (!is_null($max) && $value > $max) {
+            throw new FafiException(sprintf(EntityErr::VALUE_DIGIT_MAX_RANGE_CROSSED, $property, $max));
+        }
+    }
+
+    public function assertFieldStr($value, string $property, ?int $lengthMin = null, ?int $lengthMax = null): void
+    {
+        if (!is_string($value)) {
+            throw new FafiException(sprintf(EntityErr::VALUE_TYPE_INVALID_STR, $property));
+        }
+
+        $length = mb_strlen($value);
+        if (!is_null($lengthMin) && $length < $lengthMin) {
+            throw new FafiException(sprintf(EntityErr::VALUE_STR_MIN_LENGTH_CROSSED, $property, $lengthMin));
+        }
+        if (!is_null($lengthMax) && $length > $lengthMax) {
+            throw new FafiException(sprintf(EntityErr::VALUE_STR_MAX_LENGTH_CROSSED, $property, $lengthMax));
         }
     }
 }

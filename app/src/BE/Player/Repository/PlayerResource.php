@@ -85,31 +85,37 @@ class PlayerResource extends AbstractResource
         $this->entityValidator->assertEntityIdAbsent($entity);
 
         $this->entityValidator->assertEntityMandatoryDataPresent($entity, $data, self::REQUIRED_FIELDS);
-        $this->verifyProperties($entity, $data);
+        $this->verifyProperties($data);
 
         $this->dbValidator->assertResourcePropertyUnique($table, $entity, $data, self::FAFI_SURNAME_FIELD);
     }
 
-    private function verifyProperties(EntityInterface $entity, array $data): void
+    private function verifyProperties(array $data): void
     {
         if (isset($data[self::NAME_FIELD])) {
-            $this->entityValidator->assertEntityPropertyStr($entity, $data, self::NAME_FIELD, null, 32);
+            $field = self::NAME_FIELD;
+            $this->entityValidator->assertEntityPropertyStr($data[$field], $field, null, 32);
         }
         if (isset($data[self::PARTICLE_FIELD])) {
-            $this->entityValidator->assertEntityPropertyStr($entity, $data, self::PARTICLE_FIELD, null, 8);
+            $field = self::PARTICLE_FIELD;
+            $this->entityValidator->assertEntityPropertyStr($data[$field], $field, null, 8);
         }
         if (isset($data[self::SURNAME_FIELD])) {
-            $this->entityValidator->assertEntityPropertyStr($entity, $data, self::SURNAME_FIELD, 1, 32);
+            $field = self::SURNAME_FIELD;
+            $this->entityValidator->assertEntityPropertyStr($data[$field], $field, 1, 32);
         }
         if (isset($data[self::FAFI_SURNAME_FIELD])) {
-            $this->entityValidator->assertEntityPropertyStr($entity, $data, self::FAFI_SURNAME_FIELD, 1, 32);
+            $field = self::FAFI_SURNAME_FIELD;
+            $this->entityValidator->assertEntityPropertyStr($data[$field], $field, 1, 32);
         }
 
         if (isset($data[self::HEIGHT_FIELD])) {
-            $this->entityValidator->assertEntityPropertyInt($entity, $data, self::HEIGHT_FIELD, 111, 222);
+            $field = self::HEIGHT_FIELD;
+            $this->entityValidator->assertEntityPropertyInt($data[$field], $field, 111, 222);
         }
         if (isset($data[self::FOOT_FIELD])) {
-            $this->entityValidator->assertEntityPropertyEnum($data[self::FOOT_FIELD], self::FOOT_FIELD, self::FOOT_ALLOWED);
+            $field = self::FOOT_FIELD;
+            $this->entityValidator->assertEntityPropertyEnum($data[$field], $field, self::FOOT_ALLOWED);
         }
     }
 
