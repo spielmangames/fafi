@@ -8,5 +8,6 @@ use FAFI\src\BE\Structure\EntityInterface;
 
 interface EntityHydratorInterface
 {
-    public function hydrate(array $entity): EntityInterface;
+    public function hydrate(array $data): EntityInterface;
+//    public function extract(EntityInterface $entity): array;
 }

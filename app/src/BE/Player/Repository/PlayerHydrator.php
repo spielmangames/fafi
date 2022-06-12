@@ -51,21 +51,19 @@ class PlayerHydrator
         return $player;
     }
 
-    public function extract(Player $player): array
+    public function extract(Player $entity): array
     {
-        $data = [
-            PlayerResource::ID_FIELD => $player->getId(),
+        return [
+            PlayerResource::ID_FIELD => $entity->getId(),
 
-            PlayerResource::NAME_FIELD => $player->getName(),
-            PlayerResource::PARTICLE_FIELD => $player->getParticle(),
-            PlayerResource::SURNAME_FIELD => $player->getSurname(),
-            PlayerResource::FAFI_SURNAME_FIELD => $player->getFafiSurname(),
+            PlayerResource::NAME_FIELD => $entity->getName(),
+            PlayerResource::PARTICLE_FIELD => $entity->getParticle(),
+            PlayerResource::SURNAME_FIELD => $entity->getSurname(),
+            PlayerResource::FAFI_SURNAME_FIELD => $entity->getFafiSurname(),
 
-            PlayerResource::HEIGHT_FIELD => $player->getHeight(),
-            PlayerResource::FOOT_FIELD => $player->getFoot(),
-            PlayerResource::INJURE_FACTOR_FIELD => $player->getInjureFactor(),
+            PlayerResource::HEIGHT_FIELD => $entity->getHeight(),
+            PlayerResource::FOOT_FIELD => $entity->getFoot(),
+            PlayerResource::INJURE_FACTOR_FIELD => $entity->getInjureFactor(),
         ];
-
-        return $data;
     }
 }

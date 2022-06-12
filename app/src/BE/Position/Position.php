@@ -56,8 +56,8 @@ class Position implements EntityInterface
     ];
 
 
-    private ?int $id;
-    protected ?string $name;
+    private ?int $id = null;
+    protected ?string $name = null;
 
 
     public function setId(int $id): self

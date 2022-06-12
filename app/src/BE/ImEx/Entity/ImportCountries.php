@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace FAFI\src\BE\ImEx\Entity;
 
-use FAFI\src\BE\GeoCountry\Repository\CountryHydrator;
 use FAFI\src\BE\ImEx\Persistence\Client\CountryClient;
+use FAFI\src\BE\ImEx\Persistence\Hydrator\CountryHydrator;
 use FAFI\src\BE\ImEx\Transformer\Specification\Entity\CountrySpecification;
 
 class ImportCountries extends AbstractEntityImport

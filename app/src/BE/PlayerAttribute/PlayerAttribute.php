@@ -9,39 +9,22 @@ class PlayerAttribute implements EntityInterface
     public const ENTITY = 'Player Attribute';
 
 
-    private ?int $id;
+    private ?int $id = null;
 
-    protected ?int $playerId;
-    protected ?int $positionId;
+    protected ?int $playerId = null;
+    protected ?int $positionId = null;
 
-    protected ?int $attMin;
-    protected ?int $attMax;
-    protected ?int $defMin;
-    protected ?int $defMax;
+    protected ?int $attMin = null;
+    protected ?int $attMax = null;
+    protected ?int $defMin = null;
+    protected ?int $defMax = null;
 
 
-    public function __construct(
-        ?int $id,
-
-        ?int $playerId,
-        ?int $positionId,
-
-        ?int $attMin,
-        ?int $attMax,
-        ?int $defMin,
-        ?int $defMax
-    ) {
+    public function setId(int $id): self
+    {
         $this->id = $id;
-
-        $this->playerId = $playerId;
-        $this->positionId = $positionId;
-
-        $this->attMin = $attMin;
-        $this->attMax = $attMax;
-        $this->defMin = $defMin;
-        $this->defMax = $defMax;
+        return $this;
     }
-
 
     public function getId(): ?int
     {

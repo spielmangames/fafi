@@ -2,78 +2,42 @@
 
 namespace FAFI\src\BE\GeoCountry\Repository;
 
-use FAFI\exception\EntityErr;
-use FAFI\exception\FafiException;
 use FAFI\src\BE\GeoCountry\Country;
 
 class CountryHydrator
 {
-    private array $requiredFields = [
-        CountryResource::NAME_FIELD,
-    ];
-
-
     /**
      * @param array $data
      *
      * @return Country[]
-     * @throws FafiException
      */
     public function hydrateCollection(array $data): array
     {
-        $transformed = [];
+        $hydrated = [];
         foreach ($data as $row) {
-            $entity = $this->hydrate($row);
-            $transformed[] = $entity;
+            $hydrated[] = $this->hydrate($row);
         }
 
-        return $transformed;
+        return $hydrated;
     }
 
-    /**
-     * @param array $data
-     *
-     * @return Country
-     * @throws FafiException
-     */
     public function hydrate(array $data): Country
     {
-        $this->validateRequiredFieldsOnHydration($data);
+        $country = new Country();
 
-        return new Country(
-            isset($data[CountryResource::ID_FIELD]) ? (int)$data[CountryResource::ID_FIELD] : null,
+        !isset($data[CountryResource::ID_FIELD]) ?: $country->setId($data[CountryResource::ID_FIELD]);
 
-            $data[CountryResource::NAME_FIELD],
-        );
+        !isset($data[CountryResource::NAME_FIELD]) ?: $country->setName($data[CountryResource::NAME_FIELD]);
+
+        return $country;
     }
 
-    /**
-     * @param array $data
-     *
-     * @return void
-     * @throws FafiException
-     */
-    private function validateRequiredFieldsOnHydration(array $data): void
-    {
-        $missed = [];
-        foreach ($this->requiredFields as $field) {
-            if (!isset($data[$field])) {
-                $missed[] = $field;
-            }
-        }
-
-        if (!empty($missed)) {
-            $e = sprintf(EntityErr::REQ_MISSED, Country::ENTITY, implode('", "', $missed));
-            throw new FafiException($e);
-        }
-    }
-
-    public function extract(Country $entity): array
+    public function extract(Country $country): array
     {
         return [
-            CountryResource::ID_FIELD => $entity->getId(),
+            CountryResource::ID_FIELD => $country->getId(),
 
-            CountryResource::NAME_FIELD => $entity->getName(),
+            CountryResource::NAME_FIELD => $country->getName(),
         ];
     }
 }

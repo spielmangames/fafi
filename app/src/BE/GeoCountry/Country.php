@@ -9,9 +9,9 @@ class Country implements EntityInterface
     public const ENTITY = 'Country';
 
 
-    private ?int $id;
+    private ?int $id = null;
 
-    protected ?string $name;
+    protected ?string $name = null;
 
 
     public function setId(int $id): self

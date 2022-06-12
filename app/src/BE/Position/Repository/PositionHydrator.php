@@ -2,72 +2,35 @@
 
 namespace FAFI\src\BE\Position\Repository;
 
-use FAFI\exception\EntityErr;
-use FAFI\exception\FafiException;
 use FAFI\src\BE\Position\Position;
 
 class PositionHydrator
 {
-    private array $requiredFields = [
-        PositionResource::NAME_FIELD,
-    ];
-
-
     /**
      * @param array $data
      *
      * @return Position[]
-     * @throws FafiException
      */
     public function hydrateCollection(array $data): array
     {
-        $transformed = [];
+        $hydrated = [];
         foreach ($data as $row) {
-            $entity = $this->hydrate($row);
-            $transformed[] = $entity;
+            $hydrated[] = $this->hydrate($row);
         }
 
-        return $transformed;
+        return $hydrated;
     }
 
-    /**
-     * @param array $data
-     *
-     * @return Position
-     * @throws FafiException
-     */
     public function hydrate(array $data): Position
     {
-        $this->validateRequiredFieldsOnHydration($data);
+        $position = new Position();
 
-        return new Position(
-            isset($data[PositionResource::ID_FIELD]) ? (int)$data[PositionResource::ID_FIELD] : null,
+        !isset($data[PositionResource::ID_FIELD]) ?: $position->setId($data[PositionResource::ID_FIELD]);
 
-            $data[PositionResource::NAME_FIELD]
-        );
+        !isset($data[PositionResource::NAME_FIELD]) ?: $position->setName($data[PositionResource::NAME_FIELD]);
+
+        return $position;
     }
-
-    /**
-     * @param array $data
-     *
-     * @return void
-     * @throws FafiException
-     */
-    private function validateRequiredFieldsOnHydration(array $data): void
-    {
-        $missed = [];
-        foreach ($this->requiredFields as $field) {
-            if (!isset($data[$field])) {
-                $missed[] = $field;
-            }
-        }
-
-        if (!empty($missed)) {
-            $e = sprintf(EntityErr::REQ_MISSED, Position::ENTITY, implode('", "', $missed));
-            throw new FafiException($e);
-        }
-    }
-
 
     public function extract(Position $entity): array
     {

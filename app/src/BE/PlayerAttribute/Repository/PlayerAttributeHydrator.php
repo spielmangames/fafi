@@ -2,79 +2,41 @@
 
 namespace FAFI\src\BE\PlayerAttribute\Repository;
 
-use FAFI\exception\EntityErr;
-use FAFI\exception\FafiException;
 use FAFI\src\BE\PlayerAttribute\PlayerAttribute;
 
 class PlayerAttributeHydrator
 {
-    private array $requiredFields = [
-        PlayerAttributeResource::PLAYER_ID_FIELD,
-        PlayerAttributeResource::POSITION_ID_FIELD,
-    ];
-
-
     /**
      * @param array $data
      *
      * @return PlayerAttribute[]
-     * @throws FafiException
      */
     public function hydrateCollection(array $data): array
     {
-        $transformed = [];
+        $hydrated = [];
         foreach ($data as $row) {
-            $entity = $this->hydrate($row);
-            $transformed[] = $entity;
+            $hydrated[] = $this->hydrate($row);
         }
 
-        return $transformed;
+        return $hydrated;
     }
 
-    /**
-     * @param array $data
-     *
-     * @return PlayerAttribute
-     * @throws FafiException
-     */
     public function hydrate(array $data): PlayerAttribute
     {
-        $this->validateRequiredFieldsOnHydration($data);
+        $attribute = new PlayerAttribute();
 
-        return new PlayerAttribute(
-            isset($data[PlayerAttributeResource::ID_FIELD]) ? (int)$data[PlayerAttributeResource::ID_FIELD] : null,
+        !isset($data[PlayerAttributeResource::ID_FIELD]) ?: $attribute->setId($data[PlayerAttributeResource::ID_FIELD]);
 
-            $data[PlayerAttributeResource::PLAYER_ID_FIELD],
-            $data[PlayerAttributeResource::POSITION_ID_FIELD],
+        !isset($data[PlayerAttributeResource::PLAYER_ID_FIELD]) ?: $attribute->setPlayerId($data[PlayerAttributeResource::PLAYER_ID_FIELD]);
+        !isset($data[PlayerAttributeResource::POSITION_ID_FIELD]) ?: $attribute->setPositionId($data[PlayerAttributeResource::POSITION_ID_FIELD]);
 
-            $data[PlayerAttributeResource::ATT_MIN_FIELD],
-            $data[PlayerAttributeResource::ATT_MAX_FIELD],
-            $data[PlayerAttributeResource::DEF_MIN_FIELD],
-            $data[PlayerAttributeResource::DEF_MAX_FIELD],
-        );
+        !isset($data[PlayerAttributeResource::ATT_MIN_FIELD]) ?: $attribute->setAttMin($data[PlayerAttributeResource::ATT_MIN_FIELD]);
+        !isset($data[PlayerAttributeResource::ATT_MAX_FIELD]) ?: $attribute->setAttMax($data[PlayerAttributeResource::ATT_MAX_FIELD]);
+        !isset($data[PlayerAttributeResource::DEF_MIN_FIELD]) ?: $attribute->setDefMin($data[PlayerAttributeResource::DEF_MIN_FIELD]);
+        !isset($data[PlayerAttributeResource::DEF_MAX_FIELD]) ?: $attribute->setDefMax($data[PlayerAttributeResource::DEF_MAX_FIELD]);
+
+        return $attribute;
     }
-
-    /**
-     * @param array $data
-     *
-     * @return void
-     * @throws FafiException
-     */
-    private function validateRequiredFieldsOnHydration(array $data): void
-    {
-        $missed = [];
-        foreach ($this->requiredFields as $field) {
-            if (!isset($data[$field])) {
-                $missed[] = $field;
-            }
-        }
-
-        if (!empty($missed)) {
-            $e = sprintf(EntityErr::REQ_MISSED, PlayerAttribute::ENTITY, implode('", "', $missed));
-            throw new FafiException($e);
-        }
-    }
-
 
     public function extract(PlayerAttribute $entity): array
     {
