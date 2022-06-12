@@ -7,12 +7,10 @@ use Exception;
 class FafiException extends Exception
 {
     public const E_REQ_MISSED = 'Required fields are missed for %s: "%s".';
-    public const E_ENTITY_NOT_UNIQUE = '%s must have unique "%s".';
     public const E_ID_PRESENT = '"id" must be absent for creating %s.';
     public const E_ID_ABSENT = 'ID is required for updating %s and can not be null.';
     public const E_ENTITY_ABSENT = '%s (id = %d) is absent in storage.';
     public const E_ENTITY_PRESENT = '%s (id = %d) is present in storage.';
-    public const E_ENTITY_OPERATION_FAILED = 'Failed to operate with items in storage.';
 
     public const E_VALUE_TYPE_INVALID_ENUM = 'Property "%s" value is not supported.';
 

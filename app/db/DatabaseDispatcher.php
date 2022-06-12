@@ -2,6 +2,7 @@
 
 namespace FAFI\db;
 
+use FAFI\exception\DbErr;
 use FAFI\exception\FafiException;
 
 class DatabaseDispatcher
@@ -28,7 +29,7 @@ class DatabaseDispatcher
         try {
             $result = $connect->query($query);
             if (!$result) {
-                throw new FafiException(FafiException::E_ENTITY_OPERATION_FAILED . EOL . $connect->error);
+                $this->fail($connect->error);
             }
 
             $selection = [];
@@ -37,13 +38,13 @@ class DatabaseDispatcher
             }
         } catch (FafiException $e) {
             $connect->rollback();
-            $this->dbConnector->close();
+            $this->dbConnector->closeConnection();
 
             throw $e;
         }
 
         $connect->commit();
-        $this->dbConnector->close();
+        $this->dbConnector->closeConnection();
 
         return $selection;
     }
@@ -62,22 +63,22 @@ class DatabaseDispatcher
         try {
             $result = $connect->query($query);
             if (!$result) {
-                throw new FafiException(FafiException::E_ENTITY_OPERATION_FAILED . EOL . $connect->error);
+                $this->fail($connect->error);
             }
 
             $id = $connect->insert_id;
             if (!$id) {
-                throw new FafiException(FafiException::E_ENTITY_OPERATION_FAILED . EOL . $connect->error);
+                $this->fail($connect->error);
             }
         } catch (FafiException $e) {
             $connect->rollback();
-            $this->dbConnector->close();
+            $this->dbConnector->closeConnection();
 
             throw $e;
         }
 
         $connect->commit();
-        $this->dbConnector->close();
+        $this->dbConnector->closeConnection();
 
         return $id;
     }
@@ -96,16 +97,28 @@ class DatabaseDispatcher
         try {
             $result = $connect->query($query);
             if (!$result) {
-                throw new FafiException(FafiException::E_ENTITY_OPERATION_FAILED . EOL . $connect->error);
+                $this->fail($connect->error);
             }
         } catch (FafiException $e) {
             $connect->rollback();
-            $this->dbConnector->close();
+            $this->dbConnector->closeConnection();
 
             throw $e;
         }
 
         $connect->commit();
-        $this->dbConnector->close();
+        $this->dbConnector->closeConnection();
+    }
+
+
+    /**
+     * @param string $connectError
+     *
+     * @return void
+     * @throws FafiException
+     */
+    private function fail(string $connectError): void
+    {
+        throw new FafiException(DbErr::DB_OPERATE_FAILED . EOL . $connectError);
     }
 }

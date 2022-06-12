@@ -3,34 +3,49 @@
 namespace FAFI\db;
 
 use FAFI\config\Settings;
+use FAFI\exception\DbErr;
 use mysqli;
 
 class DatabaseConnector
 {
-    private const E_DB_CONNECT_FAILED = 'Connection failed.';
-    private const E_DB_CONNECT_CLOSING_FAILED = 'Failure on closing the database connection.';
-
+    private const SETTINGS_DB = 'db';
+    private const SETTING_HOSTNAME = 'host';
+    private const SETTING_USERNAME = 'user';
+    private const SETTING_PASSWORD = 'pass';
+    private const SETTING_DBNAME = 'name';
 
     private ?mysqli $connection = null;
 
 
     public function open(bool $withDb = true): mysqli
     {
-        $host = Settings::getInstance()->get('db/host');
-        $username = Settings::getInstance()->get('db/user');
-        $password = Settings::getInstance()->get('db/pass');
-        $dbname = $withDb ? Settings::getInstance()->get('db/name') : null;
+        $host = $this->getDbSetting(self::SETTING_HOSTNAME);
+        $username = $this->getDbSetting(self::SETTING_USERNAME);
+        $password = $this->getDbSetting(self::SETTING_PASSWORD);
+        $dbname = $withDb ? $this->getDbSetting(self::SETTING_DBNAME) : null;
 
         $this->connection = new mysqli($host, $username, $password, $dbname);
-        $this->verifyConnect($this->connection);
+        $this->verifyConnection($this->connection);
 
         return $this->connection;
     }
 
-    public function verifyConnect(mysqli $connection): void
+
+    private function getDbSettings(): array
+    {
+        return Settings::getInstance()->get(self::SETTINGS_DB);
+    }
+
+    private function getDbSetting(string $settingKey): ?string
+    {
+        return $this->getDbSettings()[$settingKey];
+    }
+
+
+    private function verifyConnection(mysqli $connection): void
     {
         if ($connection->connect_error) {
-            die(self::E_DB_CONNECT_FAILED . EOL . $connection->connect_error);
+            die(DbErr::DB_CONNECT_BROKEN . EOL . $connection->connect_error);
         }
     }
 
@@ -39,12 +54,12 @@ class DatabaseConnector
         return $this->connection;
     }
 
-    public function close(): void
+    public function closeConnection(): void
     {
         $connection = $this->getConnection();
         if ($connection) {
             if (!$connection->close()) {
-                echo self::E_DB_CONNECT_CLOSING_FAILED;
+                echo DbErr::DB_CONNECT_CLOSE_FAILED;
             }
             unset($this->connection);
         }

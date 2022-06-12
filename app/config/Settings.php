@@ -4,7 +4,7 @@ namespace FAFI\config;
 
 class Settings
 {
-    protected $path;
+    protected string $path;
     protected $settings;
     private static $instance;
 
@@ -26,7 +26,7 @@ class Settings
      */
     public function get(string $key)
     {
-        if (is_null($this->settings)) {
+        if (!isset($this->settings)) {
             $this->init();
         }
         if (empty($this->settings)) {
@@ -36,13 +36,12 @@ class Settings
         $keys = explode('/', $key);
         $settings = $this->settings;
         foreach ($keys as $key) {
-            $settings = (array_key_exists($key, $settings)) ? $settings[$key] : null;
+            $settings = array_key_exists($key, $settings) ? $settings[$key] : null;
         }
 
         return $settings;
     }
 
-    /** @return Settings */
     public static function getInstance(): Settings
     {
         if (is_null(self::$instance)) {

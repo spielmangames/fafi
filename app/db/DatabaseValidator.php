@@ -2,6 +2,7 @@
 
 namespace FAFI\db;
 
+use FAFI\exception\EntityErr;
 use FAFI\exception\FafiException;
 use FAFI\src\BE\Player\Repository\Criteria;
 use FAFI\src\BE\Structure\Repository\AbstractResource;
@@ -31,7 +32,7 @@ class DatabaseValidator
         $result = $this->queryExecutor->readRecords($table, [$condition]);
 
         if ($result && !$this->isSameRecord($result, $entityData)) {
-            throw new FafiException(sprintf(FafiException::E_ENTITY_NOT_UNIQUE, $entityName, $property));
+            throw new FafiException(sprintf(EntityErr::ENTITY_NOT_UNIQUE, $entityName, $property));
         }
     }
 
