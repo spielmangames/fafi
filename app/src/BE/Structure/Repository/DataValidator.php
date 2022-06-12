@@ -31,6 +31,13 @@ class DataValidator
     }
 
 
+    public function assertFieldBool($value, string $property): void
+    {
+        if (!is_bool($value)) {
+            throw new FafiException(sprintf(EntityErr::VALUE_TYPE_INVALID_BOOL, $property));
+        }
+    }
+
     public function assertFieldOneOf($value, string $property, array $allowed): void
     {
         if (!in_array($value, $allowed)) {

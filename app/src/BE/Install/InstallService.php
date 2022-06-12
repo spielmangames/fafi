@@ -5,6 +5,7 @@ namespace FAFI\src\BE\Install;
 use FAFI\data\FileValidator;
 use FAFI\db\DatabaseConnector;
 use FAFI\exception\FafiException;
+use FAFI\exception\FileErr;
 use FAFI\src\BE\ImEx\ImExService;
 
 class InstallService
@@ -35,7 +36,7 @@ class InstallService
 
         $this->fileValidator->validateFile($filePath, '.sql');
         if (!execSqlFile($filePath, $this->dbConnect->open(false))) {
-            throw new FafiException(sprintf('Failed to execute "%s".', $fileName));
+            throw new FafiException(sprintf(FileErr::FILE_EXEC_FAILED, $fileName));
         }
     }
 

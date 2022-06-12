@@ -4,30 +4,21 @@ declare(strict_types=1);
 
 namespace FAFI\src\BE\ImEx\Transformer\Specification\Field\Typical;
 
-use FAFI\exception\FafiException;
 use FAFI\src\BE\ImEx\Transformer\Specification\Field\ImExFieldSpecification;
+use FAFI\src\BE\Structure\Repository\DataValidator;
 
 class IntegerSpecification implements ImExFieldSpecification
 {
-    private const E_VALUE_TYPE_INVALID = 'Property "%s" is not integer.';
+    private DataValidator $dataValidator;
+
+    public function __construct()
+    {
+        $this->dataValidator = new DataValidator();
+    }
 
 
     public function validate(string $property, $value): void
     {
-        $this->assertInt($property, $value);
-    }
-
-    /**
-     * @param string $property
-     * @param $value
-     *
-     * @return void
-     * @throws FafiException
-     */
-    private function assertInt(string $property, $value): void
-    {
-        if (!is_int($value)) {
-            throw new FafiException(sprintf(self::E_VALUE_TYPE_INVALID, $property));
-        }
+        $this->dataValidator->assertFieldInt($value, $property);
     }
 }

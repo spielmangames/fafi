@@ -4,28 +4,21 @@ declare(strict_types=1);
 
 namespace FAFI\src\BE\ImEx\Transformer\Specification\Field\Typical;
 
-use FAFI\exception\EntityErr;
-use FAFI\exception\FafiException;
 use FAFI\src\BE\ImEx\Transformer\Specification\Field\ImExFieldSpecification;
+use FAFI\src\BE\Structure\Repository\DataValidator;
 
 class StringSpecification implements ImExFieldSpecification
 {
-    public function validate(string $property, $value): void
+    private DataValidator $dataValidator;
+
+    public function __construct()
     {
-        $this->assertStr($property, $value);
+        $this->dataValidator = new DataValidator();
     }
 
-    /**
-     * @param string $property
-     * @param $value
-     *
-     * @return void
-     * @throws FafiException
-     */
-    private function assertStr(string $property, $value): void
+
+    public function validate(string $property, $value): void
     {
-        if (!is_string($value)) {
-            throw new FafiException(sprintf(EntityErr::VALUE_TYPE_INVALID_STR, $property));
-        }
+        $this->dataValidator->assertFieldStr($value, $property);
     }
 }

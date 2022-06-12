@@ -6,6 +6,7 @@ namespace FAFI\src\BE\ImEx;
 
 use FAFI\data\CsvFileHandlerInterface;
 use FAFI\exception\FafiException;
+use FAFI\exception\ImExErr;
 use FAFI\src\BE\ImEx\Entity\ImportCountries;
 use FAFI\src\BE\ImEx\Entity\ImportPlayers;
 use FAFI\src\BE\ImEx\Entity\ImportPositions;
@@ -18,8 +19,6 @@ class ImExService
     public const ENTITIES_COUNTRIES = 'countries';
     public const ENTITIES_POSITIONS = 'positions';
     public const ENTITIES_PLAYERS = 'players';
-
-    private const E_ENTITY_IMPORT_NOT_SUPPORTED = 'Entity "%s" is not supported for Import.';
 
 
     private ImportCountries $importCountries;
@@ -56,7 +55,7 @@ class ImExService
                 break;
 
             default:
-                throw new FafiException(sprintf(self::E_ENTITY_IMPORT_NOT_SUPPORTED, $entityName));
+                throw new FafiException(sprintf(ImExErr::ENTITY_IMPORT_NOT_SUPPORTED, $entityName));
         }
     }
 

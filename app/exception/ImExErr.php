@@ -10,4 +10,6 @@ interface ImExErr extends Err
 
     public const IMPORT_ENTITY_FIELD_SPECIFICATION_ABSENT = 'Field "%s" Specification is absent in %s Config.';
     public const IMPORT_ENTITY_FIELD_TRANSFORMER_ABSENT = 'Field "%s" Transformer is absent in %s Config.';
+
+    public const ENTITY_IMPORT_NOT_SUPPORTED = 'Entity "%s" is not supported for Import.';
 }
