@@ -7,6 +7,7 @@ namespace FAFI\src\BE\ImEx\Storage;
 use FAFI\data\CsvFileHandler;
 use FAFI\data\FileValidator;
 use FAFI\exception\FafiException;
+use FAFI\exception\ImExErr;
 use FAFI\src\BE\ImEx\ImExService;
 
 class ImportExtractor
@@ -53,7 +54,7 @@ class ImportExtractor
             $this->fileValidator->validateLineEmpty($removeLine);
             unset($extracted[$lineToRemove]);
         } catch (FafiException $e) {
-            $e = implode(EOL, [$e->getMessage(), FafiException::E_IMPORT_FILE_HEADER_INVALID]);
+            $e = implode(EOL, [$e->getMessage(), ImExErr::IMPORT_FILE_HEADER_INVALID]);
             throw new FafiException($e);
         }
 

@@ -3,8 +3,9 @@
 namespace FAFI\src\BE\Structure\Repository;
 
 use FAFI\db\DatabaseValidator;
-use FAFI\db\QueryExecutor;
-use FAFI\db\QuerySyntax;
+use FAFI\db\Query\QueryExecutor;
+use FAFI\db\Query\QuerySyntax;
+use FAFI\exception\EntityErr;
 use FAFI\exception\FafiException;
 use FAFI\src\BE\Player\Repository\Criteria;
 use FAFI\src\BE\Structure\EntityInterface;
@@ -46,7 +47,7 @@ abstract class AbstractResource
         $criteria = new Criteria(self::ID_FIELD, QuerySyntax::OPERATOR_IS, [$id]);
         $result = $this->readFirst([$criteria]);
         if (!$result) {
-            throw new FafiException(sprintf(FafiException::E_ENTITY_ABSENT, $entity, $id));
+            throw new FafiException(sprintf(EntityErr::ENTITY_ABSENT, $entity, self::ID_FIELD, $id));
         }
 
         return $result;
@@ -96,7 +97,7 @@ abstract class AbstractResource
         $criteria = new Criteria(self::ID_FIELD, QuerySyntax::OPERATOR_IS, [$id]);
         $result = $this->readFirst([$criteria]);
         if (!$result) {
-            throw new FafiException(sprintf(FafiException::E_ENTITY_ABSENT, $entity, $id));
+            throw new FafiException(sprintf(EntityErr::ENTITY_ABSENT, $entity, self::ID_FIELD, $id));
         }
 
         return $result;

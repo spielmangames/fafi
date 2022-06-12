@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace FAFI\src\BE\ImEx\Transformer;
 
+use FAFI\exception\EntityErr;
 use FAFI\exception\FafiException;
+use FAFI\exception\ImExErr;
 use FAFI\src\BE\ImEx\Transformer\Schema\File\AbstractFileSchema;
 use FAFI\src\BE\ImEx\Transformer\Specification\Entity\ImExEntitySpecification;
 use FAFI\src\BE\ImEx\Transformer\Specification\Field\ImExFieldSpecification;
@@ -49,8 +51,8 @@ class ImportEntityValidator
 
         if (!empty($missed)) {
             $e = [
-                sprintf(FafiException::E_IMPORT_FAILED, $line),
-                sprintf(FafiException::E_REQ_MISSED, Player::ENTITY, implode('", "', $missed)),
+                sprintf(ImExErr::IMPORT_FAILED, $line),
+                sprintf(EntityErr::REQ_MISSED, Player::ENTITY, implode('", "', $missed)),
             ];
             throw new FafiException(FafiException::combine($e));
         }
@@ -68,8 +70,8 @@ class ImportEntityValidator
         $reserved = [AbstractFileSchema::ID];
         if (count($entity) <= count($reserved)) {
             $e = [
-                sprintf(FafiException::E_IMPORT_FAILED, $line),
-                sprintf(FafiException::E_IMPORT_DATA_ABSENT, Player::ENTITY),
+                sprintf(ImExErr::IMPORT_FAILED, $line),
+                sprintf(ImExErr::IMPORT_DATA_ABSENT, Player::ENTITY),
             ];
             throw new FafiException(FafiException::combine($e));
         }
@@ -95,7 +97,7 @@ class ImportEntityValidator
         try {
             $specification->validate($fieldName, $fieldValue);
         } catch (FafiException $e) {
-            $e = [sprintf(FafiException::E_IMPORT_FAILED, $line), $e->getMessage()];
+            $e = [sprintf(ImExErr::IMPORT_FAILED, $line), $e->getMessage()];
             throw new FafiException(FafiException::combine($e));
         }
     }

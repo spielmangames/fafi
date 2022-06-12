@@ -2,6 +2,7 @@
 
 namespace FAFI\src\BE\Position\Repository;
 
+use FAFI\exception\EntityErr;
 use FAFI\exception\FafiException;
 use FAFI\src\BE\Position\Position;
 
@@ -62,7 +63,7 @@ class PositionHydrator
         }
 
         if (!empty($missed)) {
-            $e = sprintf(FafiException::E_REQ_MISSED, Position::ENTITY, implode('", "', $missed));
+            $e = sprintf(EntityErr::REQ_MISSED, Position::ENTITY, implode('", "', $missed));
             throw new FafiException($e);
         }
     }

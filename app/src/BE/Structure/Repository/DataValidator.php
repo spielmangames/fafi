@@ -2,6 +2,7 @@
 
 namespace FAFI\src\BE\Structure\Repository;
 
+use FAFI\exception\EntityErr;
 use FAFI\exception\FafiException;
 
 class DataValidator
@@ -25,7 +26,7 @@ class DataValidator
 
         if (!empty($missed)) {
             $missed = implode(FafiException::LIST_WRAPPED_SEPARATOR, $missed);
-            throw new FafiException(sprintf(FafiException::E_REQ_MISSED, $entityName, $missed));
+            throw new FafiException(sprintf(EntityErr::REQ_MISSED, $entityName, $missed));
         }
     }
 }

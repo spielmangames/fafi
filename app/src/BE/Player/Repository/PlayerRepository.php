@@ -2,7 +2,7 @@
 
 namespace FAFI\src\BE\Player\Repository;
 
-use FAFI\db\QuerySyntax;
+use FAFI\db\Query\QuerySyntax;
 use FAFI\exception\FafiException;
 use FAFI\src\BE\Player\Player;
 use FAFI\src\BE\Structure\Repository\AbstractResource;

@@ -2,7 +2,7 @@
 
 namespace FAFI\demo;
 
-use FAFI\db\QuerySyntax;
+use FAFI\db\Query\QuerySyntax;
 use FAFI\exception\FafiException;
 use FAFI\src\BE\Player\Repository\Criteria;
 use FAFI\src\BE\Player\Repository\PlayerRepository;

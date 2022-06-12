@@ -4,6 +4,7 @@ namespace FAFI\data;
 
 use Exception;
 use FAFI\exception\FafiException;
+use FAFI\exception\FileErr;
 
 class CsvFileHandler implements CsvFileHandlerInterface
 {
@@ -17,7 +18,7 @@ class CsvFileHandler implements CsvFileHandlerInterface
         try {
             $content = parseCsvTable($filePath, $limit);
         } catch (Exception $e) {
-            throw new FafiException($e->getMessage());
+            throw new FafiException(FileErr::FILE_OPERATE_FAILED . EOL . $e->getMessage());
         }
 
         return $content;

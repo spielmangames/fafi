@@ -2,6 +2,7 @@
 
 namespace FAFI\src\BE\GeoCountry\Repository;
 
+use FAFI\exception\EntityErr;
 use FAFI\exception\FafiException;
 use FAFI\src\BE\GeoCountry\Country;
 
@@ -62,7 +63,7 @@ class CountryHydrator
         }
 
         if (!empty($missed)) {
-            $e = sprintf(FafiException::E_REQ_MISSED, Country::ENTITY, implode('", "', $missed));
+            $e = sprintf(EntityErr::REQ_MISSED, Country::ENTITY, implode('", "', $missed));
             throw new FafiException($e);
         }
     }

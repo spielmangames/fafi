@@ -3,18 +3,10 @@
 namespace FAFI\data;
 
 use FAFI\exception\FafiException;
+use FAFI\exception\FileErr;
 
 class FileValidator
 {
-    private const E_FILE_INVALID = 'File "%s" is invalid.';
-    private const E_FILE_EXT_INVALID = 'File "%s" has unsupported extension.';
-    private const E_FILE_TOO_LARGE = 'File "%s" is too large.';
-
-    private const E_FILE_DATA_ABSENT = 'No content data had been extracted from "%s".';
-
-    private const E_LINE_NOT_EMPTY = 'Line is not empty: "%s" column contains data.';
-
-
     /**
      * @param string $filePath
      * @param string $expectedExt
@@ -26,15 +18,15 @@ class FileValidator
     public function validateFile(string $filePath, string $expectedExt, ?int $limit = null): void
     {
         if (!isFileValid($filePath)) {
-            throw new FafiException(sprintf(self::E_FILE_INVALID, $filePath));
+            throw new FafiException(sprintf(FileErr::FILE_INVALID, $filePath));
         }
 
         if ('.' . getExt($filePath) !== $expectedExt) {
-            throw new FafiException(sprintf(self::E_FILE_EXT_INVALID, $filePath));
+            throw new FafiException(sprintf(FileErr::FILE_EXT_INVALID, $filePath));
         }
 
         if (isset($limit) && filesize($filePath) > $limit) {
-            throw new FafiException(sprintf(self::E_FILE_TOO_LARGE, $filePath));
+            throw new FafiException(sprintf(FileErr::FILE_TOO_LARGE, $filePath));
         }
     }
 
@@ -48,7 +40,7 @@ class FileValidator
     public function validateFileContentPresent(string $filePath, array $data): void
     {
         if (empty($data)) {
-            throw new FafiException(sprintf(self::E_FILE_DATA_ABSENT, $filePath));
+            throw new FafiException(sprintf(FileErr::FILE_DATA_ABSENT, $filePath));
         }
     }
 
@@ -62,7 +54,7 @@ class FileValidator
     {
         foreach ($line as $column => $cellValue) {
             if (!empty($cellValue)) {
-                throw new FafiException(sprintf(self::E_LINE_NOT_EMPTY, $column));
+                throw new FafiException(sprintf(FileErr::LINE_NOT_EMPTY, $column));
             }
         }
     }

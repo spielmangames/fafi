@@ -2,6 +2,7 @@
 
 namespace FAFI\src\BE\PlayerAttribute\Repository;
 
+use FAFI\exception\EntityErr;
 use FAFI\exception\FafiException;
 use FAFI\src\BE\PlayerAttribute\PlayerAttribute;
 
@@ -69,7 +70,7 @@ class PlayerAttributeHydrator
         }
 
         if (!empty($missed)) {
-            $e = sprintf(FafiException::E_REQ_MISSED, PlayerAttribute::ENTITY, implode('", "', $missed));
+            $e = sprintf(EntityErr::REQ_MISSED, PlayerAttribute::ENTITY, implode('", "', $missed));
             throw new FafiException($e);
         }
     }
