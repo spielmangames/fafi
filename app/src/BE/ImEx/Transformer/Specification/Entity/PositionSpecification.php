@@ -7,6 +7,8 @@ namespace FAFI\src\BE\ImEx\Transformer\Specification\Entity;
 use FAFI\src\BE\ImEx\Transformer\Field\Typical\IntegerFieldTransformer;
 use FAFI\src\BE\ImEx\Transformer\Field\Typical\StringFieldTransformer;
 use FAFI\src\BE\ImEx\Transformer\Schema\File\PositionFileSchema;
+use FAFI\src\BE\ImEx\Transformer\Specification\Field\Typical\IntegerSpecification;
+use FAFI\src\BE\ImEx\Transformer\Specification\Field\Typical\StringSpecification;
 
 class PositionSpecification implements ImExEntitySpecification
 {
@@ -22,7 +24,9 @@ class PositionSpecification implements ImExEntitySpecification
     public function getFieldSpecificationsMap(): array
     {
         return [
-            PositionFileSchema::NAME,
+            PositionFileSchema::ID => IntegerSpecification::class,
+
+            PositionFileSchema::NAME => StringSpecification::class,
         ];
     }
 

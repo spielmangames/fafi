@@ -11,6 +11,7 @@ use FAFI\src\BE\ImEx\ImExService;
 class InstallService
 {
     public const IMEX_SAMPLE_DIR_PATH = PATH_STORAGE . 'sample' . DS;
+    private const DB_SCHEMA_FILE_NAME = 'fafibase_schema.sql';
 
 
     private DatabaseConnector $dbConnect;
@@ -31,7 +32,7 @@ class InstallService
      */
     public function installDbSchema(): void
     {
-        $fileName = 'fafibase_schema.sql';
+        $fileName = self::DB_SCHEMA_FILE_NAME;
         $filePath = PATH_APP . 'db' . DS . $fileName;
 
         $this->fileValidator->validateFile($filePath, '.sql');
