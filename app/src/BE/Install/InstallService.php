@@ -39,6 +39,7 @@ class InstallService
         if (!execSqlFile($filePath, $this->dbConnect->open(false))) {
             throw new FafiException(sprintf(FileErr::FILE_EXEC_FAILED, $fileName));
         }
+        sleep(1);
     }
 
     /**
