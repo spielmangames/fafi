@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace FAFI\src\BE\ImEx\Transformer\Field;
 
 use FAFI\exception\FafiException;
+use FAFI\src\BE\ImEx\Transformer\Field\Player\PlayerAttributesFieldTransformer;
 use FAFI\src\BE\ImEx\Transformer\Field\Typical\BooleanFieldTransformer;
 use FAFI\src\BE\ImEx\Transformer\Field\Typical\IntegerFieldTransformer;
 use FAFI\src\BE\ImEx\Transformer\Field\Typical\StringFieldTransformer;
@@ -26,6 +27,9 @@ class ImExFieldTransformerFactory
                 return new IntegerFieldTransformer();
             case StringFieldTransformer::class:
                 return new StringFieldTransformer();
+
+            case PlayerAttributesFieldTransformer::class:
+                return new PlayerAttributesFieldTransformer();
 
             default:
                 throw new FafiException(sprintf(FafiException::E_CLASS_ABSENT, $class));

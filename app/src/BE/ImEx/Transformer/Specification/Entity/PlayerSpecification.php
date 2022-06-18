@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace FAFI\src\BE\ImEx\Transformer\Specification\Entity;
 
+use FAFI\src\BE\ImEx\Transformer\Field\Player\PlayerAttributesFieldTransformer;
 use FAFI\src\BE\ImEx\Transformer\Field\Typical\BooleanFieldTransformer;
 use FAFI\src\BE\ImEx\Transformer\Field\Typical\IntegerFieldTransformer;
 use FAFI\src\BE\ImEx\Transformer\Field\Typical\StringFieldTransformer;
 use FAFI\src\BE\ImEx\Transformer\Schema\File\PlayerFileSchema;
+use FAFI\src\BE\ImEx\Transformer\Specification\Field\Player\PlayerAttributesSpecification;
 use FAFI\src\BE\ImEx\Transformer\Specification\Field\Player\PlayerFootSpecification;
 use FAFI\src\BE\ImEx\Transformer\Specification\Field\Typical\BooleanSpecification;
 use FAFI\src\BE\ImEx\Transformer\Specification\Field\Typical\IntegerSpecification;
@@ -28,6 +30,8 @@ class PlayerSpecification implements ImExEntitySpecification
             PlayerFileSchema::HEIGHT => IntegerFieldTransformer::class,
             PlayerFileSchema::FOOT => StringFieldTransformer::class,
             PlayerFileSchema::INJURE_FACTOR => BooleanFieldTransformer::class,
+
+            PlayerFileSchema::ATTRIBUTES => PlayerAttributesFieldTransformer::class,
         ];
     }
 
@@ -44,6 +48,8 @@ class PlayerSpecification implements ImExEntitySpecification
             PlayerFileSchema::HEIGHT => IntegerSpecification::class,
             PlayerFileSchema::FOOT => PlayerFootSpecification::class,
             PlayerFileSchema::INJURE_FACTOR => BooleanSpecification::class,
+
+            PlayerFileSchema::ATTRIBUTES => PlayerAttributesSpecification::class,
         ];
     }
 
@@ -52,6 +58,8 @@ class PlayerSpecification implements ImExEntitySpecification
         return [
             PlayerFileSchema::SURNAME,
             PlayerFileSchema::FOOT,
+
+            PlayerFileSchema::ATTRIBUTES,
         ];
     }
 }

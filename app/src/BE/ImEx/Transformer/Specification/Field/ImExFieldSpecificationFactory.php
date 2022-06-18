@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace FAFI\src\BE\ImEx\Transformer\Specification\Field;
 
 use FAFI\exception\FafiException;
+use FAFI\src\BE\ImEx\Transformer\Specification\Field\Player\PlayerAttributesSpecification;
 use FAFI\src\BE\ImEx\Transformer\Specification\Field\Player\PlayerFootSpecification;
 use FAFI\src\BE\ImEx\Transformer\Specification\Field\Typical\BooleanSpecification;
 use FAFI\src\BE\ImEx\Transformer\Specification\Field\Typical\IntegerSpecification;
@@ -21,6 +22,7 @@ class ImExFieldSpecificationFactory
     public function create(string $class): ImExFieldSpecification
     {
         switch ($class) {
+            // typical
             case BooleanSpecification::class:
                 return new BooleanSpecification();
             case IntegerSpecification::class:
@@ -28,11 +30,13 @@ class ImExFieldSpecificationFactory
             case StringSpecification::class:
                 return new StringSpecification();
 
+            // Player
             case PlayerFootSpecification::class:
                 return new PlayerFootSpecification();
-
-            default:
-                throw new FafiException(sprintf(FafiException::E_CLASS_ABSENT, $class));
+            case PlayerAttributesSpecification::class:
+                return new PlayerAttributesSpecification();
         }
+
+        throw new FafiException(sprintf(FafiException::E_CLASS_ABSENT, $class));
     }
 }
