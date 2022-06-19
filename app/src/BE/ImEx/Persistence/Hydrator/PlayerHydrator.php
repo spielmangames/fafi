@@ -33,19 +33,11 @@ class PlayerHydrator implements EntityHydratorInterface
         !isset($data[PlayerFileSchema::FOOT]) ?: $player->setFoot($data[PlayerFileSchema::FOOT]);
         !isset($data[PlayerFileSchema::INJURE_FACTOR]) ?: $player->setInjureFactor($data[PlayerFileSchema::INJURE_FACTOR]);
 
-        !isset($data[PlayerFileSchema::ATTRIBUTES]) ?: $player->setAttributes($this->hydrateAttributes($data[PlayerFileSchema::ATTRIBUTES]));
+        !isset($data[PlayerFileSchema::ATTRIBUTES]) ?: $player->setAttributes(
+            $this->playerAttributeHydrator->hydrateCollection($data[PlayerFileSchema::ATTRIBUTES])
+        );
 
         return $player;
-    }
-
-    /**
-     * @param array $attributes
-     *
-     * @return PlayerAttribute[]
-     */
-    private function hydrateAttributes(array $attributes): array
-    {
-        return $this->playerAttributeHydrator->hydrateCollection($attributes);
     }
 
 
