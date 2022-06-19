@@ -3,6 +3,7 @@
 namespace FAFI\src\BE\Player\Repository;
 
 use FAFI\src\BE\Player\Player;
+use FAFI\src\BE\PlayerAttribute\PlayerAttribute;
 use FAFI\src\BE\PlayerAttribute\Repository\PlayerAttributeHydrator;
 
 class PlayerHydrator
@@ -32,9 +33,6 @@ class PlayerHydrator
 
     public function hydrate(array $data): Player
     {
-//        $attributes = $data['attributes'] ?? $this->playerAttributeHydrator->hydrateCollection($data['attributes']);
-        $attributes = $data['attributes'] ?? null;
-
         $player = new Player();
 
         !isset($data[PlayerResource::ID_FIELD]) ?: $player->setId($data[PlayerResource::ID_FIELD]);
@@ -48,8 +46,21 @@ class PlayerHydrator
         !isset($data[PlayerResource::FOOT_FIELD]) ?: $player->setFoot($data[PlayerResource::FOOT_FIELD]);
         !isset($data[PlayerResource::INJURE_FACTOR_FIELD]) ?: $player->setInjureFactor($data[PlayerResource::INJURE_FACTOR_FIELD]);
 
+        !isset($data['attributes']) ?: $player->setAttributes($this->hydrateAttributes($data['attributes']));
+
         return $player;
     }
+
+    /**
+     * @param array $attributes
+     *
+     * @return PlayerAttribute[]
+     */
+    private function hydrateAttributes(array $attributes): array
+    {
+        return $this->playerAttributeHydrator->hydrateCollection($attributes);
+    }
+
 
     public function extract(Player $entity): array
     {
@@ -64,6 +75,8 @@ class PlayerHydrator
             PlayerResource::HEIGHT_FIELD => $entity->getHeight(),
             PlayerResource::FOOT_FIELD => $entity->getFoot(),
             PlayerResource::INJURE_FACTOR_FIELD => $entity->getInjureFactor(),
+
+            'attributes' => $entity->getAttributes(),
         ];
     }
 }

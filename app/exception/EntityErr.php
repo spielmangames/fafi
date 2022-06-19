@@ -13,6 +13,7 @@ interface EntityErr extends Err
     public const ENTITY_NOT_UNIQUE = '%s must have unique "%s".';
 
 
+    public const VALUE_TYPE_INVALID_ARR = 'Property "%s" must be array.';
     public const VALUE_TYPE_INVALID_BOOL = 'Property "%s" must be boolean.';
     public const VALUE_TYPE_INVALID_INT = 'Property "%s" must be integer.';
     public const VALUE_TYPE_INVALID_STR = 'Property "%s" must be string.';

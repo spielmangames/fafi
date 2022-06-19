@@ -6,9 +6,18 @@ namespace FAFI\src\BE\ImEx\Persistence\Hydrator;
 
 use FAFI\src\BE\ImEx\Transformer\Schema\File\PlayerFileSchema;
 use FAFI\src\BE\Player\Player;
+use FAFI\src\BE\PlayerAttribute\PlayerAttribute;
 
 class PlayerHydrator implements EntityHydratorInterface
 {
+    private PlayerAttributeHydrator $playerAttributeHydrator;
+
+    public function __construct()
+    {
+        $this->playerAttributeHydrator = new PlayerAttributeHydrator();
+    }
+
+
     public function hydrate(array $data): Player
     {
         $player = new Player();
@@ -24,8 +33,21 @@ class PlayerHydrator implements EntityHydratorInterface
         !isset($data[PlayerFileSchema::FOOT]) ?: $player->setFoot($data[PlayerFileSchema::FOOT]);
         !isset($data[PlayerFileSchema::INJURE_FACTOR]) ?: $player->setInjureFactor($data[PlayerFileSchema::INJURE_FACTOR]);
 
+        !isset($data[PlayerFileSchema::ATTRIBUTES]) ?: $player->setAttributes($this->hydrateAttributes($data[PlayerFileSchema::ATTRIBUTES]));
+
         return $player;
     }
+
+    /**
+     * @param array $attributes
+     *
+     * @return PlayerAttribute[]
+     */
+    private function hydrateAttributes(array $attributes): array
+    {
+        return $this->playerAttributeHydrator->hydrateCollection($attributes);
+    }
+
 
     public function extract(Player $entity): array
     {
@@ -40,6 +62,8 @@ class PlayerHydrator implements EntityHydratorInterface
             PlayerFileSchema::HEIGHT => $entity->getHeight(),
             PlayerFileSchema::FOOT => $entity->getFoot(),
             PlayerFileSchema::INJURE_FACTOR => $entity->getInjureFactor(),
+
+            PlayerFileSchema::ATTRIBUTES => $entity->getAttributes(),
         ];
     }
 }
