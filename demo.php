@@ -18,7 +18,11 @@ use FAFI\FAFI;
  */
 function demoPlayerService(FAFI $fafi)
 {
-    $session = new DemoPlayerRepo($fafi->getPlayerService()->getPlayerRepo());
+    $session = new DemoPlayerRepo(
+        $fafi->getPlayerService()->getPlayerRepo(),
+        $fafi->getPlayerService()->getPositionRepo()
+    );
+
     $session->demoModifyScenario();
     $session->demoListSimpleScenario();
 //    $session->demoListAdvancedScenario();

@@ -7,15 +7,19 @@ use FAFI\exception\FafiException;
 use FAFI\src\BE\Player\Player;
 use FAFI\src\BE\Player\Repository\Criteria;
 use FAFI\src\BE\Player\Repository\PlayerRepository;
+use FAFI\src\BE\PlayerAttribute\PlayerAttribute;
+use FAFI\src\BE\Position\Repository\PositionRepository;
 use FAFI\src\BE\Structure\Repository\AbstractResource;
 
 class DemoPlayerRepo
 {
     private PlayerRepository $playerRepo;
+    private PositionRepository $positionRepo;
 
-    public function __construct(PlayerRepository $playerRepo)
+    public function __construct(PlayerRepository $playerRepo, PositionRepository $positionRepo)
     {
         $this->playerRepo = $playerRepo;
+        $this->positionRepo = $positionRepo;
     }
 
 
@@ -34,6 +38,21 @@ class DemoPlayerRepo
         $player = $this->playerRepo->findById($id);
 
         $player->setSurname('Serginho')->setHeight(181)->setFoot('L');
+        $player = $this->playerRepo->save($player);
+        $player = $this->playerRepo->findById($id);
+
+
+        $attr1 = new PlayerAttribute();
+        $pos1 = $this->positionRepo->findByName('LB');
+        $attr1->setPlayerId($player->getId())->setPositionId($pos1->getId())
+            ->setDefMin(1)->setDefMax(2)->setAttMin(2)->setAttMax(2);
+
+        $attr2 = new PlayerAttribute();
+        $pos2 = $this->positionRepo->findByName('LM');
+        $attr2->setPlayerId($player->getId())->setPositionId($pos2->getId())
+            ->setDefMin(1)->setDefMax(1)->setAttMin(2)->setAttMax(3);
+
+        $player->setAttributes([$attr1, $attr2]);
         $player = $this->playerRepo->save($player);
         $player = $this->playerRepo->findById($id);
 

@@ -32,6 +32,18 @@ class PositionRepository
     }
 
     /**
+     * @param string $name
+     *
+     * @return Position|null
+     * @throws FafiException
+     */
+    public function findByName(string $name): ?Position
+    {
+        $criteria = new Criteria(PositionResource::NAME_FIELD, QuerySyntax::OPERATOR_IS, [$name]);
+        return $this->positionResource->readFirst([$criteria]);
+    }
+
+    /**
      * @param EntityCriteriaInterface[] $conditions
      *
      * @return Position[]
