@@ -29,6 +29,14 @@ class PlayerAttributesSpecification implements ImExFieldSpecification
 
     public function validate(string $property, $value): void
     {
-        $this->dataValidator->assertFieldBool($value, $property);
+        $this->dataValidator->assertFieldArr($value, $property);
+        foreach ($value as $position => $attribute) {
+            $this->validateAttribute($property, $position, $attribute);
+        }
+    }
+
+    private function validateAttribute(string $property, $attribute): void
+    {
+
     }
 }
