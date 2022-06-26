@@ -136,23 +136,6 @@ class PlayerResource extends AbstractResource
     }
 
 
-    protected function verifyConstraintsOnCreate(string $table, EntityInterface $entity, array $data): void
-    {
-        $this->entityValidator->assertEntityIdAbsent($entity);
-        $this->entityValidator->assertEntityMandatoryDataPresent($entity, $data, self::REQUIRED_FIELDS);
-
-        $this->verifyProperties($data);
-        $this->dbValidator->assertResourcePropertyUnique($table, $entity, $data, self::FAFI_SURNAME_FIELD);
-    }
-
-    protected function verifyConstraintsOnUpdate(string $table, EntityInterface $entity, array $data): void
-    {
-        $this->entityValidator->assertEntityIdPresent($entity);
-
-        $this->verifyProperties($data);
-        $this->dbValidator->assertResourcePropertyUnique($table, $entity, $data, self::FAFI_SURNAME_FIELD);
-    }
-
     protected function verifyProperties(array $data): void
     {
         if (isset($data[self::NAME_FIELD])) {

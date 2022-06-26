@@ -118,13 +118,26 @@ abstract class AbstractResource
     protected function verifyConstraintsOnCreate(string $table, EntityInterface $entity, array $data): void
     {
         $this->entityValidator->assertEntityIdAbsent($entity);
-        $this->entityValidator->assertEntityMandatoryDataPresent($entity, $data, self::REQUIRED_FIELDS);
+        $this->entityValidator->assertEntityMandatoryDataPresent($entity, $data, $this->getRequiredFields());
 
-        $this->verifyProperties($data);
-        $this->dbValidator->assertResourcePropertyUnique($table, $entity, $data, self::FAFI_SURNAME_FIELD);
+        $this->verifyModel($table, $entity, $data);
     }
 
-    protected function verifyConstraintsOnUpdate(string $table, EntityInterface $entity, array $data): void;
+    protected function verifyConstraintsOnUpdate(string $table, EntityInterface $entity, array $data): void
+    {
+        $this->entityValidator->assertEntityIdPresent($entity);
+
+        $this->verifyModel($table, $entity, $data);
+    }
+
+    private function verifyModel(string $table, EntityInterface $entity, array $data): void
+    {
+        $this->verifyProperties($data);
+
+        foreach ($this->getUniqueFields() as $uniqueField) {
+            $this->dbValidator->assertResourcePropertyUnique($table, $entity, $data, $uniqueField);
+        }
+    }
 
     abstract protected function verifyProperties(array $data): void;
 }
