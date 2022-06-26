@@ -115,7 +115,7 @@ abstract class AbstractResource
     }
 
 
-    protected function verifyConstraintsOnCreate(string $table, EntityInterface $entity, array $data): void
+    private function verifyConstraintsOnCreate(string $table, EntityInterface $entity, array $data): void
     {
         $this->entityValidator->assertEntityIdAbsent($entity);
         $this->entityValidator->assertEntityMandatoryDataPresent($entity, $data, $this->getRequiredFields());
@@ -123,7 +123,7 @@ abstract class AbstractResource
         $this->verifyModelConstraints($table, $entity, $data);
     }
 
-    protected function verifyConstraintsOnUpdate(string $table, EntityInterface $entity, array $data): void
+    private function verifyConstraintsOnUpdate(string $table, EntityInterface $entity, array $data): void
     {
         $this->entityValidator->assertEntityIdPresent($entity);
 
