@@ -136,7 +136,7 @@ class PlayerResource extends AbstractResource
     }
 
 
-    protected function verifyProperties(array $data): void
+    protected function verifyModelPropertiesConstraints(array $data): void
     {
         if (isset($data[self::NAME_FIELD])) {
             $field = self::NAME_FIELD;

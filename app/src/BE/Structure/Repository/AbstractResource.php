@@ -120,24 +120,24 @@ abstract class AbstractResource
         $this->entityValidator->assertEntityIdAbsent($entity);
         $this->entityValidator->assertEntityMandatoryDataPresent($entity, $data, $this->getRequiredFields());
 
-        $this->verifyModel($table, $entity, $data);
+        $this->verifyModelConstraints($table, $entity, $data);
     }
 
     protected function verifyConstraintsOnUpdate(string $table, EntityInterface $entity, array $data): void
     {
         $this->entityValidator->assertEntityIdPresent($entity);
 
-        $this->verifyModel($table, $entity, $data);
+        $this->verifyModelConstraints($table, $entity, $data);
     }
 
-    private function verifyModel(string $table, EntityInterface $entity, array $data): void
+    private function verifyModelConstraints(string $table, EntityInterface $entity, array $data): void
     {
-        $this->verifyProperties($data);
+        $this->verifyModelPropertiesConstraints($data);
 
         foreach ($this->getUniqueFields() as $uniqueField) {
             $this->dbValidator->assertResourcePropertyUnique($table, $entity, $data, $uniqueField);
         }
     }
 
-    abstract protected function verifyProperties(array $data): void;
+    abstract protected function verifyModelPropertiesConstraints(array $data): void;
 }

@@ -5,16 +5,19 @@ namespace FAFI\src\BE\Player\Repository;
 use FAFI\db\Query\QuerySyntax;
 use FAFI\exception\FafiException;
 use FAFI\src\BE\Player\Player;
+use FAFI\src\BE\PlayerAttribute\Repository\PlayerAttributeRepository;
 use FAFI\src\BE\Structure\Repository\AbstractResource;
 use FAFI\src\BE\Structure\Repository\EntityCriteriaInterface;
 
 class PlayerRepository
 {
     private PlayerResource $playerResource;
+    private PlayerAttributeRepository $playerAttributeRepository;
 
     public function __construct()
     {
         $this->playerResource = new PlayerResource();
+        $this->playerAttributeRepository = new PlayerAttributeRepository();
     }
 
 

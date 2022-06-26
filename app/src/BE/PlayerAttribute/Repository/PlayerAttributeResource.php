@@ -115,7 +115,7 @@ class PlayerAttributeResource extends AbstractResource
     }
 
 
-    protected function verifyProperties(array $data): void
+    protected function verifyModelPropertiesConstraints(array $data): void
     {
         // to implement
     }
