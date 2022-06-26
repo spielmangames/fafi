@@ -46,7 +46,7 @@ class PlayerHydrator
         !isset($data[PlayerResource::FOOT_FIELD]) ?: $player->setFoot($data[PlayerResource::FOOT_FIELD]);
         !isset($data[PlayerResource::INJURE_FACTOR_FIELD]) ?: $player->setInjureFactor($data[PlayerResource::INJURE_FACTOR_FIELD]);
 
-        !isset($data['attributes']) ?: $player->setAttributes($this->hydrateAttributes($data['attributes']));
+//        !isset($data['attributes']) ?: $player->setAttributes($this->hydrateAttributes($data['attributes']));
 
         return $player;
     }
@@ -76,7 +76,7 @@ class PlayerHydrator
             PlayerResource::FOOT_FIELD => $entity->getFoot(),
             PlayerResource::INJURE_FACTOR_FIELD => $entity->getInjureFactor(),
 
-            'attributes' => $entity->getAttributes(),
+//            'attributes' => $entity->getAttributes(),
         ];
     }
 }

@@ -19,7 +19,9 @@ class CountryResource extends AbstractResource
     public const REQUIRED_FIELDS = [
         self::NAME_FIELD,
     ];
-
+    public const UNIQUE_FIELDS = [
+        self::NAME_FIELD,
+    ];
 
     public const NAME_FIELD = 'name';
 
@@ -37,6 +39,16 @@ class CountryResource extends AbstractResource
         return self::TABLE;
     }
 
+    protected function getRequiredFields(): array
+    {
+        return self::REQUIRED_FIELDS;
+    }
+
+    protected function getUniqueFields(): array
+    {
+        return self::UNIQUE_FIELDS;
+    }
+
 
     /**
      * @param Country $entity
@@ -50,11 +62,6 @@ class CountryResource extends AbstractResource
         $result = parent::create($entity);
 
         return $result;
-    }
-
-    protected function verifyConstraintsOnCreate(string $table, EntityInterface $entity, array $data): void
-    {
-        // to implement
     }
 
     /**
@@ -99,7 +106,8 @@ class CountryResource extends AbstractResource
         return $result;
     }
 
-    protected function verifyConstraintsOnUpdate(string $table, EntityInterface $entity, array $data): void
+
+    protected function verifyProperties(array $data): void
     {
         // to implement
     }

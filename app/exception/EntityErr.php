@@ -10,8 +10,8 @@ interface EntityErr extends Err
     public const ID_ABSENT = 'ID is required for updating %s and can not be null.';
     public const ID_PRESENT = 'ID must be absent for creating %s.';
 
+    public const ENTITY_DATA_ABSENT = '%s contains no data.';
     public const ENTITY_NOT_UNIQUE = '%s must have unique "%s".';
-
 
     public const VALUE_TYPE_INVALID_ARR = 'Property "%s" must be array.';
     public const VALUE_TYPE_INVALID_BOOL = 'Property "%s" must be boolean.';

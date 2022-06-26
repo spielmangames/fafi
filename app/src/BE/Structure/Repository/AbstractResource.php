@@ -29,6 +29,8 @@ abstract class AbstractResource
     }
 
     abstract protected function getTable(): string;
+    abstract protected function getRequiredFields(): array;
+    abstract protected function getUniqueFields(): array;
 
 
     /**
@@ -52,8 +54,6 @@ abstract class AbstractResource
 
         return $result;
     }
-
-    abstract protected function verifyConstraintsOnCreate(string $table, EntityInterface $entity, array $data): void;
 
     /**
      * @param EntityCriteriaInterface[] $conditions
@@ -103,8 +103,6 @@ abstract class AbstractResource
         return $result;
     }
 
-    abstract protected function verifyConstraintsOnUpdate(string $table, EntityInterface $entity, array $data): void;
-
     /**
      * @param EntityCriteriaInterface[] $conditions
      *
@@ -115,4 +113,18 @@ abstract class AbstractResource
     {
         $this->queryExecutor->deleteRecords($this->getTable(), $conditions);
     }
+
+
+    protected function verifyConstraintsOnCreate(string $table, EntityInterface $entity, array $data): void
+    {
+        $this->entityValidator->assertEntityIdAbsent($entity);
+        $this->entityValidator->assertEntityMandatoryDataPresent($entity, $data, self::REQUIRED_FIELDS);
+
+        $this->verifyProperties($data);
+        $this->dbValidator->assertResourcePropertyUnique($table, $entity, $data, self::FAFI_SURNAME_FIELD);
+    }
+
+    protected function verifyConstraintsOnUpdate(string $table, EntityInterface $entity, array $data): void;
+
+    abstract protected function verifyProperties(array $data): void;
 }

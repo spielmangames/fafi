@@ -23,7 +23,7 @@ class PlayerAttributeResource extends AbstractResource
         self::DEF_MAX_FIELD,
     ];
     public const REQUIRED_FIELDS = [];
-
+    public const UNIQUE_FIELDS = [];
 
     public const PLAYER_ID_FIELD = 'player_id';
     public const POSITION_ID_FIELD = 'position_id';
@@ -47,6 +47,16 @@ class PlayerAttributeResource extends AbstractResource
         return self::TABLE;
     }
 
+    protected function getRequiredFields(): array
+    {
+        return self::REQUIRED_FIELDS;
+    }
+
+    protected function getUniqueFields(): array
+    {
+        return self::UNIQUE_FIELDS;
+    }
+
 
     /**
      * @param PlayerAttribute $entity
@@ -60,11 +70,6 @@ class PlayerAttributeResource extends AbstractResource
         $result = parent::create($entity);
 
         return $result;
-    }
-
-    protected function verifyConstraintsOnCreate(string $table, EntityInterface $entity, array $data): void
-    {
-        // to implement
     }
 
     /**
@@ -109,7 +114,8 @@ class PlayerAttributeResource extends AbstractResource
         return $result;
     }
 
-    protected function verifyConstraintsOnUpdate(string $table, EntityInterface $entity, array $data): void
+
+    protected function verifyProperties(array $data): void
     {
         // to implement
     }

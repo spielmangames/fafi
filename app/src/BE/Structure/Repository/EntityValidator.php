@@ -17,7 +17,7 @@ class EntityValidator
 
 
     /**
-     * @param string $entityName
+     * @param EntityInterface $entity
      * @param array $entityData
      * @param string[] $mandatory
      *
