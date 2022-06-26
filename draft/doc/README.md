@@ -3,6 +3,6 @@
 
 > Configure & port your FAFI projections as a board games.
 
-> Use FAFIbase to compare players while watching the game.
+> Use FAFI_Base to compare players while watching the game.
 
-> Design your dream teams in FAFInote.
+> Design your dream teams in [FAFI_Notepad](../FafiNotepad.md).
