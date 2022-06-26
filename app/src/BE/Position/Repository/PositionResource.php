@@ -4,22 +4,21 @@ namespace FAFI\src\BE\Position\Repository;
 
 use FAFI\exception\FafiException;
 use FAFI\src\BE\Position\Position;
-use FAFI\src\BE\Structure\EntityInterface;
 use FAFI\src\BE\Structure\Repository\AbstractResource;
 use FAFI\src\BE\Structure\Repository\EntityCriteriaInterface;
 
 class PositionResource extends AbstractResource
 {
     private const TABLE = 'positions';
-    public const COLUMNS = [
+    private const COLUMNS = [
         self::ID_FIELD,
 
         self::NAME_FIELD,
     ];
-    public const REQUIRED_FIELDS = [
+    private const REQUIRED_FIELDS = [
         self::NAME_FIELD,
     ];
-    public const UNIQUE_FIELDS = [
+    private const UNIQUE_FIELDS = [
         self::NAME_FIELD,
     ];
 

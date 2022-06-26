@@ -4,14 +4,13 @@ namespace FAFI\src\BE\Player\Repository;
 
 use FAFI\exception\FafiException;
 use FAFI\src\BE\Player\Player;
-use FAFI\src\BE\Structure\EntityInterface;
 use FAFI\src\BE\Structure\Repository\AbstractResource;
 use FAFI\src\BE\Structure\Repository\EntityCriteriaInterface;
 
 class PlayerResource extends AbstractResource
 {
     private const TABLE = 'players';
-    public const COLUMNS = [
+    private const COLUMNS = [
         self::ID_FIELD,
 
         self::NAME_FIELD,
@@ -26,18 +25,13 @@ class PlayerResource extends AbstractResource
         self::FOOT_FIELD,
         self::INJURE_FACTOR_FIELD,
     ];
-    public const REQUIRED_FIELDS = [
+    private const REQUIRED_FIELDS = [
         self::SURNAME_FIELD,
         self::FAFI_SURNAME_FIELD,
     ];
-    public const UNIQUE_FIELDS = [
+    private const UNIQUE_FIELDS = [
         self::FAFI_SURNAME_FIELD,
     ];
-
-
-    public const FOOT_LEFT = 'L';
-    public const FOOT_RIGHT = 'R';
-    public const FOOT_ALLOWED = [self::FOOT_LEFT, self::FOOT_RIGHT];
 
 
     // personal origin
@@ -53,6 +47,11 @@ class PlayerResource extends AbstractResource
     public const HEIGHT_FIELD = 'height';
     public const FOOT_FIELD = 'foot';
     public const INJURE_FACTOR_FIELD = 'injure_factor';
+
+
+    public const FOOT_LEFT = 'L';
+    public const FOOT_RIGHT = 'R';
+    public const FOOT_ALLOWED = [self::FOOT_LEFT, self::FOOT_RIGHT];
 
 
     protected PlayerHydrator $hydrator;

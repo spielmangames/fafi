@@ -4,14 +4,13 @@ namespace FAFI\src\BE\PlayerAttribute\Repository;
 
 use FAFI\exception\FafiException;
 use FAFI\src\BE\PlayerAttribute\PlayerAttribute;
-use FAFI\src\BE\Structure\EntityInterface;
 use FAFI\src\BE\Structure\Repository\AbstractResource;
 use FAFI\src\BE\Structure\Repository\EntityCriteriaInterface;
 
 class PlayerAttributeResource extends AbstractResource
 {
     private const TABLE = 'players_positions_assocs';
-    public const COLUMNS = [
+    private const COLUMNS = [
         self::ID_FIELD,
 
         self::PLAYER_ID_FIELD,
@@ -22,8 +21,9 @@ class PlayerAttributeResource extends AbstractResource
         self::DEF_MIN_FIELD,
         self::DEF_MAX_FIELD,
     ];
-    public const REQUIRED_FIELDS = [];
-    public const UNIQUE_FIELDS = [];
+    private const REQUIRED_FIELDS = [];
+    private const UNIQUE_FIELDS = [];
+
 
     public const PLAYER_ID_FIELD = 'player_id';
     public const POSITION_ID_FIELD = 'position_id';

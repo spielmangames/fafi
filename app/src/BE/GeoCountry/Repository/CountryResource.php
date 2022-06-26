@@ -4,24 +4,24 @@ namespace FAFI\src\BE\GeoCountry\Repository;
 
 use FAFI\exception\FafiException;
 use FAFI\src\BE\GeoCountry\Country;
-use FAFI\src\BE\Structure\EntityInterface;
 use FAFI\src\BE\Structure\Repository\AbstractResource;
 use FAFI\src\BE\Structure\Repository\EntityCriteriaInterface;
 
 class CountryResource extends AbstractResource
 {
     private const TABLE = 'countries';
-    public const COLUMNS = [
+    private const COLUMNS = [
         self::ID_FIELD,
 
         self::NAME_FIELD,
     ];
-    public const REQUIRED_FIELDS = [
+    private const REQUIRED_FIELDS = [
         self::NAME_FIELD,
     ];
-    public const UNIQUE_FIELDS = [
+    private const UNIQUE_FIELDS = [
         self::NAME_FIELD,
     ];
+
 
     public const NAME_FIELD = 'name';
 
