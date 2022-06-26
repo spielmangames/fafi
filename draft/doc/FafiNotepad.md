@@ -1,8 +1,5 @@
 
-> Design your Teams in FAFI_Notepad.
-
-
-
+## `IN_PROGRESS` Research
 
 
 - specify Team details:
@@ -36,6 +33,12 @@ Squad page
 - foot
 - usage_per_position %
 
+
 Schema page
+
+
+
+
+
 
 

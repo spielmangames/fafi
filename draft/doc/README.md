@@ -5,4 +5,4 @@
 
 > Use FAFI_Base to compare players while watching the game.
 
-> Design your dream teams in [FAFI_Notepad](./FafiNotepad.md).
+> Design your dream Teams in [FAFI_Notepad](./FafiNotepad.md).
