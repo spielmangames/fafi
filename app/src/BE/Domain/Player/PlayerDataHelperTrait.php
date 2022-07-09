@@ -12,12 +12,10 @@ trait PlayerDataHelperTrait
         if ($name) {
             $fullName[] = $name;
         }
-
         $particle = $this->getParticle();
         if ($particle) {
             $fullName[] = $particle;
         }
-
         $fullName[] = $this->getSurname();
 
         return implode(' ', $fullName);

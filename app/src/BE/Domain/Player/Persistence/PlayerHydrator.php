@@ -1,6 +1,6 @@
 <?php
 
-namespace FAFI\src\BE\Domain\Player\Repository;
+namespace FAFI\src\BE\Domain\Player\Persistence;
 
 use FAFI\src\BE\Domain\Player\Player;
 use FAFI\src\BE\PlayerAttribute\PlayerAttribute;

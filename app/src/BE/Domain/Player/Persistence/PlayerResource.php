@@ -1,6 +1,6 @@
 <?php
 
-namespace FAFI\src\BE\Domain\Player\Repository;
+namespace FAFI\src\BE\Domain\Player\Persistence;
 
 use FAFI\exception\FafiException;
 use FAFI\src\BE\Domain\Player\Player;
