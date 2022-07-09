@@ -48,9 +48,9 @@ class InstallService
      */
     public function installSampleData(): void
     {
-        $this->importEntity(ImExService::ENTITIES_COUNTRIES);
-
-        $this->importEntity(ImExService::ENTITIES_POSITIONS);
+//        $this->importEntity(ImExService::ENTITIES_COUNTRIES);
+//
+//        $this->importEntity(ImExService::ENTITIES_POSITIONS);
         $this->importEntity(ImExService::ENTITIES_PLAYERS);
     }
 

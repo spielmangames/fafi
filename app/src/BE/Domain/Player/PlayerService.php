@@ -3,27 +3,35 @@
 namespace FAFI\src\BE\Domain\Player;
 
 use FAFI\src\BE\Domain\Player\Persistence\PlayerRepository;
+use FAFI\src\BE\Domain\PlayerAttribute\Repository\PlayerAttributeRepository;
 use FAFI\src\BE\Domain\Position\Persistence\PositionRepository;
 
 class PlayerService
 {
-    private PlayerRepository $playerRepository;
     private PositionRepository $positionRepository;
+    private PlayerRepository $playerRepository;
+    private PlayerAttributeRepository $playerAttributeRepository;
 
     public function __construct()
     {
-        $this->playerRepository = new PlayerRepository();
         $this->positionRepository = new PositionRepository();
+        $this->playerRepository = new PlayerRepository();
+        $this->playerAttributeRepository = new PlayerAttributeRepository();
     }
 
+
+    public function getPositionRepo(): PositionRepository
+    {
+        return $this->positionRepository;
+    }
 
     public function getPlayerRepo(): PlayerRepository
     {
         return $this->playerRepository;
     }
 
-    public function getPositionRepo(): PositionRepository
+    public function getPlayerAttributeRepo(): PlayerAttributeRepository
     {
-        return $this->positionRepository;
+        return $this->playerAttributeRepository;
     }
 }

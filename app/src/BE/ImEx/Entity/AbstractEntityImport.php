@@ -33,6 +33,6 @@ abstract class AbstractEntityImport
     {
         $extracted = $this->importExtractor->extract($filePath);
         $transformed = $this->importTransformer->transform($extracted, $this->entitySpecification);
-        $this->importLoader->load($transformed, $this->entityHydrator, $this->entityLoader);
+        $this->importLoader->load($transformed, $this->entitySpecification);
     }
 }

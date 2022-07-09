@@ -27,7 +27,7 @@ class PlayerAttributeRepository
      */
     public function findById(int $id): ?PlayerAttribute
     {
-        $criteria = new \FAFI\src\BE\Domain\Criteria(AbstractResource::ID_FIELD, QuerySyntax::OPERATOR_IS, [$id]);
+        $criteria = new Criteria(AbstractResource::ID_FIELD, QuerySyntax::OPERATOR_IS, [$id]);
         return $this->playerAttributeResource->readFirst([$criteria]);
     }
 

@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace FAFI\src\BE\ImEx\Transformer\Specification\Entity;
 
+use FAFI\src\BE\ImEx\Persistence\Client\PlayerAttributeClient;
+use FAFI\src\BE\ImEx\Persistence\Client\PlayerClient;
+use FAFI\src\BE\ImEx\Persistence\Hydrator\PlayerHydrator;
 use FAFI\src\BE\ImEx\Transformer\Field\Player\PlayerAttributesFieldTransformer;
 use FAFI\src\BE\ImEx\Transformer\Field\Typical\BooleanFieldTransformer;
 use FAFI\src\BE\ImEx\Transformer\Field\Typical\IntegerFieldTransformer;
@@ -17,6 +20,11 @@ use FAFI\src\BE\ImEx\Transformer\Specification\Field\Typical\StringSpecification
 
 class PlayerSpecification implements ImExEntitySpecification
 {
+    public function getResourceHydrator(): string
+    {
+        return PlayerHydrator::class;
+    }
+
     public function getFieldTransformersMap(): array
     {
         return [
@@ -60,6 +68,18 @@ class PlayerSpecification implements ImExEntitySpecification
             PlayerFileSchema::FOOT,
 
             PlayerFileSchema::ATTRIBUTES,
+        ];
+    }
+
+    public function getResourceLoader(): string
+    {
+        return PlayerClient::class;
+    }
+
+    public function getLoaderSubResources(): array
+    {
+        return [
+            PlayerFileSchema::ATTRIBUTES => PlayerAttributeClient::class,
         ];
     }
 }

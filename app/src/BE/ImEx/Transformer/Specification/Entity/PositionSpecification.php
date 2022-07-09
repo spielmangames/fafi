@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace FAFI\src\BE\ImEx\Transformer\Specification\Entity;
 
+use FAFI\src\BE\ImEx\Persistence\Client\PositionClient;
+use FAFI\src\BE\ImEx\Persistence\Hydrator\PositionHydrator;
 use FAFI\src\BE\ImEx\Transformer\Field\Typical\IntegerFieldTransformer;
 use FAFI\src\BE\ImEx\Transformer\Field\Typical\StringFieldTransformer;
 use FAFI\src\BE\ImEx\Transformer\Schema\File\PositionFileSchema;
@@ -12,6 +14,11 @@ use FAFI\src\BE\ImEx\Transformer\Specification\Field\Typical\StringSpecification
 
 class PositionSpecification implements ImExEntitySpecification
 {
+    public function getResourceHydrator(): string
+    {
+        return PositionHydrator::class;
+    }
+
     public function getFieldTransformersMap(): array
     {
         return [
@@ -35,5 +42,15 @@ class PositionSpecification implements ImExEntitySpecification
         return [
             PositionFileSchema::NAME,
         ];
+    }
+
+    public function getResourceLoader(): string
+    {
+        return PositionClient::class;
+    }
+
+    public function getLoaderSubResources(): array
+    {
+        return [];
     }
 }

@@ -8,17 +8,16 @@ use FAFI\src\BE\Domain\Criteria;
 use FAFI\src\BE\Domain\Persistence\AbstractResource;
 use FAFI\src\BE\Domain\Persistence\EntityCriteriaInterface;
 use FAFI\src\BE\Domain\Player\Player;
-use FAFI\src\BE\Domain\PlayerAttribute\Repository\PlayerAttributeRepository;
 
 class PlayerRepository
 {
     private PlayerResource $playerResource;
-    private PlayerAttributeRepository $playerAttributeRepository;
+//    private PlayerAttributeRepository $playerAttributeRepository;
 
     public function __construct()
     {
         $this->playerResource = new PlayerResource();
-        $this->playerAttributeRepository = new PlayerAttributeRepository();
+//        $this->playerAttributeRepository = new PlayerAttributeRepository();
     }
 
 
@@ -35,7 +34,7 @@ class PlayerRepository
     }
 
     /**
-     * @param \FAFI\src\BE\Domain\Persistence\EntityCriteriaInterface[] $conditions
+     * @param EntityCriteriaInterface[] $conditions
      *
      * @return Player[]
      * @throws FafiException
