@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace FAFI\src\BE\ImEx\Transformer\Specification\Field;
 
 use FAFI\exception\FafiException;
+use FAFI\src\BE\ImEx\Transformer\Specification\Field\Country\CountryContinentSpecification;
 use FAFI\src\BE\ImEx\Transformer\Specification\Field\Player\PlayerAttributesSpecification;
 use FAFI\src\BE\ImEx\Transformer\Specification\Field\Player\PlayerFootSpecification;
 use FAFI\src\BE\ImEx\Transformer\Specification\Field\Typical\BooleanSpecification;
@@ -29,6 +30,10 @@ class ImExFieldSpecificationFactory
                 return new IntegerSpecification();
             case StringSpecification::class:
                 return new StringSpecification();
+
+            // Country
+            case CountryContinentSpecification::class:
+                return new CountryContinentSpecification();
 
             // Player
             case PlayerFootSpecification::class:

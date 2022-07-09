@@ -43,19 +43,4 @@ class FileValidator
             throw new FafiException(sprintf(FileErr::FILE_DATA_ABSENT, $filePath));
         }
     }
-
-    /**
-     * @param array $line
-     *
-     * @return void
-     * @throws FafiException
-     */
-    public function validateLineEmpty(array $line): void
-    {
-        foreach ($line as $column => $cellValue) {
-            if (!empty($cellValue)) {
-                throw new FafiException(sprintf(FileErr::LINE_NOT_EMPTY, $column));
-            }
-        }
-    }
 }
