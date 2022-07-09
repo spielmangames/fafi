@@ -1,10 +1,10 @@
 <?php
 
-namespace FAFI\src\BE\Structure\Repository;
+namespace FAFI\src\BE\Domain\Persistence;
 
 use FAFI\exception\EntityErr;
 use FAFI\exception\FafiException;
-use FAFI\src\BE\Structure\EntityInterface;
+use FAFI\src\BE\Domain\EntityInterface;
 
 class EntityValidator
 {
@@ -17,7 +17,7 @@ class EntityValidator
 
 
     /**
-     * @param EntityInterface $entity
+     * @param \FAFI\src\BE\Domain\EntityInterface $entity
      * @param array $entityData
      * @param string[] $mandatory
      *
@@ -46,7 +46,7 @@ class EntityValidator
 
 
     /**
-     * @param EntityInterface $entity
+     * @param \FAFI\src\BE\Domain\EntityInterface $entity
      *
      * @return void
      * @throws FafiException
@@ -59,7 +59,7 @@ class EntityValidator
     }
 
     /**
-     * @param EntityInterface $entity
+     * @param \FAFI\src\BE\Domain\EntityInterface $entity
      *
      * @return void
      * @throws FafiException

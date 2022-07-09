@@ -2,7 +2,7 @@
 
 namespace FAFI\src\BE\Domain\Position;
 
-use FAFI\src\BE\Structure\EntityInterface;
+use FAFI\src\BE\Domain\EntityInterface;
 
 class Position implements EntityInterface
 {

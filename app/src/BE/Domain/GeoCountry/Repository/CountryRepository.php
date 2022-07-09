@@ -5,8 +5,8 @@ namespace FAFI\src\BE\Domain\GeoCountry\Repository;
 use FAFI\db\Query\QuerySyntax;
 use FAFI\exception\FafiException;
 use FAFI\src\BE\Domain\GeoCountry\Country;
-use FAFI\src\BE\Structure\Repository\AbstractResource;
-use FAFI\src\BE\Structure\Repository\EntityCriteriaInterface;
+use FAFI\src\BE\Domain\Persistence\AbstractResource;
+use FAFI\src\BE\Domain\Persistence\EntityCriteriaInterface;
 
 class CountryRepository
 {
@@ -31,7 +31,7 @@ class CountryRepository
     }
 
     /**
-     * @param EntityCriteriaInterface[] $conditions
+     * @param \FAFI\src\BE\Domain\Persistence\EntityCriteriaInterface[] $conditions
      *
      * @return Country[]
      * @throws FafiException

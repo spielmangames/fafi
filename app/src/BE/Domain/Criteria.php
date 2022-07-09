@@ -2,7 +2,7 @@
 
 namespace FAFI\src\BE\Domain;
 
-use FAFI\src\BE\Structure\Repository\EntityCriteriaInterface;
+use FAFI\src\BE\Domain\Persistence\EntityCriteriaInterface;
 
 class Criteria implements EntityCriteriaInterface
 {

@@ -4,8 +4,8 @@ namespace FAFI\src\BE\Domain\GeoCountry\Repository;
 
 use FAFI\exception\FafiException;
 use FAFI\src\BE\Domain\GeoCountry\Country;
-use FAFI\src\BE\Structure\Repository\AbstractResource;
-use FAFI\src\BE\Structure\Repository\EntityCriteriaInterface;
+use FAFI\src\BE\Domain\Persistence\AbstractResource;
+use FAFI\src\BE\Domain\Persistence\EntityCriteriaInterface;
 
 class CountryResource extends AbstractResource
 {
@@ -79,7 +79,7 @@ class CountryResource extends AbstractResource
     }
 
     /**
-     * @param EntityCriteriaInterface[] $conditions
+     * @param \FAFI\src\BE\Domain\Persistence\EntityCriteriaInterface[] $conditions
      *
      * @return Country|null
      * @throws FafiException

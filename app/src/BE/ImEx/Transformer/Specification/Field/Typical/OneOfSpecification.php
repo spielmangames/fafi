@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace FAFI\src\BE\ImEx\Transformer\Specification\Field\Typical;
 
+use FAFI\src\BE\Domain\Persistence\DataValidator;
 use FAFI\src\BE\ImEx\Transformer\Specification\Field\ImExFieldSpecification;
-use FAFI\src\BE\Structure\Repository\DataValidator;
 
 abstract class OneOfSpecification implements ImExFieldSpecification
 {

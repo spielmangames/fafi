@@ -5,10 +5,10 @@ namespace FAFI\src\BE\Domain\Player\Persistence;
 use FAFI\db\Query\QuerySyntax;
 use FAFI\exception\FafiException;
 use FAFI\src\BE\Domain\Criteria;
+use FAFI\src\BE\Domain\Persistence\AbstractResource;
+use FAFI\src\BE\Domain\Persistence\EntityCriteriaInterface;
 use FAFI\src\BE\Domain\Player\Player;
 use FAFI\src\BE\Domain\PlayerAttribute\Repository\PlayerAttributeRepository;
-use FAFI\src\BE\Structure\Repository\AbstractResource;
-use FAFI\src\BE\Structure\Repository\EntityCriteriaInterface;
 
 class PlayerRepository
 {
@@ -35,7 +35,7 @@ class PlayerRepository
     }
 
     /**
-     * @param EntityCriteriaInterface[] $conditions
+     * @param \FAFI\src\BE\Domain\Persistence\EntityCriteriaInterface[] $conditions
      *
      * @return Player[]
      * @throws FafiException

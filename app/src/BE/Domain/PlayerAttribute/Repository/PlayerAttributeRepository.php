@@ -5,9 +5,9 @@ namespace FAFI\src\BE\Domain\PlayerAttribute\Repository;
 use FAFI\db\Query\QuerySyntax;
 use FAFI\exception\FafiException;
 use FAFI\src\BE\Domain\Criteria;
+use FAFI\src\BE\Domain\Persistence\AbstractResource;
+use FAFI\src\BE\Domain\Persistence\EntityCriteriaInterface;
 use FAFI\src\BE\Domain\PlayerAttribute\PlayerAttribute;
-use FAFI\src\BE\Structure\Repository\AbstractResource;
-use FAFI\src\BE\Structure\Repository\EntityCriteriaInterface;
 
 class PlayerAttributeRepository
 {

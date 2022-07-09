@@ -2,7 +2,7 @@
 
 namespace FAFI\db\Query;
 
-use FAFI\src\BE\Structure\Repository\EntityCriteriaInterface;
+use FAFI\src\BE\Domain\Persistence\EntityCriteriaInterface;
 
 class QueryBuilder
 {
@@ -80,7 +80,7 @@ class QueryBuilder
     }
 
     /**
-     * @param EntityCriteriaInterface[] $conditions
+     * @param \FAFI\src\BE\Domain\Persistence\EntityCriteriaInterface[] $conditions
      *
      * @return string
      */

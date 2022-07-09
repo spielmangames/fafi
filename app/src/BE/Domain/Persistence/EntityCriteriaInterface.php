@@ -1,6 +1,6 @@
 <?php
 
-namespace FAFI\src\BE\Structure\Repository;
+namespace FAFI\src\BE\Domain\Persistence;
 
 interface EntityCriteriaInterface
 {

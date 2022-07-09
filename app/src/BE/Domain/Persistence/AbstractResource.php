@@ -1,13 +1,13 @@
 <?php
 
-namespace FAFI\src\BE\Structure\Repository;
+namespace FAFI\src\BE\Domain\Persistence;
 
 use FAFI\db\DatabaseValidator;
 use FAFI\db\Query\QueryExecutor;
 use FAFI\db\Query\QuerySyntax;
 use FAFI\exception\EntityErr;
 use FAFI\exception\FafiException;
-use FAFI\src\BE\Structure\EntityInterface;
+use FAFI\src\BE\Domain\EntityInterface;
 
 abstract class AbstractResource
 {
@@ -57,7 +57,7 @@ abstract class AbstractResource
     /**
      * @param EntityCriteriaInterface[] $conditions
      *
-     * @return EntityInterface[]|null
+     * @return \FAFI\src\BE\Domain\EntityInterface[]|null
      * @throws FafiException
      */
     public function read(array $conditions = []): ?array

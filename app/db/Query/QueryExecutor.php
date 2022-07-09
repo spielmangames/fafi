@@ -4,7 +4,7 @@ namespace FAFI\db\Query;
 
 use FAFI\db\DatabaseDispatcher;
 use FAFI\exception\FafiException;
-use FAFI\src\BE\Structure\Repository\EntityCriteriaInterface;
+use FAFI\src\BE\Domain\Persistence\EntityCriteriaInterface;
 
 class QueryExecutor
 {

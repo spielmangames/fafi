@@ -1,6 +1,6 @@
 
 #-----------------------------------------------------------------------------------------------------------------------
-# DB init [version=1.7]
+# DB init [version=1.8]
 #-----------------------------------------------------------------------------------------------------------------------
 
 
@@ -20,7 +20,7 @@ CREATE TABLE `_version` (
     `db` VARCHAR(8) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
-INSERT INTO _version VALUES ('1.7');
+INSERT INTO _version VALUES ('1.8');
 
 
 
@@ -34,6 +34,7 @@ CREATE TABLE `countries` (
     `id` INT(11) UNSIGNED AUTO_INCREMENT NOT NULL,
 
     `name` VARCHAR(32) NOT NULL,
+    `continent` ENUM('Africa', 'America', 'Asia', 'Europe') NOT NULL,
 
     PRIMARY KEY (`id`),
     UNIQUE KEY `u_countries_name` (`name`)

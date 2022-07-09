@@ -1,6 +1,6 @@
 <?php
 
-namespace FAFI\src\BE\Structure;
+namespace FAFI\src\BE\Domain;
 
 interface EntityInterface
 {

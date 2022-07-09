@@ -2,8 +2,8 @@
 
 namespace FAFI\src\BE\Domain\Player;
 
+use FAFI\src\BE\Domain\EntityInterface;
 use FAFI\src\BE\Domain\PlayerAttribute\PlayerAttribute;
-use FAFI\src\BE\Structure\EntityInterface;
 
 class Player implements EntityInterface
 {

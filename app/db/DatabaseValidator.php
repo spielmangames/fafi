@@ -7,7 +7,7 @@ use FAFI\db\Query\QuerySyntax;
 use FAFI\exception\EntityErr;
 use FAFI\exception\FafiException;
 use FAFI\src\BE\Domain\Criteria;
-use FAFI\src\BE\Structure\Repository\AbstractResource;
+use FAFI\src\BE\Domain\Persistence\AbstractResource;
 
 class DatabaseValidator
 {

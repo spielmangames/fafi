@@ -3,9 +3,9 @@
 namespace FAFI\src\BE\Domain\Position\Persistence;
 
 use FAFI\exception\FafiException;
+use FAFI\src\BE\Domain\Persistence\AbstractResource;
+use FAFI\src\BE\Domain\Persistence\EntityCriteriaInterface;
 use FAFI\src\BE\Domain\Position\Position;
-use FAFI\src\BE\Structure\Repository\AbstractResource;
-use FAFI\src\BE\Structure\Repository\EntityCriteriaInterface;
 
 class PositionResource extends AbstractResource
 {

@@ -3,9 +3,9 @@
 namespace FAFI\src\BE\Domain\Player\Persistence;
 
 use FAFI\exception\FafiException;
+use FAFI\src\BE\Domain\Persistence\AbstractResource;
+use FAFI\src\BE\Domain\Persistence\EntityCriteriaInterface;
 use FAFI\src\BE\Domain\Player\Player;
-use FAFI\src\BE\Structure\Repository\AbstractResource;
-use FAFI\src\BE\Structure\Repository\EntityCriteriaInterface;
 
 class PlayerResource extends AbstractResource
 {

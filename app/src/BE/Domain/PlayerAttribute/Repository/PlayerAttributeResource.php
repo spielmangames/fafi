@@ -3,9 +3,9 @@
 namespace FAFI\src\BE\Domain\PlayerAttribute\Repository;
 
 use FAFI\exception\FafiException;
+use FAFI\src\BE\Domain\Persistence\AbstractResource;
+use FAFI\src\BE\Domain\Persistence\EntityCriteriaInterface;
 use FAFI\src\BE\Domain\PlayerAttribute\PlayerAttribute;
-use FAFI\src\BE\Structure\Repository\AbstractResource;
-use FAFI\src\BE\Structure\Repository\EntityCriteriaInterface;
 
 class PlayerAttributeResource extends AbstractResource
 {
@@ -73,7 +73,7 @@ class PlayerAttributeResource extends AbstractResource
     }
 
     /**
-     * @param EntityCriteriaInterface[] $conditions
+     * @param \FAFI\src\BE\Domain\Persistence\EntityCriteriaInterface[] $conditions
      *
      * @return PlayerAttribute[]|null
      * @throws FafiException
@@ -87,7 +87,7 @@ class PlayerAttributeResource extends AbstractResource
     }
 
     /**
-     * @param EntityCriteriaInterface[] $conditions
+     * @param \FAFI\src\BE\Domain\Persistence\EntityCriteriaInterface[] $conditions
      *
      * @return PlayerAttribute|null
      * @throws FafiException

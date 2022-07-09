@@ -5,11 +5,11 @@ namespace FAFI\demo;
 use FAFI\db\Query\QuerySyntax;
 use FAFI\exception\FafiException;
 use FAFI\src\BE\Domain\Criteria;
+use FAFI\src\BE\Domain\Persistence\AbstractResource;
 use FAFI\src\BE\Domain\Player\Persistence\PlayerRepository;
 use FAFI\src\BE\Domain\Player\Player;
 use FAFI\src\BE\Domain\PlayerAttribute\PlayerAttribute;
 use FAFI\src\BE\Domain\Position\Persistence\PositionRepository;
-use FAFI\src\BE\Structure\Repository\AbstractResource;
 
 class DemoPlayerRepo
 {

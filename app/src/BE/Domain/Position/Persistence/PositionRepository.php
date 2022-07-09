@@ -4,9 +4,8 @@ namespace FAFI\src\BE\Domain\Position\Persistence;
 
 use FAFI\db\Query\QuerySyntax;
 use FAFI\exception\FafiException;
+use FAFI\src\BE\Domain\Persistence\EntityCriteriaInterface;
 use FAFI\src\BE\Domain\Position\Position;
-use FAFI\src\BE\Structure\Repository\AbstractResource;
-use FAFI\src\BE\Structure\Repository\EntityCriteriaInterface;
 
 class PositionRepository
 {
@@ -26,7 +25,7 @@ class PositionRepository
      */
     public function findById(int $id): ?Position
     {
-        $criteria = new \FAFI\src\BE\Domain\Criteria(AbstractResource::ID_FIELD, QuerySyntax::OPERATOR_IS, [$id]);
+        $criteria = new \FAFI\src\BE\Domain\Criteria(\FAFI\src\BE\Domain\Persistence\AbstractResource::ID_FIELD, QuerySyntax::OPERATOR_IS, [$id]);
         return $this->positionResource->readFirst([$criteria]);
     }
 
@@ -43,7 +42,7 @@ class PositionRepository
     }
 
     /**
-     * @param EntityCriteriaInterface[] $conditions
+     * @param \FAFI\src\BE\Domain\Persistence\EntityCriteriaInterface[] $conditions
      *
      * @return \FAFI\src\BE\Domain\Position\Position[]
      * @throws FafiException
