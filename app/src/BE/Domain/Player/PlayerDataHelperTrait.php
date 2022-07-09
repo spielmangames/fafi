@@ -1,6 +1,6 @@
 <?php
 
-namespace FAFI\src\BE\Player;
+namespace FAFI\src\BE\Domain\Player;
 
 trait PlayerDataHelperTrait
 {

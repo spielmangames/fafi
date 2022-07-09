@@ -1,92 +1,97 @@
-name
+name,continent
 
-Albania
-Algeria
-Andorra
-Angola
-Argentina
-Armenia
-Australia
-Austria
-Azerbaijan
-Belarus
-Belgium
-Bolivia
-Bosnia
-Brazil
-Bulgaria
-Cameroon
-Canada
-Chile
-China
-Colombia
-Costa Rica
-Croatia
-Czech
-Denmark
-Ecuador
-Egypt
-England
-Estonia
-Finland
-France
-Gabon
-Georgia
-Germany
-Ghana
-Greece
-Honduras
-Hungary
-Iceland
-India
-Indonesia
-Iran
-Israel
-Italy
-Ivory Coast
-Jamaica
-Japan
-Kazakhstan
-Latvia
-Lithuania
-Mali
-Mexico
-Moldova
-Monaco
-Montenegro
-Morocco
-Netherlands
-New Zealand
-Nicaragua
-Nigeria
-North Macedonia
-Northern Ireland
-Norway
-Panama
-Paraguay
-Peru
-Poland
-Portugal
-Ireland
-Romania
-Russia
-Scotland
-Senegal
-Serbia
-Slovakia
-Slovenia
-South Africa
-South Korea
-Spain
-Sweden
-Switzerland
-Togo
-Trinidad Tobago
-Tunisia
-Turkey
-Ukraine
-United Kingdom
-United States
-Uruguay
-Venezuela
-Wales
+Algeria,Africa
+Angola,Africa
+Benin,Africa
+Cameroon,Africa
+Congo,Africa
+Egypt,Africa
+Gabon,Africa
+Ghana,Africa
+Guinea,Africa
+Ivory Coast,Africa
+Kenya,Africa
+Mali,Africa
+Morocco,Africa
+Nigeria,Africa
+Senegal,Africa
+South Africa,Africa
+Togo,Africa
+Tunisia,Africa
+Argentina,America
+Bolivia,America
+Brazil,America
+Canada,America
+Chile,America
+Colombia,America
+Costa Rica,America
+Ecuador,America
+Honduras,America
+Jamaica,America
+Mexico,America
+Nicaragua,America
+Panama,America
+Paraguay,America
+Peru,America
+Suriname,America
+Trinidad Tobago,America
+United States,America
+Uruguay,America
+Venezuela,America
+Australia,Asia
+Azerbaijan,Asia
+China,Asia
+India,Asia
+Indonesia,Asia
+Iran,Asia
+Japan,Asia
+Kazakhstan,Asia
+New Zealand,Asia
+South Korea,Asia
+Albania,Europe
+Andorra,Europe
+Armenia,Europe
+Austria,Europe
+Belarus,Europe
+Belgium,Europe
+Bosnia,Europe
+Bulgaria,Europe
+Croatia,Europe
+Czech,Europe
+Denmark,Europe
+England,Europe
+Estonia,Europe
+Finland,Europe
+France,Europe
+Georgia,Europe
+Germany,Europe
+Greece,Europe
+Hungary,Europe
+Iceland,Europe
+Ireland,Europe
+Israel,Europe
+Italy,Europe
+Latvia,Europe
+Lithuania,Europe
+Moldova,Europe
+Monaco,Europe
+Montenegro,Europe
+Netherlands,Europe
+North Macedonia,Europe
+Northern Ireland,Europe
+Norway,Europe
+Poland,Europe
+Portugal,Europe
+Romania,Europe
+Russia,Europe
+Scotland,Europe
+Serbia,Europe
+Slovakia,Europe
+Slovenia,Europe
+Spain,Europe
+Sweden,Europe
+Switzerland,Europe
+Turkey,Europe
+Ukraine,Europe
+United Kingdom,Europe
+Wales,Europe

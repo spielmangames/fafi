@@ -1,9 +1,9 @@
 <?php
 
-namespace FAFI\src\BE\Player\Repository;
+namespace FAFI\src\BE\Domain\Player\Repository;
 
 use FAFI\exception\FafiException;
-use FAFI\src\BE\Player\Player;
+use FAFI\src\BE\Domain\Player\Player;
 use FAFI\src\BE\Structure\Repository\AbstractResource;
 use FAFI\src\BE\Structure\Repository\EntityCriteriaInterface;
 
@@ -81,12 +81,12 @@ class PlayerResource extends AbstractResource
     /**
      * @param Player $entity
      *
-     * @return Player
+     * @return \FAFI\src\BE\Domain\Player\Player
      * @throws FafiException
      */
     public function create($entity): Player
     {
-        /** @var Player $result */
+        /** @var \FAFI\src\BE\Domain\Player\Player $result */
         $result = parent::create($entity);
 
         return $result;
@@ -109,7 +109,7 @@ class PlayerResource extends AbstractResource
     /**
      * @param EntityCriteriaInterface[] $conditions
      *
-     * @return Player|null
+     * @return \FAFI\src\BE\Domain\Player\Player|null
      * @throws FafiException
      */
     public function readFirst(array $conditions): ?Player
@@ -123,12 +123,12 @@ class PlayerResource extends AbstractResource
     /**
      * @param Player $entity
      *
-     * @return Player
+     * @return \FAFI\src\BE\Domain\Player\Player
      * @throws FafiException
      */
     public function update($entity): Player
     {
-        /** @var Player $result */
+        /** @var \FAFI\src\BE\Domain\Player\Player $result */
         $result = parent::update($entity);
 
         return $result;

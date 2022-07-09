@@ -5,7 +5,6 @@ namespace FAFI\src\BE\GeoCountry\Repository;
 use FAFI\db\Query\QuerySyntax;
 use FAFI\exception\FafiException;
 use FAFI\src\BE\GeoCountry\Country;
-use FAFI\src\BE\Player\Repository\Criteria;
 use FAFI\src\BE\Structure\Repository\AbstractResource;
 use FAFI\src\BE\Structure\Repository\EntityCriteriaInterface;
 
@@ -27,7 +26,7 @@ class CountryRepository
      */
     public function findById(int $id): ?Country
     {
-        $criteria = new Criteria(AbstractResource::ID_FIELD, QuerySyntax::OPERATOR_IS, [$id]);
+        $criteria = new \FAFI\src\BE\Domain\Criteria(AbstractResource::ID_FIELD, QuerySyntax::OPERATOR_IS, [$id]);
         return $this->countryResource->readFirst([$criteria]);
     }
 

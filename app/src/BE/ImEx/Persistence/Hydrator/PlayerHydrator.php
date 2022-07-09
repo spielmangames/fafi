@@ -4,9 +4,8 @@ declare(strict_types=1);
 
 namespace FAFI\src\BE\ImEx\Persistence\Hydrator;
 
+use FAFI\src\BE\Domain\Player\Player;
 use FAFI\src\BE\ImEx\Transformer\Schema\File\PlayerFileSchema;
-use FAFI\src\BE\Player\Player;
-use FAFI\src\BE\PlayerAttribute\PlayerAttribute;
 
 class PlayerHydrator implements EntityHydratorInterface
 {

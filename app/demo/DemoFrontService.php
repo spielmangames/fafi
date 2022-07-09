@@ -4,9 +4,9 @@ namespace FAFI\demo;
 
 use FAFI\db\Query\QuerySyntax;
 use FAFI\exception\FafiException;
-use FAFI\src\BE\Player\Repository\Criteria;
-use FAFI\src\BE\Player\Repository\PlayerRepository;
-use FAFI\src\BE\Player\Repository\PlayersFilter;
+use FAFI\src\BE\Domain\Criteria;
+use FAFI\src\BE\Domain\Player\Repository\PlayerRepository;
+use FAFI\src\BE\Domain\Player\Repository\PlayersFilter;
 use FAFI\src\BE\Structure\Repository\AbstractResource;
 use FAFI\src\FE\StorefrontService;
 

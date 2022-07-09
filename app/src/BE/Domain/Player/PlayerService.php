@@ -1,8 +1,8 @@
 <?php
 
-namespace FAFI\src\BE\Player;
+namespace FAFI\src\BE\Domain\Player;
 
-use FAFI\src\BE\Player\Repository\PlayerRepository;
+use FAFI\src\BE\Domain\Player\Repository\PlayerRepository;
 use FAFI\src\BE\Position\Repository\PositionRepository;
 
 class PlayerService

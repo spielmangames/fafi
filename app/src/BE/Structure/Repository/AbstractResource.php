@@ -7,7 +7,6 @@ use FAFI\db\Query\QueryExecutor;
 use FAFI\db\Query\QuerySyntax;
 use FAFI\exception\EntityErr;
 use FAFI\exception\FafiException;
-use FAFI\src\BE\Player\Repository\Criteria;
 use FAFI\src\BE\Structure\EntityInterface;
 
 abstract class AbstractResource
@@ -46,7 +45,7 @@ abstract class AbstractResource
 
         $id = $this->queryExecutor->createRecord($this->getTable(), $data);
 
-        $criteria = new Criteria(self::ID_FIELD, QuerySyntax::OPERATOR_IS, [$id]);
+        $criteria = new \FAFI\src\BE\Domain\Criteria(self::ID_FIELD, QuerySyntax::OPERATOR_IS, [$id]);
         $result = $this->readFirst([$criteria]);
         if (!$result) {
             throw new FafiException(sprintf(EntityErr::ENTITY_ABSENT, $entity, self::ID_FIELD, $id));
@@ -91,10 +90,10 @@ abstract class AbstractResource
         $this->verifyConstraintsOnUpdate($this->getTable(), $entity, $data);
 
         $id = $entity->getId();
-        $criteria = new Criteria(self::ID_FIELD, QuerySyntax::OPERATOR_IS, [$id]);
+        $criteria = new \FAFI\src\BE\Domain\Criteria(self::ID_FIELD, QuerySyntax::OPERATOR_IS, [$id]);
         $this->queryExecutor->updateRecord($this->getTable(), $data, [$criteria]);
 
-        $criteria = new Criteria(self::ID_FIELD, QuerySyntax::OPERATOR_IS, [$id]);
+        $criteria = new \FAFI\src\BE\Domain\Criteria(self::ID_FIELD, QuerySyntax::OPERATOR_IS, [$id]);
         $result = $this->readFirst([$criteria]);
         if (!$result) {
             throw new FafiException(sprintf(EntityErr::ENTITY_ABSENT, $entity, self::ID_FIELD, $id));

@@ -1,8 +1,8 @@
 <?php
 
-namespace FAFI\src\BE\Player\Repository;
+namespace FAFI\src\BE\Domain\Player\Repository;
 
-use FAFI\src\BE\Player\Player;
+use FAFI\src\BE\Domain\Player\Player;
 use FAFI\src\BE\PlayerAttribute\PlayerAttribute;
 use FAFI\src\BE\PlayerAttribute\Repository\PlayerAttributeHydrator;
 

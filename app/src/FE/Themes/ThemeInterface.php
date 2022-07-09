@@ -2,7 +2,7 @@
 
 namespace FAFI\src\FE\Themes;
 
-use FAFI\src\BE\Player\Player;
+use FAFI\src\BE\Domain\Player\Player;
 use FAFI\src\FE\Structure\Page\PageInterface;
 
 interface ThemeInterface

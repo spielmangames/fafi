@@ -4,7 +4,7 @@ namespace FAFI\src\BE\PlayerAttribute\Repository;
 
 use FAFI\db\Query\QuerySyntax;
 use FAFI\exception\FafiException;
-use FAFI\src\BE\Player\Repository\Criteria;
+use FAFI\src\BE\Domain\Criteria;
 use FAFI\src\BE\PlayerAttribute\PlayerAttribute;
 use FAFI\src\BE\Structure\Repository\AbstractResource;
 use FAFI\src\BE\Structure\Repository\EntityCriteriaInterface;
@@ -27,7 +27,7 @@ class PlayerAttributeRepository
      */
     public function findById(int $id): ?PlayerAttribute
     {
-        $criteria = new Criteria(AbstractResource::ID_FIELD, QuerySyntax::OPERATOR_IS, [$id]);
+        $criteria = new \FAFI\src\BE\Domain\Criteria(AbstractResource::ID_FIELD, QuerySyntax::OPERATOR_IS, [$id]);
         return $this->playerAttributeResource->readFirst([$criteria]);
     }
 

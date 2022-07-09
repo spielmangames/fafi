@@ -4,7 +4,7 @@ namespace FAFI\src\FE\Themes\Printer\Custom\Player;
 
 use FAFI\exception\FafiException;
 use FAFI\exception\FrontErr;
-use FAFI\src\BE\Player\Player;
+use FAFI\src\BE\Domain\Player\Player;
 use FAFI\src\FE\Themes\Printer\Basic\PageSections\AbstractTitle;
 
 class PlayerTitle extends AbstractTitle
@@ -15,9 +15,9 @@ class PlayerTitle extends AbstractTitle
     protected bool $bottomBorder = false;
 
 
-    private Player $player;
+    private \FAFI\src\BE\Domain\Player\Player $player;
 
-    public function __construct(int $x, Player $player)
+    public function __construct(int $x, \FAFI\src\BE\Domain\Player\Player $player)
     {
         parent::__construct($x);
         $this->player = $player;
@@ -33,7 +33,7 @@ class PlayerTitle extends AbstractTitle
         if (!isset($this->player)) {
             throw new FafiException(sprintf(FrontErr::PLAYER_IS_MISSED, self::class));
         }
-        /** @var Player $player */
+        /** @var \FAFI\src\BE\Domain\Player\Player $player */
         $player = $this->player;
 
         return $player->buildPlayerFullName();

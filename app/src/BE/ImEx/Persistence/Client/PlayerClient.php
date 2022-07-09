@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace FAFI\src\BE\ImEx\Persistence\Client;
 
-use FAFI\src\BE\Player\PlayerService;
+use FAFI\src\BE\Domain\Player\PlayerService;
 
 class PlayerClient implements EntityClientInterface
 {

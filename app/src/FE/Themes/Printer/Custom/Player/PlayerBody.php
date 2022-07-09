@@ -2,22 +2,21 @@
 
 namespace FAFI\src\FE\Themes\Printer\Custom\Player;
 
-use FAFI\src\BE\Player\Player;
 use FAFI\src\FE\Structure\PageSection\PageSectionInterface;
 use FAFI\src\FE\Themes\Printer\Basic\PageSections\AbstractBody;
 use FAFI\src\FE\Themes\Printer\Basic\Widgets\TabsPanelWidget;
 
 class PlayerBody extends AbstractBody
 {
-    private Player $player;
+    private \FAFI\src\BE\Domain\Player\Player $player;
 
-    public function __construct(int $x, int $yReserve, Player $player, string $tabName)
+    public function __construct(int $x, int $yReserve, \FAFI\src\BE\Domain\Player\Player $player, string $tabName)
     {
         parent::__construct($x, $yReserve, $tabName);
         $this->player = $player;
     }
 
-    public function setEntity(Player $player): self
+    public function setEntity(\FAFI\src\BE\Domain\Player\Player $player): self
     {
         $this->player = $player;
         return $this;
