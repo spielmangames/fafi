@@ -1,6 +1,6 @@
 <?php
 
-namespace FAFI\src\BE\Position;
+namespace FAFI\src\BE\Domain\Position;
 
 use FAFI\src\BE\Structure\EntityInterface;
 

@@ -1,8 +1,8 @@
 <?php
 
-namespace FAFI\src\BE\Position;
+namespace FAFI\src\BE\Domain\Position;
 
-use FAFI\src\BE\Position\Repository\PositionRepository;
+use FAFI\src\BE\Domain\Position\Repository\PositionRepository;
 
 class PositionService
 {

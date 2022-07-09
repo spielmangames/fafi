@@ -1,9 +1,9 @@
 <?php
 
-namespace FAFI\src\BE\Position\Repository;
+namespace FAFI\src\BE\Domain\Position\Repository;
 
 use FAFI\exception\FafiException;
-use FAFI\src\BE\Position\Position;
+use FAFI\src\BE\Domain\Position\Position;
 use FAFI\src\BE\Structure\Repository\AbstractResource;
 use FAFI\src\BE\Structure\Repository\EntityCriteriaInterface;
 
@@ -51,9 +51,9 @@ class PositionResource extends AbstractResource
 
 
     /**
-     * @param Position $entity
+     * @param \FAFI\src\BE\Domain\Position\Position $entity
      *
-     * @return Position
+     * @return \FAFI\src\BE\Domain\Position\Position
      * @throws FafiException
      */
     public function create($entity): Position
@@ -67,12 +67,12 @@ class PositionResource extends AbstractResource
     /**
      * @param EntityCriteriaInterface[] $conditions
      *
-     * @return Position[]|null
+     * @return \FAFI\src\BE\Domain\Position\Position[]|null
      * @throws FafiException
      */
     public function read(array $conditions = []): ?array
     {
-        /** @var Position[]|null $result */
+        /** @var \FAFI\src\BE\Domain\Position\Position[]|null $result */
         $result = parent::read($conditions);
 
         return $result;
@@ -81,12 +81,12 @@ class PositionResource extends AbstractResource
     /**
      * @param EntityCriteriaInterface[] $conditions
      *
-     * @return Position|null
+     * @return \FAFI\src\BE\Domain\Position\Position|null
      * @throws FafiException
      */
     public function readFirst(array $conditions): ?Position
     {
-        /** @var Position|null $result */
+        /** @var \FAFI\src\BE\Domain\Position\Position|null $result */
         $result = parent::readFirst($conditions);
 
         return $result;
@@ -95,12 +95,12 @@ class PositionResource extends AbstractResource
     /**
      * @param Position $entity
      *
-     * @return Position
+     * @return \FAFI\src\BE\Domain\Position\Position
      * @throws FafiException
      */
     public function update($entity): Position
     {
-        /** @var Position $result */
+        /** @var \FAFI\src\BE\Domain\Position\Position $result */
         $result = parent::update($entity);
 
         return $result;

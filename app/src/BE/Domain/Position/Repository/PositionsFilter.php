@@ -1,6 +1,6 @@
 <?php
 
-namespace FAFI\src\BE\Position\Repository;
+namespace FAFI\src\BE\Domain\Position\Repository;
 
 class PositionsFilter
 {

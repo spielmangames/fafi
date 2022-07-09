@@ -3,7 +3,7 @@
 namespace FAFI\src\BE\Domain\Player;
 
 use FAFI\src\BE\Domain\Player\Persistence\PlayerRepository;
-use FAFI\src\BE\Position\Repository\PositionRepository;
+use FAFI\src\BE\Domain\Position\Repository\PositionRepository;
 
 class PlayerService
 {

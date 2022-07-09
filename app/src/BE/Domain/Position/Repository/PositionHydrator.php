@@ -1,8 +1,8 @@
 <?php
 
-namespace FAFI\src\BE\Position\Repository;
+namespace FAFI\src\BE\Domain\Position\Repository;
 
-use FAFI\src\BE\Position\Position;
+use FAFI\src\BE\Domain\Position\Position;
 
 class PositionHydrator
 {

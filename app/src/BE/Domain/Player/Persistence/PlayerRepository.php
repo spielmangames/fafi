@@ -37,7 +37,7 @@ class PlayerRepository
     /**
      * @param EntityCriteriaInterface[] $conditions
      *
-     * @return \FAFI\src\BE\Domain\Player\Player[]
+     * @return Player[]
      * @throws FafiException
      */
     public function findCollection(array $conditions = []): array
@@ -48,27 +48,27 @@ class PlayerRepository
     /**
      * @param Player $player
      *
-     * @return \FAFI\src\BE\Domain\Player\Player
+     * @return Player
      * @throws FafiException
      */
     public function save(Player $player): Player
     {
+        return $player->getId() ? $this->playerResource->update($player) : $this->playerResource->create($player);
+
+
+//        $attributesToSave = $player->getAttributes();
+//
 //        $player = $player->getId() ? $this->playerResource->update($player) : $this->playerResource->create($player);
-
-
-        $attributesToSave = $player->getAttributes();
-
-        $player = $player->getId() ? $this->playerResource->update($player) : $this->playerResource->create($player);
-
-        $attributes = [];
-        if (!is_null($attributesToSave)) {
-            foreach($attributesToSave as $attributeToSave) {
-                $attributes[] = $this->playerAttributeRepository->save($attributeToSave);
-            }
-            $player->setAttributes($attributes);
-        }
-
-        return $player;
+//
+//        $attributes = [];
+//        if (!is_null($attributesToSave)) {
+//            foreach($attributesToSave as $attributeToSave) {
+//                $attributes[] = $this->playerAttributeRepository->save($attributeToSave);
+//            }
+//            $player->setAttributes($attributes);
+//        }
+//
+//        return $player;
     }
 
     /**

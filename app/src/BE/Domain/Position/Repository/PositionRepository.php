@@ -1,10 +1,10 @@
 <?php
 
-namespace FAFI\src\BE\Position\Repository;
+namespace FAFI\src\BE\Domain\Position\Repository;
 
 use FAFI\db\Query\QuerySyntax;
 use FAFI\exception\FafiException;
-use FAFI\src\BE\Position\Position;
+use FAFI\src\BE\Domain\Position\Position;
 use FAFI\src\BE\Structure\Repository\AbstractResource;
 use FAFI\src\BE\Structure\Repository\EntityCriteriaInterface;
 
@@ -33,7 +33,7 @@ class PositionRepository
     /**
      * @param string $name
      *
-     * @return Position|null
+     * @return \FAFI\src\BE\Domain\Position\Position|null
      * @throws FafiException
      */
     public function findByName(string $name): ?Position
@@ -45,7 +45,7 @@ class PositionRepository
     /**
      * @param EntityCriteriaInterface[] $conditions
      *
-     * @return Position[]
+     * @return \FAFI\src\BE\Domain\Position\Position[]
      * @throws FafiException
      */
     public function findCollection(array $conditions): array
@@ -56,7 +56,7 @@ class PositionRepository
     /**
      * @param Position $position
      *
-     * @return Position
+     * @return \FAFI\src\BE\Domain\Position\Position
      * @throws FafiException
      */
     public function save(Position $position): Position
