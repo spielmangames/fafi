@@ -1,8 +1,8 @@
 <?php
 
-namespace FAFI\src\BE\PlayerAttribute;
+namespace FAFI\src\BE\Domain\PlayerAttribute;
 
-use FAFI\src\BE\PlayerAttribute\Repository\PlayerAttributeRepository;
+use FAFI\src\BE\Domain\PlayerAttribute\Repository\PlayerAttributeRepository;
 
 class PlayerAttributeService
 {

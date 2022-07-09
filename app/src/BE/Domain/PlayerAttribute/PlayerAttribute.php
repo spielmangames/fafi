@@ -1,6 +1,6 @@
 <?php
 
-namespace FAFI\src\BE\PlayerAttribute;
+namespace FAFI\src\BE\Domain\PlayerAttribute;
 
 use FAFI\src\BE\Structure\EntityInterface;
 

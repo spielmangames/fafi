@@ -3,8 +3,8 @@
 namespace FAFI\src\BE\Domain\Player\Persistence;
 
 use FAFI\src\BE\Domain\Player\Player;
-use FAFI\src\BE\PlayerAttribute\PlayerAttribute;
-use FAFI\src\BE\PlayerAttribute\Repository\PlayerAttributeHydrator;
+use FAFI\src\BE\Domain\PlayerAttribute\PlayerAttribute;
+use FAFI\src\BE\Domain\PlayerAttribute\Repository\PlayerAttributeHydrator;
 
 class PlayerHydrator
 {
@@ -54,7 +54,7 @@ class PlayerHydrator
     /**
      * @param array $attributes
      *
-     * @return PlayerAttribute[]
+     * @return \FAFI\src\BE\Domain\PlayerAttribute\PlayerAttribute[]
      */
     private function hydrateAttributes(array $attributes): array
     {

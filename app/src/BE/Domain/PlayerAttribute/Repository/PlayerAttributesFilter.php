@@ -1,6 +1,6 @@
 <?php
 
-namespace FAFI\src\BE\PlayerAttribute\Repository;
+namespace FAFI\src\BE\Domain\PlayerAttribute\Repository;
 
 class PlayerAttributesFilter
 {

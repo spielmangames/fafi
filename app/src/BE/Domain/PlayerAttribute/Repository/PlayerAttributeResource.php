@@ -1,9 +1,9 @@
 <?php
 
-namespace FAFI\src\BE\PlayerAttribute\Repository;
+namespace FAFI\src\BE\Domain\PlayerAttribute\Repository;
 
 use FAFI\exception\FafiException;
-use FAFI\src\BE\PlayerAttribute\PlayerAttribute;
+use FAFI\src\BE\Domain\PlayerAttribute\PlayerAttribute;
 use FAFI\src\BE\Structure\Repository\AbstractResource;
 use FAFI\src\BE\Structure\Repository\EntityCriteriaInterface;
 
@@ -66,7 +66,7 @@ class PlayerAttributeResource extends AbstractResource
      */
     public function create($entity): PlayerAttribute
     {
-        /** @var PlayerAttribute $result */
+        /** @var \FAFI\src\BE\Domain\PlayerAttribute\PlayerAttribute $result */
         $result = parent::create($entity);
 
         return $result;
@@ -80,7 +80,7 @@ class PlayerAttributeResource extends AbstractResource
      */
     public function read(array $conditions = []): ?array
     {
-        /** @var PlayerAttribute[]|null $result */
+        /** @var \FAFI\src\BE\Domain\PlayerAttribute\PlayerAttribute[]|null $result */
         $result = parent::read($conditions);
 
         return $result;
@@ -94,16 +94,16 @@ class PlayerAttributeResource extends AbstractResource
      */
     public function readFirst(array $conditions): ?PlayerAttribute
     {
-        /** @var PlayerAttribute|null $result */
+        /** @var \FAFI\src\BE\Domain\PlayerAttribute\PlayerAttribute|null $result */
         $result = parent::readFirst($conditions);
 
         return $result;
     }
 
     /**
-     * @param PlayerAttribute $entity
+     * @param \FAFI\src\BE\Domain\PlayerAttribute\PlayerAttribute $entity
      *
-     * @return PlayerAttribute
+     * @return \FAFI\src\BE\Domain\PlayerAttribute\PlayerAttribute
      * @throws FafiException
      */
     public function update($entity): PlayerAttribute

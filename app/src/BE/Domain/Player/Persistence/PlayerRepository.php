@@ -6,7 +6,7 @@ use FAFI\db\Query\QuerySyntax;
 use FAFI\exception\FafiException;
 use FAFI\src\BE\Domain\Criteria;
 use FAFI\src\BE\Domain\Player\Player;
-use FAFI\src\BE\PlayerAttribute\Repository\PlayerAttributeRepository;
+use FAFI\src\BE\Domain\PlayerAttribute\Repository\PlayerAttributeRepository;
 use FAFI\src\BE\Structure\Repository\AbstractResource;
 use FAFI\src\BE\Structure\Repository\EntityCriteriaInterface;
 
