@@ -16,9 +16,9 @@ class PlayerAttributeClient implements EntityClientInterface
     }
 
 
-    public function create($entity)
+    public function create($entity): int
     {
-        $this->playerService->getPlayerAttributeRepo()->save($entity);
+        $this->playerService->getPlayerAttributeRepo()->save($entity)->getId();
     }
 
     public function update($entity)

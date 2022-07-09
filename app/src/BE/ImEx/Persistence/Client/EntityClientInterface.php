@@ -6,6 +6,6 @@ namespace FAFI\src\BE\ImEx\Persistence\Client;
 
 interface EntityClientInterface
 {
-    public function create($entity);
+    public function create($entity): int;
     public function update($entity);
 }

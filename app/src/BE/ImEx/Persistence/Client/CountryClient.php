@@ -16,9 +16,9 @@ class CountryClient implements EntityClientInterface
     }
 
 
-    public function create($entity)
+    public function create($entity): int
     {
-        $this->countryService->getCountryRepo()->save($entity);
+        return $this->countryService->getCountryRepo()->save($entity)->getId();
     }
 
     public function update($entity)

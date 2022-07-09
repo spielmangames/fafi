@@ -16,9 +16,9 @@ class PlayerClient implements EntityClientInterface
     }
 
 
-    public function create($entity)
+    public function create($entity): int
     {
-        $this->playerService->getPlayerRepo()->save($entity);
+        return $this->playerService->getPlayerRepo()->save($entity)->getId();
     }
 
     public function update($entity)

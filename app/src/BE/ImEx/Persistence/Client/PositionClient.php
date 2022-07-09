@@ -16,9 +16,9 @@ class PositionClient implements EntityClientInterface
     }
 
 
-    public function create($entity)
+    public function create($entity): int
     {
-        $this->positionService->getPositionRepo()->save($entity);
+        return $this->positionService->getPositionRepo()->save($entity)->getId();
     }
 
     public function update($entity)

@@ -15,11 +15,6 @@ use FAFI\src\BE\ImEx\Transformer\Specification\Field\Typical\StringSpecification
 
 class CountrySpecification implements ImExEntitySpecification
 {
-    public function getResourceHydrator(): string
-    {
-        return CountryHydrator::class;
-    }
-
     public function getFieldTransformersMap(): array
     {
         return [
@@ -47,12 +42,23 @@ class CountrySpecification implements ImExEntitySpecification
         ];
     }
 
+
+    public function getResourceHydrator(): string
+    {
+        return CountryHydrator::class;
+    }
+
+    public function getSubResourceHydrators(): array
+    {
+        return [];
+    }
+
     public function getResourceLoader(): string
     {
         return CountryClient::class;
     }
 
-    public function getLoaderSubResources(): array
+    public function getSubResourceLoaders(): array
     {
         return [];
     }

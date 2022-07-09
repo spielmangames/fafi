@@ -14,11 +14,6 @@ use FAFI\src\BE\ImEx\Transformer\Specification\Field\Typical\StringSpecification
 
 class PositionSpecification implements ImExEntitySpecification
 {
-    public function getResourceHydrator(): string
-    {
-        return PositionHydrator::class;
-    }
-
     public function getFieldTransformersMap(): array
     {
         return [
@@ -44,12 +39,23 @@ class PositionSpecification implements ImExEntitySpecification
         ];
     }
 
+
+    public function getResourceHydrator(): string
+    {
+        return PositionHydrator::class;
+    }
+
+    public function getSubResourceHydrators(): array
+    {
+        return [];
+    }
+
     public function getResourceLoader(): string
     {
         return PositionClient::class;
     }
 
-    public function getLoaderSubResources(): array
+    public function getSubResourceLoaders(): array
     {
         return [];
     }
