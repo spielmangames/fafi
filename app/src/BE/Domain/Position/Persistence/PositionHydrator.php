@@ -1,6 +1,6 @@
 <?php
 
-namespace FAFI\src\BE\Domain\Position\Repository;
+namespace FAFI\src\BE\Domain\Position\Persistence;
 
 use FAFI\src\BE\Domain\Position\Position;
 

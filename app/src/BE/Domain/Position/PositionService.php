@@ -2,7 +2,7 @@
 
 namespace FAFI\src\BE\Domain\Position;
 
-use FAFI\src\BE\Domain\Position\Repository\PositionRepository;
+use FAFI\src\BE\Domain\Position\Persistence\PositionRepository;
 
 class PositionService
 {
