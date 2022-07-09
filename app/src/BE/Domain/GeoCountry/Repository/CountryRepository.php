@@ -1,10 +1,10 @@
 <?php
 
-namespace FAFI\src\BE\GeoCountry\Repository;
+namespace FAFI\src\BE\Domain\GeoCountry\Repository;
 
 use FAFI\db\Query\QuerySyntax;
 use FAFI\exception\FafiException;
-use FAFI\src\BE\GeoCountry\Country;
+use FAFI\src\BE\Domain\GeoCountry\Country;
 use FAFI\src\BE\Structure\Repository\AbstractResource;
 use FAFI\src\BE\Structure\Repository\EntityCriteriaInterface;
 
@@ -44,7 +44,7 @@ class CountryRepository
     /**
      * @param Country $country
      *
-     * @return Country
+     * @return \FAFI\src\BE\Domain\GeoCountry\Country
      * @throws FafiException
      */
     public function save(Country $country): Country

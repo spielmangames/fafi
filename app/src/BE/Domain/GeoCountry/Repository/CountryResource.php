@@ -1,9 +1,9 @@
 <?php
 
-namespace FAFI\src\BE\GeoCountry\Repository;
+namespace FAFI\src\BE\Domain\GeoCountry\Repository;
 
 use FAFI\exception\FafiException;
-use FAFI\src\BE\GeoCountry\Country;
+use FAFI\src\BE\Domain\GeoCountry\Country;
 use FAFI\src\BE\Structure\Repository\AbstractResource;
 use FAFI\src\BE\Structure\Repository\EntityCriteriaInterface;
 
@@ -51,14 +51,14 @@ class CountryResource extends AbstractResource
 
 
     /**
-     * @param Country $entity
+     * @param \FAFI\src\BE\Domain\GeoCountry\Country $entity
      *
-     * @return Country
+     * @return \FAFI\src\BE\Domain\GeoCountry\Country
      * @throws FafiException
      */
     public function create($entity): Country
     {
-        /** @var Country $result */
+        /** @var \FAFI\src\BE\Domain\GeoCountry\Country $result */
         $result = parent::create($entity);
 
         return $result;
@@ -67,7 +67,7 @@ class CountryResource extends AbstractResource
     /**
      * @param EntityCriteriaInterface[] $conditions
      *
-     * @return Country[]|null
+     * @return \FAFI\src\BE\Domain\GeoCountry\Country[]|null
      * @throws FafiException
      */
     public function read(array $conditions = []): ?array
@@ -95,12 +95,12 @@ class CountryResource extends AbstractResource
     /**
      * @param Country $entity
      *
-     * @return Country
+     * @return \FAFI\src\BE\Domain\GeoCountry\Country
      * @throws FafiException
      */
     public function update($entity): Country
     {
-        /** @var Country $result */
+        /** @var \FAFI\src\BE\Domain\GeoCountry\Country $result */
         $result = parent::update($entity);
 
         return $result;

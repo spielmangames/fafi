@@ -1,8 +1,8 @@
 <?php
 
-namespace FAFI\src\BE\GeoCountry;
+namespace FAFI\src\BE\Domain\GeoCountry;
 
-use FAFI\src\BE\GeoCountry\Repository\CountryRepository;
+use FAFI\src\BE\Domain\GeoCountry\Repository\CountryRepository;
 
 class CountryService
 {
