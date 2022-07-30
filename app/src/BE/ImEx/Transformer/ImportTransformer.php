@@ -6,7 +6,7 @@ namespace FAFI\src\BE\ImEx\Transformer;
 
 use FAFI\exception\FafiException;
 use FAFI\exception\ImExErr;
-use FAFI\src\BE\Domain\Player\Player;
+use FAFI\src\BE\Domain\Player\Player\Player;
 use FAFI\src\BE\ImEx\Transformer\Field\ImExFieldTransformer;
 use FAFI\src\BE\ImEx\Transformer\Field\ImExFieldTransformerFactory;
 use FAFI\src\BE\ImEx\Transformer\Specification\Entity\ImExEntitySpecification;

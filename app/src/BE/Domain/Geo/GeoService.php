@@ -2,11 +2,9 @@
 
 namespace FAFI\src\BE\Domain\Geo;
 
-use FAFI\db\Query\QuerySyntax;
 use FAFI\exception\FafiException;
-use FAFI\src\BE\Domain\Criteria;
-use FAFI\src\BE\Domain\Geo\Repository\CountryRepository;
-use FAFI\src\BE\Domain\Persistence\AbstractResource;
+use FAFI\src\BE\Domain\Geo\Country\Country;
+use FAFI\src\BE\Domain\Geo\Country\Persistence\CountryRepository;
 use FAFI\src\BE\Domain\Persistence\EntityCriteriaInterface;
 
 class GeoService
@@ -25,10 +23,9 @@ class GeoService
      * @return Country|null
      * @throws FafiException
      */
-    public function findById(int $id): ?Country
+    public function findCountryById(int $id): ?Country
     {
-        $criteria = new Criteria(AbstractResource::ID_FIELD, QuerySyntax::OPERATOR_IS, [$id]);
-        return $this->countryResource->readFirst([$criteria]);
+        return $this->countryRepository->findById($id);
     }
 
     /**
@@ -37,10 +34,11 @@ class GeoService
      * @return Country[]
      * @throws FafiException
      */
-    public function findCollection(array $conditions): array
+    public function findCountriesCollection(array $conditions): array
     {
-        return $this->countryResource->read($conditions);
+        return $this->countryRepository->findCollection($conditions);
     }
+
 
     /**
      * @param Country $country
@@ -48,8 +46,8 @@ class GeoService
      * @return Country
      * @throws FafiException
      */
-    public function save(Country $country): Country
+    public function saveCountry(Country $country): Country
     {
-        return $country->getId() ? $this->countryResource->update($country) : $this->countryResource->create($country);
+        return $this->countryRepository->save($country);
     }
 }

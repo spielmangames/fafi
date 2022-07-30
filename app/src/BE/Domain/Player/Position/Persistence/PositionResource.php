@@ -1,11 +1,11 @@
 <?php
 
-namespace FAFI\src\BE\Domain\Position\Persistence;
+namespace FAFI\src\BE\Domain\Player\Position\Persistence;
 
 use FAFI\exception\FafiException;
 use FAFI\src\BE\Domain\Persistence\AbstractResource;
 use FAFI\src\BE\Domain\Persistence\EntityCriteriaInterface;
-use FAFI\src\BE\Domain\Position\Position;
+use FAFI\src\BE\Domain\Player\Position\Position;
 
 class PositionResource extends AbstractResource
 {

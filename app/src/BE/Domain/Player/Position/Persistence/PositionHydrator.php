@@ -1,8 +1,8 @@
 <?php
 
-namespace FAFI\src\BE\Domain\Position\Persistence;
+namespace FAFI\src\BE\Domain\Player\Position\Persistence;
 
-use FAFI\src\BE\Domain\Position\Position;
+use FAFI\src\BE\Domain\Player\Position\Position;
 
 class PositionHydrator
 {

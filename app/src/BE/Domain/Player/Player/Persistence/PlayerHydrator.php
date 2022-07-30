@@ -1,10 +1,9 @@
 <?php
 
-namespace FAFI\src\BE\Domain\Player\Persistence;
+namespace FAFI\src\BE\Domain\Player\Player\Persistence;
 
-use FAFI\src\BE\Domain\Player\Player;
-use FAFI\src\BE\Domain\PlayerAttribute\PlayerAttribute;
-use FAFI\src\BE\Domain\PlayerAttribute\Repository\PlayerAttributeHydrator;
+use FAFI\src\BE\Domain\Player\Player\Player;
+use FAFI\src\BE\Domain\Player\PlayerAttribute\Persistence\PlayerAttributeHydrator;
 
 class PlayerHydrator
 {
@@ -54,7 +53,7 @@ class PlayerHydrator
     /**
      * @param array $attributes
      *
-     * @return \FAFI\src\BE\Domain\PlayerAttribute\PlayerAttribute[]
+     * @return \FAFI\src\BE\Domain\Player\PlayerAttribute\PlayerAttribute[]
      */
     private function hydrateAttributes(array $attributes): array
     {

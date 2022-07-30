@@ -1,8 +1,8 @@
 <?php
 
-namespace FAFI\src\BE\Domain\Geo\Repository;
+namespace FAFI\src\BE\Domain\Geo\Country\Persistence;
 
-use FAFI\src\BE\Domain\Geo\Country;
+use FAFI\src\BE\Domain\Geo\Country\Country;
 
 class CountryHydrator
 {

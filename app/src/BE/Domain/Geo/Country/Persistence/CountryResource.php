@@ -1,9 +1,9 @@
 <?php
 
-namespace FAFI\src\BE\Domain\Geo\Repository;
+namespace FAFI\src\BE\Domain\Geo\Country\Persistence;
 
 use FAFI\exception\FafiException;
-use FAFI\src\BE\Domain\Geo\Country;
+use FAFI\src\BE\Domain\Geo\Country\Country;
 use FAFI\src\BE\Domain\Persistence\AbstractResource;
 use FAFI\src\BE\Domain\Persistence\EntityCriteriaInterface;
 

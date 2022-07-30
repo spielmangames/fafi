@@ -8,15 +8,15 @@ use FAFI\src\FE\Themes\Printer\Basic\Widgets\TabsPanelWidget;
 
 class PlayerBody extends AbstractBody
 {
-    private \FAFI\src\BE\Domain\Player\Player $player;
+    private \FAFI\src\BE\Domain\Player\Player\Player $player;
 
-    public function __construct(int $x, int $yReserve, \FAFI\src\BE\Domain\Player\Player $player, string $tabName)
+    public function __construct(int $x, int $yReserve, \FAFI\src\BE\Domain\Player\Player\Player $player, string $tabName)
     {
         parent::__construct($x, $yReserve, $tabName);
         $this->player = $player;
     }
 
-    public function setEntity(\FAFI\src\BE\Domain\Player\Player $player): self
+    public function setEntity(\FAFI\src\BE\Domain\Player\Player\Player $player): self
     {
         $this->player = $player;
         return $this;

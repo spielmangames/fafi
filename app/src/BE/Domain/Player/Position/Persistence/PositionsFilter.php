@@ -1,33 +1,33 @@
 <?php
 
-namespace FAFI\src\BE\Domain\Player\Persistence;
+namespace FAFI\src\BE\Domain\Player\Position\Persistence;
 
-class PlayersFilter
+class PositionsFilter
 {
     private const DEFAULT_READ_LIMIT = 50;
 
 
-    private ?array $playerIds;
+    private ?array $positionIds;
 
     private int $offset;
     private int $limit;
 
 
     public function __construct(
-        ?array $playerIds = null,
+        ?array $positionIds = null,
         int $offset = 0,
         int $limit = self::DEFAULT_READ_LIMIT
     ) {
-        $this->playerIds = $playerIds;
+        $this->positionIds = $positionIds;
 
         $this->offset = $offset;
         $this->limit = $limit;
     }
 
 
-    public function getPlayerIds(): ?array
+    public function getPositionIds(): ?array
     {
-        return $this->playerIds;
+        return $this->positionIds;
     }
 
 

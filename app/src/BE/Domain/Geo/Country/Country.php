@@ -1,6 +1,6 @@
 <?php
 
-namespace FAFI\src\BE\Domain\Geo;
+namespace FAFI\src\BE\Domain\Geo\Country;
 
 use FAFI\src\BE\Domain\EntityInterface;
 

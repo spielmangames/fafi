@@ -1,13 +1,13 @@
 <?php
 
-namespace FAFI\src\BE\Domain\Position\Persistence;
+namespace FAFI\src\BE\Domain\Player\Position\Persistence;
 
 use FAFI\db\Query\QuerySyntax;
 use FAFI\exception\FafiException;
 use FAFI\src\BE\Domain\Criteria;
 use FAFI\src\BE\Domain\Persistence\AbstractResource;
 use FAFI\src\BE\Domain\Persistence\EntityCriteriaInterface;
-use FAFI\src\BE\Domain\Position\Position;
+use FAFI\src\BE\Domain\Player\Position\Position;
 use FAFI\src\BE\RepositoryInterface;
 
 class PositionRepository implements RepositoryInterface

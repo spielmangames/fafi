@@ -1,11 +1,10 @@
 <?php
 
-namespace FAFI\src\BE\Domain\PlayerAttribute\Repository;
+namespace FAFI\src\BE\Domain\Player\PlayerAttribute\Persistence;
 
 use FAFI\exception\FafiException;
 use FAFI\src\BE\Domain\Persistence\AbstractResource;
-use FAFI\src\BE\Domain\Persistence\EntityCriteriaInterface;
-use FAFI\src\BE\Domain\PlayerAttribute\PlayerAttribute;
+use FAFI\src\BE\Domain\Player\PlayerAttribute\PlayerAttribute;
 
 class PlayerAttributeResource extends AbstractResource
 {
@@ -66,7 +65,7 @@ class PlayerAttributeResource extends AbstractResource
      */
     public function create($entity): PlayerAttribute
     {
-        /** @var \FAFI\src\BE\Domain\PlayerAttribute\PlayerAttribute $result */
+        /** @var \FAFI\src\BE\Domain\Player\PlayerAttribute\PlayerAttribute $result */
         $result = parent::create($entity);
 
         return $result;
@@ -80,7 +79,7 @@ class PlayerAttributeResource extends AbstractResource
      */
     public function read(array $conditions = []): ?array
     {
-        /** @var \FAFI\src\BE\Domain\PlayerAttribute\PlayerAttribute[]|null $result */
+        /** @var \FAFI\src\BE\Domain\Player\PlayerAttribute\PlayerAttribute[]|null $result */
         $result = parent::read($conditions);
 
         return $result;
@@ -94,16 +93,16 @@ class PlayerAttributeResource extends AbstractResource
      */
     public function readFirst(array $conditions): ?PlayerAttribute
     {
-        /** @var \FAFI\src\BE\Domain\PlayerAttribute\PlayerAttribute|null $result */
+        /** @var \FAFI\src\BE\Domain\Player\PlayerAttribute\PlayerAttribute|null $result */
         $result = parent::readFirst($conditions);
 
         return $result;
     }
 
     /**
-     * @param \FAFI\src\BE\Domain\PlayerAttribute\PlayerAttribute $entity
+     * @param \FAFI\src\BE\Domain\Player\PlayerAttribute\PlayerAttribute $entity
      *
-     * @return \FAFI\src\BE\Domain\PlayerAttribute\PlayerAttribute
+     * @return \FAFI\src\BE\Domain\Player\PlayerAttribute\PlayerAttribute
      * @throws FafiException
      */
     public function update($entity): PlayerAttribute

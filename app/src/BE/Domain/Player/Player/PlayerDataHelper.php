@@ -1,8 +1,8 @@
 <?php
 
-namespace FAFI\src\BE\Domain\Player;
+namespace FAFI\src\BE\Domain\Player\Player;
 
-trait PlayerDataHelperTrait
+trait PlayerDataHelper
 {
     public function buildPlayerFullName(): string
     {

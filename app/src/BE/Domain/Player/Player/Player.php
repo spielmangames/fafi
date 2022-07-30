@@ -1,13 +1,13 @@
 <?php
 
-namespace FAFI\src\BE\Domain\Player;
+namespace FAFI\src\BE\Domain\Player\Player;
 
 use FAFI\src\BE\Domain\EntityInterface;
-use FAFI\src\BE\Domain\PlayerAttribute\PlayerAttribute;
+use FAFI\src\BE\Domain\Player\PlayerAttribute\PlayerAttribute;
 
 class Player implements EntityInterface
 {
-    use PlayerDataHelperTrait;
+    use PlayerDataHelper;
 
 
     public const ENTITY = 'Player';

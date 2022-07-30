@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace FAFI\src\BE\ImEx\Persistence\Hydrator;
 
-use FAFI\src\BE\Domain\Geo\Country;
+use FAFI\src\BE\Domain\Geo\Country\Country;
 use FAFI\src\BE\ImEx\Transformer\Schema\File\CountryFileSchema;
 
 class CountryHydrator implements EntityHydratorInterface

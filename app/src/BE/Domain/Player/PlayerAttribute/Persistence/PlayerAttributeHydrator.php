@@ -1,15 +1,15 @@
 <?php
 
-namespace FAFI\src\BE\Domain\PlayerAttribute\Repository;
+namespace FAFI\src\BE\Domain\Player\PlayerAttribute\Persistence;
 
-use FAFI\src\BE\Domain\PlayerAttribute\PlayerAttribute;
+use FAFI\src\BE\Domain\Player\PlayerAttribute\PlayerAttribute;
 
 class PlayerAttributeHydrator
 {
     /**
      * @param array $data
      *
-     * @return \FAFI\src\BE\Domain\PlayerAttribute\PlayerAttribute[]
+     * @return \FAFI\src\BE\Domain\Player\PlayerAttribute\PlayerAttribute[]
      */
     public function hydrateCollection(array $data): array
     {

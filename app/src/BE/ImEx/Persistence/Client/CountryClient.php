@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace FAFI\src\BE\ImEx\Persistence\Client;
 
-use FAFI\src\BE\Domain\Geo\Country;
+use FAFI\src\BE\Domain\Geo\Country\Country;
 use FAFI\src\BE\Domain\Geo\GeoService;
 
 class CountryClient implements EntityClientInterface

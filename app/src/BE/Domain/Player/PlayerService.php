@@ -2,9 +2,9 @@
 
 namespace FAFI\src\BE\Domain\Player;
 
-use FAFI\src\BE\Domain\Player\Persistence\PlayerRepository;
-use FAFI\src\BE\Domain\PlayerAttribute\Repository\PlayerAttributeRepository;
-use FAFI\src\BE\Domain\Position\Persistence\PositionRepository;
+use FAFI\src\BE\Domain\Player\Player\Persistence\PlayerRepository;
+use FAFI\src\BE\Domain\Player\PlayerAttribute\Persistence\PlayerAttributeRepository;
+use FAFI\src\BE\Domain\Player\Position\Persistence\PositionRepository;
 
 class PlayerService
 {

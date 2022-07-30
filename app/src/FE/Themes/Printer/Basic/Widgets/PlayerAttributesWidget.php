@@ -2,7 +2,7 @@
 
 namespace FAFI\src\FE\Themes\Printer\Basic\Widgets;
 
-use FAFI\src\BE\Domain\Player\Player;
+use FAFI\src\BE\Domain\Player\Player\Player;
 use FAFI\src\FE\Themes\Printer\Basic\PageSections\AbstractWidget;
 use FAFI\src\FE\Themes\Printer\PrinterDesign as PD;
 
