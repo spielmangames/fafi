@@ -39,7 +39,6 @@ class GeoService
         return $this->countryRepository->findCollection($conditions);
     }
 
-
     /**
      * @param Country $country
      *
