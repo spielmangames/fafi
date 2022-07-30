@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace FAFI\src\BE\ImEx\Persistence\Client;
 
+use FAFI\src\BE\Domain\EntityInterface;
+
 interface EntityClientInterface
 {
-    public function create($entity): int;
-    public function update($entity);
+    public function create($entity): EntityInterface;
+    public function update($entity): EntityInterface;
 }

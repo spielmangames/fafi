@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace FAFI\src\BE\ImEx\Persistence\Client;
 
+use FAFI\src\BE\Domain\Position\Position;
 use FAFI\src\BE\Domain\Position\PositionService;
 
 class PositionClient implements EntityClientInterface
@@ -16,13 +17,13 @@ class PositionClient implements EntityClientInterface
     }
 
 
-    public function create($entity): int
+    public function create($entity): Position
     {
-        return $this->positionService->getPositionRepo()->save($entity)->getId();
+        return $this->positionService->getPositionRepo()->save($entity);
     }
 
-    public function update($entity)
+    public function update($entity): Position
     {
-        $this->positionService->getPositionRepo()->save($entity);
+        return $this->positionService->getPositionRepo()->save($entity);
     }
 }

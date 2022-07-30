@@ -26,7 +26,7 @@ class DataValidator
 
         if (!empty($missed)) {
             $missed = implode(FafiException::LIST_WRAPPED_SEPARATOR, $missed);
-            throw new FafiException(sprintf(EntityErr::REQ_MISSED, $entityName, $missed));
+            throw new FafiException(sprintf(EntityErr::REQ_ABSENT, $entityName, $missed));
         }
     }
 

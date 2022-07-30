@@ -1,20 +1,21 @@
 <?php
 
-namespace FAFI\src\BE\Domain\GeoCountry\Repository;
+namespace FAFI\src\BE\Domain\Geo;
 
 use FAFI\db\Query\QuerySyntax;
 use FAFI\exception\FafiException;
-use FAFI\src\BE\Domain\GeoCountry\Country;
+use FAFI\src\BE\Domain\Criteria;
+use FAFI\src\BE\Domain\Geo\Repository\CountryRepository;
 use FAFI\src\BE\Domain\Persistence\AbstractResource;
 use FAFI\src\BE\Domain\Persistence\EntityCriteriaInterface;
 
-class CountryRepository
+class GeoService
 {
-    private CountryResource $countryResource;
+    private CountryRepository $countryRepository;
 
     public function __construct()
     {
-        $this->countryResource = new CountryResource();
+        $this->countryRepository = new CountryRepository();
     }
 
 
@@ -26,12 +27,12 @@ class CountryRepository
      */
     public function findById(int $id): ?Country
     {
-        $criteria = new \FAFI\src\BE\Domain\Criteria(AbstractResource::ID_FIELD, QuerySyntax::OPERATOR_IS, [$id]);
+        $criteria = new Criteria(AbstractResource::ID_FIELD, QuerySyntax::OPERATOR_IS, [$id]);
         return $this->countryResource->readFirst([$criteria]);
     }
 
     /**
-     * @param \FAFI\src\BE\Domain\Persistence\EntityCriteriaInterface[] $conditions
+     * @param EntityCriteriaInterface[] $conditions
      *
      * @return Country[]
      * @throws FafiException
@@ -44,7 +45,7 @@ class CountryRepository
     /**
      * @param Country $country
      *
-     * @return \FAFI\src\BE\Domain\GeoCountry\Country
+     * @return Country
      * @throws FafiException
      */
     public function save(Country $country): Country

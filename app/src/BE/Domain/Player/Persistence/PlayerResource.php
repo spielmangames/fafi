@@ -86,7 +86,7 @@ class PlayerResource extends AbstractResource
      */
     public function create($entity): Player
     {
-        /** @var \FAFI\src\BE\Domain\Player\Player $result */
+        /** @var Player $result */
         $result = parent::create($entity);
 
         return $result;
@@ -109,7 +109,7 @@ class PlayerResource extends AbstractResource
     /**
      * @param EntityCriteriaInterface[] $conditions
      *
-     * @return \FAFI\src\BE\Domain\Player\Player|null
+     * @return Player|null
      * @throws FafiException
      */
     public function readFirst(array $conditions): ?Player
@@ -123,12 +123,12 @@ class PlayerResource extends AbstractResource
     /**
      * @param Player $entity
      *
-     * @return \FAFI\src\BE\Domain\Player\Player
+     * @return Player
      * @throws FafiException
      */
     public function update($entity): Player
     {
-        /** @var \FAFI\src\BE\Domain\Player\Player $result */
+        /** @var Player $result */
         $result = parent::update($entity);
 
         return $result;

@@ -40,10 +40,20 @@ class ImportLoader
         $resourceClient = $this->entityClientFactory->create($entitySpecification->getResourceLoader());
         $subResourceClients = $this->buildSubResourceClients($entitySpecification);
 
-        foreach ($entities as $entity) {
+        foreach ($entities as $entityData) {
+            $entity = $resourceHydrator->hydrate($entityData);
 
-            $hydrated = $resourceHydrator->hydrate($entity);
-            $this->isIdPresent($entity) ? $resourceClient->update($hydrated) : $resourceClient->create($hydrated);
+            $resource = $this->isFieldPresent($entityData, AbstractFileSchema::ID)
+                ? $resourceClient->update($entity)
+                : $resourceClient->create($entity);
+
+            foreach ($subResourceHydrators as $field => $subResourceHydrator) {
+                if ($this->isFieldPresent($entityData, $field)) {
+                    $subEntity = $subResourceHydrator->hydrate($entityData[$field]);
+
+                    $subResourceClients[$field]->create($subEntity);
+                }
+            }
         }
     }
 
@@ -80,13 +90,8 @@ class ImportLoader
         return $clients;
     }
 
-    private function isSubResourcePresent(array $entity, string $subResource): bool
+    private function isFieldPresent(array $entity, string $field): bool
     {
-        return array_key_exists($subResource, $entity);
-    }
-
-    private function isIdPresent(array $entity): bool
-    {
-        return array_key_exists(AbstractFileSchema::ID, $entity);
+        return array_key_exists($field, $entity);
     }
 }

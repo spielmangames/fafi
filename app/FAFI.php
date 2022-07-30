@@ -2,7 +2,7 @@
 
 namespace FAFI;
 
-use FAFI\src\BE\Domain\GeoCountry\CountryService;
+use FAFI\src\BE\Domain\Geo\GeoService;
 use FAFI\src\BE\Domain\Player\PlayerService;
 use FAFI\src\BE\Domain\Position\PositionService;
 use FAFI\src\BE\ImEx\ImExService;
@@ -17,7 +17,7 @@ class FAFI
     private ImExService $imExService;
 
     // BE domain
-    private CountryService $countryService;
+    private GeoService $countryService;
     private PlayerService $playerService;
     private PositionService $positionService;
 
@@ -30,7 +30,7 @@ class FAFI
         $this->installService = new InstallService();
         $this->imExService = new ImExService();
 
-        $this->countryService = new CountryService();
+        $this->countryService = new GeoService();
         $this->playerService = new PlayerService();
         $this->positionService = new PositionService();
 
@@ -49,7 +49,7 @@ class FAFI
     }
 
 
-    public function getCountryService(): CountryService
+    public function getCountryService(): GeoService
     {
         return $this->countryService;
     }

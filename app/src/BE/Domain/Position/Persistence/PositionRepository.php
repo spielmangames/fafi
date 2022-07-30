@@ -4,10 +4,13 @@ namespace FAFI\src\BE\Domain\Position\Persistence;
 
 use FAFI\db\Query\QuerySyntax;
 use FAFI\exception\FafiException;
+use FAFI\src\BE\Domain\Criteria;
+use FAFI\src\BE\Domain\Persistence\AbstractResource;
 use FAFI\src\BE\Domain\Persistence\EntityCriteriaInterface;
 use FAFI\src\BE\Domain\Position\Position;
+use FAFI\src\BE\RepositoryInterface;
 
-class PositionRepository
+class PositionRepository implements RepositoryInterface
 {
     private PositionResource $positionResource;
 
@@ -25,26 +28,26 @@ class PositionRepository
      */
     public function findById(int $id): ?Position
     {
-        $criteria = new \FAFI\src\BE\Domain\Criteria(\FAFI\src\BE\Domain\Persistence\AbstractResource::ID_FIELD, QuerySyntax::OPERATOR_IS, [$id]);
+        $criteria = new Criteria(AbstractResource::ID_FIELD, QuerySyntax::OPERATOR_IS, [$id]);
         return $this->positionResource->readFirst([$criteria]);
     }
 
     /**
      * @param string $name
      *
-     * @return \FAFI\src\BE\Domain\Position\Position|null
+     * @return Position|null
      * @throws FafiException
      */
     public function findByName(string $name): ?Position
     {
-        $criteria = new \FAFI\src\BE\Domain\Criteria(PositionResource::NAME_FIELD, QuerySyntax::OPERATOR_IS, [$name]);
+        $criteria = new Criteria(PositionResource::NAME_FIELD, QuerySyntax::OPERATOR_IS, [$name]);
         return $this->positionResource->readFirst([$criteria]);
     }
 
     /**
-     * @param \FAFI\src\BE\Domain\Persistence\EntityCriteriaInterface[] $conditions
+     * @param EntityCriteriaInterface[] $conditions
      *
-     * @return \FAFI\src\BE\Domain\Position\Position[]
+     * @return Position[]
      * @throws FafiException
      */
     public function findCollection(array $conditions): array
@@ -52,14 +55,27 @@ class PositionRepository
         return $this->positionResource->read($conditions);
     }
 
+
     /**
-     * @param Position $position
+     * @param Position $entity
      *
-     * @return \FAFI\src\BE\Domain\Position\Position
+     * @return Position
      * @throws FafiException
      */
-    public function save(Position $position): Position
+    public function save($entity): Position
     {
-        return $position->getId() ? $this->positionResource->update($position) : $this->positionResource->create($position);
+        return $entity->getId() ? $this->positionResource->update($entity) : $this->positionResource->create($entity);
+    }
+
+    /**
+     * @param int $id
+     *
+     * @return void
+     * @throws FafiException
+     */
+    public function deleteById(int $id): void
+    {
+        $criteria = new Criteria(AbstractResource::ID_FIELD, QuerySyntax::OPERATOR_IS, [$id]);
+        $this->positionResource->delete([$criteria]);
     }
 }

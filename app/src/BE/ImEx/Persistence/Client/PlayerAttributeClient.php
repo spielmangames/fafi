@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace FAFI\src\BE\ImEx\Persistence\Client;
 
 use FAFI\src\BE\Domain\Player\PlayerService;
+use FAFI\src\BE\Domain\PlayerAttribute\PlayerAttribute;
 
 class PlayerAttributeClient implements EntityClientInterface
 {
@@ -16,13 +17,13 @@ class PlayerAttributeClient implements EntityClientInterface
     }
 
 
-    public function create($entity): int
+    public function create($entity): PlayerAttribute
     {
-        $this->playerService->getPlayerAttributeRepo()->save($entity)->getId();
+        return $this->playerService->getPlayerAttributeRepo()->save($entity);
     }
 
-    public function update($entity)
+    public function update($entity): PlayerAttribute
     {
-        $this->playerService->getPlayerAttributeRepo()->save($entity);
+        return $this->playerService->getPlayerAttributeRepo()->save($entity);
     }
 }

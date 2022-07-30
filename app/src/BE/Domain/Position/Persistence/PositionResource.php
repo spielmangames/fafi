@@ -51,9 +51,9 @@ class PositionResource extends AbstractResource
 
 
     /**
-     * @param \FAFI\src\BE\Domain\Position\Position $entity
+     * @param Position $entity
      *
-     * @return \FAFI\src\BE\Domain\Position\Position
+     * @return Position
      * @throws FafiException
      */
     public function create($entity): Position
@@ -67,12 +67,12 @@ class PositionResource extends AbstractResource
     /**
      * @param EntityCriteriaInterface[] $conditions
      *
-     * @return \FAFI\src\BE\Domain\Position\Position[]|null
+     * @return Position[]|null
      * @throws FafiException
      */
     public function read(array $conditions = []): ?array
     {
-        /** @var \FAFI\src\BE\Domain\Position\Position[]|null $result */
+        /** @var Position[]|null $result */
         $result = parent::read($conditions);
 
         return $result;
@@ -81,12 +81,12 @@ class PositionResource extends AbstractResource
     /**
      * @param EntityCriteriaInterface[] $conditions
      *
-     * @return \FAFI\src\BE\Domain\Position\Position|null
+     * @return Position|null
      * @throws FafiException
      */
     public function readFirst(array $conditions): ?Position
     {
-        /** @var \FAFI\src\BE\Domain\Position\Position|null $result */
+        /** @var Position|null $result */
         $result = parent::readFirst($conditions);
 
         return $result;
@@ -95,12 +95,12 @@ class PositionResource extends AbstractResource
     /**
      * @param Position $entity
      *
-     * @return \FAFI\src\BE\Domain\Position\Position
+     * @return Position
      * @throws FafiException
      */
     public function update($entity): Position
     {
-        /** @var \FAFI\src\BE\Domain\Position\Position $result */
+        /** @var Position $result */
         $result = parent::update($entity);
 
         return $result;

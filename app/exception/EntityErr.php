@@ -6,7 +6,7 @@ interface EntityErr extends Err
 {
     public const ENTITY_ABSENT = '%s (%s = %s) is absent.';
 
-    public const REQ_MISSED = 'Required fields are missed for %s: "%s".';
+    public const REQ_ABSENT = 'Required fields are absent for %s: "%s".';
     public const ID_ABSENT = 'ID is required for updating %s and can not be null.';
     public const ID_PRESENT = 'ID must be absent for creating %s.';
 

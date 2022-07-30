@@ -1,58 +1,58 @@
 <?php
 
-namespace FAFI\src\BE\Domain\PlayerAttribute\Repository;
+namespace FAFI\src\BE\Domain\Geo\Repository;
 
 use FAFI\db\Query\QuerySyntax;
 use FAFI\exception\FafiException;
 use FAFI\src\BE\Domain\Criteria;
+use FAFI\src\BE\Domain\Geo\Country;
 use FAFI\src\BE\Domain\Persistence\AbstractResource;
 use FAFI\src\BE\Domain\Persistence\EntityCriteriaInterface;
-use FAFI\src\BE\Domain\PlayerAttribute\PlayerAttribute;
 use FAFI\src\BE\RepositoryInterface;
 
-class PlayerAttributeRepository implements RepositoryInterface
+class CountryRepository implements RepositoryInterface
 {
-    private PlayerAttributeResource $playerAttributeResource;
+    private CountryResource $countryResource;
 
     public function __construct()
     {
-        $this->playerAttributeResource = new PlayerAttributeResource();
+        $this->countryResource = new CountryResource();
     }
 
 
     /**
      * @param int $id
      *
-     * @return PlayerAttribute|null
+     * @return Country|null
      * @throws FafiException
      */
-    public function findById(int $id): ?PlayerAttribute
+    public function findById(int $id): ?Country
     {
         $criteria = new Criteria(AbstractResource::ID_FIELD, QuerySyntax::OPERATOR_IS, [$id]);
-        return $this->playerAttributeResource->readFirst([$criteria]);
+        return $this->countryResource->readFirst([$criteria]);
     }
 
     /**
      * @param EntityCriteriaInterface[] $conditions
      *
-     * @return PlayerAttribute[]
+     * @return Country[]
      * @throws FafiException
      */
     public function findCollection(array $conditions): array
     {
-        return $this->playerAttributeResource->read($conditions);
+        return $this->countryResource->read($conditions);
     }
 
 
     /**
-     * @param PlayerAttribute $entity
+     * @param Country $entity
      *
-     * @return PlayerAttribute
+     * @return Country
      * @throws FafiException
      */
-    public function save($entity): PlayerAttribute
+    public function save($entity): Country
     {
-        return $entity->getId() ? $this->playerAttributeResource->update($entity) : $this->playerAttributeResource->create($entity);
+        return $entity->getId() ? $this->countryResource->update($entity) : $this->countryResource->create($entity);
     }
 
     /**
@@ -64,6 +64,6 @@ class PlayerAttributeRepository implements RepositoryInterface
     public function deleteById(int $id): void
     {
         $criteria = new Criteria(AbstractResource::ID_FIELD, QuerySyntax::OPERATOR_IS, [$id]);
-        $this->playerAttributeResource->delete([$criteria]);
+        $this->countryResource->delete([$criteria]);
     }
 }

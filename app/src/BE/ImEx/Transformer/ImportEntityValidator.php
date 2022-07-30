@@ -52,7 +52,7 @@ class ImportEntityValidator
         if (!empty($missed)) {
             $e = [
                 sprintf(ImExErr::IMPORT_FAILED, $line),
-                sprintf(EntityErr::REQ_MISSED, Player::ENTITY, implode('", "', $missed)),
+                sprintf(EntityErr::REQ_ABSENT, Player::ENTITY, implode('", "', $missed)),
             ];
             throw new FafiException(FafiException::combine($e));
         }
