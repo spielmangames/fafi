@@ -85,12 +85,15 @@ class ImportTransformer
      */
     private function prepareFieldSpecification(int $line, ImExEntitySpecification $entitySpecification, string $fieldName): ImExFieldSpecification
     {
+        // TODO: revisit $entityName to become domain independent
+        $entityName = Player::ENTITY;
+
         $fieldSpecificationsMap = $entitySpecification->getFieldSpecificationsMap();
 
         if (!isset($fieldSpecificationsMap[$fieldName])) {
             $e = [
                 sprintf(ImExErr::IMPORT_FAILED, $line),
-                sprintf(ImExErr::IMPORT_ENTITY_FIELD_SPECIFICATION_ABSENT, $fieldName, Player::ENTITY),
+                sprintf(ImExErr::IMPORT_ENTITY_FIELD_SPECIFICATION_ABSENT, $fieldName, $entityName),
             ];
             throw new FafiException(FafiException::combine($e));
         }
@@ -108,12 +111,16 @@ class ImportTransformer
      */
     private function prepareFieldTransformer(int $line, ImExEntitySpecification $entitySpecification, string $fieldName): ImExFieldTransformer
     {
+        // TODO: revisit $entityName to become domain independent
+        $entityName = Player::ENTITY;
+
+
         $fieldTransformersMap = $entitySpecification->getFieldTransformersMap();
 
         if (!isset($fieldTransformersMap[$fieldName])) {
             $e = [
                 sprintf(ImExErr::IMPORT_FAILED, $line),
-                sprintf(ImExErr::IMPORT_ENTITY_FIELD_TRANSFORMER_ABSENT, $fieldName, Player::ENTITY),
+                sprintf(ImExErr::IMPORT_ENTITY_FIELD_TRANSFORMER_ABSENT, $fieldName, $entityName),
             ];
             throw new FafiException(FafiException::combine($e));
         }

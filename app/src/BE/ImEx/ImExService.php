@@ -53,10 +53,9 @@ class ImExService
             case self::ENTITIES_PLAYERS:
                 $this->importPlayers($filePath);
                 break;
-
-            default:
-                throw new FafiException(sprintf(ImExErr::ENTITY_IMPORT_NOT_SUPPORTED, $entityName));
         }
+
+        throw new FafiException(sprintf(ImExErr::ENTITY_IMPORT_NOT_SUPPORTED, $entityName));
     }
 
 

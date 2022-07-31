@@ -39,6 +39,9 @@ class ImportEntityValidator
      */
     private function assertMandatory(int $line, array $entity, ImExEntitySpecification $specification): void
     {
+        // TODO: revisit $entityName to become domain independent
+        $entityName = Player::ENTITY;
+
         $missed = [];
         foreach ($specification->getMandatoryFieldsOnCreate() as $mandatory) {
             if (!isset($entity[$mandatory])) {
@@ -52,7 +55,7 @@ class ImportEntityValidator
         if (!empty($missed)) {
             $e = [
                 sprintf(ImExErr::IMPORT_FAILED, $line),
-                sprintf(EntityErr::REQ_ABSENT, Player::ENTITY, implode('", "', $missed)),
+                sprintf(EntityErr::REQ_ABSENT, $entityName, implode(FafiException::LIST_WRAPPED_SEPARATOR, $missed)),
             ];
             throw new FafiException(FafiException::combine($e));
         }
@@ -67,11 +70,14 @@ class ImportEntityValidator
      */
     private function assertContentPresent(int $line, array $entity): void
     {
+        // TODO: revisit $entityName to become domain independent
+        $entityName = Player::ENTITY;
+
         $reserved = [AbstractFileSchema::ID];
         if (count($entity) <= count($reserved)) {
             $e = [
                 sprintf(ImExErr::IMPORT_FAILED, $line),
-                sprintf(ImExErr::IMPORT_DATA_ABSENT, Player::ENTITY),
+                sprintf(ImExErr::IMPORT_DATA_ABSENT, $entityName),
             ];
             throw new FafiException(FafiException::combine($e));
         }
