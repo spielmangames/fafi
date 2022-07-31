@@ -4,7 +4,7 @@ namespace FAFI\src\FE\Themes\Printer\Custom\Player;
 
 use FAFI\exception\FafiException;
 use FAFI\exception\FrontErr;
-use FAFI\src\BE\Domain\Player\Player\Player;
+use FAFI\src\BE\Domain\Dto\Player\Player\Player;
 use FAFI\src\FE\Structure\ContentableInterface;
 use FAFI\src\FE\Structure\PageSection\PageSectionInterface;
 use FAFI\src\FE\Themes\Printer\Basic\Pages\AbstractPrinterPage;

@@ -3,7 +3,7 @@
 namespace FAFI\src\BE;
 
 use FAFI\exception\FafiException;
-use FAFI\src\BE\Domain\EntityInterface;
+use FAFI\src\BE\Domain\Dto\EntityInterface;
 use FAFI\src\BE\Domain\Persistence\EntityCriteriaInterface;
 
 interface RepositoryInterface

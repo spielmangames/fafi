@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace FAFI\src\BE\ImEx\Persistence\Client;
 
-use FAFI\src\BE\Domain\Player\PlayerAttribute\PlayerAttribute;
-use FAFI\src\BE\Domain\Player\PlayerService;
+use FAFI\src\BE\Domain\Dto\Player\PlayerAttribute\PlayerAttribute;
+use FAFI\src\BE\Domain\Service\PlayerService;
 
 class PlayerAttributeClient implements EntityClientInterface
 {

@@ -1,18 +1,15 @@
 <?php
 
-declare(strict_types=1);
-
-namespace FAFI\src\BE\ImEx\Persistence\Hydrator;
+namespace FAFI\src\BE\Domain\Persistence\Player\PlayerAttribute;
 
 use FAFI\src\BE\Domain\Dto\Player\PlayerAttribute\PlayerAttribute;
-use FAFI\src\BE\Domain\Persistence\Player\PlayerAttribute\PlayerAttributeResource;
 
-class PlayerAttributeHydrator implements EntityHydratorInterface
+class PlayerAttributeHydrator
 {
     /**
      * @param array $data
      *
-     * @return PlayerAttribute[]
+     * @return \FAFI\src\BE\Domain\Dto\Player\PlayerAttribute\PlayerAttribute[]
      */
     public function hydrateCollection(array $data): array
     {

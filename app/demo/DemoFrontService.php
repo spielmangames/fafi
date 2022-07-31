@@ -6,8 +6,8 @@ use FAFI\db\Query\QuerySyntax;
 use FAFI\exception\FafiException;
 use FAFI\src\BE\Domain\Criteria;
 use FAFI\src\BE\Domain\Persistence\AbstractResource;
-use FAFI\src\BE\Domain\Player\Player\Persistence\PlayerRepository;
-use FAFI\src\BE\Domain\Player\Player\Persistence\PlayersFilter;
+use FAFI\src\BE\Domain\Persistence\Player\Player\PlayerRepository;
+use FAFI\src\BE\Domain\Persistence\Player\Player\PlayersFilter;
 use FAFI\src\FE\StorefrontService;
 
 class DemoFrontService

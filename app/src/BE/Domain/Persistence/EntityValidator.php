@@ -4,7 +4,7 @@ namespace FAFI\src\BE\Domain\Persistence;
 
 use FAFI\exception\EntityErr;
 use FAFI\exception\FafiException;
-use FAFI\src\BE\Domain\EntityInterface;
+use FAFI\src\BE\Domain\Dto\EntityInterface;
 
 class EntityValidator
 {
@@ -17,7 +17,7 @@ class EntityValidator
 
 
     /**
-     * @param \FAFI\src\BE\Domain\EntityInterface $entity
+     * @param \FAFI\src\BE\Domain\Dto\EntityInterface $entity
      * @param array $entityData
      * @param string[] $mandatory
      *
@@ -46,7 +46,7 @@ class EntityValidator
 
 
     /**
-     * @param \FAFI\src\BE\Domain\EntityInterface $entity
+     * @param \FAFI\src\BE\Domain\Dto\EntityInterface $entity
      *
      * @return void
      * @throws FafiException
@@ -59,7 +59,7 @@ class EntityValidator
     }
 
     /**
-     * @param \FAFI\src\BE\Domain\EntityInterface $entity
+     * @param \FAFI\src\BE\Domain\Dto\EntityInterface $entity
      *
      * @return void
      * @throws FafiException

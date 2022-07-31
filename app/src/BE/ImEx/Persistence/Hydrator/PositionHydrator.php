@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace FAFI\src\BE\ImEx\Persistence\Hydrator;
 
-use FAFI\src\BE\Domain\Player\Position\Position;
+use FAFI\src\BE\Domain\Dto\Player\Position\Position;
 use FAFI\src\BE\ImEx\Transformer\Schema\File\PositionFileSchema;
 
 class PositionHydrator implements EntityHydratorInterface

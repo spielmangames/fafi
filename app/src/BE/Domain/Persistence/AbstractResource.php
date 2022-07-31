@@ -7,7 +7,7 @@ use FAFI\db\Query\QueryExecutor;
 use FAFI\db\Query\QuerySyntax;
 use FAFI\exception\EntityErr;
 use FAFI\exception\FafiException;
-use FAFI\src\BE\Domain\EntityInterface;
+use FAFI\src\BE\Domain\Dto\EntityInterface;
 
 abstract class AbstractResource
 {
@@ -57,7 +57,7 @@ abstract class AbstractResource
     /**
      * @param EntityCriteriaInterface[] $conditions
      *
-     * @return \FAFI\src\BE\Domain\EntityInterface[]|null
+     * @return \FAFI\src\BE\Domain\Dto\EntityInterface[]|null
      * @throws FafiException
      */
     public function read(array $conditions = []): ?array

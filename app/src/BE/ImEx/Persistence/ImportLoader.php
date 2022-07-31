@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace FAFI\src\BE\ImEx\Persistence;
 
 use FAFI\exception\FafiException;
-use FAFI\src\BE\Domain\EntityInterface;
 use FAFI\src\BE\ImEx\Persistence\Client\EntityClientFactory;
 use FAFI\src\BE\ImEx\Persistence\Client\EntityClientInterface;
 use FAFI\src\BE\ImEx\Persistence\Hydrator\EntityHydratorFactory;

@@ -2,8 +2,8 @@
 
 namespace FAFI;
 
-use FAFI\src\BE\Domain\Geo\GeoService;
-use FAFI\src\BE\Domain\Player\PlayerService;
+use FAFI\src\BE\Domain\Service\GeoService;
+use FAFI\src\BE\Domain\Service\PlayerService;
 use FAFI\src\BE\ImEx\ImExService;
 use FAFI\src\BE\Install\InstallService;
 use FAFI\src\FE\StorefrontService;
