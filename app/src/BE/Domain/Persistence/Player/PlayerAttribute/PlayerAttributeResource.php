@@ -5,6 +5,7 @@ namespace FAFI\src\BE\Domain\Persistence\Player\PlayerAttribute;
 use FAFI\exception\FafiException;
 use FAFI\src\BE\Domain\Dto\Player\PlayerAttribute\PlayerAttribute;
 use FAFI\src\BE\Domain\Persistence\AbstractResource;
+use FAFI\src\BE\Domain\Persistence\EntityCriteriaInterface;
 
 class PlayerAttributeResource extends AbstractResource
 {
@@ -65,44 +66,44 @@ class PlayerAttributeResource extends AbstractResource
      */
     public function create($entity): PlayerAttribute
     {
-        /** @var \FAFI\src\BE\Domain\Dto\Player\PlayerAttribute\PlayerAttribute $result */
+        /** @var PlayerAttribute $result */
         $result = parent::create($entity);
 
         return $result;
     }
 
     /**
-     * @param \FAFI\src\BE\Domain\Persistence\EntityCriteriaInterface[] $conditions
+     * @param EntityCriteriaInterface[] $conditions
      *
      * @return PlayerAttribute[]|null
      * @throws FafiException
      */
     public function read(array $conditions = []): ?array
     {
-        /** @var \FAFI\src\BE\Domain\Dto\Player\PlayerAttribute\PlayerAttribute[]|null $result */
+        /** @var PlayerAttribute[]|null $result */
         $result = parent::read($conditions);
 
         return $result;
     }
 
     /**
-     * @param \FAFI\src\BE\Domain\Persistence\EntityCriteriaInterface[] $conditions
+     * @param EntityCriteriaInterface[] $conditions
      *
      * @return PlayerAttribute|null
      * @throws FafiException
      */
     public function readFirst(array $conditions): ?PlayerAttribute
     {
-        /** @var \FAFI\src\BE\Domain\Dto\Player\PlayerAttribute\PlayerAttribute|null $result */
+        /** @var PlayerAttribute|null $result */
         $result = parent::readFirst($conditions);
 
         return $result;
     }
 
     /**
-     * @param \FAFI\src\BE\Domain\Dto\Player\PlayerAttribute\PlayerAttribute $entity
+     * @param PlayerAttribute $entity
      *
-     * @return \FAFI\src\BE\Domain\Dto\Player\PlayerAttribute\PlayerAttribute
+     * @return PlayerAttribute
      * @throws FafiException
      */
     public function update($entity): PlayerAttribute

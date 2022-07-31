@@ -9,7 +9,7 @@ class PlayerAttributeHydrator
     /**
      * @param array $data
      *
-     * @return \FAFI\src\BE\Domain\Dto\Player\PlayerAttribute\PlayerAttribute[]
+     * @return PlayerAttribute[]
      */
     public function hydrateCollection(array $data): array
     {

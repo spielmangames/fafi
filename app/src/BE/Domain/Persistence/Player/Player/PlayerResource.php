@@ -81,7 +81,7 @@ class PlayerResource extends AbstractResource
     /**
      * @param Player $entity
      *
-     * @return \FAFI\src\BE\Domain\Dto\Player\Player\Player
+     * @return Player
      * @throws FafiException
      */
     public function create($entity): Player

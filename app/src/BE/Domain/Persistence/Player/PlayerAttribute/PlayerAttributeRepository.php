@@ -12,11 +12,11 @@ use FAFI\src\BE\RepositoryInterface;
 
 class PlayerAttributeRepository implements RepositoryInterface
 {
-    private PlayerAttributeResource $playerAttributeResource;
+    private PlayerAttributeResource $attributeResource;
 
     public function __construct()
     {
-        $this->playerAttributeResource = new PlayerAttributeResource();
+        $this->attributeResource = new PlayerAttributeResource();
     }
 
 
@@ -29,7 +29,7 @@ class PlayerAttributeRepository implements RepositoryInterface
     public function findById(int $id): ?PlayerAttribute
     {
         $criteria = new Criteria(AbstractResource::ID_FIELD, QuerySyntax::OPERATOR_IS, [$id]);
-        return $this->playerAttributeResource->readFirst([$criteria]);
+        return $this->attributeResource->readFirst([$criteria]);
     }
 
     /**
@@ -40,7 +40,7 @@ class PlayerAttributeRepository implements RepositoryInterface
      */
     public function findCollection(array $conditions): array
     {
-        return $this->playerAttributeResource->read($conditions);
+        return $this->attributeResource->read($conditions);
     }
 
 
@@ -52,7 +52,7 @@ class PlayerAttributeRepository implements RepositoryInterface
      */
     public function save($entity): PlayerAttribute
     {
-        return $entity->getId() ? $this->playerAttributeResource->update($entity) : $this->playerAttributeResource->create($entity);
+        return $entity->getId() ? $this->attributeResource->update($entity) : $this->attributeResource->create($entity);
     }
 
     /**
@@ -64,6 +64,6 @@ class PlayerAttributeRepository implements RepositoryInterface
     public function deleteById(int $id): void
     {
         $criteria = new Criteria(AbstractResource::ID_FIELD, QuerySyntax::OPERATOR_IS, [$id]);
-        $this->playerAttributeResource->delete([$criteria]);
+        $this->attributeResource->delete([$criteria]);
     }
 }
