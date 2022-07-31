@@ -27,7 +27,7 @@ class DemoImportService
      */
     public function demoImportNewPlayers(): void
     {
-        $filePath = $this->installService::IMEX_SAMPLE_DIR_PATH . 'players' . CsvFileHandlerInterface::FILE_EXT;
+        $filePath = $this->installService->getSampleDataDirPath() . 'players' . CsvFileHandlerInterface::FILE_EXT;
         $this->imExService->importEntity($filePath, ImExService::ENTITIES_PLAYERS);
     }
 }

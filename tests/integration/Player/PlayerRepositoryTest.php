@@ -4,7 +4,7 @@ namespace Tests\integration\Player;
 
 use Tests\integration\BaseFafiIntegrationTest;
 
-/** @covers \FAFI\src\BE\Domain\Persistence\Player\Player\PlayerRepository */
+/** @covers PlayerRepository */
 class PlayerRepositoryTest extends BaseFafiIntegrationTest
 {
     public function testA()

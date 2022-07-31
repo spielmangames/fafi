@@ -23,7 +23,6 @@ class DemoInstallService
      */
     public function demoInstall(): void
     {
-        $this->installService->installDbSchema();
-        $this->installService->installSampleData();
+        $this->installService->installSample();
     }
 }
