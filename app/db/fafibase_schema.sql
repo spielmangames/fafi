@@ -1,10 +1,11 @@
 
 #-----------------------------------------------------------------------------------------------------------------------
-# DB init [version=1.8]
+# DB init [version=1.9]
 #-----------------------------------------------------------------------------------------------------------------------
 
 
 DROP DATABASE IF EXISTS `fafi_db`;
+
 CREATE DATABASE `fafi_db`;
 USE fafi_db;
 
@@ -12,7 +13,7 @@ USE fafi_db;
 
 
 #-----------------------------------------------------------------------------------------------------------------------
-# DB Schema version
+# 0. DB version
 #-----------------------------------------------------------------------------------------------------------------------
 
 
@@ -20,13 +21,13 @@ CREATE TABLE `_version` (
     `db` VARCHAR(8) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
-INSERT INTO _version VALUES ('1.8');
+INSERT INTO _version VALUES ('1.9');
 
 
 
 
 #-----------------------------------------------------------------------------------------------------------------------
-# Geography models
+# 1. Geography
 #-----------------------------------------------------------------------------------------------------------------------
 
 
@@ -34,39 +35,67 @@ CREATE TABLE `countries` (
     `id` INT(11) UNSIGNED AUTO_INCREMENT NOT NULL,
 
     `name` VARCHAR(32) NOT NULL,
+    `code` VARCHAR(6) NOT NULL,
     `continent` ENUM('Africa', 'America', 'Asia', 'Europe') NOT NULL,
 
     PRIMARY KEY (`id`),
-    UNIQUE KEY `u_countries_name` (`name`)
+    UNIQUE KEY `u_countries_name` (`name`),
+    UNIQUE KEY `u_countries_code` (`code`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 
-# CREATE TABLE `cities` (
-#     `id` INT(11) UNSIGNED AUTO_INCREMENT NOT NULL,
-#
-#     `name` VARCHAR(32) NOT NULL,
-#
-#     PRIMARY KEY (`id`),
-#     UNIQUE KEY `u_cities_name` (`name`)
-# ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-#
-#
-# CREATE TABLE `cities_countries_assocs` (
-#     `id` INT(11) UNSIGNED AUTO_INCREMENT NOT NULL,
-#
-#     `city_id` INT(11) UNSIGNED NOT NULL,
-#     `state` VARCHAR(32),
-#     `country_id` INT(11) UNSIGNED NOT NULL,
-#
-#     PRIMARY KEY (`id`),
-#     UNIQUE KEY `u_cities_countries_assocs_city_id_country_id` (`city_id`, `country_id`)
-# ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+CREATE TABLE `cities` (
+    `id` INT(11) UNSIGNED AUTO_INCREMENT NOT NULL,
+
+    `name` VARCHAR(32) NOT NULL,
+
+    PRIMARY KEY (`id`),
+    UNIQUE KEY `u_cities_name` (`name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+CREATE TABLE `city_country_assocs` (
+    `id` INT(11) UNSIGNED AUTO_INCREMENT NOT NULL,
+
+    `city_id` INT(11) UNSIGNED NOT NULL,
+    `region` VARCHAR(32),
+    `country_id` INT(11) UNSIGNED NOT NULL,
+
+    PRIMARY KEY (`id`),
+    UNIQUE KEY `u_city_country_assocs_city_id_country_id` (`city_id`, `country_id`),
+    CONSTRAINT `city_id` FOREIGN KEY (`city_id`) REFERENCES `cities` (`id`) ON DELETE CASCADE,
+    CONSTRAINT `country_id` FOREIGN KEY (`country_id`) REFERENCES `countries` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 
 
 
 #-----------------------------------------------------------------------------------------------------------------------
-# PLAYER models
+# 2. Teams
+#-----------------------------------------------------------------------------------------------------------------------
+
+
+CREATE TABLE clubs (
+     `id` INT(11) UNSIGNED AUTO_INCREMENT NOT NULL,
+
+     `name` VARCHAR(32) NOT NULL,
+     `fafi_name` VARCHAR(32) NOT NULL,
+
+     `city_id` INT(11) UNSIGNED NOT NULL,
+     `country_id` INT(11) UNSIGNED NOT NULL,
+     `founded` SMALLINT(4) UNSIGNED,
+
+     PRIMARY KEY (`id`),
+     UNIQUE KEY `u_clubs_name` (`name`),
+     UNIQUE KEY `u_clubs_fafi_name` (`fafi_name`),
+     CONSTRAINT `city_id` FOREIGN KEY (`city_id`) REFERENCES `cities` (`id`) ON DELETE CASCADE,
+     CONSTRAINT `country_id` FOREIGN KEY (`country_id`) REFERENCES `countries` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+
+
+
+#-----------------------------------------------------------------------------------------------------------------------
+# 3.1 Player Skills
 #-----------------------------------------------------------------------------------------------------------------------
 
 
@@ -80,6 +109,13 @@ CREATE TABLE `positions` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 
+
+
+#-----------------------------------------------------------------------------------------------------------------------
+# 3.2 Player
+#-----------------------------------------------------------------------------------------------------------------------
+
+
 CREATE TABLE `players` (
     `id` INT(11) UNSIGNED AUTO_INCREMENT NOT NULL,
 
@@ -88,44 +124,54 @@ CREATE TABLE `players` (
     `surname` VARCHAR(32) NOT NULL,
     `fafi_surname` VARCHAR(32) NOT NULL,
 
+    `birth_country` INT(11) UNSIGNED NOT NULL,
+    `birth_city` INT(11) UNSIGNED NOT NULL,
+#     `birth_date`
+    `nationality` INT(11) UNSIGNED NOT NULL,
+
     `height` TINYINT(3) UNSIGNED,
     `foot` ENUM('L', 'R'),
     `injure_factor` BIT DEFAULT 0,
 
     PRIMARY KEY (`id`),
     UNIQUE KEY `u_players_name_particle_surname` (`name`, `particle`, `surname`),
-    UNIQUE KEY `u_players_fafi_surname` (`fafi_surname`)
+    CONSTRAINT `birth_country` FOREIGN KEY (`birth_country`) REFERENCES `countries` (`id`) ON DELETE CASCADE,
+    CONSTRAINT `birth_city` FOREIGN KEY (`birth_city`) REFERENCES `cities` (`id`) ON DELETE CASCADE,
+    CONSTRAINT `nationality` FOREIGN KEY (`nationality`) REFERENCES `countries` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 
-CREATE TABLE `players_positions_assocs` (
+CREATE TABLE `player_position_assocs` (
     `id` INT(11) UNSIGNED AUTO_INCREMENT NOT NULL,
 
     `player_id` INT(11) UNSIGNED NOT NULL,
     `position_id` INT(11) UNSIGNED NOT NULL,
 
-    `att_min` TINYINT(1) NOT NULL DEFAULT 0,
-    `att_max` TINYINT(1) NOT NULL DEFAULT 0,
-    `def_min` TINYINT(1) NOT NULL DEFAULT 0,
-    `def_max` TINYINT(1) NOT NULL DEFAULT 0,
+    `att_min` TINYINT(1) UNSIGNED NOT NULL DEFAULT 0,
+    `att_max` TINYINT(1) UNSIGNED NOT NULL DEFAULT 0,
+    `def_min` TINYINT(1) UNSIGNED NOT NULL DEFAULT 0,
+    `def_max` TINYINT(1) UNSIGNED NOT NULL DEFAULT 0,
 
     PRIMARY KEY (`id`),
-    UNIQUE KEY `u_players_player_id_position_id` (`player_id`, `position_id`),
+    UNIQUE KEY `u_player_position_assocs_player_id_position_id` (`player_id`, `position_id`),
     CONSTRAINT `player_id` FOREIGN KEY (`player_id`) REFERENCES `players` (`id`) ON DELETE CASCADE,
     CONSTRAINT `position_id` FOREIGN KEY (`position_id`) REFERENCES `positions` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 
-# CREATE TABLE `player_origins` (
-#     `id` bigint(16) NOT NULL PRIMARY KEY AUTO_INCREMENT,
-#
-#     `player_id` bigint(16) NOT NULL,
-#
-#     PRIMARY KEY (`id`),
-#     CONSTRAINT `player_id` FOREIGN KEY (`player_id`) REFERENCES `players` (`id`) ON DELETE CASCADE
-# ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+CREATE TABLE `player_club_assocs` (
+    `id` INT(11) UNSIGNED AUTO_INCREMENT NOT NULL,
 
+    `club_id` INT(11) UNSIGNED NOT NULL,
+    `no` TINYINT(2) UNSIGNED NOT NULL,
+    `player_id` INT(11) UNSIGNED NOT NULL,
 
+    PRIMARY KEY (`id`),
+    UNIQUE KEY `u_player_club_assocs_club_id_no` (`club_id`, `no`),
+    UNIQUE KEY `u_player_club_assocs_club_id_player_id` (`club_id`, `player_id`),
+    CONSTRAINT `club_id` FOREIGN KEY (`club_id`) REFERENCES `clubs` (`id`) ON DELETE CASCADE,
+    CONSTRAINT `player_id` FOREIGN KEY (`player_id`) REFERENCES `players` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 
 

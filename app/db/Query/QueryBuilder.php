@@ -80,7 +80,7 @@ class QueryBuilder
     }
 
     /**
-     * @param \FAFI\src\BE\Domain\Persistence\EntityCriteriaInterface[] $conditions
+     * @param EntityCriteriaInterface[] $conditions
      *
      * @return string
      */
