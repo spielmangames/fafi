@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace FAFI\src\BE\ImEx\Transformer\Specification\Entity;
 
+use FAFI\src\BE\Domain\Dto\Player\Player\Player;
 use FAFI\src\BE\ImEx\Persistence\Client\PlayerAttributeClient;
 use FAFI\src\BE\ImEx\Persistence\Client\PlayerClient;
 use FAFI\src\BE\ImEx\Persistence\Hydrator\PlayerAttributeHydrator;
@@ -21,6 +22,12 @@ use FAFI\src\BE\ImEx\Transformer\Specification\Field\Typical\StringSpecification
 
 class PlayerConfig implements ImportableEntityConfig
 {
+    public function getEntityName(): string
+    {
+        return Player::ENTITY;
+    }
+
+
     public function getFieldTransformersMap(): array
     {
         return [

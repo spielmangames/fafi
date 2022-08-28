@@ -6,6 +6,9 @@ namespace FAFI\src\BE\ImEx\Transformer\Specification\Entity;
 
 interface ImportableEntityConfig
 {
+    public function getEntityName(): string;
+
+
     /** @return string[] */
     public function getFieldTransformersMap(): array;
     /** @return string[] */

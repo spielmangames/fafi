@@ -14,6 +14,12 @@ use FAFI\src\BE\ImEx\Transformer\Specification\Field\Typical\StringSpecification
 
 class CityConfig implements ImportableEntityConfig
 {
+    public function getEntityName(): string
+    {
+        return City::ENTITY;
+    }
+
+
     public function getFieldTransformersMap(): array
     {
         return [

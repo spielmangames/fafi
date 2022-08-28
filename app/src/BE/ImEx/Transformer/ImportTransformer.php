@@ -77,45 +77,19 @@ class ImportTransformer
 
     /**
      * @param int $line
-     * @param ImportableEntityConfig $entitySpecification
-     * @param string $fieldName
-     *
-     * @return ImExFieldSpecification
-     * @throws FafiException
-     */
-    private function prepareFieldSpecification(int $line, ImportableEntityConfig $entitySpecification, string $fieldName): ImExFieldSpecification
-    {
-        // TODO: revisit $entityName to become domain independent
-        $entityName = Player::ENTITY;
-
-        $fieldSpecificationsMap = $entitySpecification->getFieldSpecificationsMap();
-
-        if (!isset($fieldSpecificationsMap[$fieldName])) {
-            $e = [
-                sprintf(ImExErr::IMPORT_FAILED, $line),
-                sprintf(ImExErr::IMPORT_ENTITY_FIELD_SPECIFICATION_ABSENT, $fieldName, $entityName),
-            ];
-            throw new FafiException(FafiException::combine($e));
-        }
-
-        return $this->fieldSpecificationFactory->create($fieldSpecificationsMap[$fieldName]);
-    }
-
-    /**
-     * @param int $line
-     * @param ImportableEntityConfig $entitySpecification
+     * @param ImportableEntityConfig $entityConfig
      * @param string $fieldName
      *
      * @return ImExFieldTransformer
      * @throws FafiException
      */
-    private function prepareFieldTransformer(int $line, ImportableEntityConfig $entitySpecification, string $fieldName): ImExFieldTransformer
+    private function prepareFieldTransformer(int $line, ImportableEntityConfig $entityConfig, string $fieldName): ImExFieldTransformer
     {
         // TODO: revisit $entityName to become domain independent
         $entityName = Player::ENTITY;
 
 
-        $fieldTransformersMap = $entitySpecification->getFieldTransformersMap();
+        $fieldTransformersMap = $entityConfig->getFieldTransformersMap();
 
         if (!isset($fieldTransformersMap[$fieldName])) {
             $e = [
@@ -126,5 +100,28 @@ class ImportTransformer
         }
 
         return $this->fieldTransformerFactory->create($fieldTransformersMap[$fieldName]);
+    }
+
+    /**
+     * @param int $line
+     * @param ImportableEntityConfig $entityConfig
+     * @param string $fieldName
+     *
+     * @return ImExFieldSpecification
+     * @throws FafiException
+     */
+    private function prepareFieldSpecification(int $line, ImportableEntityConfig $entityConfig, string $fieldName): ImExFieldSpecification
+    {
+        $fieldSpecificationsMap = $entityConfig->getFieldSpecificationsMap();
+
+        if (!isset($fieldSpecificationsMap[$fieldName])) {
+            $e = [
+                sprintf(ImExErr::IMPORT_FAILED, $line),
+                sprintf(ImExErr::IMPORT_ENTITY_FIELD_SPECIFICATION_ABSENT, $fieldName, $entityConfig->getEntityName()),
+            ];
+            throw new FafiException(FafiException::combine($e));
+        }
+
+        return $this->fieldSpecificationFactory->create($fieldSpecificationsMap[$fieldName]);
     }
 }

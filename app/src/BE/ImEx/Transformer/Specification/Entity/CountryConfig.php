@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace FAFI\src\BE\ImEx\Transformer\Specification\Entity;
 
+use FAFI\src\BE\Domain\Dto\Geo\Country\Country;
 use FAFI\src\BE\ImEx\Persistence\Client\CountryClient;
 use FAFI\src\BE\ImEx\Persistence\Hydrator\CountryHydrator;
 use FAFI\src\BE\ImEx\Transformer\Field\Typical\IntegerFieldTransformer;
@@ -15,6 +16,12 @@ use FAFI\src\BE\ImEx\Transformer\Specification\Field\Typical\StringSpecification
 
 class CountryConfig implements ImportableEntityConfig
 {
+    public function getEntityName(): string
+    {
+        return Country::ENTITY;
+    }
+
+
     public function getFieldTransformersMap(): array
     {
         return [
