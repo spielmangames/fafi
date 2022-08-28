@@ -5,17 +5,17 @@ declare(strict_types=1);
 namespace FAFI\src\BE\ImEx\Transformer\Field\Typical;
 
 use FAFI\src\BE\ImEx\Transformer\Field\ImExFieldTransformer;
-use FAFI\src\BE\ImEx\Transformer\Specification\Field\Typical\BooleanSpecification;
+use FAFI\src\BE\ImEx\Transformer\Schema\File\Field\BoolFieldFileSchema;
 
 class BooleanFieldTransformer implements ImExFieldTransformer
 {
     public function fromStr(string $property, string $value)
     {
         switch ($value) {
-            case BooleanSpecification::TRUE_FIELD:
+            case BoolFieldFileSchema::TRUE:
                 $value = true;
                 break;
-            case BooleanSpecification::FALSE_FIELD:
+            case BoolFieldFileSchema::FALSE:
                 $value = false;
                 break;
         }

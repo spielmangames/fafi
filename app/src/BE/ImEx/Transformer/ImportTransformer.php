@@ -6,11 +6,10 @@ namespace FAFI\src\BE\ImEx\Transformer;
 
 use FAFI\exception\FafiException;
 use FAFI\exception\ImExErr;
-use FAFI\src\BE\Domain\Dto\Player\Player\Player;
 use FAFI\src\BE\ImEx\Transformer\Field\ImExFieldTransformer;
 use FAFI\src\BE\ImEx\Transformer\Field\ImExFieldTransformerFactory;
 use FAFI\src\BE\ImEx\Transformer\Specification\Entity\ImportableEntityConfig;
-use FAFI\src\BE\ImEx\Transformer\Specification\Field\ImExFieldSpecification;
+use FAFI\src\BE\ImEx\Transformer\Specification\Field\FieldSpecification;
 use FAFI\src\BE\ImEx\Transformer\Specification\Field\ImExFieldSpecificationFactory;
 
 class ImportTransformer
@@ -45,6 +44,7 @@ class ImportTransformer
 
         return $transformed;
     }
+
 
     /**
      * @param int $line
@@ -103,10 +103,10 @@ class ImportTransformer
      * @param ImportableEntityConfig $entityConfig
      * @param string $fieldName
      *
-     * @return ImExFieldSpecification
+     * @return FieldSpecification
      * @throws FafiException
      */
-    private function prepareFieldSpecification(int $line, ImportableEntityConfig $entityConfig, string $fieldName): ImExFieldSpecification
+    private function prepareFieldSpecification(int $line, ImportableEntityConfig $entityConfig, string $fieldName): FieldSpecification
     {
         $fieldSpecificationsMap = $entityConfig->getFieldSpecificationsMap();
 

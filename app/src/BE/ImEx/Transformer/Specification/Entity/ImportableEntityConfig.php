@@ -6,6 +6,10 @@ namespace FAFI\src\BE\ImEx\Transformer\Specification\Entity;
 
 interface ImportableEntityConfig
 {
+    public const OBJECT = 'object';
+    public const PARAMS = 'params';
+
+
     public function getEntityName(): string;
 
 
@@ -13,7 +17,6 @@ interface ImportableEntityConfig
     public function getMandatoryFieldsOnCreate(): array;
     /** @return string[] */
     public function getFieldTransformersMap(): array;
-    /** @return string[] */
     public function getFieldSpecificationsMap(): array;
 
 

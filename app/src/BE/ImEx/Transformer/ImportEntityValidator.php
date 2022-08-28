@@ -9,7 +9,7 @@ use FAFI\exception\FafiException;
 use FAFI\exception\ImExErr;
 use FAFI\src\BE\ImEx\Transformer\Schema\File\AbstractFileSchema;
 use FAFI\src\BE\ImEx\Transformer\Specification\Entity\ImportableEntityConfig;
-use FAFI\src\BE\ImEx\Transformer\Specification\Field\ImExFieldSpecification;
+use FAFI\src\BE\ImEx\Transformer\Specification\Field\FieldSpecification;
 
 class ImportEntityValidator
 {
@@ -83,12 +83,12 @@ class ImportEntityValidator
      * @param int $line
      * @param string $fieldName
      * @param $fieldValue
-     * @param ImExFieldSpecification $fieldSpecification
+     * @param FieldSpecification $fieldSpecification
      *
      * @return void
      * @throws FafiException
      */
-    private function assertEntityField(int $line, string $fieldName, $fieldValue, ImExFieldSpecification $specification): void
+    private function assertEntityField(int $line, string $fieldName, $fieldValue, FieldSpecification $specification): void
     {
         try {
             $specification->validate($fieldName, $fieldValue);

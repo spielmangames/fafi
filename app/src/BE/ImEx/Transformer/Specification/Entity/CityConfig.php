@@ -9,7 +9,7 @@ use FAFI\src\BE\ImEx\Persistence\Hydrator\CountryHydrator;
 use FAFI\src\BE\ImEx\Transformer\Field\Typical\IntegerFieldTransformer;
 use FAFI\src\BE\ImEx\Transformer\Field\Typical\StringFieldTransformer;
 use FAFI\src\BE\ImEx\Transformer\Schema\File\CityFileSchema;
-use FAFI\src\BE\ImEx\Transformer\Specification\Field\Typical\IntegerSpecification;
+use FAFI\src\BE\ImEx\Transformer\Specification\Field\Typical\IdSpecification;
 use FAFI\src\BE\ImEx\Transformer\Specification\Field\Typical\StringSpecification;
 
 class CityConfig implements ImportableEntityConfig
@@ -24,7 +24,6 @@ class CityConfig implements ImportableEntityConfig
     {
         return [
             CityFileSchema::NAME,
-            CityFileSchema::COUNTRY,
         ];
     }
 
@@ -34,19 +33,18 @@ class CityConfig implements ImportableEntityConfig
             CityFileSchema::ID => IntegerFieldTransformer::class,
 
             CityFileSchema::NAME => StringFieldTransformer::class,
-            CityFileSchema::REGION => StringFieldTransformer::class,
-            CityFileSchema::COUNTRY => IntegerFieldTransformer::class,
         ];
     }
 
     public function getFieldSpecificationsMap(): array
     {
         return [
-            CityFileSchema::ID => IntegerSpecification::class,
+            CityFileSchema::ID => [ImportableEntityConfig::OBJECT => IdSpecification::class],
 
-            CityFileSchema::NAME => StringSpecification::class,
-            CityFileSchema::REGION => StringSpecification::class,
-            CityFileSchema::COUNTRY => IntegerSpecification::class,
+            CityFileSchema::NAME => [
+                ImportableEntityConfig::OBJECT => StringSpecification::class,
+                ImportableEntityConfig::PARAMS => []
+            ],
         ];
     }
 

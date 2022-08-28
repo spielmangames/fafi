@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace FAFI\src\BE\ImEx\Transformer\Specification\Field\Player;
 
 use FAFI\src\BE\Domain\Persistence\DataValidator;
-use FAFI\src\BE\ImEx\Transformer\Specification\Field\ImExFieldSpecification;
+use FAFI\src\BE\ImEx\Transformer\Specification\Field\FieldSpecification;
 
-class PlayerAttributesSpecification implements ImExFieldSpecification
+class PlayerAttributesSpecification implements FieldSpecification
 {
     public const ATTRIBUTES_SEPARATOR = '|';
     public const ATTRIBUTE_NAME_VALUE_SEPARATOR = ':';

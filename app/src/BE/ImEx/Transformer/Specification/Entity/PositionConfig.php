@@ -10,7 +10,7 @@ use FAFI\src\BE\ImEx\Persistence\Hydrator\PositionHydrator;
 use FAFI\src\BE\ImEx\Transformer\Field\Typical\IntegerFieldTransformer;
 use FAFI\src\BE\ImEx\Transformer\Field\Typical\StringFieldTransformer;
 use FAFI\src\BE\ImEx\Transformer\Schema\File\PositionFileSchema;
-use FAFI\src\BE\ImEx\Transformer\Specification\Field\Typical\IntegerSpecification;
+use FAFI\src\BE\ImEx\Transformer\Specification\Field\Typical\IdSpecification;
 use FAFI\src\BE\ImEx\Transformer\Specification\Field\Typical\StringSpecification;
 
 class PositionConfig implements ImportableEntityConfig
@@ -40,9 +40,12 @@ class PositionConfig implements ImportableEntityConfig
     public function getFieldSpecificationsMap(): array
     {
         return [
-            PositionFileSchema::ID => IntegerSpecification::class,
+            PositionFileSchema::ID => [ImportableEntityConfig::OBJECT => IdSpecification::class],
 
-            PositionFileSchema::NAME => StringSpecification::class,
+            PositionFileSchema::NAME => [
+                ImportableEntityConfig::OBJECT => StringSpecification::class,
+                ImportableEntityConfig::PARAMS => []
+            ],
         ];
     }
 

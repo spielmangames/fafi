@@ -5,22 +5,22 @@ declare(strict_types=1);
 namespace FAFI\src\BE\ImEx\Transformer\Specification\Field;
 
 use FAFI\exception\FafiException;
-use FAFI\src\BE\ImEx\Transformer\Specification\Field\Country\CountryContinentSpecification;
 use FAFI\src\BE\ImEx\Transformer\Specification\Field\Player\PlayerAttributesSpecification;
-use FAFI\src\BE\ImEx\Transformer\Specification\Field\Player\PlayerFootSpecification;
 use FAFI\src\BE\ImEx\Transformer\Specification\Field\Typical\BooleanSpecification;
 use FAFI\src\BE\ImEx\Transformer\Specification\Field\Typical\IntegerSpecification;
+use FAFI\src\BE\ImEx\Transformer\Specification\Field\Typical\OneOfSpecification;
 use FAFI\src\BE\ImEx\Transformer\Specification\Field\Typical\StringSpecification;
 
 class ImExFieldSpecificationFactory
 {
     /**
      * @param string $class
+     * @param array|null $params
      *
-     * @return ImExFieldSpecification
+     * @return FieldSpecification
      * @throws FafiException
      */
-    public function create(string $class): ImExFieldSpecification
+    public function create(string $class, ?array $params): FieldSpecification
     {
         switch ($class) {
             // typical
@@ -28,16 +28,12 @@ class ImExFieldSpecificationFactory
                 return new BooleanSpecification();
             case IntegerSpecification::class:
                 return new IntegerSpecification();
+            case OneOfSpecification::class:
+                return new OneOfSpecification();
             case StringSpecification::class:
                 return new StringSpecification();
 
-            // Country
-            case CountryContinentSpecification::class:
-                return new CountryContinentSpecification();
-
             // Player
-            case PlayerFootSpecification::class:
-                return new PlayerFootSpecification();
             case PlayerAttributesSpecification::class:
                 return new PlayerAttributesSpecification();
         }

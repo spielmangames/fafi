@@ -6,7 +6,7 @@ namespace FAFI\src\BE\ImEx\Transformer\Specification\Field;
 
 use FAFI\exception\FafiException;
 
-interface ImExFieldSpecification
+interface FieldSpecification
 {
     /**
      * @param string $property

@@ -15,9 +15,10 @@ use FAFI\src\BE\ImEx\Transformer\Field\Typical\IntegerFieldTransformer;
 use FAFI\src\BE\ImEx\Transformer\Field\Typical\StringFieldTransformer;
 use FAFI\src\BE\ImEx\Transformer\Schema\File\PlayerFileSchema;
 use FAFI\src\BE\ImEx\Transformer\Specification\Field\Player\PlayerAttributesSpecification;
-use FAFI\src\BE\ImEx\Transformer\Specification\Field\Player\PlayerFootSpecification;
 use FAFI\src\BE\ImEx\Transformer\Specification\Field\Typical\BooleanSpecification;
+use FAFI\src\BE\ImEx\Transformer\Specification\Field\Typical\IdSpecification;
 use FAFI\src\BE\ImEx\Transformer\Specification\Field\Typical\IntegerSpecification;
+use FAFI\src\BE\ImEx\Transformer\Specification\Field\Typical\OneOfSpecification;
 use FAFI\src\BE\ImEx\Transformer\Specification\Field\Typical\StringSpecification;
 
 class PlayerConfig implements ImportableEntityConfig
@@ -59,18 +60,43 @@ class PlayerConfig implements ImportableEntityConfig
     public function getFieldSpecificationsMap(): array
     {
         return [
-            PlayerFileSchema::ID => IntegerSpecification::class,
+            PlayerFileSchema::ID => [ImportableEntityConfig::OBJECT => IdSpecification::class],
 
-            PlayerFileSchema::NAME => StringSpecification::class,
-            PlayerFileSchema::PARTICLE => StringSpecification::class,
-            PlayerFileSchema::SURNAME => StringSpecification::class,
-            PlayerFileSchema::FAFI_SURNAME => StringSpecification::class,
+            PlayerFileSchema::NAME => [
+                ImportableEntityConfig::OBJECT => StringSpecification::class,
+                ImportableEntityConfig::PARAMS => []
+            ],
+            PlayerFileSchema::PARTICLE => [
+                ImportableEntityConfig::OBJECT => StringSpecification::class,
+                ImportableEntityConfig::PARAMS => []
+            ],
+            PlayerFileSchema::SURNAME => [
+                ImportableEntityConfig::OBJECT => StringSpecification::class,
+                ImportableEntityConfig::PARAMS => []
+            ],
+            PlayerFileSchema::FAFI_SURNAME => [
+                ImportableEntityConfig::OBJECT => StringSpecification::class,
+                ImportableEntityConfig::PARAMS => []
+            ],
 
-            PlayerFileSchema::HEIGHT => IntegerSpecification::class,
-            PlayerFileSchema::FOOT => PlayerFootSpecification::class,
-            PlayerFileSchema::INJURE_FACTOR => BooleanSpecification::class,
+            PlayerFileSchema::HEIGHT => [
+                ImportableEntityConfig::OBJECT => IntegerSpecification::class,
+                ImportableEntityConfig::PARAMS => []
+            ],
+            PlayerFileSchema::FOOT => [
+                ImportableEntityConfig::OBJECT => OneOfSpecification::class,
+                ImportableEntityConfig::PARAMS => []
+            ],
+            PlayerFileSchema::INJURE_FACTOR => [
+                ImportableEntityConfig::OBJECT => BooleanSpecification::class,
+                ImportableEntityConfig::PARAMS => []
+            ],
 
-            PlayerFileSchema::ATTRIBUTES => PlayerAttributesSpecification::class,
+
+            PlayerFileSchema::ATTRIBUTES => [
+                ImportableEntityConfig::OBJECT => PlayerAttributesSpecification::class,
+                ImportableEntityConfig::PARAMS => []
+            ],
         ];
     }
 
