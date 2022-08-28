@@ -13,9 +13,10 @@ echo EOL;
 
 $fafi = new FAFI();
 
+$fafi->installAppWithSample();
+
 //demoPlayerService($fafi);
 //demoImport($fafi);
-demoInstall($fafi);
 //demoFront($fafi);
 
 

@@ -61,4 +61,10 @@ class FAFI
     {
         return $this->storefrontService;
     }
+
+
+    public function installAppWithSample(): void
+    {
+        $this->installService->installSample();
+    }
 }

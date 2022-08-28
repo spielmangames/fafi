@@ -1,6 +1,6 @@
 
 #-----------------------------------------------------------------------------------------------------------------------
-# DB init [version=1.9]
+# DB init [version=1.10]
 #-----------------------------------------------------------------------------------------------------------------------
 
 
@@ -21,7 +21,7 @@ CREATE TABLE `_version` (
     `db` VARCHAR(8) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
-INSERT INTO _version VALUES ('1.9');
+INSERT INTO _version VALUES ('1.11');
 
 
 
@@ -35,12 +35,12 @@ CREATE TABLE `countries` (
     `id` INT(11) UNSIGNED AUTO_INCREMENT NOT NULL,
 
     `name` VARCHAR(32) NOT NULL,
-    `code` VARCHAR(6) NOT NULL,
+#     `code` VARCHAR(6) NOT NULL,
     `continent` ENUM('Africa', 'America', 'Asia', 'Europe') NOT NULL,
 
     PRIMARY KEY (`id`),
-    UNIQUE KEY `u_countries_name` (`name`),
-    UNIQUE KEY `u_countries_code` (`code`)
+    UNIQUE KEY `u_countries_name` (`name`)
+#     UNIQUE KEY `u_countries_code` (`code`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 
@@ -53,18 +53,18 @@ CREATE TABLE `cities` (
     UNIQUE KEY `u_cities_name` (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
-CREATE TABLE `city_country_assocs` (
-    `id` INT(11) UNSIGNED AUTO_INCREMENT NOT NULL,
-
-    `city_id` INT(11) UNSIGNED NOT NULL,
-    `region` VARCHAR(32),
-    `country_id` INT(11) UNSIGNED NOT NULL,
-
-    PRIMARY KEY (`id`),
-    UNIQUE KEY `u_city_country_assocs_city_id_country_id` (`city_id`, `country_id`),
-    CONSTRAINT `city_id` FOREIGN KEY (`city_id`) REFERENCES `cities` (`id`) ON DELETE CASCADE,
-    CONSTRAINT `country_id` FOREIGN KEY (`country_id`) REFERENCES `countries` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+# CREATE TABLE `city_country_assocs` (
+#     `id` INT(11) UNSIGNED AUTO_INCREMENT NOT NULL,
+#
+#     `city_id` INT(11) UNSIGNED NOT NULL,
+#     `region` VARCHAR(32),
+#     `country_id` INT(11) UNSIGNED NOT NULL,
+#
+#     PRIMARY KEY (`id`),
+#     UNIQUE KEY `u_city_country_assocs_city_id_country_id` (`city_id`, `country_id`),
+#     CONSTRAINT `city_id` FOREIGN KEY (`city_id`) REFERENCES `cities` (`id`) ON DELETE CASCADE,
+#     CONSTRAINT `country_id` FOREIGN KEY (`country_id`) REFERENCES `countries` (`id`) ON DELETE CASCADE
+# ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 
 
@@ -124,19 +124,20 @@ CREATE TABLE `players` (
     `surname` VARCHAR(32) NOT NULL,
     `fafi_surname` VARCHAR(32) NOT NULL,
 
-    `birth_country` INT(11) UNSIGNED NOT NULL,
-    `birth_city` INT(11) UNSIGNED NOT NULL,
+#     `birth_country` INT(11) UNSIGNED NOT NULL,
+#     `birth_city` INT(11) UNSIGNED NOT NULL,
 #     `birth_date`
     `nationality` INT(11) UNSIGNED NOT NULL,
 
-    `height` TINYINT(3) UNSIGNED,
+#     `height` TINYINT(3) UNSIGNED,
     `foot` ENUM('L', 'R'),
-    `injure_factor` BIT DEFAULT 0,
+#     `injure_factor` BIT DEFAULT 0,
 
     PRIMARY KEY (`id`),
     UNIQUE KEY `u_players_name_particle_surname` (`name`, `particle`, `surname`),
-    CONSTRAINT `birth_country` FOREIGN KEY (`birth_country`) REFERENCES `countries` (`id`) ON DELETE CASCADE,
-    CONSTRAINT `birth_city` FOREIGN KEY (`birth_city`) REFERENCES `cities` (`id`) ON DELETE CASCADE,
+    UNIQUE KEY `u_players_name_particle_fafi_surname` (`name`, `particle`, `surname`),
+#     CONSTRAINT `birth_country` FOREIGN KEY (`birth_country`) REFERENCES `countries` (`id`) ON DELETE CASCADE,
+#     CONSTRAINT `birth_city` FOREIGN KEY (`birth_city`) REFERENCES `cities` (`id`) ON DELETE CASCADE,
     CONSTRAINT `nationality` FOREIGN KEY (`nationality`) REFERENCES `countries` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -163,11 +164,11 @@ CREATE TABLE `player_club_assocs` (
     `id` INT(11) UNSIGNED AUTO_INCREMENT NOT NULL,
 
     `club_id` INT(11) UNSIGNED NOT NULL,
-    `no` TINYINT(2) UNSIGNED NOT NULL,
+    `num` TINYINT(2) UNSIGNED NOT NULL,
     `player_id` INT(11) UNSIGNED NOT NULL,
 
     PRIMARY KEY (`id`),
-    UNIQUE KEY `u_player_club_assocs_club_id_no` (`club_id`, `no`),
+    UNIQUE KEY `u_player_club_assocs_club_id_no` (`club_id`, `num`),
     UNIQUE KEY `u_player_club_assocs_club_id_player_id` (`club_id`, `player_id`),
     CONSTRAINT `club_id` FOREIGN KEY (`club_id`) REFERENCES `clubs` (`id`) ON DELETE CASCADE,
     CONSTRAINT `player_id` FOREIGN KEY (`player_id`) REFERENCES `players` (`id`) ON DELETE CASCADE

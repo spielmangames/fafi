@@ -21,6 +21,7 @@ class CountrySpecification implements ImExEntitySpecification
             CountryFileSchema::ID => IntegerFieldTransformer::class,
 
             CountryFileSchema::NAME => StringFieldTransformer::class,
+//            CountryFileSchema::CODE => StringFieldTransformer::class,
             CountryFileSchema::CONTINENT => StringFieldTransformer::class,
         ];
     }
@@ -31,6 +32,7 @@ class CountrySpecification implements ImExEntitySpecification
             CountryFileSchema::ID => IntegerSpecification::class,
 
             CountryFileSchema::NAME => StringSpecification::class,
+//            CountryFileSchema::CODE => StringSpecification::class,
             CountryFileSchema::CONTINENT => CountryContinentSpecification::class,
         ];
     }
@@ -39,6 +41,8 @@ class CountrySpecification implements ImExEntitySpecification
     {
         return [
             CountryFileSchema::NAME,
+//            CountryFileSchema::CODE,
+            CountryFileSchema::CONTINENT,
         ];
     }
 

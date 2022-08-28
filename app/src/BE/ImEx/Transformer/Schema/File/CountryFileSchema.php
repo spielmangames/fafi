@@ -15,6 +15,7 @@ class CountryFileSchema extends AbstractFileSchema
         self::ID,
 
         self::NAME,
+//        self::CODE,
         self::CONTINENT,
     ];
 }
