@@ -21,6 +21,13 @@ class PositionConfig implements ImportableEntityConfig
     }
 
 
+    public function getMandatoryFieldsOnCreate(): array
+    {
+        return [
+            PositionFileSchema::NAME,
+        ];
+    }
+
     public function getFieldTransformersMap(): array
     {
         return [
@@ -36,13 +43,6 @@ class PositionConfig implements ImportableEntityConfig
             PositionFileSchema::ID => IntegerSpecification::class,
 
             PositionFileSchema::NAME => StringSpecification::class,
-        ];
-    }
-
-    public function getMandatoryFieldsOnCreate(): array
-    {
-        return [
-            PositionFileSchema::NAME,
         ];
     }
 

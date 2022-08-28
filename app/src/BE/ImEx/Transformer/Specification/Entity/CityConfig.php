@@ -20,6 +20,14 @@ class CityConfig implements ImportableEntityConfig
     }
 
 
+    public function getMandatoryFieldsOnCreate(): array
+    {
+        return [
+            CityFileSchema::NAME,
+            CityFileSchema::COUNTRY,
+        ];
+    }
+
     public function getFieldTransformersMap(): array
     {
         return [
@@ -39,14 +47,6 @@ class CityConfig implements ImportableEntityConfig
             CityFileSchema::NAME => StringSpecification::class,
             CityFileSchema::REGION => StringSpecification::class,
             CityFileSchema::COUNTRY => IntegerSpecification::class,
-        ];
-    }
-
-    public function getMandatoryFieldsOnCreate(): array
-    {
-        return [
-            CityFileSchema::NAME,
-            CityFileSchema::COUNTRY,
         ];
     }
 

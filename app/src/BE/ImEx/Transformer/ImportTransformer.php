@@ -15,15 +15,15 @@ use FAFI\src\BE\ImEx\Transformer\Specification\Field\ImExFieldSpecificationFacto
 
 class ImportTransformer
 {
+    private ImportEntityValidator $entityValidator;
     private ImExFieldTransformerFactory $fieldTransformerFactory;
     private ImExFieldSpecificationFactory $fieldSpecificationFactory;
-    private ImportEntityValidator $entityValidator;
 
     public function __construct()
     {
+        $this->entityValidator = new ImportEntityValidator();
         $this->fieldTransformerFactory = new ImExFieldTransformerFactory();
         $this->fieldSpecificationFactory = new ImExFieldSpecificationFactory();
-        $this->entityValidator = new ImportEntityValidator();
     }
 
 
@@ -85,16 +85,12 @@ class ImportTransformer
      */
     private function prepareFieldTransformer(int $line, ImportableEntityConfig $entityConfig, string $fieldName): ImExFieldTransformer
     {
-        // TODO: revisit $entityName to become domain independent
-        $entityName = Player::ENTITY;
-
-
         $fieldTransformersMap = $entityConfig->getFieldTransformersMap();
 
         if (!isset($fieldTransformersMap[$fieldName])) {
             $e = [
                 sprintf(ImExErr::IMPORT_FAILED, $line),
-                sprintf(ImExErr::IMPORT_ENTITY_FIELD_TRANSFORMER_ABSENT, $fieldName, $entityName),
+                sprintf(ImExErr::IMPORT_ENTITY_FIELD_TRANSFORMER_ABSENT, $fieldName, $entityConfig->getEntityName()),
             ];
             throw new FafiException(FafiException::combine($e));
         }

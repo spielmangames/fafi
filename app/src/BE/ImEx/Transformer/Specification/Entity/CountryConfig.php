@@ -22,6 +22,15 @@ class CountryConfig implements ImportableEntityConfig
     }
 
 
+    public function getMandatoryFieldsOnCreate(): array
+    {
+        return [
+            CountryFileSchema::NAME,
+//            CountryFileSchema::CODE,
+            CountryFileSchema::CONTINENT,
+        ];
+    }
+
     public function getFieldTransformersMap(): array
     {
         return [
@@ -41,15 +50,6 @@ class CountryConfig implements ImportableEntityConfig
             CountryFileSchema::NAME => StringSpecification::class,
 //            CountryFileSchema::CODE => StringSpecification::class,
             CountryFileSchema::CONTINENT => CountryContinentSpecification::class,
-        ];
-    }
-
-    public function getMandatoryFieldsOnCreate(): array
-    {
-        return [
-            CountryFileSchema::NAME,
-//            CountryFileSchema::CODE,
-            CountryFileSchema::CONTINENT,
         ];
     }
 

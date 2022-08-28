@@ -28,6 +28,16 @@ class PlayerConfig implements ImportableEntityConfig
     }
 
 
+    public function getMandatoryFieldsOnCreate(): array
+    {
+        return [
+            PlayerFileSchema::SURNAME,
+            PlayerFileSchema::FOOT,
+
+            PlayerFileSchema::ATTRIBUTES,
+        ];
+    }
+
     public function getFieldTransformersMap(): array
     {
         return [
@@ -61,16 +71,6 @@ class PlayerConfig implements ImportableEntityConfig
             PlayerFileSchema::INJURE_FACTOR => BooleanSpecification::class,
 
             PlayerFileSchema::ATTRIBUTES => PlayerAttributesSpecification::class,
-        ];
-    }
-
-    public function getMandatoryFieldsOnCreate(): array
-    {
-        return [
-            PlayerFileSchema::SURNAME,
-            PlayerFileSchema::FOOT,
-
-            PlayerFileSchema::ATTRIBUTES,
         ];
     }
 
