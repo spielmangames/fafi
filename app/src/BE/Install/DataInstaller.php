@@ -8,6 +8,10 @@ use FAFI\src\BE\ImEx\ImExService;
 class DataInstaller
 {
     public const IMEX_SAMPLE_DIR_PATH = PATH_STORAGE . 'sample' . DS;
+    private const SAMPLE_FILEPATH_COUNTRIES = self::IMEX_SAMPLE_DIR_PATH . 'countries.csv';
+    private const SAMPLE_FILEPATH_CITIES = self::IMEX_SAMPLE_DIR_PATH . 'cities.csv';
+    private const SAMPLE_FILEPATH_POSITIONS = self::IMEX_SAMPLE_DIR_PATH . 'positions.csv';
+    private const SAMPLE_FILEPATH_PLAYERS = self::IMEX_SAMPLE_DIR_PATH . 'players.csv';
 
 
     private ImExService $imExService;
@@ -25,23 +29,11 @@ class DataInstaller
     public function installSampleData(): void
     {
         // geo
-        $this->importEntity($this->imExService::ENTITIES_COUNTRIES);
-        $this->importEntity($this->imExService::ENTITIES_CITIES);
+        $this->imExService->importCountries(self::SAMPLE_FILEPATH_COUNTRIES);
+        $this->imExService->importCities(self::SAMPLE_FILEPATH_CITIES);
 
-        // domain
-        $this->importEntity($this->imExService::ENTITIES_POSITIONS);
-        $this->importEntity($this->imExService::ENTITIES_PLAYERS);
-    }
-
-    /**
-     * @param string $entityName
-     *
-     * @return void
-     * @throws FafiException
-     */
-    private function importEntity(string $entityName): void
-    {
-        $filePath = self::IMEX_SAMPLE_DIR_PATH . $entityName . ImExService::FILE_EXT;
-        $this->imExService->import($filePath, $entityName);
+        // player
+        $this->imExService->importPositions(self::SAMPLE_FILEPATH_POSITIONS);
+        $this->imExService->importPlayers(self::SAMPLE_FILEPATH_PLAYERS);
     }
 }
