@@ -1,6 +1,6 @@
 
 #-----------------------------------------------------------------------------------------------------------------------
-# DB init [version=1.10]
+# DB init [version=1.12]
 #-----------------------------------------------------------------------------------------------------------------------
 
 
@@ -18,10 +18,10 @@ USE fafi_db;
 
 
 CREATE TABLE `_version` (
-    `db` VARCHAR(8) NOT NULL
+    `db_schema` VARCHAR(8) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
-INSERT INTO _version VALUES ('1.11');
+INSERT INTO _version VALUES ('1.12');
 
 
 
