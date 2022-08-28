@@ -10,7 +10,7 @@ use FAFI\src\BE\ImEx\Persistence\Client\EntityClientInterface;
 use FAFI\src\BE\ImEx\Persistence\Hydrator\EntityHydratorFactory;
 use FAFI\src\BE\ImEx\Persistence\Hydrator\EntityHydratorInterface;
 use FAFI\src\BE\ImEx\Transformer\Schema\File\AbstractFileSchema;
-use FAFI\src\BE\ImEx\Transformer\Specification\Entity\ImExEntitySpecification;
+use FAFI\src\BE\ImEx\Transformer\Specification\Entity\ImportableEntityConfig;
 
 class ImportLoader
 {
@@ -26,12 +26,12 @@ class ImportLoader
 
     /**
      * @param array[] $entities
-     * @param ImExEntitySpecification $entitySpecification
+     * @param ImportableEntityConfig $entitySpecification
      *
      * @return void
      * @throws FafiException
      */
-    public function load(array $entities, ImExEntitySpecification $entitySpecification): void
+    public function load(array $entities, ImportableEntityConfig $entitySpecification): void
     {
         $resourceHydrator = $this->entityHydratorFactory->create($entitySpecification->getResourceHydrator());
         $subResourceHydrators = $this->buildSubResourceHydrators($entitySpecification);
@@ -58,12 +58,12 @@ class ImportLoader
 
 
     /**
-     * @param ImExEntitySpecification $entitySpecification
+     * @param ImportableEntityConfig $entitySpecification
      *
      * @return EntityHydratorInterface[]
      * @throws FafiException
      */
-    private function buildSubResourceHydrators(ImExEntitySpecification $entitySpecification): array
+    private function buildSubResourceHydrators(ImportableEntityConfig $entitySpecification): array
     {
         $hydrators = [];
         foreach ($entitySpecification->getSubResourceHydrators() as $subResource => $hydrator) {
@@ -74,12 +74,12 @@ class ImportLoader
     }
 
     /**
-     * @param ImExEntitySpecification $entitySpecification
+     * @param ImportableEntityConfig $entitySpecification
      *
      * @return EntityClientInterface[]
      * @throws FafiException
      */
-    private function buildSubResourceClients(ImExEntitySpecification $entitySpecification): array
+    private function buildSubResourceClients(ImportableEntityConfig $entitySpecification): array
     {
         $clients = [];
         foreach ($entitySpecification->getSubResourceLoaders() as $subResource => $client) {

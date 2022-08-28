@@ -9,7 +9,7 @@ use FAFI\exception\ImExErr;
 use FAFI\src\BE\Domain\Dto\Player\Player\Player;
 use FAFI\src\BE\ImEx\Transformer\Field\ImExFieldTransformer;
 use FAFI\src\BE\ImEx\Transformer\Field\ImExFieldTransformerFactory;
-use FAFI\src\BE\ImEx\Transformer\Specification\Entity\ImExEntitySpecification;
+use FAFI\src\BE\ImEx\Transformer\Specification\Entity\ImportableEntityConfig;
 use FAFI\src\BE\ImEx\Transformer\Specification\Field\ImExFieldSpecification;
 use FAFI\src\BE\ImEx\Transformer\Specification\Field\ImExFieldSpecificationFactory;
 
@@ -29,18 +29,18 @@ class ImportTransformer
 
     /**
      * @param array $entities
-     * @param ImExEntitySpecification $entitySpecification
+     * @param ImportableEntityConfig $entityConfig
      *
      * @return array
      * @throws FafiException
      */
-    public function transform(array $entities, ImExEntitySpecification $entitySpecification): array
+    public function transform(array $entities, ImportableEntityConfig $entityConfig): array
     {
         $transformed = [];
 
         foreach ($entities as $line => $entity) {
-            $this->entityValidator->validateEntity($line, $entity, $entitySpecification);
-            $transformed[$line] = $this->transformEntity($line, $entity, $entitySpecification);
+            $this->entityValidator->validateEntity($line, $entity, $entityConfig);
+            $transformed[$line] = $this->transformEntity($line, $entity, $entityConfig);
         }
 
         return $transformed;
@@ -49,12 +49,12 @@ class ImportTransformer
     /**
      * @param int $line
      * @param array $entity
-     * @param ImExEntitySpecification $entitySpecification
+     * @param ImportableEntityConfig $entityConfig
      *
      * @return array
      * @throws FafiException
      */
-    private function transformEntity(int $line, array $entity, ImExEntitySpecification $entitySpecification): array
+    private function transformEntity(int $line, array $entity, ImportableEntityConfig $entityConfig): array
     {
         $transformed = [];
 
@@ -62,10 +62,10 @@ class ImportTransformer
             if ($fieldValue === '') {
                 $fieldValue = null;
             } else {
-                $fieldTransformer = $this->prepareFieldTransformer($line, $entitySpecification, $fieldName);
+                $fieldTransformer = $this->prepareFieldTransformer($line, $entityConfig, $fieldName);
                 $fieldValue = $fieldTransformer->fromStr($fieldName, $fieldValue);
 
-                $fieldSpecification = $this->prepareFieldSpecification($line, $entitySpecification, $fieldName);
+                $fieldSpecification = $this->prepareFieldSpecification($line, $entityConfig, $fieldName);
                 $fieldSpecification->validate($fieldName, $fieldValue);
             }
 
@@ -77,13 +77,13 @@ class ImportTransformer
 
     /**
      * @param int $line
-     * @param ImExEntitySpecification $entitySpecification
+     * @param ImportableEntityConfig $entitySpecification
      * @param string $fieldName
      *
      * @return ImExFieldSpecification
      * @throws FafiException
      */
-    private function prepareFieldSpecification(int $line, ImExEntitySpecification $entitySpecification, string $fieldName): ImExFieldSpecification
+    private function prepareFieldSpecification(int $line, ImportableEntityConfig $entitySpecification, string $fieldName): ImExFieldSpecification
     {
         // TODO: revisit $entityName to become domain independent
         $entityName = Player::ENTITY;
@@ -103,13 +103,13 @@ class ImportTransformer
 
     /**
      * @param int $line
-     * @param ImExEntitySpecification $entitySpecification
+     * @param ImportableEntityConfig $entitySpecification
      * @param string $fieldName
      *
      * @return ImExFieldTransformer
      * @throws FafiException
      */
-    private function prepareFieldTransformer(int $line, ImExEntitySpecification $entitySpecification, string $fieldName): ImExFieldTransformer
+    private function prepareFieldTransformer(int $line, ImportableEntityConfig $entitySpecification, string $fieldName): ImExFieldTransformer
     {
         // TODO: revisit $entityName to become domain independent
         $entityName = Player::ENTITY;

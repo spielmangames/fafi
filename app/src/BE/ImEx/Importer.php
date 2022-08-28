@@ -2,14 +2,13 @@
 
 declare(strict_types=1);
 
-namespace FAFI\src\BE\ImEx\Entity;
+namespace FAFI\src\BE\ImEx;
 
 use FAFI\exception\FafiException;
-use FAFI\exception\ImExErr;
 use FAFI\src\BE\ImEx\Persistence\ImportLoader;
 use FAFI\src\BE\ImEx\Storage\ImportExtractor;
 use FAFI\src\BE\ImEx\Transformer\ImportTransformer;
-use FAFI\src\BE\ImEx\Transformer\Specification\Entity\ImExEntitySpecification;
+use FAFI\src\BE\ImEx\Transformer\Specification\Entity\ImportableEntityConfig;
 
 class Importer
 {
@@ -27,20 +26,15 @@ class Importer
 
     /**
      * @param string $filePath
-     * @param ImExEntitySpecification $entitySpecification
+     * @param ImportableEntityConfig $entityConfig
      *
      * @return void
      * @throws FafiException
      */
-    public function import(string $filePath, ?ImExEntitySpecification $entitySpecification = null): void
+    public function import(string $filePath, ImportableEntityConfig $entityConfig): void
     {
-        throw new FafiException(sprintf(ImExErr::ENTITY_IMPORT_NOT_SUPPORTED, $entityName));
-
-
         $extracted = $this->importExtractor->extract($filePath);
-
-        $transformed = $this->importTransformer->transform($extracted, $entitySpecification);
-
-        $this->importLoader->load($transformed, $entitySpecification);
+        $transformed = $this->importTransformer->transform($extracted, $entityConfig);
+        $this->importLoader->load($transformed, $entityConfig);
     }
 }

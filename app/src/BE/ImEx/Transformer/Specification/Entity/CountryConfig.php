@@ -13,7 +13,7 @@ use FAFI\src\BE\ImEx\Transformer\Specification\Field\Country\CountryContinentSpe
 use FAFI\src\BE\ImEx\Transformer\Specification\Field\Typical\IntegerSpecification;
 use FAFI\src\BE\ImEx\Transformer\Specification\Field\Typical\StringSpecification;
 
-class CountrySpecification implements ImExEntitySpecification
+class CountryConfig implements ImportableEntityConfig
 {
     public function getFieldTransformersMap(): array
     {

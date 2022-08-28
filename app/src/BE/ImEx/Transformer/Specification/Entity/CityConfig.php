@@ -4,45 +4,50 @@ declare(strict_types=1);
 
 namespace FAFI\src\BE\ImEx\Transformer\Specification\Entity;
 
-use FAFI\src\BE\ImEx\Persistence\Client\PositionClient;
-use FAFI\src\BE\ImEx\Persistence\Hydrator\PositionHydrator;
+use FAFI\src\BE\ImEx\Persistence\Client\CountryClient;
+use FAFI\src\BE\ImEx\Persistence\Hydrator\CountryHydrator;
 use FAFI\src\BE\ImEx\Transformer\Field\Typical\IntegerFieldTransformer;
 use FAFI\src\BE\ImEx\Transformer\Field\Typical\StringFieldTransformer;
-use FAFI\src\BE\ImEx\Transformer\Schema\File\PositionFileSchema;
+use FAFI\src\BE\ImEx\Transformer\Schema\File\CityFileSchema;
 use FAFI\src\BE\ImEx\Transformer\Specification\Field\Typical\IntegerSpecification;
 use FAFI\src\BE\ImEx\Transformer\Specification\Field\Typical\StringSpecification;
 
-class PositionSpecification implements ImExEntitySpecification
+class CityConfig implements ImportableEntityConfig
 {
     public function getFieldTransformersMap(): array
     {
         return [
-            PositionFileSchema::ID => IntegerFieldTransformer::class,
+            CityFileSchema::ID => IntegerFieldTransformer::class,
 
-            PositionFileSchema::NAME => StringFieldTransformer::class,
+            CityFileSchema::NAME => StringFieldTransformer::class,
+            CityFileSchema::REGION => StringFieldTransformer::class,
+            CityFileSchema::COUNTRY => IntegerFieldTransformer::class,
         ];
     }
 
     public function getFieldSpecificationsMap(): array
     {
         return [
-            PositionFileSchema::ID => IntegerSpecification::class,
+            CityFileSchema::ID => IntegerSpecification::class,
 
-            PositionFileSchema::NAME => StringSpecification::class,
+            CityFileSchema::NAME => StringSpecification::class,
+            CityFileSchema::REGION => StringSpecification::class,
+            CityFileSchema::COUNTRY => IntegerSpecification::class,
         ];
     }
 
     public function getMandatoryFieldsOnCreate(): array
     {
         return [
-            PositionFileSchema::NAME,
+            CityFileSchema::NAME,
+            CityFileSchema::COUNTRY,
         ];
     }
 
 
     public function getResourceHydrator(): string
     {
-        return PositionHydrator::class;
+        return CountryHydrator::class;
     }
 
     public function getSubResourceHydrators(): array
@@ -52,7 +57,7 @@ class PositionSpecification implements ImExEntitySpecification
 
     public function getResourceLoader(): string
     {
-        return PositionClient::class;
+        return CountryClient::class;
     }
 
     public function getSubResourceLoaders(): array

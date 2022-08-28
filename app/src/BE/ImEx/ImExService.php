@@ -6,17 +6,29 @@ namespace FAFI\src\BE\ImEx;
 
 use FAFI\data\CsvFileHandlerInterface;
 use FAFI\exception\FafiException;
-use FAFI\src\BE\ImEx\Entity\Importer;
+use FAFI\src\BE\ImEx\Transformer\Specification\Entity\CityConfig;
+use FAFI\src\BE\ImEx\Transformer\Specification\Entity\CountryConfig;
+use FAFI\src\BE\ImEx\Transformer\Specification\Entity\PlayerConfig;
+use FAFI\src\BE\ImEx\Transformer\Specification\Entity\PositionConfig;
 
 class ImExService
 {
     public const FILE_EXT = CsvFileHandlerInterface::FILE_EXT;
 
+    private CountryConfig $countryImportConfig;
+    private CityConfig $cityImportConfig;
+    private PositionConfig $positionImportConfig;
+    private PlayerConfig $playerImportConfig;
 
     private Importer $importer;
 
     public function __construct()
     {
+        $this->countryImportConfig = new CountryConfig();
+        $this->cityImportConfig = new CityConfig();
+        $this->positionImportConfig = new PositionConfig();
+        $this->playerImportConfig = new PlayerConfig();
+
         $this->importer = new Importer();
     }
 
@@ -29,7 +41,7 @@ class ImExService
      */
     public function importCountries(string $filePath): void
     {
-        $this->importer->import($filePath);
+        $this->importer->import($filePath, $this->countryImportConfig);
     }
 
     /**
@@ -40,7 +52,7 @@ class ImExService
      */
     public function importCities(string $filePath): void
     {
-        $this->importer->import($filePath);
+        $this->importer->import($filePath, $this->cityImportConfig);
     }
 
     /**
@@ -51,7 +63,7 @@ class ImExService
      */
     public function importPositions(string $filePath): void
     {
-        $this->importer->import($filePath);
+        $this->importer->import($filePath, $this->positionImportConfig);
     }
 
     /**
@@ -62,6 +74,6 @@ class ImExService
      */
     public function importPlayers(string $filePath): void
     {
-        $this->importer->import($filePath);
+        $this->importer->import($filePath, $this->playerImportConfig);
     }
 }

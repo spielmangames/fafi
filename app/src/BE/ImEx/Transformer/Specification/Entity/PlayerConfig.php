@@ -19,7 +19,7 @@ use FAFI\src\BE\ImEx\Transformer\Specification\Field\Typical\BooleanSpecificatio
 use FAFI\src\BE\ImEx\Transformer\Specification\Field\Typical\IntegerSpecification;
 use FAFI\src\BE\ImEx\Transformer\Specification\Field\Typical\StringSpecification;
 
-class PlayerSpecification implements ImExEntitySpecification
+class PlayerConfig implements ImportableEntityConfig
 {
     public function getFieldTransformersMap(): array
     {

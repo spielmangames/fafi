@@ -9,7 +9,7 @@ use FAFI\exception\FafiException;
 use FAFI\exception\ImExErr;
 use FAFI\src\BE\Domain\Dto\Player\Player\Player;
 use FAFI\src\BE\ImEx\Transformer\Schema\File\AbstractFileSchema;
-use FAFI\src\BE\ImEx\Transformer\Specification\Entity\ImExEntitySpecification;
+use FAFI\src\BE\ImEx\Transformer\Specification\Entity\ImportableEntityConfig;
 use FAFI\src\BE\ImEx\Transformer\Specification\Field\ImExFieldSpecification;
 
 class ImportEntityValidator
@@ -17,12 +17,12 @@ class ImportEntityValidator
     /**
      * @param int $line
      * @param array $entity
-     * @param ImExEntitySpecification $specification
+     * @param ImportableEntityConfig $specification
      *
      * @return void
      * @throws FafiException
      */
-    public function validateEntity(int $line, array $entity, ImExEntitySpecification $specification): void
+    public function validateEntity(int $line, array $entity, ImportableEntityConfig $specification): void
     {
         array_key_exists(AbstractFileSchema::ID, $entity)
             ? $this->assertContentPresent($line, $entity)
@@ -32,12 +32,12 @@ class ImportEntityValidator
     /**
      * @param int $line
      * @param array $entity
-     * @param ImExEntitySpecification $specification
+     * @param ImportableEntityConfig $specification
      *
      * @return void
      * @throws FafiException
      */
-    private function assertMandatory(int $line, array $entity, ImExEntitySpecification $specification): void
+    private function assertMandatory(int $line, array $entity, ImportableEntityConfig $specification): void
     {
         // TODO: revisit $entityName to become domain independent
         $entityName = Player::ENTITY;
