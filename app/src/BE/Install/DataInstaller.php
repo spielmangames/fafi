@@ -26,6 +26,7 @@ class DataInstaller
     {
         // geo
         $this->importEntity($this->imExService::ENTITIES_COUNTRIES);
+        $this->importEntity($this->imExService::ENTITIES_CITIES);
 
         // domain
         $this->importEntity($this->imExService::ENTITIES_POSITIONS);
@@ -41,6 +42,6 @@ class DataInstaller
     private function importEntity(string $entityName): void
     {
         $filePath = self::IMEX_SAMPLE_DIR_PATH . $entityName . ImExService::FILE_EXT;
-        $this->imExService->importEntity($filePath, $entityName);
+        $this->imExService->import($filePath, $entityName);
     }
 }

@@ -7,9 +7,10 @@ namespace FAFI\src\BE\ImEx;
 use FAFI\data\CsvFileHandlerInterface;
 use FAFI\exception\FafiException;
 use FAFI\exception\ImExErr;
-use FAFI\src\BE\ImEx\Entity\ImportCountries;
-use FAFI\src\BE\ImEx\Entity\ImportPlayers;
-use FAFI\src\BE\ImEx\Entity\ImportPositions;
+use FAFI\src\BE\ImEx\Entity\ImporterCities;
+use FAFI\src\BE\ImEx\Entity\ImporterCountries;
+use FAFI\src\BE\ImEx\Entity\ImporterPlayers;
+use FAFI\src\BE\ImEx\Entity\ImporterPositions;
 
 class ImExService
 {
@@ -17,20 +18,26 @@ class ImExService
 
 
     public const ENTITIES_COUNTRIES = 'countries';
+    public const ENTITIES_CITIES = 'cities';
+
     public const ENTITIES_POSITIONS = 'positions';
     public const ENTITIES_PLAYERS = 'players';
 
 
-    private ImportCountries $importCountries;
-    private ImportPositions $importPositions;
-    private ImportPlayers $importPlayers;
+    private ImporterCountries $importCountries;
+    private ImporterCities $importCities;
+
+    private ImporterPositions $importPositions;
+    private ImporterPlayers $importPlayers;
 
 
     public function __construct()
     {
-        $this->importCountries = new ImportCountries();
-        $this->importPositions = new ImportPositions();
-        $this->importPlayers = new ImportPlayers();
+        $this->importCountries = new ImporterCountries();
+        $this->importCities = new ImporterCities();
+
+        $this->importPositions = new ImporterPositions();
+        $this->importPlayers = new ImporterPlayers();
     }
 
 
@@ -41,12 +48,16 @@ class ImExService
      * @return void
      * @throws FafiException
      */
-    public function importEntity(string $filePath, string $entityName): void
+    public function import(string $filePath, string $entityName): void
     {
         switch ($entityName) {
             case self::ENTITIES_COUNTRIES:
                 $this->importCountries($filePath);
                 break;
+            case self::ENTITIES_CITIES:
+                $this->importCities($filePath);
+                break;
+
             case self::ENTITIES_POSITIONS:
                 $this->importPositions($filePath);
                 break;
@@ -68,6 +79,17 @@ class ImExService
     private function importCountries(string $filePath): void
     {
         $this->importCountries->import($filePath);
+    }
+
+    /**
+     * @param string $filePath
+     *
+     * @return void
+     * @throws FafiException
+     */
+    private function importCities(string $filePath): void
+    {
+        $this->importCities->import($filePath);
     }
 
     /**

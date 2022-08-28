@@ -6,7 +6,7 @@ namespace FAFI\src\BE\ImEx\Entity;
 
 use FAFI\src\BE\ImEx\Transformer\Specification\Entity\PositionSpecification;
 
-class ImportPositions extends AbstractEntityImport
+class ImporterPositions extends AbstractEntityImporter
 {
     protected PositionSpecification $entitySpecification;
 

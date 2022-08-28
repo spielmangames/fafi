@@ -6,7 +6,7 @@ namespace FAFI\src\BE\ImEx\Entity;
 
 use FAFI\src\BE\ImEx\Transformer\Specification\Entity\PlayerSpecification;
 
-class ImportPlayers extends AbstractEntityImport
+class ImporterPlayers extends AbstractEntityImporter
 {
     protected PlayerSpecification $entitySpecification;
 

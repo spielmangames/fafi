@@ -6,7 +6,7 @@ namespace FAFI\src\BE\ImEx\Entity;
 
 use FAFI\src\BE\ImEx\Transformer\Specification\Entity\CountrySpecification;
 
-class ImportCountries extends AbstractEntityImport
+class ImporterCountries extends AbstractEntityImporter
 {
     protected CountrySpecification $entitySpecification;
 

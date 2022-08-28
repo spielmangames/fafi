@@ -9,7 +9,7 @@ use FAFI\src\BE\ImEx\Persistence\ImportLoader;
 use FAFI\src\BE\ImEx\Storage\ImportExtractor;
 use FAFI\src\BE\ImEx\Transformer\ImportTransformer;
 
-abstract class AbstractEntityImport
+abstract class AbstractEntityImporter
 {
     protected ImportExtractor $importExtractor;
     protected ImportTransformer $importTransformer;
