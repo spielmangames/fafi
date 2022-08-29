@@ -8,8 +8,6 @@ class Country implements EntityInterface
 {
     public const ENTITY = 'Country';
 
-    public const CONTINENTS_SUPPORTED = Continent::SUPPORTED;
-
 
     private ?int $id = null;
 

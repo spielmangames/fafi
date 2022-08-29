@@ -113,51 +113,54 @@ class ImportTransformer
 
         $fieldSpecificationsMap = $entityConfig->getFieldSpecificationsMap();
         if (!isset($fieldSpecificationsMap[$field])) {
-            $e = [
-                sprintf(ImExErr::IMPORT_FAILED, $line),
-                sprintf(ImExErr::IMPORT_ENTITY_FIELD_SPECIFICATION_ABSENT, $field, $entity),
-            ];
-            throw new FafiException(FafiException::combine($e));
+            $e = sprintf(ImExErr::IMPORT_ENTITY_FIELD_SPECIFICATION_ABSENT, $field, $entity);
+            $this->fail($line, $e);
         }
 
         $fieldSpecification = $fieldSpecificationsMap[$field];
         if (!is_array($fieldSpecification) || empty($fieldSpecification) || count($fieldSpecification) > 2) {
-            $e = [
-                sprintf(ImExErr::IMPORT_FAILED, $line),
-                sprintf(ImExErr::IMPORT_ENTITY_FIELD_SPECIFICATION_INVALID, $field, $entity),
-            ];
-            throw new FafiException(FafiException::combine($e));
+            $e = sprintf(ImExErr::IMPORT_ENTITY_FIELD_SPECIFICATION_INVALID, $field, $entity);
+            $this->fail($line, $e);
         }
 
-        if (!isset($fieldSpecificationsMap[ImportableEntityConfig::OBJECT])) {
-            $e = [
-                sprintf(ImExErr::IMPORT_FAILED, $line),
-                sprintf(ImExErr::IMPORT_ENTITY_FIELD_SPECIFICATION_INVALID, $field, $entity),
-            ];
-            throw new FafiException(FafiException::combine($e));
+        if (!isset($fieldSpecification[ImportableEntityConfig::OBJECT])) {
+            $e = sprintf(ImExErr::IMPORT_ENTITY_FIELD_SPECIFICATION_INVALID, $field, $entity);
+            $this->fail($line, $e);
         }
-        $class = $fieldSpecificationsMap[ImportableEntityConfig::OBJECT];
+        $class = $fieldSpecification[ImportableEntityConfig::OBJECT];
         if (!is_string($class)) {
-            $e = [
-                sprintf(ImExErr::IMPORT_FAILED, $line),
-                sprintf(ImExErr::IMPORT_ENTITY_FIELD_SPECIFICATION_INVALID, $field, $entity),
-            ];
-            throw new FafiException(FafiException::combine($e));
+            $e = sprintf(ImExErr::IMPORT_ENTITY_FIELD_SPECIFICATION_INVALID, $field, $entity);
+            $this->fail($line, $e);
         }
 
         $params = null;
-        if (isset($fieldSpecificationsMap[ImportableEntityConfig::PARAMS])) {
-            $params = $fieldSpecificationsMap[ImportableEntityConfig::PARAMS];
+        if (isset($fieldSpecification[ImportableEntityConfig::PARAMS])) {
+            $params = $fieldSpecification[ImportableEntityConfig::PARAMS];
 
-            if (!is_array($params)) {
-                $e = [
-                    sprintf(ImExErr::IMPORT_FAILED, $line),
-                    sprintf(ImExErr::IMPORT_ENTITY_FIELD_SPECIFICATION_INVALID, $field, $entity),
-                ];
-                throw new FafiException(FafiException::combine($e));
+            if (!is_array($params) || empty($params)) {
+                $e = sprintf(ImExErr::IMPORT_ENTITY_FIELD_SPECIFICATION_INVALID, $field, $entity);
+                $this->fail($line, $e);
             }
         }
 
-        return $this->fieldSpecificationFactory->create($class, $params);
+        try {
+            $specification = $this->fieldSpecificationFactory->create($class, $params);
+        } catch (FafiException $exception) {
+            $this->fail($line, $exception->getMessage());
+        }
+
+        return $specification;
+    }
+
+    /**
+     * @param int $line
+     * @param string $error
+     *
+     * @return void
+     * @throws FafiException
+     */
+    private function fail(int $line, string $error): void
+    {
+        throw new FafiException(FafiException::combine([sprintf(ImExErr::IMPORT_FAILED, $line), $error]));
     }
 }

@@ -8,9 +8,10 @@ interface ImExErr extends Err
     public const IMPORT_FAILED = 'Importing failed on line %d.';
     public const IMPORT_DATA_ABSENT = 'There is no data to update %s.';
 
+    public const IMPORT_ENTITY_FIELD_TRANSFORMER_ABSENT = 'Field "%s" Transformer is absent in %s Config.';
     public const IMPORT_ENTITY_FIELD_SPECIFICATION_ABSENT = 'Field "%s" Specification is absent in %s Config.';
     public const IMPORT_ENTITY_FIELD_SPECIFICATION_INVALID = 'Field "%s" Specification is invalid in %s Config.';
-    public const IMPORT_ENTITY_FIELD_TRANSFORMER_ABSENT = 'Field "%s" Transformer is absent in %s Config.';
+    public const IMPORT_ENTITY_FIELD_SPECIFICATION_PARAM_INVALID = 'Specification param "%s" is invalid.';
 
     public const ENTITY_IMPORT_NOT_SUPPORTED = 'Entity "%s" is not supported for Import.';
 }
