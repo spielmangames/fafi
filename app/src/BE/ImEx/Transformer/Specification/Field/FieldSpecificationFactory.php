@@ -8,9 +8,9 @@ use FAFI\exception\FafiException;
 use FAFI\exception\ImExErr;
 use FAFI\src\BE\ImEx\Transformer\Specification\Field\Player\PlayerAttributesSpecification;
 use FAFI\src\BE\ImEx\Transformer\Specification\Field\Typical\BooleanSpecification;
+use FAFI\src\BE\ImEx\Transformer\Specification\Field\Typical\EnumSpecification;
 use FAFI\src\BE\ImEx\Transformer\Specification\Field\Typical\IdSpecification;
 use FAFI\src\BE\ImEx\Transformer\Specification\Field\Typical\IntegerSpecification;
-use FAFI\src\BE\ImEx\Transformer\Specification\Field\Typical\EnumSpecification;
 use FAFI\src\BE\ImEx\Transformer\Specification\Field\Typical\StringSpecification;
 
 class FieldSpecificationFactory
@@ -28,12 +28,12 @@ class FieldSpecificationFactory
             // typical
             case BooleanSpecification::class:
                 return $this->createBoolSpecification();
+            case EnumSpecification::class:
+                return $this->createEnumSpecification($params);
             case IdSpecification::class:
                 return $this->createIdSpecification();
             case IntegerSpecification::class:
                 return $this->createIntSpecification($params);
-            case EnumSpecification::class:
-                return $this->createEnumSpecification($params);
             case StringSpecification::class:
                 return $this->createStrSpecification($params);
 
@@ -49,6 +49,27 @@ class FieldSpecificationFactory
     private function createBoolSpecification(): BooleanSpecification
     {
         return new BooleanSpecification();
+    }
+
+    /**
+     * @param array $params
+     *
+     * @return EnumSpecification
+     * @throws FafiException
+     */
+    private function createEnumSpecification(array $params): EnumSpecification
+    {
+        if (!isset($params[EnumSpecification::PARAM_SUPPORTED])) {
+            $e = sprintf(ImExErr::IMPORT_ENTITY_FIELD_SPECIFICATION_PARAM_INVALID, EnumSpecification::PARAM_SUPPORTED);
+            throw new FafiException($e);
+        }
+        $supported = $params[EnumSpecification::PARAM_SUPPORTED];
+        if (!is_array($supported) || empty($supported)) {
+            $e = sprintf(ImExErr::IMPORT_ENTITY_FIELD_SPECIFICATION_PARAM_INVALID, EnumSpecification::PARAM_SUPPORTED);
+            throw new FafiException($e);
+        }
+
+        return new EnumSpecification($supported);
     }
 
     private function createIdSpecification(): IdSpecification
@@ -83,27 +104,6 @@ class FieldSpecificationFactory
         }
 
         return new IntegerSpecification($min, $max);
-    }
-
-    /**
-     * @param array $params
-     *
-     * @return EnumSpecification
-     * @throws FafiException
-     */
-    private function createEnumSpecification(array $params): EnumSpecification
-    {
-        if (!isset($params[EnumSpecification::PARAM_SUPPORTED])) {
-            $e = sprintf(ImExErr::IMPORT_ENTITY_FIELD_SPECIFICATION_PARAM_INVALID, EnumSpecification::PARAM_SUPPORTED);
-            throw new FafiException($e);
-        }
-        $supported = $params[EnumSpecification::PARAM_SUPPORTED];
-        if (!is_array($supported) || empty($supported)) {
-            $e = sprintf(ImExErr::IMPORT_ENTITY_FIELD_SPECIFICATION_PARAM_INVALID, EnumSpecification::PARAM_SUPPORTED);
-            throw new FafiException($e);
-        }
-
-        return new EnumSpecification($supported);
     }
 
     /**
