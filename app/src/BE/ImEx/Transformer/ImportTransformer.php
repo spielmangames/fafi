@@ -93,8 +93,18 @@ class ImportTransformer
         if (!isset($fieldTransformersMap[$field])) {
            $this->fail(sprintf(ImExErr::IMPORT_ENTITY_FIELD_TRANSFORMER_ABSENT, $field, $entity));
         }
+        $class = $fieldTransformersMap[$field];
+        if (!is_string($class)) {
+            $this->fail(sprintf(ImExErr::IMPORT_ENTITY_FIELD_TRANSFORMER_INVALID, $field, $entity));
+        }
 
-        return $this->fieldTransformerFactory->create($fieldTransformersMap[$field]);
+        try {
+            $transformer = $this->fieldTransformerFactory->create($class);
+        } catch (FafiException $exception) {
+            $this->fail($exception->getMessage());
+        }
+
+        return $transformer;
     }
 
     /**
@@ -141,6 +151,11 @@ class ImportTransformer
         }
 
         return $specification;
+    }
+
+    private function retrieveA()
+    {
+
     }
 
     /**
