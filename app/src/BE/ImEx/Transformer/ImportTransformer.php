@@ -14,6 +14,8 @@ use FAFI\src\BE\ImEx\Transformer\Specification\Field\ImExFieldSpecificationFacto
 
 class ImportTransformer
 {
+    private int $line;
+
     private ImportEntityValidator $entityValidator;
     private ImExFieldTransformerFactory $fieldTransformerFactory;
     private ImExFieldSpecificationFactory $fieldSpecificationFactory;
@@ -38,8 +40,10 @@ class ImportTransformer
         $transformed = [];
 
         foreach ($entities as $line => $entity) {
+            $this->line = $line;
+
             $this->entityValidator->validateEntity($line, $entity, $entityConfig);
-            $transformed[$line] = $this->transformEntity($line, $entity, $entityConfig);
+            $transformed[$line] = $this->transformEntity($entity, $entityConfig);
         }
 
         return $transformed;
@@ -47,14 +51,13 @@ class ImportTransformer
 
 
     /**
-     * @param int $line
      * @param array $entity
      * @param ImportableEntityConfig $entityConfig
      *
      * @return array
      * @throws FafiException
      */
-    private function transformEntity(int $line, array $entity, ImportableEntityConfig $entityConfig): array
+    private function transformEntity(array $entity, ImportableEntityConfig $entityConfig): array
     {
         $transformed = [];
 
@@ -62,10 +65,10 @@ class ImportTransformer
             if ($fieldValue === '') {
                 $fieldValue = null;
             } else {
-                $fieldTransformer = $this->prepareFieldTransformer($line, $entityConfig, $fieldName);
+                $fieldTransformer = $this->prepareFieldTransformer($entityConfig, $fieldName);
                 $fieldValue = $fieldTransformer->fromStr($fieldName, $fieldValue);
 
-                $fieldSpecification = $this->prepareFieldSpecification($line, $entityConfig, $fieldName);
+                $fieldSpecification = $this->prepareFieldSpecification($entityConfig, $fieldName);
                 $fieldSpecification->validate($fieldName, $fieldValue);
             }
 
@@ -76,61 +79,50 @@ class ImportTransformer
     }
 
     /**
-     * @param int $line
      * @param ImportableEntityConfig $entityConfig
      * @param string $field
      *
      * @return ImExFieldTransformer
      * @throws FafiException
      */
-    private function prepareFieldTransformer(int $line, ImportableEntityConfig $entityConfig, string $field): ImExFieldTransformer
+    private function prepareFieldTransformer(ImportableEntityConfig $entityConfig, string $field): ImExFieldTransformer
     {
         $entity = $entityConfig->getEntityName();
-
         $fieldTransformersMap = $entityConfig->getFieldTransformersMap();
+
         if (!isset($fieldTransformersMap[$field])) {
-            $e = [
-                sprintf(ImExErr::IMPORT_FAILED, $line),
-                sprintf(ImExErr::IMPORT_ENTITY_FIELD_TRANSFORMER_ABSENT, $field, $entity),
-            ];
-            throw new FafiException(FafiException::combine($e));
+           $this->fail(sprintf(ImExErr::IMPORT_ENTITY_FIELD_TRANSFORMER_ABSENT, $field, $entity));
         }
 
         return $this->fieldTransformerFactory->create($fieldTransformersMap[$field]);
     }
 
     /**
-     * @param int $line
      * @param ImportableEntityConfig $entityConfig
      * @param string $field
      *
      * @return FieldSpecification
      * @throws FafiException
      */
-    private function prepareFieldSpecification(int $line, ImportableEntityConfig $entityConfig, string $field): FieldSpecification
+    private function prepareFieldSpecification(ImportableEntityConfig $entityConfig, string $field): FieldSpecification
     {
         $entity = $entityConfig->getEntityName();
-
         $fieldSpecificationsMap = $entityConfig->getFieldSpecificationsMap();
-        if (!isset($fieldSpecificationsMap[$field])) {
-            $e = sprintf(ImExErr::IMPORT_ENTITY_FIELD_SPECIFICATION_ABSENT, $field, $entity);
-            $this->fail($line, $e);
-        }
 
+        if (!isset($fieldSpecificationsMap[$field])) {
+            $this->fail(sprintf(ImExErr::IMPORT_ENTITY_FIELD_SPECIFICATION_ABSENT, $field, $entity));
+        }
         $fieldSpecification = $fieldSpecificationsMap[$field];
         if (!is_array($fieldSpecification) || empty($fieldSpecification) || count($fieldSpecification) > 2) {
-            $e = sprintf(ImExErr::IMPORT_ENTITY_FIELD_SPECIFICATION_INVALID, $field, $entity);
-            $this->fail($line, $e);
+            $this->fail(sprintf(ImExErr::IMPORT_ENTITY_FIELD_SPECIFICATION_INVALID, $field, $entity));
         }
 
         if (!isset($fieldSpecification[ImportableEntityConfig::OBJECT])) {
-            $e = sprintf(ImExErr::IMPORT_ENTITY_FIELD_SPECIFICATION_INVALID, $field, $entity);
-            $this->fail($line, $e);
+            $this->fail(sprintf(ImExErr::IMPORT_ENTITY_FIELD_SPECIFICATION_INVALID, $field, $entity));
         }
         $class = $fieldSpecification[ImportableEntityConfig::OBJECT];
         if (!is_string($class)) {
-            $e = sprintf(ImExErr::IMPORT_ENTITY_FIELD_SPECIFICATION_INVALID, $field, $entity);
-            $this->fail($line, $e);
+            $this->fail(sprintf(ImExErr::IMPORT_ENTITY_FIELD_SPECIFICATION_INVALID, $field, $entity));
         }
 
         $params = null;
@@ -138,29 +130,27 @@ class ImportTransformer
             $params = $fieldSpecification[ImportableEntityConfig::PARAMS];
 
             if (!is_array($params) || empty($params)) {
-                $e = sprintf(ImExErr::IMPORT_ENTITY_FIELD_SPECIFICATION_INVALID, $field, $entity);
-                $this->fail($line, $e);
+                $this->fail(sprintf(ImExErr::IMPORT_ENTITY_FIELD_SPECIFICATION_INVALID, $field, $entity));
             }
         }
 
         try {
             $specification = $this->fieldSpecificationFactory->create($class, $params);
         } catch (FafiException $exception) {
-            $this->fail($line, $exception->getMessage());
+            $this->fail($exception->getMessage());
         }
 
         return $specification;
     }
 
     /**
-     * @param int $line
      * @param string $error
      *
      * @return void
      * @throws FafiException
      */
-    private function fail(int $line, string $error): void
+    private function fail(string $error): void
     {
-        throw new FafiException(FafiException::combine([sprintf(ImExErr::IMPORT_FAILED, $line), $error]));
+        throw new FafiException(FafiException::combine([sprintf(ImExErr::IMPORT_FAILED, $this->line), $error]));
     }
 }
