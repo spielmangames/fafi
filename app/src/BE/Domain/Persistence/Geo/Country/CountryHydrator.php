@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace FAFI\src\BE\Domain\Persistence\Geo\Country;
 
 use FAFI\src\BE\Domain\Dto\Geo\Country\Country;
@@ -26,8 +28,8 @@ class CountryHydrator
         $country = new Country();
 
         !isset($data[CountryResource::ID_FIELD]) ?: $country->setId($data[CountryResource::ID_FIELD]);
-
         !isset($data[CountryResource::NAME_FIELD]) ?: $country->setName($data[CountryResource::NAME_FIELD]);
+        !isset($data[CountryResource::CONTINENT_FIELD]) ?: $country->setContinent($data[CountryResource::CONTINENT_FIELD]);
 
         return $country;
     }
@@ -38,6 +40,7 @@ class CountryHydrator
             CountryResource::ID_FIELD => $country->getId(),
 
             CountryResource::NAME_FIELD => $country->getName(),
+            CountryResource::CONTINENT_FIELD => $country->getContinent(),
         ];
     }
 }

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace FAFI\src\FE\Themes\Printer\Basic\Widgets;
 
 use FAFI\src\BE\Domain\Dto\Player\Player\Player;

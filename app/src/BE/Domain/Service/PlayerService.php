@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace FAFI\src\BE\Domain\Service;
 
 use FAFI\exception\FafiException;
@@ -12,6 +14,7 @@ use FAFI\src\BE\Domain\Persistence\Player\Position\PositionRepository;
 
 class PlayerService
 {
+
     private PositionRepository $positionRepository;
     private PlayerRepository $playerRepository;
     private PlayerAttributeRepository $playerAttributeRepository;

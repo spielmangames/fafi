@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace FAFI\src\BE\Domain\Dto\Player\PlayerAttribute;
 
 use FAFI\src\BE\Domain\Dto\EntityInterface;

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace FAFI\src\FE\Themes\Printer\Basic\PageSections;
 
 use FAFI\src\FE\Structure\PageSection\PageSectionInterface;

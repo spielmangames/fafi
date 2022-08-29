@@ -2,19 +2,18 @@
 
 declare(strict_types=1);
 
-namespace FAFI\src\BE\Domain\Dto\Geo\Country;
+namespace FAFI\src\BE\Domain\Dto\Geo\City;
 
 use FAFI\src\BE\Domain\Dto\EntityInterface;
 
-class Country implements EntityInterface
+class City implements EntityInterface
 {
-    public const ENTITY = 'Country';
+    public const ENTITY = 'City';
 
 
     private ?int $id = null;
 
     protected ?string $name = null;
-    protected ?string $continent = null;
 
 
     public function setId(int $id): self
@@ -38,17 +37,6 @@ class Country implements EntityInterface
     public function getName(): ?string
     {
         return $this->name;
-    }
-
-    public function setContinent(string $continent): self
-    {
-        $this->continent = $continent;
-        return $this;
-    }
-
-    public function getContinent(): string
-    {
-        return $this->continent;
     }
 
 

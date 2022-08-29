@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace FAFI\src\BE\Install;
 
 use FAFI\exception\FafiException;

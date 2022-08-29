@@ -2,25 +2,23 @@
 
 declare(strict_types=1);
 
-namespace FAFI\src\BE\Domain\Persistence\Geo\Country;
+namespace FAFI\src\BE\Domain\Persistence\Geo\City;
 
 use FAFI\exception\FafiException;
-use FAFI\src\BE\Domain\Dto\Geo\Country\Country;
+use FAFI\src\BE\Domain\Dto\Geo\City\City;
 use FAFI\src\BE\Domain\Persistence\AbstractResource;
 use FAFI\src\BE\Domain\Persistence\EntityCriteriaInterface;
 
-class CountryResource extends AbstractResource
+class CityResource extends AbstractResource
 {
-    private const TABLE = 'countries';
+    private const TABLE = 'cities';
     private const COLUMNS = [
         self::ID_FIELD,
 
         self::NAME_FIELD,
-        self::CONTINENT_FIELD,
     ];
     private const REQUIRED_FIELDS = [
         self::NAME_FIELD,
-        self::CONTINENT_FIELD,
     ];
     private const UNIQUE_FIELDS = [
         self::NAME_FIELD,
@@ -28,15 +26,14 @@ class CountryResource extends AbstractResource
 
 
     public const NAME_FIELD = 'name';
-    public const CONTINENT_FIELD = 'continent';
 
 
-    protected CountryHydrator $hydrator;
+    protected CityHydrator $hydrator;
 
     public function __construct()
     {
         parent::__construct();
-        $this->hydrator = new CountryHydrator();
+        $this->hydrator = new CityHydrator();
     }
 
     protected function getTable(): string
@@ -56,14 +53,14 @@ class CountryResource extends AbstractResource
 
 
     /**
-     * @param Country $entity
+     * @param City $entity
      *
-     * @return Country
+     * @return City
      * @throws FafiException
      */
-    public function create($entity): Country
+    public function create($entity): City
     {
-        /** @var Country $result */
+        /** @var City $result */
         $result = parent::create($entity);
 
         return $result;
@@ -72,12 +69,12 @@ class CountryResource extends AbstractResource
     /**
      * @param EntityCriteriaInterface[] $conditions
      *
-     * @return Country[]|null
+     * @return City[]|null
      * @throws FafiException
      */
     public function read(array $conditions = []): ?array
     {
-        /** @var Country[]|null $result */
+        /** @var City[]|null $result */
         $result = parent::read($conditions);
 
         return $result;
@@ -86,26 +83,26 @@ class CountryResource extends AbstractResource
     /**
      * @param EntityCriteriaInterface[] $conditions
      *
-     * @return Country|null
+     * @return City|null
      * @throws FafiException
      */
-    public function readFirst(array $conditions): ?Country
+    public function readFirst(array $conditions): ?City
     {
-        /** @var Country|null $result */
+        /** @var City|null $result */
         $result = parent::readFirst($conditions);
 
         return $result;
     }
 
     /**
-     * @param Country $entity
+     * @param City $entity
      *
-     * @return Country
+     * @return City
      * @throws FafiException
      */
-    public function update($entity): Country
+    public function update($entity): City
     {
-        /** @var Country $result */
+        /** @var City $result */
         $result = parent::update($entity);
 
         return $result;

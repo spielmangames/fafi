@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace FAFI;
 
 use FAFI\src\BE\Domain\Service\GeoService;

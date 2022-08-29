@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace FAFI\src\FE\Themes\Printer\Basic\PageSections;
 
 abstract class AbstractBody extends AbstractPrinterPageSection

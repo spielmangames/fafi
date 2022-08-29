@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace FAFI\src\FE;
 
 use FAFI\exception\FafiException;
@@ -27,6 +29,11 @@ class StorefrontService
         return $this->theme;
     }
 
+
+    public function getPlayersListPage(array $players): PageInterface
+    {
+        return $this->theme->getPlayersListPage($players);
+    }
 
     public function getPlayerReadPage(Player $player): PageInterface
     {
