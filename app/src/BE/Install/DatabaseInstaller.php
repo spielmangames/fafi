@@ -12,6 +12,7 @@ use FAFI\exception\FileErr;
 class DatabaseInstaller
 {
     private const DB_SCHEMA_FILE_NAME = 'fafibase_schema.sql';
+    private const DB_SCHEMA_FILE_SIZE_MAX = 1;
 
 
     private DatabaseConnector $dbConnect;
@@ -33,7 +34,7 @@ class DatabaseInstaller
         $fileName = self::DB_SCHEMA_FILE_NAME;
         $filePath = PATH_APP . 'db' . DS . $fileName;
 
-        $this->fileValidator->validateFile($filePath, '.sql');
+        $this->fileValidator->validateFile($filePath, '.sql', self::DB_SCHEMA_FILE_SIZE_MAX);
         if (!execSqlFile($filePath, $this->dbConnect->open(false))) {
             throw new FafiException(sprintf(FileErr::FILE_EXEC_FAILED, $fileName));
         }

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace FAFI\src\BE\ImEx\Entity;
+namespace FAFI\src\BE\ImEx\Import;
 
 use FAFI\src\BE\ImEx\Transformer\Specification\Entity\ImportableEntityConfig;
 

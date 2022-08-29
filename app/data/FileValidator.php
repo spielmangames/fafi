@@ -9,15 +9,18 @@ use FAFI\exception\FileErr;
 
 class FileValidator
 {
+    private const BYTES_IN_MEGABYTE = 1048576;
+
+
     /**
      * @param string $filePath
      * @param string $expectedExt
-     * @param int|null $limit
+     * @param int|null $maxSize
      *
      * @return void
      * @throws FafiException
      */
-    public function validateFile(string $filePath, string $expectedExt, ?int $limit = null): void
+    public function validateFile(string $filePath, string $expectedExt, ?int $maxSize = null): void
     {
         if (!isFileValid($filePath)) {
             throw new FafiException(sprintf(FileErr::FILE_INVALID, $filePath));
@@ -27,7 +30,7 @@ class FileValidator
             throw new FafiException(sprintf(FileErr::FILE_EXT_INVALID, $filePath));
         }
 
-        if (isset($limit) && filesize($filePath) > $limit) {
+        if (isset($maxSize) && filesize($filePath) > ($maxSize * self::BYTES_IN_MEGABYTE)) {
             throw new FafiException(sprintf(FileErr::FILE_TOO_LARGE, $filePath));
         }
     }
