@@ -12,7 +12,7 @@ use FAFI\src\BE\ImEx\Transformer\Field\Typical\IntegerFieldTransformer;
 use FAFI\src\BE\ImEx\Transformer\Field\Typical\StringFieldTransformer;
 use FAFI\src\BE\ImEx\Transformer\Schema\File\CountryFileSchema;
 use FAFI\src\BE\ImEx\Transformer\Specification\Field\Typical\IdSpecification;
-use FAFI\src\BE\ImEx\Transformer\Specification\Field\Typical\OneOfSpecification;
+use FAFI\src\BE\ImEx\Transformer\Specification\Field\Typical\EnumSpecification;
 use FAFI\src\BE\ImEx\Transformer\Specification\Field\Typical\StringSpecification;
 
 class CountryConfig implements ImportableEntityConfig
@@ -48,11 +48,16 @@ class CountryConfig implements ImportableEntityConfig
 
             CountryFileSchema::NAME => [
                 ImportableEntityConfig::OBJECT => StringSpecification::class,
-                ImportableEntityConfig::PARAMS => [CountryConstraints::NAME_MIN, CountryConstraints::NAME_MAX]
+                ImportableEntityConfig::PARAMS => [
+                    StringSpecification::PARAM_MIN => CountryConstraints::NAME_MIN,
+                    StringSpecification::PARAM_MAX => CountryConstraints::NAME_MAX
+                ]
             ],
             CountryFileSchema::CONTINENT => [
-                ImportableEntityConfig::OBJECT => OneOfSpecification::class,
-                ImportableEntityConfig::PARAMS => [CountryConstraints::CONTINENTS_SUPPORTED]
+                ImportableEntityConfig::OBJECT => EnumSpecification::class,
+                ImportableEntityConfig::PARAMS => [
+                    EnumSpecification::PARAM_SUPPORTED => CountryConstraints::CONTINENTS_SUPPORTED
+                ]
             ],
         ];
     }

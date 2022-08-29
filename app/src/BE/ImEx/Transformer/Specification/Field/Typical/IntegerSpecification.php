@@ -9,6 +9,9 @@ use FAFI\src\BE\ImEx\Transformer\Specification\Field\FieldSpecification;
 
 class IntegerSpecification extends AbstractFieldSpecification implements FieldSpecification
 {
+    public const PARAM_MIN = 'min';
+    public const PARAM_MAX = 'max';
+
     private ?int $min;
     private ?int $max;
 

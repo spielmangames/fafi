@@ -10,7 +10,7 @@ use FAFI\src\BE\ImEx\Transformer\Field\ImExFieldTransformer;
 use FAFI\src\BE\ImEx\Transformer\Field\ImExFieldTransformerFactory;
 use FAFI\src\BE\ImEx\Transformer\Specification\Entity\ImportableEntityConfig;
 use FAFI\src\BE\ImEx\Transformer\Specification\Field\FieldSpecification;
-use FAFI\src\BE\ImEx\Transformer\Specification\Field\ImExFieldSpecificationFactory;
+use FAFI\src\BE\ImEx\Transformer\Specification\Field\FieldSpecificationFactory;
 
 class ImportTransformer
 {
@@ -18,13 +18,13 @@ class ImportTransformer
 
     private ImportEntityValidator $entityValidator;
     private ImExFieldTransformerFactory $fieldTransformerFactory;
-    private ImExFieldSpecificationFactory $fieldSpecificationFactory;
+    private FieldSpecificationFactory $fieldSpecificationFactory;
 
     public function __construct()
     {
         $this->entityValidator = new ImportEntityValidator();
         $this->fieldTransformerFactory = new ImExFieldTransformerFactory();
-        $this->fieldSpecificationFactory = new ImExFieldSpecificationFactory();
+        $this->fieldSpecificationFactory = new FieldSpecificationFactory();
     }
 
 
@@ -153,10 +153,6 @@ class ImportTransformer
         return $specification;
     }
 
-    private function retrieveA()
-    {
-
-    }
 
     /**
      * @param string $error

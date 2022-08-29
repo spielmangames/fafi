@@ -18,7 +18,7 @@ use FAFI\src\BE\ImEx\Transformer\Specification\Field\Player\PlayerAttributesSpec
 use FAFI\src\BE\ImEx\Transformer\Specification\Field\Typical\BooleanSpecification;
 use FAFI\src\BE\ImEx\Transformer\Specification\Field\Typical\IdSpecification;
 use FAFI\src\BE\ImEx\Transformer\Specification\Field\Typical\IntegerSpecification;
-use FAFI\src\BE\ImEx\Transformer\Specification\Field\Typical\OneOfSpecification;
+use FAFI\src\BE\ImEx\Transformer\Specification\Field\Typical\EnumSpecification;
 use FAFI\src\BE\ImEx\Transformer\Specification\Field\Typical\StringSpecification;
 
 class PlayerConfig implements ImportableEntityConfig
@@ -84,7 +84,7 @@ class PlayerConfig implements ImportableEntityConfig
                 ImportableEntityConfig::PARAMS => []
             ],
             PlayerFileSchema::FOOT => [
-                ImportableEntityConfig::OBJECT => OneOfSpecification::class,
+                ImportableEntityConfig::OBJECT => EnumSpecification::class,
                 ImportableEntityConfig::PARAMS => []
             ],
             PlayerFileSchema::INJURE_FACTOR => [
