@@ -7,7 +7,7 @@ namespace FAFI\src\BE\ImEx\Transformer;
 use FAFI\exception\EntityErr;
 use FAFI\exception\FafiException;
 use FAFI\exception\ImExErr;
-use FAFI\src\BE\ImEx\Transformer\Schema\File\AbstractFileSchema;
+use FAFI\src\BE\ImEx\FileSchemas\Entity\AbstractEntityFileSchema;
 use FAFI\src\BE\ImEx\Transformer\Specification\Entity\ImportableEntityConfig;
 use FAFI\src\BE\ImEx\Transformer\Specification\Field\FieldSpecification;
 
@@ -23,7 +23,7 @@ class ImportEntityValidator
      */
     public function validateEntity(int $line, array $entity, ImportableEntityConfig $entityConfig): void
     {
-        array_key_exists(AbstractFileSchema::ID, $entity)
+        array_key_exists(AbstractEntityFileSchema::ID, $entity)
             ? $this->assertContentPresent($line, $entity, $entityConfig)
             : $this->assertMandatory($line, $entity, $entityConfig);
     }
@@ -38,7 +38,7 @@ class ImportEntityValidator
      */
     private function assertContentPresent(int $line, array $entity, ImportableEntityConfig $entityConfig): void
     {
-        $reserved = [AbstractFileSchema::ID];
+        $reserved = [AbstractEntityFileSchema::ID];
         if (count($entity) <= count($reserved)) {
             $e = [
                 sprintf(ImExErr::IMPORT_FAILED, $line),

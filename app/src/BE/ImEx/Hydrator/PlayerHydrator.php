@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace FAFI\src\BE\ImEx\Hydrator;
 
 use FAFI\src\BE\Domain\Dto\Player\Player\Player;
-use FAFI\src\BE\ImEx\Transformer\Schema\File\PlayerFileSchema;
+use FAFI\src\BE\ImEx\FileSchemas\Entity\PlayerEntityFileSchema;
 
 class PlayerHydrator implements EntityHydratorInterface
 {
@@ -21,19 +21,19 @@ class PlayerHydrator implements EntityHydratorInterface
     {
         $player = new Player();
 
-        !isset($data[PlayerFileSchema::ID]) ?: $player->setId($data[PlayerFileSchema::ID]);
+        !isset($data[PlayerEntityFileSchema::ID]) ?: $player->setId($data[PlayerEntityFileSchema::ID]);
 
-        !isset($data[PlayerFileSchema::NAME]) ?: $player->setName($data[PlayerFileSchema::NAME]);
-        !isset($data[PlayerFileSchema::PARTICLE]) ?: $player->setParticle($data[PlayerFileSchema::PARTICLE]);
-        !isset($data[PlayerFileSchema::SURNAME]) ?: $player->setSurname($data[PlayerFileSchema::SURNAME]);
-        !isset($data[PlayerFileSchema::FAFI_SURNAME]) ?: $player->setFafiSurname($data[PlayerFileSchema::FAFI_SURNAME]);
+        !isset($data[PlayerEntityFileSchema::NAME]) ?: $player->setName($data[PlayerEntityFileSchema::NAME]);
+        !isset($data[PlayerEntityFileSchema::PARTICLE]) ?: $player->setParticle($data[PlayerEntityFileSchema::PARTICLE]);
+        !isset($data[PlayerEntityFileSchema::SURNAME]) ?: $player->setSurname($data[PlayerEntityFileSchema::SURNAME]);
+        !isset($data[PlayerEntityFileSchema::FAFI_SURNAME]) ?: $player->setFafiSurname($data[PlayerEntityFileSchema::FAFI_SURNAME]);
 
-        !isset($data[PlayerFileSchema::HEIGHT]) ?: $player->setHeight($data[PlayerFileSchema::HEIGHT]);
-        !isset($data[PlayerFileSchema::FOOT]) ?: $player->setFoot($data[PlayerFileSchema::FOOT]);
-        !isset($data[PlayerFileSchema::INJURE_FACTOR]) ?: $player->setInjureFactor($data[PlayerFileSchema::INJURE_FACTOR]);
+        !isset($data[PlayerEntityFileSchema::HEIGHT]) ?: $player->setHeight($data[PlayerEntityFileSchema::HEIGHT]);
+        !isset($data[PlayerEntityFileSchema::FOOT]) ?: $player->setFoot($data[PlayerEntityFileSchema::FOOT]);
+        !isset($data[PlayerEntityFileSchema::INJURE_FACTOR]) ?: $player->setInjureFactor($data[PlayerEntityFileSchema::INJURE_FACTOR]);
 
-        !isset($data[PlayerFileSchema::ATTRIBUTES]) ?: $player->setAttributes(
-            $this->playerAttributeHydrator->hydrateCollection($data[PlayerFileSchema::ATTRIBUTES])
+        !isset($data[PlayerEntityFileSchema::ATTRIBUTES]) ?: $player->setAttributes(
+            $this->playerAttributeHydrator->hydrateCollection($data[PlayerEntityFileSchema::ATTRIBUTES])
         );
 
         return $player;
@@ -43,18 +43,18 @@ class PlayerHydrator implements EntityHydratorInterface
     public function dehydrate(Player $entity): array
     {
         return [
-            PlayerFileSchema::ID => $entity->getId(),
+            PlayerEntityFileSchema::ID => $entity->getId(),
 
-            PlayerFileSchema::NAME => $entity->getName(),
-            PlayerFileSchema::PARTICLE => $entity->getParticle(),
-            PlayerFileSchema::SURNAME => $entity->getSurname(),
-            PlayerFileSchema::FAFI_SURNAME => $entity->getFafiSurname(),
+            PlayerEntityFileSchema::NAME => $entity->getName(),
+            PlayerEntityFileSchema::PARTICLE => $entity->getParticle(),
+            PlayerEntityFileSchema::SURNAME => $entity->getSurname(),
+            PlayerEntityFileSchema::FAFI_SURNAME => $entity->getFafiSurname(),
 
-            PlayerFileSchema::HEIGHT => $entity->getHeight(),
-            PlayerFileSchema::FOOT => $entity->getFoot(),
-            PlayerFileSchema::INJURE_FACTOR => $entity->getInjureFactor(),
+            PlayerEntityFileSchema::HEIGHT => $entity->getHeight(),
+            PlayerEntityFileSchema::FOOT => $entity->getFoot(),
+            PlayerEntityFileSchema::INJURE_FACTOR => $entity->getInjureFactor(),
 
-            PlayerFileSchema::ATTRIBUTES => $entity->getAttributes(),
+            PlayerEntityFileSchema::ATTRIBUTES => $entity->getAttributes(),
         ];
     }
 }

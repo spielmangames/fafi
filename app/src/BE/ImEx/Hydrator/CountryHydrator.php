@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace FAFI\src\BE\ImEx\Hydrator;
 
 use FAFI\src\BE\Domain\Dto\Geo\Country\Country;
-use FAFI\src\BE\ImEx\Transformer\Schema\File\CountryFileSchema;
+use FAFI\src\BE\ImEx\FileSchemas\Entity\CountryEntityFileSchema;
 
 class CountryHydrator implements EntityHydratorInterface
 {
@@ -13,10 +13,10 @@ class CountryHydrator implements EntityHydratorInterface
     {
         $country = new Country();
 
-        !isset($data[CountryFileSchema::ID]) ?: $country->setId($data[CountryFileSchema::ID]);
+        !isset($data[CountryEntityFileSchema::ID]) ?: $country->setId($data[CountryEntityFileSchema::ID]);
 
-        !isset($data[CountryFileSchema::NAME]) ?: $country->setName($data[CountryFileSchema::NAME]);
-        !isset($data[CountryFileSchema::CONTINENT]) ?: $country->setContinent($data[CountryFileSchema::CONTINENT]);
+        !isset($data[CountryEntityFileSchema::NAME]) ?: $country->setName($data[CountryEntityFileSchema::NAME]);
+        !isset($data[CountryEntityFileSchema::CONTINENT]) ?: $country->setContinent($data[CountryEntityFileSchema::CONTINENT]);
 
         return $country;
     }
@@ -24,10 +24,10 @@ class CountryHydrator implements EntityHydratorInterface
     public function dehydrate(Country $entity): array
     {
         return [
-            CountryFileSchema::ID => $entity->getId(),
+            CountryEntityFileSchema::ID => $entity->getId(),
 
-            CountryFileSchema::NAME => $entity->getName(),
-            CountryFileSchema::CONTINENT => $entity->getContinent(),
+            CountryEntityFileSchema::NAME => $entity->getName(),
+            CountryEntityFileSchema::CONTINENT => $entity->getContinent(),
         ];
     }
 }

@@ -7,9 +7,9 @@ namespace FAFI\src\BE\ImEx\Transformer\Specification\Entity;
 use FAFI\src\BE\Domain\Dto\Player\Position\Position;
 use FAFI\src\BE\ImEx\Clients\PositionClient;
 use FAFI\src\BE\ImEx\Hydrator\PositionHydrator;
+use FAFI\src\BE\ImEx\FileSchemas\Entity\PositionEntityFileSchema;
 use FAFI\src\BE\ImEx\Transformer\Field\Typical\IntegerFieldConverter;
 use FAFI\src\BE\ImEx\Transformer\Field\Typical\StringFieldConverter;
-use FAFI\src\BE\ImEx\Transformer\Schema\File\PositionFileSchema;
 use FAFI\src\BE\ImEx\Transformer\Specification\Field\Typical\IdSpecification;
 use FAFI\src\BE\ImEx\Transformer\Specification\Field\Typical\StringSpecification;
 
@@ -24,25 +24,25 @@ class PositionConfig implements ImportableEntityConfig
     public function getMandatoryFieldsOnCreate(): array
     {
         return [
-            PositionFileSchema::NAME,
+            PositionEntityFileSchema::NAME,
         ];
     }
 
     public function getFieldConvertersMap(): array
     {
         return [
-            PositionFileSchema::ID => IntegerFieldConverter::class,
+            PositionEntityFileSchema::ID => IntegerFieldConverter::class,
 
-            PositionFileSchema::NAME => StringFieldConverter::class,
+            PositionEntityFileSchema::NAME => StringFieldConverter::class,
         ];
     }
 
     public function getFieldSpecificationsMap(): array
     {
         return [
-            PositionFileSchema::ID => [ImportableEntityConfig::OBJECT => IdSpecification::class],
+            PositionEntityFileSchema::ID => [ImportableEntityConfig::OBJECT => IdSpecification::class],
 
-            PositionFileSchema::NAME => [
+            PositionEntityFileSchema::NAME => [
                 ImportableEntityConfig::OBJECT => StringSpecification::class,
                 ImportableEntityConfig::PARAMS => []
             ],

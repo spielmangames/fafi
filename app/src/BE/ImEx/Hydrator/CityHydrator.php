@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace FAFI\src\BE\ImEx\Hydrator;
 
 use FAFI\src\BE\Domain\Dto\Geo\City\City;
-use FAFI\src\BE\ImEx\Transformer\Schema\File\CityFileSchema;
+use FAFI\src\BE\ImEx\FileSchemas\Entity\CityEntityFileSchema;
 
 class CityHydrator implements EntityHydratorInterface
 {
@@ -13,9 +13,9 @@ class CityHydrator implements EntityHydratorInterface
     {
         $country = new City();
 
-        !isset($data[CityFileSchema::ID]) ?: $country->setId($data[CityFileSchema::ID]);
+        !isset($data[CityEntityFileSchema::ID]) ?: $country->setId($data[CityEntityFileSchema::ID]);
 
-        !isset($data[CityFileSchema::NAME]) ?: $country->setName($data[CityFileSchema::NAME]);
+        !isset($data[CityEntityFileSchema::NAME]) ?: $country->setName($data[CityEntityFileSchema::NAME]);
 
         return $country;
     }
@@ -23,9 +23,9 @@ class CityHydrator implements EntityHydratorInterface
     public function dehydrate(City $entity): array
     {
         return [
-            CityFileSchema::ID => $entity->getId(),
+            CityEntityFileSchema::ID => $entity->getId(),
 
-            CityFileSchema::NAME => $entity->getName(),
+            CityEntityFileSchema::NAME => $entity->getName(),
         ];
     }
 }

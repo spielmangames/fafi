@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace FAFI\src\BE\ImEx\Transformer\Schema\File;
+namespace FAFI\src\BE\ImEx\FileSchemas\Entity;
 
-class CityFileSchema extends AbstractFileSchema
+class CityEntityFileSchema extends AbstractEntityFileSchema
 {
     public const NAME = 'name';
 
@@ -12,7 +12,7 @@ class CityFileSchema extends AbstractFileSchema
 //    public const COUNTRY = 'country';
 
 
-    public const FILE_HEADER = [
+    public const HEADER = [
         self::ID,
 
         self::NAME,

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace FAFI\src\BE\ImEx\Transformer\Schema\File;
+namespace FAFI\src\BE\ImEx\FileSchemas\Entity;
 
-class PlayerFileSchema extends AbstractFileSchema
+class PlayerEntityFileSchema extends AbstractEntityFileSchema
 {
     public const NAME = 'name';
     public const PARTICLE = 'particle';
@@ -18,7 +18,7 @@ class PlayerFileSchema extends AbstractFileSchema
     public const ATTRIBUTES = 'attributes';
 
 
-    public const FILE_HEADER = [
+    public const HEADER = [
         self::ID,
 
         self::NAME,

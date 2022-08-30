@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace FAFI\src\BE\ImEx\Hydrator;
 
 use FAFI\src\BE\Domain\Dto\Player\Position\Position;
-use FAFI\src\BE\ImEx\Transformer\Schema\File\PositionFileSchema;
+use FAFI\src\BE\ImEx\FileSchemas\Entity\PositionEntityFileSchema;
 
 class PositionHydrator implements EntityHydratorInterface
 {
@@ -13,9 +13,9 @@ class PositionHydrator implements EntityHydratorInterface
     {
         $position = new Position();
 
-        !isset($data[PositionFileSchema::ID]) ?: $position->setId($data[PositionFileSchema::ID]);
+        !isset($data[PositionEntityFileSchema::ID]) ?: $position->setId($data[PositionEntityFileSchema::ID]);
 
-        !isset($data[PositionFileSchema::NAME]) ?: $position->setName($data[PositionFileSchema::NAME]);
+        !isset($data[PositionEntityFileSchema::NAME]) ?: $position->setName($data[PositionEntityFileSchema::NAME]);
 
         return $position;
     }
@@ -23,9 +23,9 @@ class PositionHydrator implements EntityHydratorInterface
     public function dehydrate(Position $entity): array
     {
         return [
-            PositionFileSchema::ID => $entity->getId(),
+            PositionEntityFileSchema::ID => $entity->getId(),
 
-            PositionFileSchema::NAME => $entity->getName(),
+            PositionEntityFileSchema::NAME => $entity->getName(),
         ];
     }
 }

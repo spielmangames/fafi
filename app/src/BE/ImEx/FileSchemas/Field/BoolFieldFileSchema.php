@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace FAFI\src\BE\ImEx\Transformer\Schema\File\Field;
+namespace FAFI\src\BE\ImEx\FileSchemas\Field;
 
 interface BoolFieldFileSchema
 {

@@ -7,10 +7,10 @@ namespace FAFI\src\BE\ImEx\Transformer\Specification\Entity;
 use FAFI\src\BE\Domain\Dto\Geo\City\City;
 use FAFI\src\BE\Domain\Dto\Geo\City\CityConstraints;
 use FAFI\src\BE\ImEx\Clients\CountryClient;
+use FAFI\src\BE\ImEx\FileSchemas\Entity\CityEntityFileSchema;
 use FAFI\src\BE\ImEx\Hydrator\CountryHydrator;
 use FAFI\src\BE\ImEx\Transformer\Field\Typical\IntegerFieldConverter;
 use FAFI\src\BE\ImEx\Transformer\Field\Typical\StringFieldConverter;
-use FAFI\src\BE\ImEx\Transformer\Schema\File\CityFileSchema;
 use FAFI\src\BE\ImEx\Transformer\Specification\Field\Typical\IdSpecification;
 use FAFI\src\BE\ImEx\Transformer\Specification\Field\Typical\StringSpecification;
 
@@ -25,25 +25,25 @@ class CityConfig implements ImportableEntityConfig
     public function getMandatoryFieldsOnCreate(): array
     {
         return [
-            CityFileSchema::NAME,
+            CityEntityFileSchema::NAME,
         ];
     }
 
     public function getFieldConvertersMap(): array
     {
         return [
-            CityFileSchema::ID => IntegerFieldConverter::class,
+            CityEntityFileSchema::ID => IntegerFieldConverter::class,
 
-            CityFileSchema::NAME => StringFieldConverter::class,
+            CityEntityFileSchema::NAME => StringFieldConverter::class,
         ];
     }
 
     public function getFieldSpecificationsMap(): array
     {
         return [
-            CityFileSchema::ID => [ImportableEntityConfig::OBJECT => IdSpecification::class],
+            CityEntityFileSchema::ID => [ImportableEntityConfig::OBJECT => IdSpecification::class],
 
-            CityFileSchema::NAME => [
+            CityEntityFileSchema::NAME => [
                 ImportableEntityConfig::OBJECT => StringSpecification::class,
                 ImportableEntityConfig::PARAMS => [
                     StringSpecification::PARAM_MIN => CityConstraints::NAME_MIN,
