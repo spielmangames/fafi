@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace FAFI\src\BE\ImEx\Transformer\Specification\Entity;
 
 use FAFI\src\BE\Domain\Dto\Player\Position\Position;
-use FAFI\src\BE\ImEx\Persistence\Client\PositionClient;
+use FAFI\src\BE\ImEx\Clients\PositionClient;
 use FAFI\src\BE\ImEx\Persistence\Hydrator\PositionHydrator;
 use FAFI\src\BE\ImEx\Transformer\Field\Typical\IntegerFieldTransformer;
 use FAFI\src\BE\ImEx\Transformer\Field\Typical\StringFieldTransformer;

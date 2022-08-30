@@ -20,7 +20,7 @@ class CityHydrator implements EntityHydratorInterface
         return $country;
     }
 
-    public function extract(City $entity): array
+    public function dehydrate(City $entity): array
     {
         return [
             CityFileSchema::ID => $entity->getId(),

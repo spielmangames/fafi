@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace FAFI\src\BE\ImEx\Transformer\Specification\Entity;
 
 use FAFI\src\BE\Domain\Dto\Player\Player\Player;
-use FAFI\src\BE\ImEx\Persistence\Client\PlayerAttributeClient;
-use FAFI\src\BE\ImEx\Persistence\Client\PlayerClient;
+use FAFI\src\BE\ImEx\Clients\PlayerAttributeClient;
+use FAFI\src\BE\ImEx\Clients\PlayerClient;
 use FAFI\src\BE\ImEx\Persistence\Hydrator\PlayerAttributeHydrator;
 use FAFI\src\BE\ImEx\Persistence\Hydrator\PlayerHydrator;
 use FAFI\src\BE\ImEx\Transformer\Field\Player\PlayerAttributesFieldTransformer;
@@ -16,9 +16,9 @@ use FAFI\src\BE\ImEx\Transformer\Field\Typical\StringFieldTransformer;
 use FAFI\src\BE\ImEx\Transformer\Schema\File\PlayerFileSchema;
 use FAFI\src\BE\ImEx\Transformer\Specification\Field\Player\PlayerAttributesSpecification;
 use FAFI\src\BE\ImEx\Transformer\Specification\Field\Typical\BooleanSpecification;
+use FAFI\src\BE\ImEx\Transformer\Specification\Field\Typical\EnumSpecification;
 use FAFI\src\BE\ImEx\Transformer\Specification\Field\Typical\IdSpecification;
 use FAFI\src\BE\ImEx\Transformer\Specification\Field\Typical\IntegerSpecification;
-use FAFI\src\BE\ImEx\Transformer\Specification\Field\Typical\EnumSpecification;
 use FAFI\src\BE\ImEx\Transformer\Specification\Field\Typical\StringSpecification;
 
 class PlayerConfig implements ImportableEntityConfig

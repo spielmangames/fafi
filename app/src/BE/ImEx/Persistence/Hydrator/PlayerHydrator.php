@@ -40,7 +40,7 @@ class PlayerHydrator implements EntityHydratorInterface
     }
 
 
-    public function extract(Player $entity): array
+    public function dehydrate(Player $entity): array
     {
         return [
             PlayerFileSchema::ID => $entity->getId(),

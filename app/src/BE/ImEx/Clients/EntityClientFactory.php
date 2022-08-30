@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace FAFI\src\BE\ImEx\Persistence\Client;
+namespace FAFI\src\BE\ImEx\Clients;
 
 use FAFI\exception\FafiException;
 
@@ -19,6 +19,8 @@ class EntityClientFactory
         switch ($class) {
             case CountryClient::class:
                 return new CountryClient();
+            case CityClient::class:
+                return new CityClient();
 
             case PositionClient::class:
                 return new PositionClient();

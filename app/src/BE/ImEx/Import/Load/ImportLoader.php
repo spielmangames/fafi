@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace FAFI\src\BE\ImEx\Import\Load;
 
 use FAFI\exception\FafiException;
-use FAFI\src\BE\ImEx\Persistence\Client\EntityClientFactory;
-use FAFI\src\BE\ImEx\Persistence\Client\EntityClientInterface;
+use FAFI\src\BE\ImEx\Clients\EntityClientFactory;
+use FAFI\src\BE\ImEx\Clients\EntityClientInterface;
 use FAFI\src\BE\ImEx\Persistence\Hydrator\EntityHydratorFactory;
 use FAFI\src\BE\ImEx\Persistence\Hydrator\EntityHydratorInterface;
 use FAFI\src\BE\ImEx\Transformer\Schema\File\AbstractFileSchema;
@@ -76,7 +76,7 @@ class ImportLoader
     /**
      * @param ImportableEntityConfig $entitySpecification
      *
-     * @return EntityClientInterface[]
+     * @return \FAFI\src\BE\ImEx\Clients\EntityClientInterface[]
      * @throws FafiException
      */
     private function buildSubResourceClients(ImportableEntityConfig $entitySpecification): array

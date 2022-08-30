@@ -41,7 +41,7 @@ class PlayerAttributeHydrator implements EntityHydratorInterface
         return $attribute;
     }
 
-    public function extract(PlayerAttribute $entity): array
+    public function dehydrate(PlayerAttribute $entity): array
     {
         return [
             PlayerAttributeResource::ID_FIELD => $entity->getId(),

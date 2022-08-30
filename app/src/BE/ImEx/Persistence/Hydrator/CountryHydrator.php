@@ -21,7 +21,7 @@ class CountryHydrator implements EntityHydratorInterface
         return $country;
     }
 
-    public function extract(Country $entity): array
+    public function dehydrate(Country $entity): array
     {
         return [
             CountryFileSchema::ID => $entity->getId(),

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace FAFI\src\BE\ImEx\Persistence\Client;
+namespace FAFI\src\BE\ImEx\Clients;
 
 use FAFI\src\BE\Domain\Dto\Geo\City\City;
 use FAFI\src\BE\Domain\Service\GeoService;

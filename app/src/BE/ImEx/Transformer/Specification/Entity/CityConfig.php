@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace FAFI\src\BE\ImEx\Transformer\Specification\Entity;
 
-use FAFI\src\BE\ImEx\Persistence\Client\CountryClient;
+use FAFI\src\BE\ImEx\Clients\CountryClient;
 use FAFI\src\BE\ImEx\Persistence\Hydrator\CountryHydrator;
 use FAFI\src\BE\ImEx\Transformer\Field\Typical\IntegerFieldTransformer;
 use FAFI\src\BE\ImEx\Transformer\Field\Typical\StringFieldTransformer;

@@ -19,6 +19,8 @@ class EntityHydratorFactory
         switch ($class) {
             case CountryHydrator::class:
                 return new CountryHydrator();
+            case CityHydrator::class:
+                return new CityHydrator();
 
             case PositionHydrator::class:
                 return new PositionHydrator();

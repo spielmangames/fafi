@@ -20,7 +20,7 @@ class PositionHydrator implements EntityHydratorInterface
         return $position;
     }
 
-    public function extract(Position $entity): array
+    public function dehydrate(Position $entity): array
     {
         return [
             PositionFileSchema::ID => $entity->getId(),
