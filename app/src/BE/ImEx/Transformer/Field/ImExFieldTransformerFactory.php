@@ -15,10 +15,10 @@ class ImExFieldTransformerFactory
     /**
      * @param string $class
      *
-     * @return ImExFieldTransformer
+     * @return ImportFieldTransformer
      * @throws FafiException
      */
-    public function create(string $class): ImExFieldTransformer
+    public function create(string $class): ImportFieldTransformer
     {
         switch ($class) {
             case BooleanFieldTransformer::class:

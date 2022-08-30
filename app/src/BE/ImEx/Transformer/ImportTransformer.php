@@ -6,7 +6,7 @@ namespace FAFI\src\BE\ImEx\Transformer;
 
 use FAFI\exception\FafiException;
 use FAFI\exception\ImExErr;
-use FAFI\src\BE\ImEx\Transformer\Field\ImExFieldTransformer;
+use FAFI\src\BE\ImEx\Transformer\Field\ImportFieldTransformer;
 use FAFI\src\BE\ImEx\Transformer\Field\ImExFieldTransformerFactory;
 use FAFI\src\BE\ImEx\Transformer\Specification\Entity\ImportableEntityConfig;
 use FAFI\src\BE\ImEx\Transformer\Specification\Field\FieldSpecification;
@@ -82,10 +82,10 @@ class ImportTransformer
      * @param ImportableEntityConfig $entityConfig
      * @param string $field
      *
-     * @return ImExFieldTransformer
+     * @return ImportFieldTransformer
      * @throws FafiException
      */
-    private function prepareFieldTransformer(ImportableEntityConfig $entityConfig, string $field): ImExFieldTransformer
+    private function prepareFieldTransformer(ImportableEntityConfig $entityConfig, string $field): ImportFieldTransformer
     {
         $entity = $entityConfig->getEntityName();
         $fieldTransformersMap = $entityConfig->getFieldTransformersMap();

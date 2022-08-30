@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace FAFI\src\BE\ImEx\Import;
+namespace FAFI\src\BE\ImEx\Import\Load;
 
 use FAFI\exception\FafiException;
 use FAFI\src\BE\ImEx\Persistence\Client\EntityClientFactory;
