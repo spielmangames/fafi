@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace FAFI\src\BE\ImEx\Persistence\Hydrator;
+namespace FAFI\src\BE\ImEx\Hydrator;
 
 use FAFI\exception\FafiException;
 

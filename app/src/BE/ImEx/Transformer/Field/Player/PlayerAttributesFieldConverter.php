@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace FAFI\src\BE\ImEx\Transformer\Field\Player;
 
-use FAFI\src\BE\ImEx\Transformer\Field\ImportFieldTransformer;
+use FAFI\src\BE\ImEx\Transformer\Field\ImportFieldConverter;
 use FAFI\src\BE\ImEx\Transformer\Specification\Field\Player\PlayerAttributesSpecification;
 
-class PlayerAttributesFieldTransformer implements ImportFieldTransformer
+class PlayerAttributesFieldConverter implements ImportFieldConverter
 {
     public function fromStr(string $property, string $value)
     {

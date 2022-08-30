@@ -6,9 +6,9 @@ namespace FAFI\src\BE\ImEx\Transformer\Specification\Entity;
 
 use FAFI\src\BE\Domain\Dto\Player\Position\Position;
 use FAFI\src\BE\ImEx\Clients\PositionClient;
-use FAFI\src\BE\ImEx\Persistence\Hydrator\PositionHydrator;
-use FAFI\src\BE\ImEx\Transformer\Field\Typical\IntegerFieldTransformer;
-use FAFI\src\BE\ImEx\Transformer\Field\Typical\StringFieldTransformer;
+use FAFI\src\BE\ImEx\Hydrator\PositionHydrator;
+use FAFI\src\BE\ImEx\Transformer\Field\Typical\IntegerFieldConverter;
+use FAFI\src\BE\ImEx\Transformer\Field\Typical\StringFieldConverter;
 use FAFI\src\BE\ImEx\Transformer\Schema\File\PositionFileSchema;
 use FAFI\src\BE\ImEx\Transformer\Specification\Field\Typical\IdSpecification;
 use FAFI\src\BE\ImEx\Transformer\Specification\Field\Typical\StringSpecification;
@@ -28,12 +28,12 @@ class PositionConfig implements ImportableEntityConfig
         ];
     }
 
-    public function getFieldTransformersMap(): array
+    public function getFieldConvertersMap(): array
     {
         return [
-            PositionFileSchema::ID => IntegerFieldTransformer::class,
+            PositionFileSchema::ID => IntegerFieldConverter::class,
 
-            PositionFileSchema::NAME => StringFieldTransformer::class,
+            PositionFileSchema::NAME => StringFieldConverter::class,
         ];
     }
 
@@ -49,7 +49,6 @@ class PositionConfig implements ImportableEntityConfig
         ];
     }
 
-
     public function getResourceHydrator(): string
     {
         return PositionHydrator::class;
@@ -59,6 +58,7 @@ class PositionConfig implements ImportableEntityConfig
     {
         return [];
     }
+
 
     public function getResourceLoader(): string
     {

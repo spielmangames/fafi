@@ -6,8 +6,8 @@ namespace FAFI\src\BE\ImEx\Transformer;
 
 use FAFI\exception\FafiException;
 use FAFI\exception\ImExErr;
-use FAFI\src\BE\ImEx\Transformer\Field\ImportFieldTransformer;
-use FAFI\src\BE\ImEx\Transformer\Field\ImExFieldTransformerFactory;
+use FAFI\src\BE\ImEx\Transformer\Field\ImportFieldConverter;
+use FAFI\src\BE\ImEx\Transformer\Field\ImExFieldConverterFactory;
 use FAFI\src\BE\ImEx\Transformer\Specification\Entity\ImportableEntityConfig;
 use FAFI\src\BE\ImEx\Transformer\Specification\Field\FieldSpecification;
 use FAFI\src\BE\ImEx\Transformer\Specification\Field\FieldSpecificationFactory;
@@ -17,13 +17,13 @@ class ImportTransformer
     private int $line;
 
     private ImportEntityValidator $entityValidator;
-    private ImExFieldTransformerFactory $fieldTransformerFactory;
+    private ImExFieldConverterFactory $fieldTransformerFactory;
     private FieldSpecificationFactory $fieldSpecificationFactory;
 
     public function __construct()
     {
         $this->entityValidator = new ImportEntityValidator();
-        $this->fieldTransformerFactory = new ImExFieldTransformerFactory();
+        $this->fieldTransformerFactory = new ImExFieldConverterFactory();
         $this->fieldSpecificationFactory = new FieldSpecificationFactory();
     }
 
@@ -82,13 +82,13 @@ class ImportTransformer
      * @param ImportableEntityConfig $entityConfig
      * @param string $field
      *
-     * @return ImportFieldTransformer
+     * @return ImportFieldConverter
      * @throws FafiException
      */
-    private function prepareFieldTransformer(ImportableEntityConfig $entityConfig, string $field): ImportFieldTransformer
+    private function prepareFieldTransformer(ImportableEntityConfig $entityConfig, string $field): ImportFieldConverter
     {
         $entity = $entityConfig->getEntityName();
-        $fieldTransformersMap = $entityConfig->getFieldTransformersMap();
+        $fieldTransformersMap = $entityConfig->getFieldConvertersMap();
 
         if (!isset($fieldTransformersMap[$field])) {
            $this->fail(sprintf(ImExErr::IMPORT_ENTITY_FIELD_TRANSFORMER_ABSENT, $field, $entity));

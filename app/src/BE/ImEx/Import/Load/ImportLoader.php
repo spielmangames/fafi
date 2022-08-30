@@ -7,8 +7,8 @@ namespace FAFI\src\BE\ImEx\Import\Load;
 use FAFI\exception\FafiException;
 use FAFI\src\BE\ImEx\Clients\EntityClientFactory;
 use FAFI\src\BE\ImEx\Clients\EntityClientInterface;
-use FAFI\src\BE\ImEx\Persistence\Hydrator\EntityHydratorFactory;
-use FAFI\src\BE\ImEx\Persistence\Hydrator\EntityHydratorInterface;
+use FAFI\src\BE\ImEx\Hydrator\EntityHydratorFactory;
+use FAFI\src\BE\ImEx\Hydrator\EntityHydratorInterface;
 use FAFI\src\BE\ImEx\Transformer\Schema\File\AbstractFileSchema;
 use FAFI\src\BE\ImEx\Transformer\Specification\Entity\ImportableEntityConfig;
 

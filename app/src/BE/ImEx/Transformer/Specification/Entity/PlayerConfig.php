@@ -7,12 +7,12 @@ namespace FAFI\src\BE\ImEx\Transformer\Specification\Entity;
 use FAFI\src\BE\Domain\Dto\Player\Player\Player;
 use FAFI\src\BE\ImEx\Clients\PlayerAttributeClient;
 use FAFI\src\BE\ImEx\Clients\PlayerClient;
-use FAFI\src\BE\ImEx\Persistence\Hydrator\PlayerAttributeHydrator;
-use FAFI\src\BE\ImEx\Persistence\Hydrator\PlayerHydrator;
-use FAFI\src\BE\ImEx\Transformer\Field\Player\PlayerAttributesFieldTransformer;
-use FAFI\src\BE\ImEx\Transformer\Field\Typical\BooleanFieldTransformer;
-use FAFI\src\BE\ImEx\Transformer\Field\Typical\IntegerFieldTransformer;
-use FAFI\src\BE\ImEx\Transformer\Field\Typical\StringFieldTransformer;
+use FAFI\src\BE\ImEx\Hydrator\PlayerAttributeHydrator;
+use FAFI\src\BE\ImEx\Hydrator\PlayerHydrator;
+use FAFI\src\BE\ImEx\Transformer\Field\Player\PlayerAttributesFieldConverter;
+use FAFI\src\BE\ImEx\Transformer\Field\Typical\BooleanFieldConverter;
+use FAFI\src\BE\ImEx\Transformer\Field\Typical\IntegerFieldConverter;
+use FAFI\src\BE\ImEx\Transformer\Field\Typical\StringFieldConverter;
 use FAFI\src\BE\ImEx\Transformer\Schema\File\PlayerFileSchema;
 use FAFI\src\BE\ImEx\Transformer\Specification\Field\Player\PlayerAttributesSpecification;
 use FAFI\src\BE\ImEx\Transformer\Specification\Field\Typical\BooleanSpecification;
@@ -39,21 +39,21 @@ class PlayerConfig implements ImportableEntityConfig
         ];
     }
 
-    public function getFieldTransformersMap(): array
+    public function getFieldConvertersMap(): array
     {
         return [
-            PlayerFileSchema::ID => IntegerFieldTransformer::class,
+            PlayerFileSchema::ID => IntegerFieldConverter::class,
 
-            PlayerFileSchema::NAME => StringFieldTransformer::class,
-            PlayerFileSchema::PARTICLE => StringFieldTransformer::class,
-            PlayerFileSchema::SURNAME => StringFieldTransformer::class,
-            PlayerFileSchema::FAFI_SURNAME => StringFieldTransformer::class,
+            PlayerFileSchema::NAME => StringFieldConverter::class,
+            PlayerFileSchema::PARTICLE => StringFieldConverter::class,
+            PlayerFileSchema::SURNAME => StringFieldConverter::class,
+            PlayerFileSchema::FAFI_SURNAME => StringFieldConverter::class,
 
-            PlayerFileSchema::HEIGHT => IntegerFieldTransformer::class,
-            PlayerFileSchema::FOOT => StringFieldTransformer::class,
-            PlayerFileSchema::INJURE_FACTOR => BooleanFieldTransformer::class,
+            PlayerFileSchema::HEIGHT => IntegerFieldConverter::class,
+            PlayerFileSchema::FOOT => StringFieldConverter::class,
+            PlayerFileSchema::INJURE_FACTOR => BooleanFieldConverter::class,
 
-            PlayerFileSchema::ATTRIBUTES => PlayerAttributesFieldTransformer::class,
+            PlayerFileSchema::ATTRIBUTES => PlayerAttributesFieldConverter::class,
         ];
     }
 
@@ -100,7 +100,6 @@ class PlayerConfig implements ImportableEntityConfig
         ];
     }
 
-
     public function getResourceHydrator(): string
     {
         return PlayerHydrator::class;
@@ -112,6 +111,7 @@ class PlayerConfig implements ImportableEntityConfig
             PlayerFileSchema::ATTRIBUTES => PlayerAttributeHydrator::class,
         ];
     }
+
 
     public function getResourceLoader(): string
     {

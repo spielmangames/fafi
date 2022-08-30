@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace FAFI\src\BE\ImEx\Transformer\Specification\Entity;
 
+use FAFI\src\BE\Domain\Dto\Geo\City\City;
+use FAFI\src\BE\Domain\Dto\Geo\City\CityConstraints;
 use FAFI\src\BE\ImEx\Clients\CountryClient;
-use FAFI\src\BE\ImEx\Persistence\Hydrator\CountryHydrator;
-use FAFI\src\BE\ImEx\Transformer\Field\Typical\IntegerFieldTransformer;
-use FAFI\src\BE\ImEx\Transformer\Field\Typical\StringFieldTransformer;
+use FAFI\src\BE\ImEx\Hydrator\CountryHydrator;
+use FAFI\src\BE\ImEx\Transformer\Field\Typical\IntegerFieldConverter;
+use FAFI\src\BE\ImEx\Transformer\Field\Typical\StringFieldConverter;
 use FAFI\src\BE\ImEx\Transformer\Schema\File\CityFileSchema;
 use FAFI\src\BE\ImEx\Transformer\Specification\Field\Typical\IdSpecification;
 use FAFI\src\BE\ImEx\Transformer\Specification\Field\Typical\StringSpecification;
@@ -27,12 +29,12 @@ class CityConfig implements ImportableEntityConfig
         ];
     }
 
-    public function getFieldTransformersMap(): array
+    public function getFieldConvertersMap(): array
     {
         return [
-            CityFileSchema::ID => IntegerFieldTransformer::class,
+            CityFileSchema::ID => IntegerFieldConverter::class,
 
-            CityFileSchema::NAME => StringFieldTransformer::class,
+            CityFileSchema::NAME => StringFieldConverter::class,
         ];
     }
 
@@ -43,11 +45,13 @@ class CityConfig implements ImportableEntityConfig
 
             CityFileSchema::NAME => [
                 ImportableEntityConfig::OBJECT => StringSpecification::class,
-                ImportableEntityConfig::PARAMS => []
+                ImportableEntityConfig::PARAMS => [
+                    StringSpecification::PARAM_MIN => CityConstraints::NAME_MIN,
+                    StringSpecification::PARAM_MAX => CityConstraints::NAME_MAX
+                ]
             ],
         ];
     }
-
 
     public function getResourceHydrator(): string
     {
@@ -58,6 +62,7 @@ class CityConfig implements ImportableEntityConfig
     {
         return [];
     }
+
 
     public function getResourceLoader(): string
     {

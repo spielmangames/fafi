@@ -7,9 +7,9 @@ namespace FAFI\src\BE\ImEx\Transformer\Specification\Entity;
 use FAFI\src\BE\Domain\Dto\Geo\Country\Country;
 use FAFI\src\BE\Domain\Dto\Geo\Country\CountryConstraints;
 use FAFI\src\BE\ImEx\Clients\CountryClient;
-use FAFI\src\BE\ImEx\Persistence\Hydrator\CountryHydrator;
-use FAFI\src\BE\ImEx\Transformer\Field\Typical\IntegerFieldTransformer;
-use FAFI\src\BE\ImEx\Transformer\Field\Typical\StringFieldTransformer;
+use FAFI\src\BE\ImEx\Hydrator\CountryHydrator;
+use FAFI\src\BE\ImEx\Transformer\Field\Typical\IntegerFieldConverter;
+use FAFI\src\BE\ImEx\Transformer\Field\Typical\StringFieldConverter;
 use FAFI\src\BE\ImEx\Transformer\Schema\File\CountryFileSchema;
 use FAFI\src\BE\ImEx\Transformer\Specification\Field\Typical\EnumSpecification;
 use FAFI\src\BE\ImEx\Transformer\Specification\Field\Typical\IdSpecification;
@@ -31,13 +31,13 @@ class CountryConfig implements ImportableEntityConfig
         ];
     }
 
-    public function getFieldTransformersMap(): array
+    public function getFieldConvertersMap(): array
     {
         return [
-            CountryFileSchema::ID => IntegerFieldTransformer::class,
+            CountryFileSchema::ID => IntegerFieldConverter::class,
 
-            CountryFileSchema::NAME => StringFieldTransformer::class,
-            CountryFileSchema::CONTINENT => StringFieldTransformer::class,
+            CountryFileSchema::NAME => StringFieldConverter::class,
+            CountryFileSchema::CONTINENT => StringFieldConverter::class,
         ];
     }
 
@@ -62,7 +62,6 @@ class CountryConfig implements ImportableEntityConfig
         ];
     }
 
-
     public function getResourceHydrator(): string
     {
         return CountryHydrator::class;
@@ -72,6 +71,7 @@ class CountryConfig implements ImportableEntityConfig
     {
         return [];
     }
+
 
     public function getResourceLoader(): string
     {
