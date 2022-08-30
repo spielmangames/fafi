@@ -28,6 +28,7 @@ class CityHydrator
         $city = new City();
 
         !isset($data[CityResource::ID_FIELD]) ?: $city->setId($data[CityResource::ID_FIELD]);
+
         !isset($data[CityResource::NAME_FIELD]) ?: $city->setName($data[CityResource::NAME_FIELD]);
 
         return $city;

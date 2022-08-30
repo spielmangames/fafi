@@ -16,6 +16,7 @@ class CountryHydrator implements EntityHydratorInterface
         !isset($data[CountryFileSchema::ID]) ?: $country->setId($data[CountryFileSchema::ID]);
 
         !isset($data[CountryFileSchema::NAME]) ?: $country->setName($data[CountryFileSchema::NAME]);
+        !isset($data[CountryFileSchema::CONTINENT]) ?: $country->setContinent($data[CountryFileSchema::CONTINENT]);
 
         return $country;
     }
@@ -26,6 +27,7 @@ class CountryHydrator implements EntityHydratorInterface
             CountryFileSchema::ID => $entity->getId(),
 
             CountryFileSchema::NAME => $entity->getName(),
+            CountryFileSchema::CONTINENT => $entity->getContinent(),
         ];
     }
 }

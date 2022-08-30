@@ -28,6 +28,7 @@ class CountryHydrator
         $country = new Country();
 
         !isset($data[CountryResource::ID_FIELD]) ?: $country->setId($data[CountryResource::ID_FIELD]);
+
         !isset($data[CountryResource::NAME_FIELD]) ?: $country->setName($data[CountryResource::NAME_FIELD]);
         !isset($data[CountryResource::CONTINENT_FIELD]) ?: $country->setContinent($data[CountryResource::CONTINENT_FIELD]);
 
