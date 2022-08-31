@@ -6,20 +6,33 @@ namespace FAFI\src\BE\Domain\Dto\Player\Player;
 
 trait PlayerDataHelper
 {
-    public function buildPlayerFullName(): string
+    public function buildFullName(bool $initials = false): string
     {
-        $fullName = [];
+        $result = [];
 
         $name = $this->getName();
         if ($name) {
-            $fullName[] = $name;
+            if ($initials) {
+                $name = $name[0] . '.';
+            }
+            $result[] = $name;
         }
+        $result[] = $this->buildSurnameWithParticle();
+
+        $delimiter = $initials ? '' : ' ';
+        return implode($delimiter, $result);
+    }
+
+    public function buildSurnameWithParticle(): string
+    {
+        $result = [];
+
         $particle = $this->getParticle();
         if ($particle) {
-            $fullName[] = $particle;
+            $result[] = $particle;
         }
-        $fullName[] = $this->getSurname();
+        $result[] = $this->getSurname();
 
-        return implode(' ', $fullName);
+        return implode(' ', $result);
     }
 }
