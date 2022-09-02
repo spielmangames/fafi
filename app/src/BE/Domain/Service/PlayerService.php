@@ -89,20 +89,38 @@ class PlayerService
      * @return Player
      * @throws FafiException
      */
-    public function savePlayer(Player $player): Player
+    public function savePlayerComposite(Player $player): Player
     {
         $attributesToSave = $player->getAttributes();
 
-        $player = $this->playerRepository->save($player);
+        $this->savePlayer($player);
 
-        $attributes = [];
         if (!is_null($attributesToSave)) {
-            foreach($attributesToSave as $attributeToSave) {
-                $attributes[] = $this->playerAttributeRepository->save($attributeToSave);
-            }
-            $player->setAttributes($attributes);
+            $player->setAttributes($this->savePlayerAttributes($attributesToSave));
         }
 
         return $player;
+    }
+
+    /**
+     * @param Player $player
+     *
+     * @return Player
+     * @throws FafiException
+     */
+    public function savePlayer(Player $player): Player
+    {
+        return $this->playerRepository->save($player);
+    }
+
+    public function savePlayerAttributes(array $attributesToSave): array
+    {
+        $attributes = [];
+
+        foreach($attributesToSave as $attributeToSave) {
+            $attributes[] = $this->playerAttributeRepository->save($attributeToSave);
+        }
+
+        return $attributes;
     }
 }

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace FAFI\src\BE\ImEx\Transformer\Specification\Entity;
 
 use FAFI\src\BE\Domain\Dto\Player\Player\Player;
+use FAFI\src\BE\Domain\Dto\Player\Player\PlayerConstraints;
 use FAFI\src\BE\ImEx\Clients\PlayerAttributeClient;
 use FAFI\src\BE\ImEx\Clients\PlayerClient;
 use FAFI\src\BE\ImEx\Hydrator\PlayerAttributeHydrator;
@@ -64,33 +65,47 @@ class PlayerConfig implements ImportableEntityConfig
 
             PlayerEntityFileSchema::NAME => [
                 ImportableEntityConfig::OBJECT => StringSpecification::class,
-                ImportableEntityConfig::PARAMS => []
+                ImportableEntityConfig::PARAMS => [
+                    StringSpecification::PARAM_MIN => PlayerConstraints::NAME_MIN,
+                    StringSpecification::PARAM_MAX => PlayerConstraints::NAME_MAX
+                ]
             ],
             PlayerEntityFileSchema::PARTICLE => [
                 ImportableEntityConfig::OBJECT => StringSpecification::class,
-                ImportableEntityConfig::PARAMS => []
+                ImportableEntityConfig::PARAMS => [
+                    StringSpecification::PARAM_MIN => PlayerConstraints::PARTICLE_MIN,
+                    StringSpecification::PARAM_MAX => PlayerConstraints::PARTICLE_MAX
+                ]
             ],
             PlayerEntityFileSchema::SURNAME => [
                 ImportableEntityConfig::OBJECT => StringSpecification::class,
-                ImportableEntityConfig::PARAMS => []
+                ImportableEntityConfig::PARAMS => [
+                    StringSpecification::PARAM_MIN => PlayerConstraints::SURNAME_MIN,
+                    StringSpecification::PARAM_MAX => PlayerConstraints::SURNAME_MAX
+                ]
             ],
             PlayerEntityFileSchema::FAFI_SURNAME => [
                 ImportableEntityConfig::OBJECT => StringSpecification::class,
-                ImportableEntityConfig::PARAMS => []
+                ImportableEntityConfig::PARAMS => [
+                    StringSpecification::PARAM_MIN => PlayerConstraints::FAFI_SURNAME_MIN,
+                    StringSpecification::PARAM_MAX => PlayerConstraints::FAFI_SURNAME_MAX
+                ]
             ],
 
             PlayerEntityFileSchema::HEIGHT => [
                 ImportableEntityConfig::OBJECT => IntegerSpecification::class,
-                ImportableEntityConfig::PARAMS => []
+                ImportableEntityConfig::PARAMS => [
+                    IntegerSpecification::PARAM_MIN => PlayerConstraints::HEIGHT_MIN,
+                    IntegerSpecification::PARAM_MAX => PlayerConstraints::HEIGHT_MAX
+                ]
             ],
             PlayerEntityFileSchema::FOOT => [
                 ImportableEntityConfig::OBJECT => EnumSpecification::class,
-                ImportableEntityConfig::PARAMS => []
+                ImportableEntityConfig::PARAMS => [
+                    EnumSpecification::PARAM_SUPPORTED => PlayerConstraints::FOOT_SUPPORTED
+                ]
             ],
-            PlayerEntityFileSchema::INJURE_FACTOR => [
-                ImportableEntityConfig::OBJECT => BooleanSpecification::class,
-                ImportableEntityConfig::PARAMS => []
-            ],
+            PlayerEntityFileSchema::INJURE_FACTOR => [ImportableEntityConfig::OBJECT => BooleanSpecification::class],
 
 
             PlayerEntityFileSchema::ATTRIBUTES => [
