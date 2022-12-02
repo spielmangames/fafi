@@ -4,7 +4,7 @@
 
 ### Позиції
 * польові гравці можуть мати декілька позицій
-  * к-ть позицій у гравця обмежено налаштуванням `player/positions_qty_max`
+  * к-ть позицій у гравця обмежено налаштуванням `S::player/positions_qty_max`
   * польові гравці не можуть стоять на воротах
   * воротник не може грати в полі
 * вміння гравця на певній позиції представлено тактичними атрибутами
@@ -17,7 +17,7 @@
     attack_min ~ attack_max
     defence_min ~ defence_max
   ```
-* к-ть тактичних очок гравця обмежено налаштуванням `player/attribute_value_max`; для легендарного обмежено налаштуванням `player/attribute_value_legend_max`:
+* к-ть тактичних очок гравця обмежено налаштуванням `S::player/attribute_value_max`; для легендарного обмежено налаштуванням `S::player/attribute_value_legend_max`:
   ```
     if (player->isLegend()) {
       limit = attribute_value_legend_max
