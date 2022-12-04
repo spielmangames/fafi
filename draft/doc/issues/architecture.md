@@ -16,6 +16,7 @@ Should Domain Entity model contain the SubEntity models in response?
 > FAFI-003
 
 PUT only? PATCH only? support both???
+How to set Entity field to null?
 
 
 
