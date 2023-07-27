@@ -7,8 +7,8 @@
 
 
 
-- [IN_PROGRESS] [Тренування](./training.md)
-- [IN_PROGRESS] [Матч](./match.md)
+- `IN_PROGRESS...` [Тренування](./training.md)
+- `IN_PROGRESS...` [Матч](./match.md)
 
 
 
@@ -16,5 +16,5 @@
 
 
 
-- [IN_PROGRESS] [Настольний комплект](./board_complect.md)
+- [Настольний комплект](./board_complect.md)
 
