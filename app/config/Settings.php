@@ -24,6 +24,7 @@ class Settings
 
     /**
      * @param string $key
+     *
      * @return string|array|null
      */
     public function get(string $key)

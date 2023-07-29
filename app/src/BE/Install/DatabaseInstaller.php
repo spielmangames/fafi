@@ -34,10 +34,24 @@ class DatabaseInstaller
         $fileName = self::DB_SCHEMA_FILE_NAME;
         $filePath = PATH_APP . 'db' . DS . $fileName;
 
-        $this->fileValidator->validateFile($filePath, '.sql', self::DB_SCHEMA_FILE_SIZE_MAX);
+        $this->validateFile($filePath);
+
         if (!execSqlFile($filePath, $this->dbConnect->open(false))) {
             throw new FafiException(sprintf(FileErr::FILE_EXEC_FAILED, $fileName));
         }
         sleep(1);
+    }
+
+    /**
+     * @param string $filePath
+     *
+     * @return void
+     * @throws FafiException
+     */
+    private function validateFile(string $filePath): void
+    {
+        $this->fileValidator->validateFileAccessible($filePath);
+        $this->fileValidator->validateFileExtension($filePath, '.sql');
+        $this->fileValidator->validateFileSize($filePath, self::DB_SCHEMA_FILE_SIZE_MAX);
     }
 }

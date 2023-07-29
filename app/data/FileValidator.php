@@ -14,22 +14,40 @@ class FileValidator
 
     /**
      * @param string $filePath
+     *
+     * @return void
+     * @throws FafiException
+     */
+    public function validateFileAccessible(string $filePath): void
+    {
+        if (!isFileValid($filePath)) {
+            throw new FafiException(sprintf(FileErr::FILE_INVALID, $filePath));
+        }
+    }
+
+    /**
+     * @param string $filePath
      * @param string $expectedExt
+     *
+     * @return void
+     * @throws FafiException
+     */
+    public function validateFileExtension(string $filePath, string $expectedExt): void
+    {
+        if ('.' . getExt($filePath) !== $expectedExt) {
+            throw new FafiException(sprintf(FileErr::FILE_EXT_INVALID, $filePath));
+        }
+    }
+
+    /**
+     * @param string $filePath
      * @param int|null $maxSize
      *
      * @return void
      * @throws FafiException
      */
-    public function validateFile(string $filePath, string $expectedExt, ?int $maxSize = null): void
+    public function validateFileSize(string $filePath, ?int $maxSize = null): void
     {
-        if (!isFileValid($filePath)) {
-            throw new FafiException(sprintf(FileErr::FILE_INVALID, $filePath));
-        }
-
-        if ('.' . getExt($filePath) !== $expectedExt) {
-            throw new FafiException(sprintf(FileErr::FILE_EXT_INVALID, $filePath));
-        }
-
         if (isset($maxSize) && filesize($filePath) > ($maxSize * self::BYTES_IN_MEGABYTE)) {
             throw new FafiException(sprintf(FileErr::FILE_TOO_LARGE, $filePath));
         }

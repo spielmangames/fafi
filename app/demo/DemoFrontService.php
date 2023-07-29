@@ -37,7 +37,7 @@ class DemoFrontService
         $players = $this->playerRepo->findCollection([$condition]);
 
         foreach ($players as $player) {
-            $playerReadPage = $this->storefrontService->getPlayerReadPage($player);
+            $playerReadPage = $this->storefrontService->getPlayerReadPage($player->getId());
 
             foreach ($playerReadPage->getTabsList() as $tab) {
                 $content = $playerReadPage->setTabName($tab)->forPrint();

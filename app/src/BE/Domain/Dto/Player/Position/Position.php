@@ -11,50 +11,52 @@ class Position implements EntityInterface
     public const ENTITY = 'Position';
 
 
-    public const P_GK = 'GK';
+    public const GK = 'GK';
 
-    public const P_CB = 'CB';
-    public const P_RB = 'RB';
-    public const P_LB = 'LB';
-    public const P_WB = 'WB';
+    public const CB = 'CB';
 
-    public const P_DM = 'DM';
-    public const P_CM = 'CM';
-    public const P_AM = 'AM';
+    public const RB = 'RB';
+    public const LB = 'LB';
+    public const WB = 'WB';
 
-    public const P_RM = 'RM';
-    public const P_LM = 'LM';
-    public const P_WM = 'WM';
+    public const DM = 'DM';
+    public const CM = 'CM';
+    public const AM = 'AM';
 
-    public const P_RF = 'RF';
-    public const P_LF = 'LF';
-    public const P_WF = 'WF';
+    public const RM = 'RM';
+    public const LM = 'LM';
+    public const WM = 'WM';
 
-    public const P_SF = 'SF';
-    public const P_CF = 'CF';
+    public const RF = 'RF';
+    public const LF = 'LF';
+    public const WF = 'WF';
 
-    public const P_SUPPORTED = [
-        self::P_GK,
+    public const SF = 'SF';
+    public const CF = 'CF';
 
-        self::P_CB,
-        self::P_RB,
-        self::P_LB,
-        self::P_WB,
+    public const SUPPORTED = [
+        self::GK,
 
-        self::P_DM,
-        self::P_CM,
-        self::P_AM,
+        self::CB,
 
-        self::P_RM,
-        self::P_LM,
-        self::P_WM,
+        self::RB,
+        self::LB,
+        self::WB,
 
-        self::P_RF,
-        self::P_LF,
-        self::P_WF,
+        self::DM,
+        self::CM,
+        self::AM,
 
-        self::P_SF,
-        self::P_CF,
+        self::RM,
+        self::LM,
+        self::WM,
+
+        self::RF,
+        self::LF,
+        self::WF,
+
+        self::SF,
+        self::CF,
     ];
 
 

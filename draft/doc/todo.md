@@ -65,6 +65,7 @@
 - `F1` Multiplayer mode
 
 - `F3` Classic Players
+- `F3` Classic Teams
 - `F3` configurable gameplay
 
 - `F4` Fbase data versioning (keep players projections)

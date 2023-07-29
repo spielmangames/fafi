@@ -112,4 +112,6 @@ Several sequentially specified contexts form a chain of detailing queries. Be aw
 
 
 
+###### TODO
+Make sure that each `t`eam have equal qty of home & away `G`ames on wide ranges, e.g. 4-to-4 for 8-in-row `M`atchdays series inside a `L`ap.
 

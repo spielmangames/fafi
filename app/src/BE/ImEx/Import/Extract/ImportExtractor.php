@@ -32,10 +32,23 @@ class ImportExtractor
      */
     public function extract(string $filePath): array
     {
-        $this->fileValidator->validateFile($filePath, ImExService::FILE_EXT, self::IMPORT_FILE_SIZE_MAX);
+        $this->validateFile($filePath);
         $extracted = $this->fileHandler->read($filePath);
         $this->fileValidator->validateFileContentPresent($filePath, $extracted);
 
         return $extracted;
+    }
+
+    /**
+     * @param string $filePath
+     *
+     * @return void
+     * @throws FafiException
+     */
+    private function validateFile(string $filePath): void
+    {
+        $this->fileValidator->validateFileAccessible($filePath);
+        $this->fileValidator->validateFileExtension($filePath, ImExService::FILE_EXT);
+        $this->fileValidator->validateFileSize($filePath, self::IMPORT_FILE_SIZE_MAX);
     }
 }

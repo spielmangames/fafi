@@ -30,11 +30,26 @@ class DataInstaller
      */
     public function installSampleData(): void
     {
-        // geo
+        $this->installGeo();
+        $this->installPlayer();
+    }
+
+    /**
+     * @return void
+     * @throws FafiException
+     */
+    private function installGeo(): void
+    {
         $this->imExService->importCountries(self::SAMPLE_FILEPATH_COUNTRIES);
         $this->imExService->importCities(self::SAMPLE_FILEPATH_CITIES);
+    }
 
-        // player
+    /**
+     * @return void
+     * @throws FafiException
+     */
+    private function installPlayer(): void
+    {
         $this->imExService->importPositions(self::SAMPLE_FILEPATH_POSITIONS);
         $this->imExService->importPlayers(self::SAMPLE_FILEPATH_PLAYERS);
     }

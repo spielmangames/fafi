@@ -93,7 +93,7 @@ class PlayerService
     {
         $attributesToSave = $player->getAttributes();
 
-        $this->savePlayer($player);
+        $player = $this->savePlayer($player);
 
         if (!is_null($attributesToSave)) {
             $player->setAttributes($this->savePlayerAttributes($attributesToSave));
