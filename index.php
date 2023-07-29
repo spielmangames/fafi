@@ -4,13 +4,10 @@ require_once 'app/boot/bootstrap.php';
 require_once 'demo.php';
 
 use FAFI\FAFI;
+use FAFI\logs\Logger;
 
 
-echo EOL;
-echo('FAFI 2022: started.');
-echo EOL;
-
-
+Logger::logAppStart();
 $fafi = new FAFI();
 
 $fafi->installAppWithSample();
@@ -19,8 +16,4 @@ $fafi->installAppWithSample();
 //demoImport($fafi);
 //demoFront($fafi);
 
-
-echo EOL;
-echo('FAFI 2022: finished.');
-echo EOL;
-
+Logger::logAppFinish();
