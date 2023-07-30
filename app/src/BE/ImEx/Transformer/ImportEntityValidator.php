@@ -60,6 +60,7 @@ class ImportEntityValidator
     private function assertMandatory(int $line, array $entity, ImportableEntityConfig $entityConfig): void
     {
         $missed = [];
+
         foreach ($entityConfig->getMandatoryFieldsOnCreate() as $field) {
             if (!isset($entity[$field])) {
                 $missed[] = $field;
