@@ -16,6 +16,7 @@ class ImportTransformer
 {
     private int $line;
 
+
     private ImportEntityValidator $entityValidator;
     private ImExFieldConverterFactory $fieldTransformerFactory;
     private FieldSpecificationFactory $fieldSpecificationFactory;
@@ -51,7 +52,7 @@ class ImportTransformer
 
 
     /**
-     * @param array $entity
+     * @param string[] $entity
      * @param ImportableEntityConfig $entityConfig
      *
      * @return array
@@ -162,6 +163,7 @@ class ImportTransformer
      */
     private function fail(string $error): void
     {
-        throw new FafiException(FafiException::combine([sprintf(ImExErr::IMPORT_FAILED, $this->line), $error]));
+        $e = [sprintf(ImExErr::IMPORT_FAILED, $this->line), $error];
+        throw new FafiException(FafiException::combine($e));
     }
 }

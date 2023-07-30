@@ -15,7 +15,7 @@ class ImportEntityValidator
 {
     /**
      * @param int $line
-     * @param array $entity
+     * @param string[] $entity
      * @param ImportableEntityConfig $entityConfig
      *
      * @return void
@@ -30,7 +30,7 @@ class ImportEntityValidator
 
     /**
      * @param int $line
-     * @param array $entity
+     * @param string[] $entity
      * @param ImportableEntityConfig $entityConfig
      *
      * @return void
@@ -39,6 +39,7 @@ class ImportEntityValidator
     private function assertContentPresent(int $line, array $entity, ImportableEntityConfig $entityConfig): void
     {
         $reserved = [AbstractEntityFileSchema::ID];
+
         if (count($entity) <= count($reserved)) {
             $e = [
                 sprintf(ImExErr::IMPORT_FAILED, $line),
@@ -50,7 +51,7 @@ class ImportEntityValidator
 
     /**
      * @param int $line
-     * @param array $entity
+     * @param string[] $entity
      * @param ImportableEntityConfig $entityConfig
      *
      * @return void
