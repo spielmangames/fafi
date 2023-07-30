@@ -13,6 +13,9 @@ use FAFI\src\FE\Themes\ThemeFactory;
 
 class FAFI
 {
+    public const SUBJECT = 'FAFI 2023';
+
+
     // BE technical
     private InstallService $installService;
     private ImExService $imExService;

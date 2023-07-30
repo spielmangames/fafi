@@ -6,15 +6,15 @@ namespace FAFI\logs;
 
 class Logger
 {
-    public static function logAppStart(): void
+    public static function logStart(string $subject): void
     {
-        echo('FAFI 2023: started.');
+        echo($subject . LogAction::SAY . LogAction::START);
         echo EOL;
     }
 
-    public static function logAppFinish(): void
+    public static function logFinish(string $subject): void
     {
-        echo('FAFI 2023: finished.');
+        echo($subject . LogAction::SAY . LogAction::FINISH);
         echo EOL;
     }
 }

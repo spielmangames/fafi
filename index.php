@@ -7,7 +7,7 @@ use FAFI\FAFI;
 use FAFI\logs\Logger;
 
 
-Logger::logAppStart();
+Logger::logStart(FAFI::SUBJECT);
 $fafi = new FAFI();
 
 $fafi->installAppWithSample();
@@ -16,4 +16,4 @@ $fafi->installAppWithSample();
 //demoImport($fafi);
 //demoFront($fafi);
 
-Logger::logAppFinish();
+Logger::logFinish(FAFI::SUBJECT);
