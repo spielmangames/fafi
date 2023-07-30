@@ -8,6 +8,7 @@ use FAFI\data\CsvFileHandlerInterface;
 use FAFI\exception\FafiException;
 use FAFI\src\BE\ImEx\Import\Importer;
 use FAFI\src\BE\ImEx\Transformer\Specification\Entity\CityConfig;
+use FAFI\src\BE\ImEx\Transformer\Specification\Entity\ClubConfig;
 use FAFI\src\BE\ImEx\Transformer\Specification\Entity\CountryConfig;
 use FAFI\src\BE\ImEx\Transformer\Specification\Entity\PlayerConfig;
 use FAFI\src\BE\ImEx\Transformer\Specification\Entity\PositionConfig;
@@ -16,8 +17,10 @@ class ImExService
 {
     public const FILE_EXT = CsvFileHandlerInterface::FILE_EXT;
 
+
     private CountryConfig $countryImportConfig;
     private CityConfig $cityImportConfig;
+    private ClubConfig $clubImportConfig;
     private PositionConfig $positionImportConfig;
     private PlayerConfig $playerImportConfig;
 
@@ -27,6 +30,7 @@ class ImExService
     {
         $this->countryImportConfig = new CountryConfig();
         $this->cityImportConfig = new CityConfig();
+        $this->clubImportConfig = new ClubConfig();
         $this->positionImportConfig = new PositionConfig();
         $this->playerImportConfig = new PlayerConfig();
 
@@ -54,6 +58,17 @@ class ImExService
     public function importCities(string $filePath): void
     {
         $this->importer->import($filePath, $this->cityImportConfig);
+    }
+
+    /**
+     * @param string $filePath
+     *
+     * @return void
+     * @throws FafiException
+     */
+    public function importClubs(string $filePath): void
+    {
+        $this->importer->import($filePath, $this->clubImportConfig);
     }
 
     /**
