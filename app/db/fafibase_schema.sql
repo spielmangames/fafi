@@ -1,6 +1,6 @@
 
 #-----------------------------------------------------------------------------------------------------------------------
-# DB init [version=1.12]
+# DB init [version=1.13]
 #-----------------------------------------------------------------------------------------------------------------------
 
 
@@ -21,7 +21,7 @@ CREATE TABLE `_version` (
     `db_schema` VARCHAR(8) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
-INSERT INTO _version VALUES ('1.12');
+INSERT INTO _version VALUES ('1.13');
 
 
 
