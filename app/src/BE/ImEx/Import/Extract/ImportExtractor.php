@@ -47,7 +47,7 @@ class ImportExtractor
      */
     private function validateFile(string $filePath): void
     {
-        $this->fileValidator->validateFileAccessible($filePath);
+        $this->fileValidator->validateFileAccessibility($filePath);
         $this->fileValidator->validateFileExtension($filePath, ImExService::FILE_EXT);
         $this->fileValidator->validateFileSize($filePath, self::IMPORT_FILE_SIZE_MAX);
     }

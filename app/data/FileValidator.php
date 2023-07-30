@@ -18,7 +18,7 @@ class FileValidator
      * @return void
      * @throws FafiException
      */
-    public function validateFileAccessible(string $filePath): void
+    public function validateFileAccessibility(string $filePath): void
     {
         if (!isFileValid($filePath)) {
             throw new FafiException(sprintf(FileErr::FILE_INVALID, $filePath));
