@@ -27,14 +27,14 @@ class ImportExtractor
     /**
      * @param string $filePath
      *
-     * @return array
+     * @return string[][]
      * @throws FafiException
      */
     public function extract(string $filePath): array
     {
         $this->validateFile($filePath);
         $extracted = $this->fileHandler->read($filePath);
-        $this->fileValidator->validateFileContentPresent($filePath, $extracted);
+        $this->validateContent($filePath, $extracted);
 
         return $extracted;
     }
@@ -50,5 +50,17 @@ class ImportExtractor
         $this->fileValidator->validateFileAccessibility($filePath);
         $this->fileValidator->validateFileExtension($filePath, ImExService::FILE_EXT);
         $this->fileValidator->validateFileSize($filePath, self::IMPORT_FILE_SIZE_MAX);
+    }
+
+    /**
+     * @param string $filePath
+     * @param string[][] $content
+     *
+     * @return void
+     * @throws FafiException
+     */
+    private function validateContent(string $filePath, array $content): void
+    {
+        $this->fileValidator->validateFileContentPresent($filePath, $content);
     }
 }

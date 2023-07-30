@@ -29,7 +29,7 @@ class ImportTransformer
 
 
     /**
-     * @param array $entities
+     * @param string[][] $entities
      * @param ImportableEntityConfig $entityConfig
      *
      * @return array
