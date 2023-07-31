@@ -17,13 +17,11 @@ class ImportTransformer
     private int $line;
 
 
-    private ImportEntityValidator $entityValidator;
     private ImExFieldConverterFactory $fieldTransformerFactory;
     private FieldSpecificationFactory $fieldSpecificationFactory;
 
     public function __construct()
     {
-        $this->entityValidator = new ImportEntityValidator();
         $this->fieldTransformerFactory = new ImExFieldConverterFactory();
         $this->fieldSpecificationFactory = new FieldSpecificationFactory();
     }
@@ -42,8 +40,6 @@ class ImportTransformer
 
         foreach ($entities as $line => $entity) {
             $this->line = $line;
-
-            $this->entityValidator->validateEntity($line, $entity, $entityConfig);
             $transformed[$line] = $this->transformEntity($entity, $entityConfig);
         }
 

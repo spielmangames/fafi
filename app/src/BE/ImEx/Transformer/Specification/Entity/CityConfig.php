@@ -22,13 +22,6 @@ class CityConfig implements ImportableEntityConfig
     }
 
 
-    public function getMandatoryFieldsOnCreate(): array
-    {
-        return [
-            CityEntityFileSchema::NAME,
-        ];
-    }
-
     public function getFieldConvertersMap(): array
     {
         return [

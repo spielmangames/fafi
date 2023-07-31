@@ -14,8 +14,6 @@ interface ImportableEntityConfig
 
 
     /** @return string[] */
-    public function getMandatoryFieldsOnCreate(): array;
-    /** @return string[] */
     public function getFieldConvertersMap(): array;
     public function getFieldSpecificationsMap(): array;
     public function getResourceHydrator(): string;

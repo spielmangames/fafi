@@ -21,13 +21,6 @@ class PositionConfig implements ImportableEntityConfig
     }
 
 
-    public function getMandatoryFieldsOnCreate(): array
-    {
-        return [
-            PositionEntityFileSchema::NAME,
-        ];
-    }
-
     public function getFieldConvertersMap(): array
     {
         return [

@@ -23,14 +23,6 @@ class CountryConfig implements ImportableEntityConfig
     }
 
 
-    public function getMandatoryFieldsOnCreate(): array
-    {
-        return [
-            CountryEntityFileSchema::NAME,
-            CountryEntityFileSchema::CONTINENT,
-        ];
-    }
-
     public function getFieldConvertersMap(): array
     {
         return [

@@ -30,16 +30,6 @@ class PlayerConfig implements ImportableEntityConfig
     }
 
 
-    public function getMandatoryFieldsOnCreate(): array
-    {
-        return [
-            PlayerEntityFileSchema::SURNAME,
-            PlayerEntityFileSchema::FOOT,
-
-            PlayerEntityFileSchema::ATTRIBUTES,
-        ];
-    }
-
     public function getFieldConvertersMap(): array
     {
         return [
