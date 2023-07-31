@@ -1,0 +1,49 @@
+<?php
+
+declare(strict_types=1);
+
+namespace FAFI\src\BE\ImEx;
+
+use FAFI\exception\FafiException;
+use FAFI\src\BE\ImEx\Transformer\Specification\Entity\CityConfig;
+use FAFI\src\BE\ImEx\Transformer\Specification\Entity\ClubConfig;
+use FAFI\src\BE\ImEx\Transformer\Specification\Entity\CountryConfig;
+use FAFI\src\BE\ImEx\Transformer\Specification\Entity\ImportableEntityConfig;
+use FAFI\src\BE\ImEx\Transformer\Specification\Entity\ImportableEntityConfigFactory;
+use FAFI\src\BE\ImEx\Transformer\Specification\Entity\PlayerConfig;
+
+class ImportEntityConfigDetector
+{
+    private const MAP = [
+        ImExableEntities::COUNTRIES => CountryConfig::class,
+        ImExableEntities::CITIES => CityConfig::class,
+
+        ImExableEntities::CLUBS => ClubConfig::class,
+        ImExableEntities::POSITIONS => ClubConfig::class,
+
+        ImExableEntities::PLAYERS => PlayerConfig::class,
+    ];
+
+
+    private ImportableEntityConfigFactory $importableEntityConfigFactory;
+
+    public function __construct()
+    {
+        $this->importableEntityConfigFactory = new ImportableEntityConfigFactory();
+    }
+
+
+    /**
+     * @param string $filePath
+     *
+     * @return ImportableEntityConfig
+     * @throws FafiException
+     */
+    public function selectConfig(string $filePath): ImportableEntityConfig
+    {
+        $name = basename($filePath);
+        $class = self::MAP[$name];
+
+        return $this->importableEntityConfigFactory->create($class);
+    }
+}

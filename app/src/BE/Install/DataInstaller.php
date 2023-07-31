@@ -5,17 +5,12 @@ declare(strict_types=1);
 namespace FAFI\src\BE\Install;
 
 use FAFI\exception\FafiException;
+use FAFI\src\BE\ImEx\ImExableEntities;
 use FAFI\src\BE\ImEx\ImExService;
 
 class DataInstaller
 {
     public const IMEX_SAMPLE_DIR_PATH = PATH_STORAGE . 'sample' . DS;
-
-    private const SAMPLE_FILEPATH_COUNTRIES = 'countries.csv';
-    private const SAMPLE_FILEPATH_CITIES = 'cities.csv';
-    private const SAMPLE_FILEPATH_CLUBS = 'clubs.csv';
-    private const SAMPLE_FILEPATH_POSITIONS = 'positions.csv';
-    private const SAMPLE_FILEPATH_PLAYERS = 'players.csv';
 
 
     private ImExService $imExService;
@@ -43,8 +38,8 @@ class DataInstaller
      */
     private function installGeo(): void
     {
-        $this->imExService->importCountries($this->formSampleFilePath(self::SAMPLE_FILEPATH_COUNTRIES));
-        $this->imExService->importCities($this->formSampleFilePath(self::SAMPLE_FILEPATH_CITIES));
+        $this->imExService->import($this->formSampleFilePath(ImExableEntities::COUNTRIES));
+        $this->imExService->import($this->formSampleFilePath(ImExableEntities::CITIES));
     }
 
     /**
@@ -53,7 +48,7 @@ class DataInstaller
      */
     private function installTeams(): void
     {
-        $this->imExService->importClubs($this->formSampleFilePath(self::SAMPLE_FILEPATH_CLUBS));
+        $this->imExService->import($this->formSampleFilePath(ImExableEntities::CLUBS));
     }
 
     /**
@@ -62,13 +57,13 @@ class DataInstaller
      */
     private function installPlayer(): void
     {
-        $this->imExService->importPositions($this->formSampleFilePath(self::SAMPLE_FILEPATH_POSITIONS));
-        $this->imExService->importPlayers($this->formSampleFilePath(self::SAMPLE_FILEPATH_PLAYERS));
+        $this->imExService->import($this->formSampleFilePath(ImExableEntities::POSITIONS));
+        $this->imExService->import($this->formSampleFilePath(ImExableEntities::PLAYERS));
     }
 
 
-    public function formSampleFilePath(string $fileName): string
+    public function formSampleFilePath(string $entityName): string
     {
-        return self::IMEX_SAMPLE_DIR_PATH . $fileName;
+        return self::IMEX_SAMPLE_DIR_PATH . $entityName . ImExService::FILE_EXT;
     }
 }
