@@ -6,7 +6,7 @@ namespace FAFI\src\BE\ImEx;
 
 interface ImExableEntities
 {
-    public const COUNTRIES = 'counties';
+    public const COUNTRIES = 'countries';
     public const CITIES = 'cities';
 
     public const CLUBS = 'clubs';
