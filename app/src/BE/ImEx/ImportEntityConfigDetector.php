@@ -41,9 +41,7 @@ class ImportEntityConfigDetector
      */
     public function selectConfig(string $filePath): ImportableEntityConfig
     {
-        $name = basename($filePath);
-        $class = self::MAP[$name];
-
-        return $this->importableEntityConfigFactory->create($class);
+        $entity = pathinfo($filePath, PATHINFO_FILENAME);
+        return $this->importableEntityConfigFactory->create(self::MAP[$entity]);
     }
 }
