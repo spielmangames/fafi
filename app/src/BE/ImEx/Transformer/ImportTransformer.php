@@ -28,17 +28,17 @@ class ImportTransformer
 
 
     /**
-     * @param string[][] $entities
+     * @param string[][] $extractedEntities
      * @param ImportableEntityConfig $entityConfig
      *
      * @return array
      * @throws FafiException
      */
-    public function transform(array $entities, ImportableEntityConfig $entityConfig): array
+    public function transform(array $extractedEntities, ImportableEntityConfig $entityConfig): array
     {
         $transformed = [];
 
-        foreach ($entities as $line => $entity) {
+        foreach ($extractedEntities as $line => $entity) {
             $this->line = $line;
             $transformed[$line] = $this->transformEntity($entity, $entityConfig);
         }
@@ -48,26 +48,22 @@ class ImportTransformer
 
 
     /**
-     * @param string[] $entity
+     * @param string[] $extractedEntity
      * @param ImportableEntityConfig $entityConfig
      *
      * @return array
      * @throws FafiException
      */
-    private function transformEntity(array $entity, ImportableEntityConfig $entityConfig): array
+    private function transformEntity(array $extractedEntity, ImportableEntityConfig $entityConfig): array
     {
         $transformed = [];
 
-        foreach ($entity as $fieldName => $fieldValue) {
-            if ($fieldValue === '') {
-                $fieldValue = null;
-            } else {
-                $fieldTransformer = $this->prepareFieldTransformer($entityConfig, $fieldName);
-                $fieldValue = $fieldTransformer->fromStr($fieldName, $fieldValue);
+        foreach ($extractedEntity as $fieldName => $fieldValue) {
+            $fieldTransformer = $this->prepareFieldTransformer($entityConfig, $fieldName);
+            $fieldValue = $fieldTransformer->fromStr($fieldName, $fieldValue);
 
-                $fieldSpecification = $this->prepareFieldSpecification($entityConfig, $fieldName);
-                $fieldSpecification->validate($fieldName, $fieldValue);
-            }
+            $fieldSpecification = $this->prepareFieldSpecification($entityConfig, $fieldName);
+            $fieldSpecification->validate($fieldName, $fieldValue);
 
             $transformed[$fieldName] = $fieldValue;
         }
