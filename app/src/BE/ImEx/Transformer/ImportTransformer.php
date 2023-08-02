@@ -59,8 +59,8 @@ class ImportTransformer
         $transformed = [];
 
         foreach ($extractedEntity as $fieldName => $fieldValue) {
-            $fieldTransformer = $this->prepareFieldTransformer($entityConfig, $fieldName);
-            $fieldValue = $fieldTransformer->fromStr($fieldName, $fieldValue);
+            $fieldConverter = $this->prepareFieldConverter($entityConfig, $fieldName);
+            $fieldValue = $fieldConverter->fromStr($fieldName, $fieldValue);
 
             $fieldSpecification = $this->prepareFieldSpecification($entityConfig, $fieldName);
             $fieldSpecification->validate($fieldName, $fieldValue);
@@ -78,17 +78,17 @@ class ImportTransformer
      * @return ImportFieldConverter
      * @throws FafiException
      */
-    private function prepareFieldTransformer(ImportableEntityConfig $entityConfig, string $field): ImportFieldConverter
+    private function prepareFieldConverter(ImportableEntityConfig $entityConfig, string $field): ImportFieldConverter
     {
         $entity = $entityConfig->getEntityName();
-        $fieldTransformersMap = $entityConfig->getFieldConvertersMap();
+        $fieldConvertersMap = $entityConfig->getFieldConvertersMap();
 
-        if (!isset($fieldTransformersMap[$field])) {
-           $this->fail(sprintf(ImExErr::IMPORT_ENTITY_FIELD_TRANSFORMER_ABSENT, $field, $entity));
+        if (!isset($fieldConvertersMap[$field])) {
+           $this->fail(sprintf(ImExErr::IMPORT_ENTITY_FIELD_CONVERTER_ABSENT, $field, $entity));
         }
-        $class = $fieldTransformersMap[$field];
+        $class = $fieldConvertersMap[$field];
         if (!is_string($class)) {
-            $this->fail(sprintf(ImExErr::IMPORT_ENTITY_FIELD_TRANSFORMER_INVALID, $field, $entity));
+            $this->fail(sprintf(ImExErr::IMPORT_ENTITY_FIELD_CONVERTER_INVALID, $field, $entity));
         }
 
         try {
