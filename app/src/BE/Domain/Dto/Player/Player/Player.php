@@ -11,7 +11,6 @@ class Player implements EntityInterface
 {
     use PlayerDataHelper;
 
-
     public const ENTITY = 'Player';
 
 

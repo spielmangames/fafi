@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace FAFI\src\BE\Domain\Dto\Player\Player;
 
-interface PlayerConstraints
+abstract class PlayerConstraints
 {
     public const NAME_MIN = 0;
     public const NAME_MAX = 32;

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace FAFI\src\BE\Domain\Dto\Player\Player;
 
-interface Foot
+final class Foot
 {
     public const LEFT = 'L';
     public const RIGHT = 'R';
