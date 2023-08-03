@@ -7,7 +7,7 @@ namespace FAFI\src\BE\ImEx\Transformer\Specification\Entity;
 use FAFI\src\BE\Domain\Dto\Team\Club\Club;
 use FAFI\src\BE\Domain\Dto\Team\Club\ClubConstraints;
 use FAFI\src\BE\Domain\Persistence\Team\Club\ClubHydrator;
-use FAFI\src\BE\ImEx\Clients\CountryClient;
+use FAFI\src\BE\ImEx\Clients\ClubClient;
 use FAFI\src\BE\ImEx\FileSchemas\Entity\ClubEntityFileSchema;
 use FAFI\src\BE\ImEx\Transformer\Field\Typical\IntegerFieldConverter;
 use FAFI\src\BE\ImEx\Transformer\Field\Typical\StringFieldConverter;
