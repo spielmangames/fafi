@@ -14,7 +14,6 @@ use FAFI\src\BE\Domain\Persistence\Player\Position\PositionRepository;
 
 class PlayerService
 {
-
     private PositionRepository $positionRepository;
     private PlayerRepository $playerRepository;
     private PlayerAttributeRepository $playerAttributeRepository;

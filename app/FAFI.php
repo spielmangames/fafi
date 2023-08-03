@@ -6,6 +6,7 @@ namespace FAFI;
 
 use FAFI\src\BE\Domain\Service\GeoService;
 use FAFI\src\BE\Domain\Service\PlayerService;
+use FAFI\src\BE\Domain\Service\TeamService;
 use FAFI\src\BE\ImEx\ImExService;
 use FAFI\src\BE\Install\InstallService;
 use FAFI\src\FE\StorefrontService;
@@ -22,6 +23,7 @@ class FAFI
 
     // BE domain
     private GeoService $geoService;
+    private TeamService $teamService;
     private PlayerService $playerService;
 
     // FE
@@ -34,6 +36,7 @@ class FAFI
         $this->imExService = new ImExService();
 
         $this->geoService = new GeoService();
+        $this->teamService = new TeamService();
         $this->playerService = new PlayerService();
 
         $this->storefrontService = new StorefrontService(ThemeFactory::THEME_PRINTER);
@@ -54,6 +57,11 @@ class FAFI
     public function getGeoService(): GeoService
     {
         return $this->geoService;
+    }
+
+    public function getTeamService(): TeamService
+    {
+        return $this->teamService;
     }
 
     public function getPlayerService(): PlayerService
