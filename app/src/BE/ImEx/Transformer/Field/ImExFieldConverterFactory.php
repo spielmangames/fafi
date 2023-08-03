@@ -20,19 +20,14 @@ class ImExFieldConverterFactory
      */
     public function create(string $class): ImportFieldConverter
     {
-        switch ($class) {
-            case BooleanFieldConverter::class:
-                return new BooleanFieldConverter();
-            case IntegerFieldConverter::class:
-                return new IntegerFieldConverter();
-            case StringFieldConverter::class:
-                return new StringFieldConverter();
+        return match ($class) {
+            BooleanFieldConverter::class => new BooleanFieldConverter(),
+            IntegerFieldConverter::class => new IntegerFieldConverter(),
+            StringFieldConverter::class => new StringFieldConverter(),
 
-            case PlayerAttributesFieldConverter::class:
-                return new PlayerAttributesFieldConverter();
+            PlayerAttributesFieldConverter::class => new PlayerAttributesFieldConverter(),
 
-            default:
-                throw new FafiException(sprintf(FafiException::E_CLASS_ABSENT, $class));
-        }
+            default => throw new FafiException(sprintf(FafiException::E_CLASS_ABSENT, $class)),
+        };
     }
 }

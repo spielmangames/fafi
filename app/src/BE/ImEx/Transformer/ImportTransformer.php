@@ -17,12 +17,12 @@ class ImportTransformer
     private int $line;
 
 
-    private ImExFieldConverterFactory $fieldTransformerFactory;
+    private ImExFieldConverterFactory $fieldConverterFactory;
     private FieldSpecificationFactory $fieldSpecificationFactory;
 
     public function __construct()
     {
-        $this->fieldTransformerFactory = new ImExFieldConverterFactory();
+        $this->fieldConverterFactory = new ImExFieldConverterFactory();
         $this->fieldSpecificationFactory = new FieldSpecificationFactory();
     }
 
@@ -62,8 +62,8 @@ class ImportTransformer
             $fieldConverter = $this->prepareFieldConverter($entityConfig, $fieldName);
             $fieldValue = $fieldConverter->fromStr($fieldName, $fieldValue);
 
-            $fieldSpecification = $this->prepareFieldSpecification($entityConfig, $fieldName);
-            $fieldSpecification->validate($fieldName, $fieldValue);
+//            $fieldSpecification = $this->prepareFieldSpecification($entityConfig, $fieldName);
+//            $fieldSpecification->validate($fieldName, $fieldValue);
 
             $transformed[$fieldName] = $fieldValue;
         }
@@ -92,12 +92,12 @@ class ImportTransformer
         }
 
         try {
-            $transformer = $this->fieldTransformerFactory->create($class);
+            $converter = $this->fieldConverterFactory->create($class);
         } catch (FafiException $exception) {
             $this->fail($exception->getMessage());
         }
 
-        return $transformer;
+        return $converter;
     }
 
     /**

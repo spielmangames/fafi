@@ -6,5 +6,5 @@ namespace FAFI\src\BE\ImEx\Transformer\Field;
 
 interface ImportFieldConverter
 {
-    public function fromStr(string $property, string $value);
+    public function fromStr(string $property, string $value): mixed;
 }

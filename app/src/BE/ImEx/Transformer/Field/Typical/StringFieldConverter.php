@@ -8,7 +8,7 @@ use FAFI\src\BE\ImEx\Transformer\Field\ImportFieldConverter;
 
 class StringFieldConverter implements ImportFieldConverter
 {
-    public function fromStr(string $property, string $value)
+    public function fromStr(string $property, string $value): string
     {
         return $value;
     }

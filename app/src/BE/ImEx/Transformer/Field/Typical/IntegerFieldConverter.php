@@ -8,7 +8,7 @@ use FAFI\src\BE\ImEx\Transformer\Field\ImportFieldConverter;
 
 class IntegerFieldConverter implements ImportFieldConverter
 {
-    public function fromStr(string $property, string $value)
+    public function fromStr(string $property, string $value): int|string
     {
         return ctype_digit($value) ? (int)$value : $value;
     }

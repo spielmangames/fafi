@@ -9,7 +9,7 @@ use FAFI\src\BE\ImEx\Transformer\Specification\Field\Player\PlayerAttributesSpec
 
 class PlayerAttributesFieldConverter implements ImportFieldConverter
 {
-    public function fromStr(string $property, string $value)
+    public function fromStr(string $property, string $value): array
     {
         $attributeSets = explode(PlayerAttributesSpecification::ATTRIBUTES_SEPARATOR, $value);
 

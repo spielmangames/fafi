@@ -9,17 +9,13 @@ use FAFI\src\BE\ImEx\Transformer\Field\ImportFieldConverter;
 
 class BooleanFieldConverter implements ImportFieldConverter
 {
-    public function fromStr(string $property, string $value)
+    public function fromStr(string $property, string $value): bool|string
     {
-        switch ($value) {
-            case BoolFieldFileSchema::TRUE:
-                $value = true;
-                break;
-            case BoolFieldFileSchema::FALSE:
-                $value = false;
-                break;
-        }
+        return match ($value) {
+            BoolFieldFileSchema::TRUE => true,
+            BoolFieldFileSchema::FALSE => false,
 
-        return $value;
+            default => $value,
+        };
     }
 }
