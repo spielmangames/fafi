@@ -60,7 +60,7 @@ abstract class AbstractResource
     /**
      * @param EntityCriteriaInterface[] $conditions
      *
-     * @return \FAFI\src\BE\Domain\Dto\EntityInterface[]|null
+     * @return EntityInterface[]|null
      * @throws FafiException
      */
     public function read(array $conditions = []): ?array
@@ -137,7 +137,7 @@ abstract class AbstractResource
         $this->verifyModelPropertiesConstraints($data);
 
         foreach ($this->getUniqueFields() as $uniqueField) {
-            $this->dbValidator->assertResourcePropertyUnique($table, $entity, $data, $uniqueField);
+            $this->dbValidator->assertResourcePropertyUnique($table, (string)$entity, $data, $uniqueField);
         }
     }
 
