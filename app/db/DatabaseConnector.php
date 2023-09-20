@@ -4,45 +4,34 @@ declare(strict_types=1);
 
 namespace FAFI\db;
 
-use FAFI\config\Settings;
 use FAFI\exception\DbErr;
 use mysqli;
 
 class DatabaseConnector
 {
-    private const SETTINGS_DB = 'db';
-    private const SETTING_HOSTNAME = 'host';
-    private const SETTING_USERNAME = 'user';
-    private const SETTING_PASSWORD = 'pass';
-    private const SETTING_DBNAME = 'name';
-
     private ?mysqli $connection = null;
+
+
+    private DatabaseSettings $databaseSettings;
+
+    public function __construct()
+    {
+        $this->databaseSettings = new DatabaseSettings();
+    }
 
 
     public function open(bool $withDb = true): mysqli
     {
-        $host = $this->getDbSetting(self::SETTING_HOSTNAME);
-        $username = $this->getDbSetting(self::SETTING_USERNAME);
-        $password = $this->getDbSetting(self::SETTING_PASSWORD);
-        $dbname = $withDb ? $this->getDbSetting(self::SETTING_DBNAME) : null;
+        $host = $this->databaseSettings->getHostname();
+        $username = $this->databaseSettings->getUsername();
+        $password = $this->databaseSettings->getPassword();
+        $dbname = $withDb ? $this->databaseSettings->getDbname() : null;
 
         $this->connection = new mysqli($host, $username, $password, $dbname);
         $this->verifyConnection($this->connection);
 
         return $this->connection;
     }
-
-
-    private function getDbSettings(): array
-    {
-        return Settings::getInstance()->get(self::SETTINGS_DB);
-    }
-
-    private function getDbSetting(string $settingKey): ?string
-    {
-        return $this->getDbSettings()[$settingKey];
-    }
-
 
     private function verifyConnection(mysqli $connection): void
     {
@@ -51,10 +40,6 @@ class DatabaseConnector
         }
     }
 
-    public function getConnection(): ?mysqli
-    {
-        return $this->connection;
-    }
 
     public function closeConnection(): void
     {
@@ -65,5 +50,10 @@ class DatabaseConnector
             }
             unset($this->connection);
         }
+    }
+
+    private function getConnection(): ?mysqli
+    {
+        return $this->connection;
     }
 }
