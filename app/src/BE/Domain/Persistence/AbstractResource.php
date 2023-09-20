@@ -137,7 +137,7 @@ abstract class AbstractResource
         $this->verifyModelPropertiesConstraints($data);
 
         foreach ($this->getUniqueFields() as $uniqueField) {
-            $this->dbValidator->assertResourcePropertyUnique($table, (string)$entity, $data, $uniqueField);
+            $this->dbValidator->assertPropertyUnique($table, (string)$entity, $data, $uniqueField);
         }
     }
 

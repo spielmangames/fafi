@@ -30,7 +30,7 @@ class DatabaseValidator
      * @return void
      * @throws FafiException
      */
-    public function assertResourcePropertyUnique(string $table, string $entityName, array $entityData, string $property): void
+    public function assertPropertyUnique(string $table, string $entityName, array $entityData, string $property): void
     {
         $condition = new Criteria($property, QuerySyntax::OPERATOR_IS, [$entityData[$property]]);
         $result = $this->queryExecutor->readRecords($table, [$condition]);
