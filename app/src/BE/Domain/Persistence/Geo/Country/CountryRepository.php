@@ -45,6 +45,18 @@ class CountryRepository implements RepositoryInterface
         return $this->countryResource->read($conditions);
     }
 
+    /**
+     * @param string $name
+     *
+     * @return Country|null
+     * @throws FafiException
+     */
+    public function findByName(string $name): ?Country
+    {
+        $criteria = new Criteria(CountryResource::NAME_FIELD, QuerySyntax::OPERATOR_IS, [$name]);
+        return $this->countryResource->readFirst([$criteria]);
+    }
+
 
     /**
      * @param Country $entity
