@@ -1,6 +1,6 @@
 
 #-----------------------------------------------------------------------------------------------------------------------
-# DB init [version=1.13]
+# DB init [version=1.14]
 #-----------------------------------------------------------------------------------------------------------------------
 
 
@@ -21,7 +21,7 @@ CREATE TABLE `_version` (
     `db_schema` VARCHAR(8) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
-INSERT INTO _version VALUES ('1.13');
+INSERT INTO _version VALUES ('1.14');
 
 
 
@@ -35,12 +35,10 @@ CREATE TABLE `countries` (
     `id` INT(11) UNSIGNED AUTO_INCREMENT NOT NULL,
 
     `name` VARCHAR(32) NOT NULL,
-#     `code` VARCHAR(6) NOT NULL,
     `continent` ENUM('Africa', 'America', 'Asia', 'Europe') NOT NULL,
 
     PRIMARY KEY (`id`),
     UNIQUE KEY `u_countries_name` (`name`)
-#     UNIQUE KEY `u_countries_code` (`code`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 
@@ -48,23 +46,12 @@ CREATE TABLE `cities` (
     `id` INT(11) UNSIGNED AUTO_INCREMENT NOT NULL,
 
     `name` VARCHAR(32) NOT NULL,
+    `country_id` INT(11) UNSIGNED NOT NULL,
 
     PRIMARY KEY (`id`),
     UNIQUE KEY `u_cities_name` (`name`)
+    CONSTRAINT `country_id` FOREIGN KEY (`country_id`) REFERENCES `countries` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
-# CREATE TABLE `city_country_assocs` (
-#     `id` INT(11) UNSIGNED AUTO_INCREMENT NOT NULL,
-#
-#     `city_id` INT(11) UNSIGNED NOT NULL,
-#     `region` VARCHAR(32),
-#     `country_id` INT(11) UNSIGNED NOT NULL,
-#
-#     PRIMARY KEY (`id`),
-#     UNIQUE KEY `u_city_country_assocs_city_id_country_id` (`city_id`, `country_id`),
-#     CONSTRAINT `city_id` FOREIGN KEY (`city_id`) REFERENCES `cities` (`id`) ON DELETE CASCADE,
-#     CONSTRAINT `country_id` FOREIGN KEY (`country_id`) REFERENCES `countries` (`id`) ON DELETE CASCADE
-# ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 
 
@@ -81,14 +68,12 @@ CREATE TABLE clubs (
      `fafi_name` VARCHAR(32) NOT NULL,
 
      `city_id` INT(11) UNSIGNED NOT NULL,
-     `country_id` INT(11) UNSIGNED NOT NULL,
-     `founded` SMALLINT(4) UNSIGNED,
+     `founded` SMALLINT(4) UNSIGNED NOT NULL,,
 
      PRIMARY KEY (`id`),
      UNIQUE KEY `u_clubs_name` (`name`),
      UNIQUE KEY `u_clubs_fafi_name` (`fafi_name`),
-     CONSTRAINT `city_id` FOREIGN KEY (`city_id`) REFERENCES `cities` (`id`) ON DELETE CASCADE,
-     CONSTRAINT `country_id` FOREIGN KEY (`country_id`) REFERENCES `countries` (`id`) ON DELETE CASCADE
+     CONSTRAINT `city_id` FOREIGN KEY (`city_id`) REFERENCES `cities` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 
