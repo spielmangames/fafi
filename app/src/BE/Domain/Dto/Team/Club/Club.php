@@ -11,38 +11,37 @@ class Club extends Team implements EntityInterface
 {
     public const ENTITY = 'Club';
 
-
-    private ?int $id = null;
-
-    protected ?string $name = null;
-
-
-    public function setId(int $id): self
-    {
-        $this->id = $id;
-        return $this;
+    public function __construct(
+        private readonly int $id,
+        private readonly string $name,
+        private readonly string $fafiName,
+        private readonly int $cityId,
+        private readonly int $founded,
+    ) {
     }
 
-    public function getId(): ?int
+    public function getId(): int
     {
         return $this->id;
     }
 
-
-    public function setName(string $name): self
-    {
-        $this->name = $name;
-        return $this;
-    }
-
-    public function getName(): ?string
+    public function getName(): string
     {
         return $this->name;
     }
 
-
-    public function __toString(): string
+    public function getFafiName(): string
     {
-        return self::ENTITY;
+        return $this->fafiName;
+    }
+
+    public function getCityId(): int
+    {
+        return $this->cityId;
+    }
+
+    public function getFounded(): int
+    {
+        return $this->founded;
     }
 }

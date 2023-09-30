@@ -6,6 +6,7 @@ namespace FAFI\src\BE\Domain\Persistence\Team\Club;
 
 use FAFI\exception\FafiException;
 use FAFI\src\BE\Domain\Dto\Team\Club\Club;
+use FAFI\src\BE\Domain\Dto\Team\Club\ClubData;
 use FAFI\src\BE\Domain\Persistence\AbstractResource;
 use FAFI\src\BE\Domain\Persistence\EntityCriteriaInterface;
 
@@ -61,15 +62,15 @@ class ClubResource extends AbstractResource
 
 
     /**
-     * @param Club $entity
+     * @param ClubData $entityData
      *
      * @return Club
      * @throws FafiException
      */
-    public function create($entity): Club
+    public function create($entityData): Club
     {
         /** @var Club $result */
-        $result = parent::create($entity);
+        $result = parent::create($entityData);
 
         return $result;
     }
@@ -103,15 +104,15 @@ class ClubResource extends AbstractResource
     }
 
     /**
-     * @param Club $entity
+     * @param ClubData $entityData
      *
      * @return Club
      * @throws FafiException
      */
-    public function update($entity): Club
+    public function update($entityData): Club
     {
         /** @var Club $result */
-        $result = parent::update($entity);
+        $result = parent::update($entityData);
 
         return $result;
     }

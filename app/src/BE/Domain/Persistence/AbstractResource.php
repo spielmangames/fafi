@@ -10,6 +10,7 @@ use FAFI\db\Query\QuerySyntax;
 use FAFI\exception\EntityErr;
 use FAFI\exception\FafiException;
 use FAFI\src\BE\Domain\Criteria;
+use FAFI\src\BE\Domain\Dto\EntityDataInterface;
 use FAFI\src\BE\Domain\Dto\EntityInterface;
 
 abstract class AbstractResource
@@ -36,22 +37,22 @@ abstract class AbstractResource
 
 
     /**
-     * @param EntityInterface $entity
+     * @param EntityDataInterface $entityData
      *
      * @return EntityInterface
      * @throws FafiException
      */
-    public function create(EntityInterface $entity): EntityInterface
+    public function create(EntityDataInterface $entityData): EntityInterface
     {
-        $data = $this->hydrator->extract($entity);
-        $this->verifyConstraintsOnCreate($this->getTable(), $entity, $data);
+        $data = $this->hydrator->extract($entityData);
+        $this->verifyConstraintsOnCreate($this->getTable(), $entityData, $data);
 
         $id = $this->queryExecutor->createRecord($this->getTable(), $data);
 
         $criteria = new Criteria(self::ID_FIELD, QuerySyntax::OPERATOR_IS, [$id]);
         $result = $this->readFirst([$criteria]);
         if (!$result) {
-            throw new FafiException(sprintf(EntityErr::ENTITY_ABSENT, $entity, self::ID_FIELD, $id));
+            throw new FafiException(sprintf(EntityErr::ENTITY_ABSENT, $entityData, self::ID_FIELD, $id));
         }
 
         return $result;
@@ -82,24 +83,24 @@ abstract class AbstractResource
     }
 
     /**
-     * @param EntityInterface $entity
+     * @param EntityDataInterface $entityData
      *
      * @return EntityInterface
      * @throws FafiException
      */
-    public function update(EntityInterface $entity): EntityInterface
+    public function update(EntityDataInterface $entityData): EntityInterface
     {
-        $data = $this->hydrator->extract($entity);
-        $this->verifyConstraintsOnUpdate($this->getTable(), $entity, $data);
+        $data = $this->hydrator->extract($entityData);
+        $this->verifyConstraintsOnUpdate($this->getTable(), $entityData, $data);
 
-        $id = $entity->getId();
+        $id = $entityData->getId();
         $criteria = new Criteria(self::ID_FIELD, QuerySyntax::OPERATOR_IS, [$id]);
         $this->queryExecutor->updateRecord($this->getTable(), $data, [$criteria]);
 
         $criteria = new Criteria(self::ID_FIELD, QuerySyntax::OPERATOR_IS, [$id]);
         $result = $this->readFirst([$criteria]);
         if (!$result) {
-            throw new FafiException(sprintf(EntityErr::ENTITY_ABSENT, $entity, self::ID_FIELD, $id));
+            throw new FafiException(sprintf(EntityErr::ENTITY_ABSENT, $entityData, self::ID_FIELD, $id));
         }
 
         return $result;

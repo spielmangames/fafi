@@ -77,15 +77,15 @@ class PlayerResource extends AbstractResource
 
 
     /**
-     * @param Player $entity
+     * @param Player $entityData
      *
      * @return Player
      * @throws FafiException
      */
-    public function create($entity): Player
+    public function create($entityData): Player
     {
         /** @var Player $result */
-        $result = parent::create($entity);
+        $result = parent::create($entityData);
 
         return $result;
     }
@@ -119,15 +119,15 @@ class PlayerResource extends AbstractResource
     }
 
     /**
-     * @param Player $entity
+     * @param Player $entityData
      *
      * @return Player
      * @throws FafiException
      */
-    public function update($entity): Player
+    public function update($entityData): Player
     {
         /** @var Player $result */
-        $result = parent::update($entity);
+        $result = parent::update($entityData);
 
         return $result;
     }

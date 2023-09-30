@@ -6,6 +6,7 @@ namespace FAFI\src\BE\Domain\Persistence\Geo\City;
 
 use FAFI\exception\FafiException;
 use FAFI\src\BE\Domain\Dto\Geo\City\City;
+use FAFI\src\BE\Domain\Dto\Geo\City\CityData;
 use FAFI\src\BE\Domain\Persistence\AbstractResource;
 use FAFI\src\BE\Domain\Persistence\EntityCriteriaInterface;
 
@@ -53,15 +54,15 @@ class CityResource extends AbstractResource
 
 
     /**
-     * @param City $entity
+     * @param CityData $entityData
      *
      * @return City
      * @throws FafiException
      */
-    public function create($entity): City
+    public function create($entityData): City
     {
         /** @var City $result */
-        $result = parent::create($entity);
+        $result = parent::create($entityData);
 
         return $result;
     }
@@ -95,15 +96,15 @@ class CityResource extends AbstractResource
     }
 
     /**
-     * @param City $entity
+     * @param CityData $entityData
      *
      * @return City
      * @throws FafiException
      */
-    public function update($entity): City
+    public function update($entityData): City
     {
         /** @var City $result */
-        $result = parent::update($entity);
+        $result = parent::update($entityData);
 
         return $result;
     }

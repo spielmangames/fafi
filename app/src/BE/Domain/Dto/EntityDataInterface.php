@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace FAFI\src\BE\Domain\Dto;
 
-interface EntityInterface
+interface EntityDataInterface
 {
-    public function getId(): int;
 }

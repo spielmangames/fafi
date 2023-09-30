@@ -53,15 +53,15 @@ class PositionResource extends AbstractResource
 
 
     /**
-     * @param Position $entity
+     * @param Position $entityData
      *
      * @return Position
      * @throws FafiException
      */
-    public function create($entity): Position
+    public function create($entityData): Position
     {
         /** @var Position $result */
-        $result = parent::create($entity);
+        $result = parent::create($entityData);
 
         return $result;
     }
@@ -95,15 +95,15 @@ class PositionResource extends AbstractResource
     }
 
     /**
-     * @param Position $entity
+     * @param Position $entityData
      *
      * @return Position
      * @throws FafiException
      */
-    public function update($entity): Position
+    public function update($entityData): Position
     {
         /** @var Position $result */
-        $result = parent::update($entity);
+        $result = parent::update($entityData);
 
         return $result;
     }

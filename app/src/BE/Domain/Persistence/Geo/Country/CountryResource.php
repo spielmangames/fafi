@@ -6,6 +6,7 @@ namespace FAFI\src\BE\Domain\Persistence\Geo\Country;
 
 use FAFI\exception\FafiException;
 use FAFI\src\BE\Domain\Dto\Geo\Country\Country;
+use FAFI\src\BE\Domain\Dto\Geo\Country\CountryData;
 use FAFI\src\BE\Domain\Persistence\AbstractResource;
 use FAFI\src\BE\Domain\Persistence\EntityCriteriaInterface;
 
@@ -56,15 +57,15 @@ class CountryResource extends AbstractResource
 
 
     /**
-     * @param Country $entity
+     * @param CountryData $entityData
      *
      * @return Country
      * @throws FafiException
      */
-    public function create($entity): Country
+    public function create($entityData): Country
     {
         /** @var Country $result */
-        $result = parent::create($entity);
+        $result = parent::create($entityData);
 
         return $result;
     }
@@ -98,15 +99,15 @@ class CountryResource extends AbstractResource
     }
 
     /**
-     * @param Country $entity
+     * @param CountryData $entityData
      *
      * @return Country
      * @throws FafiException
      */
-    public function update($entity): Country
+    public function update($entityData): Country
     {
         /** @var Country $result */
-        $result = parent::update($entity);
+        $result = parent::update($entityData);
 
         return $result;
     }
