@@ -10,10 +10,10 @@ class ClubData implements EntityDataInterface
 {
     private ?int $id = null;
 
-    protected ?string $name = null;
-    protected ?string $fafiName = null;
-    protected ?int $cityId = null;
-    protected ?int $founded = null;
+    private ?string $name = null;
+    private ?string $fafiName = null;
+    private ?int $cityId = null;
+    private ?int $founded = null;
 
 
     public function setId(int $id): self

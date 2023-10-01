@@ -10,8 +10,8 @@ class CityData implements EntityDataInterface
 {
     private ?int $id = null;
 
-    protected ?string $name = null;
-    protected ?int $countryId = null;
+    private ?string $name = null;
+    private ?int $countryId = null;
 
 
     public function setId(int $id): self

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace FAFI\src\BE\Domain\Persistence\Player\Position;
 
 use FAFI\src\BE\Domain\Dto\Player\Position\Position;
+use FAFI\src\BE\Domain\Dto\Player\Position\PositionData;
 use FAFI\src\BE\Domain\Persistence\HydratorInterface;
 
 class PositionHydrator implements HydratorInterface
@@ -26,16 +27,17 @@ class PositionHydrator implements HydratorInterface
 
     public function hydrate(array $data): Position
     {
-        $position = new Position();
+        $id = (int)$data[PositionResource::ID_FIELD];
 
-        !isset($data[PositionResource::ID_FIELD]) ?: $position->setId($data[PositionResource::ID_FIELD]);
+        $name = $data[PositionResource::NAME_FIELD];
 
-        !isset($data[PositionResource::NAME_FIELD]) ?: $position->setName($data[PositionResource::NAME_FIELD]);
-
-        return $position;
+        return new Position(
+            $id,
+            $name
+        );
     }
 
-    public function extract(Position $entity): array
+    public function extract(PositionData $entity): array
     {
         return [
             PositionResource::ID_FIELD => $entity->getId(),

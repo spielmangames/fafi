@@ -2,16 +2,15 @@
 
 declare(strict_types=1);
 
-namespace FAFI\src\BE\Domain\Dto\Geo\Country;
+namespace FAFI\src\BE\Domain\Dto\Player\Position;
 
 use FAFI\src\BE\Domain\Dto\EntityDataInterface;
 
-class CountryData implements EntityDataInterface
+class PositionData implements EntityDataInterface
 {
     private ?int $id = null;
 
     private ?string $name = null;
-    private ?string $continent = null;
 
 
     public function setId(int $id): self
@@ -35,16 +34,5 @@ class CountryData implements EntityDataInterface
     public function getName(): ?string
     {
         return $this->name;
-    }
-
-    public function setContinent(string $continent): self
-    {
-        $this->continent = $continent;
-        return $this;
-    }
-
-    public function getContinent(): ?string
-    {
-        return $this->continent;
     }
 }
