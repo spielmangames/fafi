@@ -5,8 +5,9 @@ declare(strict_types=1);
 namespace FAFI\src\BE\Domain\Persistence\Team\Club;
 
 use FAFI\src\BE\Domain\Dto\Team\Club\Club;
+use FAFI\src\BE\Domain\Persistence\HydratorInterface;
 
-class ClubHydrator
+class ClubHydrator implements HydratorInterface
 {
     /**
      * @param array $data

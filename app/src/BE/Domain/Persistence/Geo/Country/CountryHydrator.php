@@ -5,8 +5,9 @@ declare(strict_types=1);
 namespace FAFI\src\BE\Domain\Persistence\Geo\Country;
 
 use FAFI\src\BE\Domain\Dto\Geo\Country\Country;
+use FAFI\src\BE\Domain\Persistence\HydratorInterface;
 
-class CountryHydrator
+class CountryHydrator implements HydratorInterface
 {
     /**
      * @param array $data

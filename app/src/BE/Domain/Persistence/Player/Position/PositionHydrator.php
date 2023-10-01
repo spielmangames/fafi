@@ -5,8 +5,9 @@ declare(strict_types=1);
 namespace FAFI\src\BE\Domain\Persistence\Player\Position;
 
 use FAFI\src\BE\Domain\Dto\Player\Position\Position;
+use FAFI\src\BE\Domain\Persistence\HydratorInterface;
 
-class PositionHydrator
+class PositionHydrator implements HydratorInterface
 {
     /**
      * @param array $data

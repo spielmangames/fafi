@@ -5,8 +5,9 @@ declare(strict_types=1);
 namespace FAFI\src\BE\Domain\Persistence\Geo\City;
 
 use FAFI\src\BE\Domain\Dto\Geo\City\City;
+use FAFI\src\BE\Domain\Persistence\HydratorInterface;
 
-class CityHydrator
+class CityHydrator implements HydratorInterface
 {
     /**
      * @param array $data
