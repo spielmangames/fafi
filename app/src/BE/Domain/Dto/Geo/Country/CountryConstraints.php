@@ -9,5 +9,5 @@ abstract class CountryConstraints
     public const NAME_MIN = 1;
     public const NAME_MAX = 32;
 
-    public const CONTINENTS_SUPPORTED = Continent::SUPPORTED;
+    public const CONTINENTS_SUPPORTED = ContinentEnum::SUPPORTED;
 }

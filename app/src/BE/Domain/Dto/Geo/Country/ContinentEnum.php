@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace FAFI\src\BE\Domain\Dto\Geo\Country;
 
-final class Continent
+final class ContinentEnum
 {
     public const AFRICA = 'Africa';
     public const AMERICA = 'America';

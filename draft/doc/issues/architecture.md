@@ -25,3 +25,13 @@ using ON DELETE CASCADE in DB (eg: ```table "clubs" > CONSTRAINT `city_id` FOREI
 
 
 
+## FAFI-005
+Using indexes in DB
+
+
+
+## FAFI-006
+Implement DI
+
+
+
