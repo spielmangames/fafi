@@ -29,12 +29,9 @@ class CityResource extends AbstractResource
     public const NAME_FIELD = 'name';
 
 
-    protected CityHydrator $hydrator;
-
     public function __construct()
     {
-        parent::__construct();
-        $this->hydrator = new CityHydrator();
+        parent::__construct(new CityHydrator());
     }
 
     protected function getTable(): string

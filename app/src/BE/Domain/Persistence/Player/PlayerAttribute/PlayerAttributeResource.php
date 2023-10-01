@@ -36,12 +36,9 @@ class PlayerAttributeResource extends AbstractResource
     public const DEF_MAX_FIELD = 'def_max';
 
 
-    protected PlayerAttributeHydrator $hydrator;
-
     public function __construct()
     {
-        parent::__construct();
-        $this->hydrator = new PlayerAttributeHydrator();
+        parent::__construct(new PlayerAttributeHydrator());
     }
 
     protected function getTable(): string

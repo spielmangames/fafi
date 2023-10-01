@@ -32,12 +32,9 @@ class CountryResource extends AbstractResource
     public const CONTINENT_FIELD = 'continent';
 
 
-    protected CountryHydrator $hydrator;
-
     public function __construct()
     {
-        parent::__construct();
-        $this->hydrator = new CountryHydrator();
+        parent::__construct(new CountryHydrator());
     }
 
     protected function getTable(): string

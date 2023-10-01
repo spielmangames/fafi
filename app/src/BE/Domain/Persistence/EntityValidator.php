@@ -19,7 +19,7 @@ class EntityValidator
 
 
     /**
-     * @param \FAFI\src\BE\Domain\Dto\EntityInterface $entity
+     * @param EntityInterface $entity
      * @param array $entityData
      * @param string[] $mandatory
      *
@@ -48,7 +48,7 @@ class EntityValidator
 
 
     /**
-     * @param \FAFI\src\BE\Domain\Dto\EntityInterface $entity
+     * @param EntityInterface $entity
      *
      * @return void
      * @throws FafiException
@@ -61,7 +61,7 @@ class EntityValidator
     }
 
     /**
-     * @param \FAFI\src\BE\Domain\Dto\EntityInterface $entity
+     * @param EntityInterface $entity
      *
      * @return void
      * @throws FafiException

@@ -52,12 +52,9 @@ class PlayerResource extends AbstractResource
     public const INJURE_FACTOR_FIELD = 'injure_factor';
 
 
-    protected PlayerHydrator $hydrator;
-
     public function __construct()
     {
-        parent::__construct();
-        $this->hydrator = new PlayerHydrator();
+        parent::__construct(new PlayerHydrator());
     }
 
     protected function getTable(): string

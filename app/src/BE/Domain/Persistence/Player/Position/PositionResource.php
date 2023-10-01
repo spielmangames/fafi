@@ -28,12 +28,9 @@ class PositionResource extends AbstractResource
     public const NAME_FIELD = 'name';
 
 
-    protected PositionHydrator $hydrator;
-
     public function __construct()
     {
-        parent::__construct();
-        $this->hydrator = new PositionHydrator();
+        parent::__construct(new PositionHydrator());
     }
 
     protected function getTable(): string

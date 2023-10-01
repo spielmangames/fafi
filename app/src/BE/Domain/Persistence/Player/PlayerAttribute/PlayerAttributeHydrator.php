@@ -5,8 +5,9 @@ declare(strict_types=1);
 namespace FAFI\src\BE\Domain\Persistence\Player\PlayerAttribute;
 
 use FAFI\src\BE\Domain\Dto\Player\PlayerAttribute\PlayerAttribute;
+use FAFI\src\BE\Domain\Persistence\HydratorInterface;
 
-class PlayerAttributeHydrator
+class PlayerAttributeHydrator implements HydratorInterface
 {
     /**
      * @param array $data

@@ -19,15 +19,17 @@ abstract class AbstractResource
 
 
     protected EntityValidator $entityValidator;
-    protected DatabaseValidator $dbValidator;
+    protected HydratorInterface $hydrator;
 
+    protected DatabaseValidator $dbValidator;
     protected QueryExecutor $queryExecutor;
 
-    public function __construct()
+    public function __construct(HydratorInterface $hydrator)
     {
         $this->entityValidator = new EntityValidator();
-        $this->dbValidator = new DatabaseValidator();
+        $this->hydrator = $hydrator;
 
+        $this->dbValidator = new DatabaseValidator();
         $this->queryExecutor = new QueryExecutor();
     }
 
@@ -118,7 +120,7 @@ abstract class AbstractResource
     }
 
 
-    private function verifyConstraintsOnCreate(string $table, EntityInterface $entity, array $data): void
+    private function verifyConstraintsOnCreate(string $table, EntityDataInterface $entity, array $data): void
     {
         $this->entityValidator->assertEntityIdAbsent($entity);
         $this->entityValidator->assertEntityMandatoryDataPresent($entity, $data, $this->getRequiredFields());
@@ -126,7 +128,7 @@ abstract class AbstractResource
         $this->verifyModelConstraints($table, $entity, $data);
     }
 
-    private function verifyConstraintsOnUpdate(string $table, EntityInterface $entity, array $data): void
+    private function verifyConstraintsOnUpdate(string $table, EntityDataInterface $entity, array $data): void
     {
         $this->entityValidator->assertEntityIdPresent($entity);
 

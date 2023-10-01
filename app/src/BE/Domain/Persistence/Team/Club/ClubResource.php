@@ -37,12 +37,9 @@ class ClubResource extends AbstractResource
     public const FOUNDED_FIELD = 'founded';
 
 
-    protected ClubHydrator $hydrator;
-
     public function __construct()
     {
-        parent::__construct();
-        $this->hydrator = new ClubHydrator();
+        parent::__construct(new ClubHydrator());
     }
 
     protected function getTable(): string
