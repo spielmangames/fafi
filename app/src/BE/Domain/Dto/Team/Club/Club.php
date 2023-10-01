@@ -14,7 +14,7 @@ class Club extends Team implements EntityInterface
     public function __construct(
         private readonly int $id,
         private readonly string $name,
-        private readonly string $fafiName,
+        private readonly ?string $fafiName,
         private readonly int $cityId,
         private readonly int $founded,
     ) {
@@ -30,7 +30,7 @@ class Club extends Team implements EntityInterface
         return $this->name;
     }
 
-    public function getFafiName(): string
+    public function getFafiName(): ?string
     {
         return $this->fafiName;
     }

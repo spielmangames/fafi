@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace FAFI\src\BE\Domain\Persistence\Geo\Country;
 
 use FAFI\exception\FafiException;
+use FAFI\src\BE\Domain\Dto\EntityDataInterface;
 use FAFI\src\BE\Domain\Dto\Geo\Country\Country;
 use FAFI\src\BE\Domain\Dto\Geo\Country\CountryData;
 use FAFI\src\BE\Domain\Persistence\AbstractResource;
@@ -59,8 +60,10 @@ class CountryResource extends AbstractResource
      * @return Country
      * @throws FafiException
      */
-    public function create($entityData): Country
+    public function create(EntityDataInterface $entityData): Country
     {
+        $this->verifyInterface(CountryData::class, $entityData);
+
         /** @var Country $result */
         $result = parent::create($entityData);
 

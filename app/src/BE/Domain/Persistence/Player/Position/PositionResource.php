@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace FAFI\src\BE\Domain\Persistence\Player\Position;
 
 use FAFI\exception\FafiException;
+use FAFI\src\BE\Domain\Dto\EntityDataInterface;
 use FAFI\src\BE\Domain\Dto\Player\Position\Position;
 use FAFI\src\BE\Domain\Persistence\AbstractResource;
 use FAFI\src\BE\Domain\Persistence\EntityCriteriaInterface;
@@ -50,13 +51,15 @@ class PositionResource extends AbstractResource
 
 
     /**
-     * @param Position $entityData
+     * @param PositionData $entityData
      *
      * @return Position
      * @throws FafiException
      */
-    public function create($entityData): Position
+    public function create(EntityDataInterface $entityData): Position
     {
+        $this->verifyInterface(PositionData::class, $entityData);
+
         /** @var Position $result */
         $result = parent::create($entityData);
 

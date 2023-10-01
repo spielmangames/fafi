@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace FAFI\src\BE\Domain\Persistence\Team\Club;
 
 use FAFI\src\BE\Domain\Dto\Team\Club\Club;
+use FAFI\src\BE\Domain\Dto\Team\Club\ClubData;
 use FAFI\src\BE\Domain\Persistence\HydratorInterface;
 
 class ClubHydrator implements HydratorInterface
@@ -26,21 +27,28 @@ class ClubHydrator implements HydratorInterface
 
     public function hydrate(array $data): Club
     {
-        $club = new Club();
+        $id = (int)$data[ClubResource::ID_FIELD];
 
-        !isset($data[ClubResource::ID_FIELD]) ?: $club->setId($data[ClubResource::ID_FIELD]);
+        $name = $data[ClubResource::NAME_FIELD];
+        $fafiName = $data[ClubResource::FAFI_NAME_FIELD];
+        $cityId = (int)$data[ClubResource::CITY_ID_FIELD];
+        $founded = (int)$data[ClubResource::FOUNDED_FIELD] ?? null;
 
-        !isset($data[ClubResource::NAME_FIELD]) ?: $club->setName($data[ClubResource::NAME_FIELD]);
-
-        return $club;
+        return new Club(
+            $id,
+            $name,
+            $fafiName,
+            $cityId,
+            $founded
+        );
     }
 
-    public function extract(Club $club): array
+    public function extract(ClubData $entity): array
     {
         return [
-            ClubResource::ID_FIELD => $club->getId(),
+            ClubResource::ID_FIELD => $entity->getId(),
 
-            ClubResource::NAME_FIELD => $club->getName(),
+            ClubResource::NAME_FIELD => $entity->getName(),
         ];
     }
 }

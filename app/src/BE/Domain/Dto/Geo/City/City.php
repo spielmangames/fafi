@@ -13,7 +13,7 @@ class City implements EntityInterface
     public function __construct(
         private readonly int $id,
         private readonly string $name,
-        private readonly string $countryId,
+        private readonly int $countryId,
     ) {
     }
 
@@ -27,7 +27,7 @@ class City implements EntityInterface
         return $this->name;
     }
 
-    public function getCountryId(): string
+    public function getCountryId(): int
     {
         return $this->countryId;
     }

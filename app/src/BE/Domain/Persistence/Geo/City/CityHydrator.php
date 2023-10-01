@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace FAFI\src\BE\Domain\Persistence\Geo\City;
 
 use FAFI\src\BE\Domain\Dto\Geo\City\City;
+use FAFI\src\BE\Domain\Dto\Geo\City\CityData;
 use FAFI\src\BE\Domain\Persistence\HydratorInterface;
 
 class CityHydrator implements HydratorInterface
@@ -26,21 +27,24 @@ class CityHydrator implements HydratorInterface
 
     public function hydrate(array $data): City
     {
-        $city = new City();
+        $id = (int)$data[CityResource::ID_FIELD];
 
-        !isset($data[CityResource::ID_FIELD]) ?: $city->setId($data[CityResource::ID_FIELD]);
+        $name = $data[CityResource::NAME_FIELD];
+        $countryId = (int)$data[CityResource::COUNTRY_ID_FIELD];
 
-        !isset($data[CityResource::NAME_FIELD]) ?: $city->setName($data[CityResource::NAME_FIELD]);
-
-        return $city;
+        return new City(
+            $id,
+            $name,
+            $countryId
+        );
     }
 
-    public function extract(City $city): array
+    public function extract(CityData $entity): array
     {
         return [
-            CityResource::ID_FIELD => $city->getId(),
+            CityResource::ID_FIELD => $entity->getId(),
 
-            CityResource::NAME_FIELD => $city->getName(),
+            CityResource::NAME_FIELD => $entity->getName(),
         ];
     }
 }

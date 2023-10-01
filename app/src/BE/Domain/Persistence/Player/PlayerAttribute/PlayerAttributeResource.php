@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace FAFI\src\BE\Domain\Persistence\Player\PlayerAttribute;
 
 use FAFI\exception\FafiException;
+use FAFI\src\BE\Domain\Dto\EntityDataInterface;
 use FAFI\src\BE\Domain\Dto\Player\PlayerAttribute\PlayerAttribute;
 use FAFI\src\BE\Domain\Persistence\AbstractResource;
 use FAFI\src\BE\Domain\Persistence\EntityCriteriaInterface;
@@ -58,13 +59,15 @@ class PlayerAttributeResource extends AbstractResource
 
 
     /**
-     * @param PlayerAttribute $entityData
+     * @param PlayerAttributeData $entityData
      *
      * @return PlayerAttribute
      * @throws FafiException
      */
-    public function create($entityData): PlayerAttribute
+    public function create(EntityDataInterface $entityData): PlayerAttribute
     {
+        $this->verifyInterface(PlayerAttributeData::class, $entityData);
+
         /** @var PlayerAttribute $result */
         $result = parent::create($entityData);
 

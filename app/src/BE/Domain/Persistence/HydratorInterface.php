@@ -16,4 +16,6 @@ interface HydratorInterface
     public function hydrateCollection(array $data): array;
 
     public function hydrate(array $data): EntityInterface;
+
+//    public function extract(EntityInterface $entity): array;
 }

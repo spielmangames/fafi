@@ -18,6 +18,9 @@ abstract class AbstractResource
     public const ID_FIELD = 'id';
 
 
+    private const E_CLASS_UNEXPECTED = 'Provided class "%s" is not expected "%s".';
+
+
     protected EntityValidator $entityValidator;
     protected HydratorInterface $hydrator;
 
@@ -117,6 +120,23 @@ abstract class AbstractResource
     public function delete(array $conditions = []): void
     {
         $this->queryExecutor->deleteRecords($this->getTable(), $conditions);
+    }
+
+
+    /**
+     * @param string $expected
+     * @param EntityDataInterface $actual
+     *
+     * @return void
+     * @throws FafiException
+     */
+    protected function verifyInterface(string $expected, EntityDataInterface $actual): void
+    {
+        if ($actual instanceof $expected) {
+            return;
+        }
+
+        throw new FafiException(sprintf(self::E_CLASS_UNEXPECTED, $actual::class, $expected));
     }
 
 

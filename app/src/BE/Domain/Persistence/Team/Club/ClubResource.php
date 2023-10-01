@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace FAFI\src\BE\Domain\Persistence\Team\Club;
 
 use FAFI\exception\FafiException;
+use FAFI\src\BE\Domain\Dto\EntityDataInterface;
 use FAFI\src\BE\Domain\Dto\Team\Club\Club;
 use FAFI\src\BE\Domain\Dto\Team\Club\ClubData;
 use FAFI\src\BE\Domain\Persistence\AbstractResource;
@@ -64,8 +65,10 @@ class ClubResource extends AbstractResource
      * @return Club
      * @throws FafiException
      */
-    public function create($entityData): Club
+    public function create(EntityDataInterface $entityData): Club
     {
+        $this->verifyInterface(ClubData::class, $entityData);
+
         /** @var Club $result */
         $result = parent::create($entityData);
 

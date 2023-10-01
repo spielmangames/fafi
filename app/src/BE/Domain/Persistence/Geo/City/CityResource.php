@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace FAFI\src\BE\Domain\Persistence\Geo\City;
 
 use FAFI\exception\FafiException;
+use FAFI\src\BE\Domain\Dto\EntityDataInterface;
 use FAFI\src\BE\Domain\Dto\Geo\City\City;
 use FAFI\src\BE\Domain\Dto\Geo\City\CityData;
 use FAFI\src\BE\Domain\Persistence\AbstractResource;
@@ -17,9 +18,11 @@ class CityResource extends AbstractResource
         self::ID_FIELD,
 
         self::NAME_FIELD,
+        self::COUNTRY_ID_FIELD,
     ];
     private const REQUIRED_FIELDS = [
         self::NAME_FIELD,
+        self::COUNTRY_ID_FIELD,
     ];
     private const UNIQUE_FIELDS = [
         self::NAME_FIELD,
@@ -27,6 +30,7 @@ class CityResource extends AbstractResource
 
 
     public const NAME_FIELD = 'name';
+    public const COUNTRY_ID_FIELD = 'country_id';
 
 
     public function __construct()
@@ -56,8 +60,10 @@ class CityResource extends AbstractResource
      * @return City
      * @throws FafiException
      */
-    public function create($entityData): City
+    public function create(EntityDataInterface $entityData): City
     {
+        $this->verifyInterface(CityData::class, $entityData);
+
         /** @var City $result */
         $result = parent::create($entityData);
 
