@@ -26,6 +26,6 @@ class IntegerSpecification extends AbstractFieldSpecification implements FieldSp
 
     public function validate(string $property, $value): void
     {
-        $this->dataValidator->assertFieldInt($value, $property, $this->min, $this->max);
+        $this->dataValidator::assertFieldInt($value, $property, $this->min, $this->max);
     }
 }

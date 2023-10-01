@@ -18,9 +18,6 @@ abstract class AbstractResource
     public const ID_FIELD = 'id';
 
 
-    private const E_CLASS_UNEXPECTED = 'Provided class "%s" is not expected "%s".';
-
-
     protected EntityValidator $entityValidator;
     protected HydratorInterface $hydrator;
 
@@ -123,34 +120,17 @@ abstract class AbstractResource
     }
 
 
-    /**
-     * @param string $expected
-     * @param EntityDataInterface $actual
-     *
-     * @return void
-     * @throws FafiException
-     */
-    protected function verifyInterface(string $expected, EntityDataInterface $actual): void
-    {
-        if ($actual instanceof $expected) {
-            return;
-        }
-
-        throw new FafiException(sprintf(self::E_CLASS_UNEXPECTED, $actual::class, $expected));
-    }
-
-
     private function verifyConstraintsOnCreate(string $table, EntityDataInterface $entity, array $data): void
     {
-        $this->entityValidator->assertEntityIdAbsent($entity);
-        $this->entityValidator->assertEntityMandatoryDataPresent($entity, $data, $this->getRequiredFields());
+        $this->entityValidator::assertEntityIdAbsent($entity);
+        $this->entityValidator::assertEntityMandatoryDataPresent($entity, $data, $this->getRequiredFields());
 
         $this->verifyModelConstraints($table, $entity, $data);
     }
 
     private function verifyConstraintsOnUpdate(string $table, EntityDataInterface $entity, array $data): void
     {
-        $this->entityValidator->assertEntityIdPresent($entity);
+        $this->entityValidator::assertEntityIdPresent($entity);
 
         $this->verifyModelConstraints($table, $entity, $data);
     }

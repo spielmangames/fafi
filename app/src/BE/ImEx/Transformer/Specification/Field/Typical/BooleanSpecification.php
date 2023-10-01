@@ -11,6 +11,6 @@ class BooleanSpecification extends AbstractFieldSpecification implements FieldSp
 {
     public function validate(string $property, $value): void
     {
-        $this->dataValidator->assertFieldBool($value, $property);
+        $this->dataValidator::assertFieldBool($value, $property);
     }
 }

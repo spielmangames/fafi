@@ -6,15 +6,27 @@ namespace FAFI\src\BE\Domain\Persistence;
 
 use FAFI\exception\EntityErr;
 use FAFI\exception\FafiException;
+use FAFI\src\BE\Domain\Dto\EntityDataInterface;
 use FAFI\src\BE\Domain\Dto\EntityInterface;
 
 class EntityValidator
 {
-    private DataValidator $dataValidator;
+    private const E_CLASS_UNEXPECTED = 'Provided class "%s" is not expected "%s".';
 
-    public function __construct()
+    /**
+     * @param string $expected
+     * @param EntityDataInterface $actual
+     *
+     * @return void
+     * @throws FafiException
+     */
+    public static function verifyInterface(string $expected, EntityDataInterface $actual): void
     {
-        $this->dataValidator = new DataValidator();
+        if ($actual instanceof $expected) {
+            return;
+        }
+
+        throw new FafiException(sprintf(self::E_CLASS_UNEXPECTED, $actual::class, $expected));
     }
 
 
@@ -26,24 +38,24 @@ class EntityValidator
      * @return void
      * @throws FafiException
      */
-    public function assertEntityMandatoryDataPresent(EntityInterface $entity, array $entityData, array $mandatory): void
+    public static function assertEntityMandatoryDataPresent(EntityInterface $entity, array $entityData, array $mandatory): void
     {
-        $this->dataValidator->assertRequiredFieldsPresent($entity, $entityData, $mandatory);
+        DataValidator::assertRequiredFieldsPresent($entity, $entityData, $mandatory);
     }
 
-    public function assertEntityPropertyStr($value, string $property, ?int $lengthMin = null, ?int $lengthMax = null): void
+    public static function assertEntityPropertyStr($value, string $property, ?int $lengthMin = null, ?int $lengthMax = null): void
     {
-        $this->dataValidator->assertFieldStr($value, $property, $lengthMin, $lengthMax);
+        DataValidator::assertFieldStr($value, $property, $lengthMin, $lengthMax);
     }
 
-    public function assertEntityPropertyInt($value, string $property, ?int $min = null, ?int $max = null): void
+    public static function assertEntityPropertyInt($value, string $property, ?int $min = null, ?int $max = null): void
     {
-        $this->dataValidator->assertFieldInt($value, $property, $min, $max);
+        DataValidator::assertFieldInt($value, $property, $min, $max);
     }
 
-    public function assertEntityPropertyEnum($value, string $property, array $allowed): void
+    public static function assertEntityPropertyEnum($value, string $property, array $allowed): void
     {
-        $this->dataValidator->assertFieldOneOf($value, $property, $allowed);
+        DataValidator::assertFieldOneOf($value, $property, $allowed);
     }
 
 
@@ -53,7 +65,7 @@ class EntityValidator
      * @return void
      * @throws FafiException
      */
-    public function assertEntityIdPresent(EntityInterface $entity): void
+    public static function assertEntityIdPresent(EntityInterface $entity): void
     {
         if (!$entity->getId()) {
             throw new FafiException(sprintf(EntityErr::ID_ABSENT, $entity));
@@ -66,7 +78,7 @@ class EntityValidator
      * @return void
      * @throws FafiException
      */
-    public function assertEntityIdAbsent(EntityInterface $entity): void
+    public static function assertEntityIdAbsent(EntityInterface $entity): void
     {
         if ($entity->getId()) {
             throw new FafiException(sprintf(EntityErr::ID_PRESENT, $entity));

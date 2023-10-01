@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace FAFI\src\BE\Domain\Persistence\Player\PlayerAttribute;
 
+use FAFI\src\BE\Domain\Dto\EntityDataInterface;
 use FAFI\src\BE\Domain\Dto\Player\PlayerAttribute\PlayerAttribute;
+use FAFI\src\BE\Domain\Persistence\EntityValidator;
 use FAFI\src\BE\Domain\Persistence\HydratorInterface;
 
 class PlayerAttributeHydrator implements HydratorInterface
@@ -41,8 +43,11 @@ class PlayerAttributeHydrator implements HydratorInterface
         return $attribute;
     }
 
-    public function extract(PlayerAttribute $entity): array
+    public function extract(EntityDataInterface $entity): array
     {
+        EntityValidator::verifyInterface(PlayerAttributeData::class, $entity);
+        /** @var PlayerAttributeData $entity */
+
         return [
             PlayerAttributeResource::ID_FIELD => $entity->getId(),
 

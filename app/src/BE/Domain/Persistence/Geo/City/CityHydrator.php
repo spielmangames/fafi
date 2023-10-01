@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace FAFI\src\BE\Domain\Persistence\Geo\City;
 
+use FAFI\src\BE\Domain\Dto\EntityDataInterface;
 use FAFI\src\BE\Domain\Dto\Geo\City\City;
 use FAFI\src\BE\Domain\Dto\Geo\City\CityData;
+use FAFI\src\BE\Domain\Persistence\EntityValidator;
 use FAFI\src\BE\Domain\Persistence\HydratorInterface;
 
 class CityHydrator implements HydratorInterface
@@ -39,8 +41,11 @@ class CityHydrator implements HydratorInterface
         );
     }
 
-    public function extract(CityData $entity): array
+    public function extract(EntityDataInterface $entity): array
     {
+        EntityValidator::verifyInterface(CityData::class, $entity);
+        /** @var CityData $entity */
+
         return [
             CityResource::ID_FIELD => $entity->getId(),
 

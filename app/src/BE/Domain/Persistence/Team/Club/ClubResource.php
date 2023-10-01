@@ -67,7 +67,7 @@ class ClubResource extends AbstractResource
      */
     public function create(EntityDataInterface $entityData): Club
     {
-        $this->verifyInterface(ClubData::class, $entityData);
+        $this->entityValidator::verifyInterface(ClubData::class, $entityData);
 
         /** @var Club $result */
         $result = parent::create($entityData);

@@ -29,7 +29,7 @@ class PlayerAttributesSpecification implements FieldSpecification
 
     public function validate(string $property, $value): void
     {
-        $this->dataValidator->assertFieldArr($value, $property);
+        $this->dataValidator::assertFieldArr($value, $property);
         foreach ($value as $position => $attribute) {
             $this->validateAttribute($property, $position, $attribute);
         }

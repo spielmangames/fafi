@@ -23,6 +23,6 @@ class EnumSpecification extends AbstractFieldSpecification implements FieldSpeci
 
     public function validate(string $property, $value): void
     {
-        $this->dataValidator->assertFieldOneOf($value, $property, $this->supported);
+        $this->dataValidator::assertFieldOneOf($value, $property, $this->supported);
     }
 }

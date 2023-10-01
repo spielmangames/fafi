@@ -26,6 +26,6 @@ class StringSpecification extends AbstractFieldSpecification implements FieldSpe
 
     public function validate(string $property, $value): void
     {
-        $this->dataValidator->assertFieldStr($value, $property, $this->min, $this->max);
+        $this->dataValidator::assertFieldStr($value, $property, $this->min, $this->max);
     }
 }

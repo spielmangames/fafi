@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace FAFI\src\BE\Domain\Persistence\Team\Club;
 
+use FAFI\src\BE\Domain\Dto\EntityDataInterface;
 use FAFI\src\BE\Domain\Dto\Team\Club\Club;
 use FAFI\src\BE\Domain\Dto\Team\Club\ClubData;
+use FAFI\src\BE\Domain\Persistence\EntityValidator;
 use FAFI\src\BE\Domain\Persistence\HydratorInterface;
 
 class ClubHydrator implements HydratorInterface
@@ -43,8 +45,11 @@ class ClubHydrator implements HydratorInterface
         );
     }
 
-    public function extract(ClubData $entity): array
+    public function extract(EntityDataInterface $entity): array
     {
+        EntityValidator::verifyInterface(ClubData::class, $entity);
+        /** @var ClubData $entity */
+
         return [
             ClubResource::ID_FIELD => $entity->getId(),
 

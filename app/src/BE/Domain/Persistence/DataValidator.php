@@ -17,7 +17,7 @@ class DataValidator
      * @return void
      * @throws FafiException
      */
-    public function assertRequiredFieldsPresent(string $entityName, array $entityData, array $mandatory): void
+    public static function assertRequiredFieldsPresent(string $entityName, array $entityData, array $mandatory): void
     {
         $missed = [];
         foreach ($mandatory as $field) {
@@ -33,28 +33,28 @@ class DataValidator
     }
 
 
-    public function assertFieldArr($value, string $property): void
+    public static function assertFieldArr($value, string $property): void
     {
         if (!is_array($value)) {
             throw new FafiException(sprintf(EntityErr::VALUE_TYPE_INVALID_ARR, $property));
         }
     }
 
-    public function assertFieldBool($value, string $property): void
+    public static function assertFieldBool($value, string $property): void
     {
         if (!is_bool($value)) {
             throw new FafiException(sprintf(EntityErr::VALUE_TYPE_INVALID_BOOL, $property));
         }
     }
 
-    public function assertFieldOneOf($value, string $property, array $allowed): void
+    public static function assertFieldOneOf($value, string $property, array $allowed): void
     {
         if (!in_array($value, $allowed)) {
             throw new FafiException(sprintf(EntityErr::VALUE_TYPE_INVALID_ENUM, $property));
         }
     }
 
-    public function assertFieldInt($value, string $property, ?int $min = null, ?int $max = null): void
+    public static function assertFieldInt($value, string $property, ?int $min = null, ?int $max = null): void
     {
         if (!is_int($value)) {
             throw new FafiException(sprintf(EntityErr::VALUE_TYPE_INVALID_INT, $property));
@@ -68,7 +68,7 @@ class DataValidator
         }
     }
 
-    public function assertFieldStr($value, string $property, ?int $lengthMin = null, ?int $lengthMax = null): void
+    public static function assertFieldStr($value, string $property, ?int $lengthMin = null, ?int $lengthMax = null): void
     {
         if (!is_string($value)) {
             throw new FafiException(sprintf(EntityErr::VALUE_TYPE_INVALID_STR, $property));

@@ -82,7 +82,7 @@ class PlayerResource extends AbstractResource
      */
     public function create(EntityDataInterface $entityData): Player
     {
-        $this->verifyInterface(PlayerData::class, $entityData);
+        $this->entityValidator::verifyInterface(PlayerData::class, $entityData);
 
         /** @var Player $result */
         $result = parent::create($entityData);
@@ -137,28 +137,28 @@ class PlayerResource extends AbstractResource
     {
         if (isset($data[self::NAME_FIELD])) {
             $field = self::NAME_FIELD;
-            $this->entityValidator->assertEntityPropertyStr($data[$field], $field, PlayerConstraints::NAME_MIN, PlayerConstraints::NAME_MAX);
+            $this->entityValidator::assertEntityPropertyStr($data[$field], $field, PlayerConstraints::NAME_MIN, PlayerConstraints::NAME_MAX);
         }
         if (isset($data[self::PARTICLE_FIELD])) {
             $field = self::PARTICLE_FIELD;
-            $this->entityValidator->assertEntityPropertyStr($data[$field], $field, PlayerConstraints::PARTICLE_MIN, PlayerConstraints::PARTICLE_MAX);
+            $this->entityValidator::assertEntityPropertyStr($data[$field], $field, PlayerConstraints::PARTICLE_MIN, PlayerConstraints::PARTICLE_MAX);
         }
         if (isset($data[self::SURNAME_FIELD])) {
             $field = self::SURNAME_FIELD;
-            $this->entityValidator->assertEntityPropertyStr($data[$field], $field, PlayerConstraints::SURNAME_MIN, PlayerConstraints::SURNAME_MAX);
+            $this->entityValidator::assertEntityPropertyStr($data[$field], $field, PlayerConstraints::SURNAME_MIN, PlayerConstraints::SURNAME_MAX);
         }
         if (isset($data[self::FAFI_SURNAME_FIELD])) {
             $field = self::FAFI_SURNAME_FIELD;
-            $this->entityValidator->assertEntityPropertyStr($data[$field], $field, PlayerConstraints::FAFI_SURNAME_MIN, PlayerConstraints::FAFI_SURNAME_MAX);
+            $this->entityValidator::assertEntityPropertyStr($data[$field], $field, PlayerConstraints::FAFI_SURNAME_MIN, PlayerConstraints::FAFI_SURNAME_MAX);
         }
 
         if (isset($data[self::HEIGHT_FIELD])) {
             $field = self::HEIGHT_FIELD;
-            $this->entityValidator->assertEntityPropertyInt($data[$field], $field, PlayerConstraints::HEIGHT_MIN, PlayerConstraints::HEIGHT_MAX);
+            $this->entityValidator::assertEntityPropertyInt($data[$field], $field, PlayerConstraints::HEIGHT_MIN, PlayerConstraints::HEIGHT_MAX);
         }
         if (isset($data[self::FOOT_FIELD])) {
             $field = self::FOOT_FIELD;
-            $this->entityValidator->assertEntityPropertyEnum($data[$field], $field, PlayerConstraints::FOOT_SUPPORTED);
+            $this->entityValidator::assertEntityPropertyEnum($data[$field], $field, PlayerConstraints::FOOT_SUPPORTED);
         }
     }
 

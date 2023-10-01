@@ -11,6 +11,6 @@ class IdSpecification extends AbstractFieldSpecification implements FieldSpecifi
 {
     public function validate(string $property, $value): void
     {
-        $this->dataValidator->assertFieldInt($value, $property, 0);
+        $this->dataValidator::assertFieldInt($value, $property, 0);
     }
 }
