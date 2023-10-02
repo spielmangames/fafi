@@ -121,27 +121,51 @@ abstract class AbstractResource
     }
 
 
-    private function verifyConstraintsOnCreate(string $table, EntityDataInterface $entityData, array $data): void
+    /**
+     * @param string $table
+     * @param EntityDataInterface $entity
+     * @param array $data
+     *
+     * @return void
+     * @throws FafiException
+     */
+    private function verifyConstraintsOnCreate(string $table, EntityDataInterface $entity, array $data): void
     {
-        $this->entityValidator::assertEntityIdAbsent($entityData);
-        $this->entityValidator::assertEntityMandatoryDataPresent($entityData, $data, $this->getRequiredFields());
+        $this->entityValidator::assertEntityIdAbsent($entity);
+        $this->entityValidator::assertEntityMandatoryDataPresent($entity, $data, $this->getRequiredFields());
 
-        $this->verifyModelConstraints($table, $entityData, $data);
+        $this->verifyModelConstraints($table, $entity, $data);
     }
 
-    private function verifyConstraintsOnUpdate(string $table, EntityDataInterface $entityData, array $data): void
+    /**
+     * @param string $table
+     * @param EntityDataInterface $entity
+     * @param array $data
+     *
+     * @return void
+     * @throws FafiException
+     */
+    private function verifyConstraintsOnUpdate(string $table, EntityDataInterface $entity, array $data): void
     {
-        $this->entityValidator::assertEntityIdPresent($entityData);
+        $this->entityValidator::assertEntityIdPresent($entity);
 
-        $this->verifyModelConstraints($table, $entityData, $data);
+        $this->verifyModelConstraints($table, $entity, $data);
     }
 
-    private function verifyModelConstraints(string $table, EntityInterface $entity, array $data): void
+    /**
+     * @param string $table
+     * @param EntityDataInterface $entity
+     * @param array $data
+     *
+     * @return void
+     * @throws FafiException
+     */
+    private function verifyModelConstraints(string $table, EntityDataInterface $entity, array $data): void
     {
         $this->verifyModelPropertiesConstraints($data);
 
         foreach ($this->getUniqueFields() as $uniqueField) {
-            $this->dbValidator->assertPropertyUnique($table, (string)$entity, $data, $uniqueField);
+            $this->dbValidator->assertPropertyUnique($table, $entity::class, $data, $uniqueField);
         }
     }
 
