@@ -104,8 +104,10 @@ class CountryResource extends AbstractResource
      * @return Country
      * @throws FafiException
      */
-    public function update($entityData): Country
+    public function update(EntityDataInterface $entityData): Country
     {
+        $this->entityValidator::verifyInterface(CountryData::class, $entityData);
+
         /** @var Country $result */
         $result = parent::update($entityData);
 

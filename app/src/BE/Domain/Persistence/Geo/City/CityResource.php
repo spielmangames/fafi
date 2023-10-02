@@ -104,8 +104,10 @@ class CityResource extends AbstractResource
      * @return City
      * @throws FafiException
      */
-    public function update($entityData): City
+    public function update(EntityDataInterface $entityData): City
     {
+        $this->entityValidator::verifyInterface(CityData::class, $entityData);
+
         /** @var City $result */
         $result = parent::update($entityData);
 

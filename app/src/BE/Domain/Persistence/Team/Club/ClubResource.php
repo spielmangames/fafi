@@ -109,8 +109,10 @@ class ClubResource extends AbstractResource
      * @return Club
      * @throws FafiException
      */
-    public function update($entityData): Club
+    public function update(EntityDataInterface $entityData): Club
     {
+        $this->entityValidator::verifyInterface(ClubData::class, $entityData);
+
         /** @var Club $result */
         $result = parent::update($entityData);
 

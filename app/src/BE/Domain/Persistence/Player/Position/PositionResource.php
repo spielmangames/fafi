@@ -96,13 +96,15 @@ class PositionResource extends AbstractResource
     }
 
     /**
-     * @param Position $entityData
+     * @param PositionData $entityData
      *
      * @return Position
      * @throws FafiException
      */
-    public function update($entityData): Position
+    public function update(EntityDataInterface $entityData): Position
     {
+        $this->entityValidator::verifyInterface(PositionData::class, $entityData);
+
         /** @var Position $result */
         $result = parent::update($entityData);
 

@@ -119,13 +119,15 @@ class PlayerResource extends AbstractResource
     }
 
     /**
-     * @param Player $entityData
+     * @param PlayerData $entityData
      *
      * @return Player
      * @throws FafiException
      */
-    public function update($entityData): Player
+    public function update(EntityDataInterface $entityData): Player
     {
+        $this->entityValidator::verifyInterface(PlayerData::class, $entityData);
+
         /** @var Player $result */
         $result = parent::update($entityData);
 
