@@ -31,7 +31,7 @@ class PositionRepository implements RepositoryInterface
     public function findById(int $id): ?Position
     {
         $criteria = new Criteria(AbstractResource::ID_FIELD, QuerySyntax::OPERATOR_IS, [$id]);
-        return $this->positionResource->readFirst([$criteria]);
+        return $this->positionResource->read([$criteria]);
     }
 
     /**
@@ -43,7 +43,7 @@ class PositionRepository implements RepositoryInterface
     public function findByName(string $name): ?Position
     {
         $criteria = new Criteria(PositionResource::NAME_FIELD, QuerySyntax::OPERATOR_IS, [$name]);
-        return $this->positionResource->readFirst([$criteria]);
+        return $this->positionResource->read([$criteria]);
     }
 
     /**

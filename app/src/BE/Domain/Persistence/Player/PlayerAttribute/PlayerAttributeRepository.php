@@ -31,7 +31,7 @@ class PlayerAttributeRepository implements RepositoryInterface
     public function findById(int $id): ?PlayerAttribute
     {
         $criteria = new Criteria(AbstractResource::ID_FIELD, QuerySyntax::OPERATOR_IS, [$id]);
-        return $this->attributeResource->readFirst([$criteria]);
+        return $this->attributeResource->read([$criteria]);
     }
 
     /**

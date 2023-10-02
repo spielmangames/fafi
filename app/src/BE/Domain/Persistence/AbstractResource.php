@@ -52,7 +52,7 @@ abstract class AbstractResource
         $id = $this->queryExecutor->createRecord($this->getTable(), $data);
 
         $criteria = new Criteria(self::ID_FIELD, QuerySyntax::OPERATOR_IS, [$id]);
-        $result = $this->readFirst([$criteria]);
+        $result = $this->read([$criteria]);
         if (!$result) {
             throw new FafiException(sprintf(EntityErr::ENTITY_ABSENT, $entityData, self::ID_FIELD, $id));
         }
@@ -78,7 +78,7 @@ abstract class AbstractResource
      * @return EntityInterface|null
      * @throws FafiException
      */
-    public function readFirst(array $conditions): ?EntityInterface
+    public function read(array $conditions): ?EntityInterface
     {
         $selection = $this->list($conditions);
         return !empty($selection) ? array_shift($selection) : null;
@@ -100,7 +100,7 @@ abstract class AbstractResource
         $this->queryExecutor->updateRecord($this->getTable(), $data, [$criteria]);
 
         $criteria = new Criteria(self::ID_FIELD, QuerySyntax::OPERATOR_IS, [$id]);
-        $result = $this->readFirst([$criteria]);
+        $result = $this->read([$criteria]);
         if (!$result) {
             throw new FafiException(sprintf(EntityErr::ENTITY_ABSENT, $entityData, self::ID_FIELD, $id));
         }

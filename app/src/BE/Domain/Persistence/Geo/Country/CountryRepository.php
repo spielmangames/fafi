@@ -31,7 +31,7 @@ class CountryRepository implements RepositoryInterface
     public function findById(int $id): ?Country
     {
         $criteria = new Criteria(AbstractResource::ID_FIELD, QuerySyntax::OPERATOR_IS, [$id]);
-        return $this->countryResource->readFirst([$criteria]);
+        return $this->countryResource->read([$criteria]);
     }
 
     /**
@@ -54,7 +54,7 @@ class CountryRepository implements RepositoryInterface
     public function findByName(string $name): ?Country
     {
         $criteria = new Criteria(CountryResource::NAME_FIELD, QuerySyntax::OPERATOR_IS, [$name]);
-        return $this->countryResource->readFirst([$criteria]);
+        return $this->countryResource->read([$criteria]);
     }
 
 

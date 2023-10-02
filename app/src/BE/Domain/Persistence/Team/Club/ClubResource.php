@@ -95,10 +95,10 @@ class ClubResource extends AbstractResource
      * @return Club|null
      * @throws FafiException
      */
-    public function readFirst(array $conditions): ?Club
+    public function read(array $conditions): ?Club
     {
         /** @var Club|null $result */
-        $result = parent::readFirst($conditions);
+        $result = parent::read($conditions);
 
         return $result;
     }

@@ -94,10 +94,10 @@ class PlayerAttributeResource extends AbstractResource
      * @return PlayerAttribute|null
      * @throws FafiException
      */
-    public function readFirst(array $conditions): ?PlayerAttribute
+    public function read(array $conditions): ?PlayerAttribute
     {
         /** @var PlayerAttribute|null $result */
-        $result = parent::readFirst($conditions);
+        $result = parent::read($conditions);
 
         return $result;
     }

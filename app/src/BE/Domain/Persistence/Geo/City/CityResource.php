@@ -90,10 +90,10 @@ class CityResource extends AbstractResource
      * @return City|null
      * @throws FafiException
      */
-    public function readFirst(array $conditions): ?City
+    public function read(array $conditions): ?City
     {
         /** @var City|null $result */
-        $result = parent::readFirst($conditions);
+        $result = parent::read($conditions);
 
         return $result;
     }

@@ -87,10 +87,10 @@ class PositionResource extends AbstractResource
      * @return Position|null
      * @throws FafiException
      */
-    public function readFirst(array $conditions): ?Position
+    public function read(array $conditions): ?Position
     {
         /** @var Position|null $result */
-        $result = parent::readFirst($conditions);
+        $result = parent::read($conditions);
 
         return $result;
     }

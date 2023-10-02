@@ -90,10 +90,10 @@ class CountryResource extends AbstractResource
      * @return Country|null
      * @throws FafiException
      */
-    public function readFirst(array $conditions): ?Country
+    public function read(array $conditions): ?Country
     {
         /** @var Country|null $result */
-        $result = parent::readFirst($conditions);
+        $result = parent::read($conditions);
 
         return $result;
     }

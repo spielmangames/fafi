@@ -31,7 +31,7 @@ class ClubRepository implements RepositoryInterface
     public function findById(int $id): ?Club
     {
         $criteria = new Criteria(AbstractResource::ID_FIELD, QuerySyntax::OPERATOR_IS, [$id]);
-        return $this->clubResource->readFirst([$criteria]);
+        return $this->clubResource->read([$criteria]);
     }
 
     /**

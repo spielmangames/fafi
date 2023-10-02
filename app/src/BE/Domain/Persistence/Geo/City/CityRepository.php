@@ -31,7 +31,7 @@ class CityRepository implements RepositoryInterface
     public function findById(int $id): ?City
     {
         $criteria = new Criteria(AbstractResource::ID_FIELD, QuerySyntax::OPERATOR_IS, [$id]);
-        return $this->cityResource->readFirst([$criteria]);
+        return $this->cityResource->read([$criteria]);
     }
 
     /**

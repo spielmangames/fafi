@@ -31,7 +31,7 @@ class PlayerRepository implements RepositoryInterface
     public function findById(int $id): ?Player
     {
         $criteria = new Criteria(AbstractResource::ID_FIELD, QuerySyntax::OPERATOR_IS, [$id]);
-        return $this->playerResource->readFirst([$criteria]);
+        return $this->playerResource->read([$criteria]);
     }
 
     /**
