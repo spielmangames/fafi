@@ -42,7 +42,7 @@ class ClubRepository implements RepositoryInterface
      */
     public function findCollection(array $conditions): array
     {
-        return $this->clubResource->read($conditions);
+        return $this->clubResource->list($conditions);
     }
 
 

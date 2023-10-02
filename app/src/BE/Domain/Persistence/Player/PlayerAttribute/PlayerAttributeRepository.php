@@ -42,7 +42,7 @@ class PlayerAttributeRepository implements RepositoryInterface
      */
     public function findCollection(array $conditions): array
     {
-        return $this->attributeResource->read($conditions);
+        return $this->attributeResource->list($conditions);
     }
 
 

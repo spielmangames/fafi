@@ -63,10 +63,10 @@ abstract class AbstractResource
     /**
      * @param EntityCriteriaInterface[] $conditions
      *
-     * @return EntityInterface[]|null
+     * @return EntityInterface[]
      * @throws FafiException
      */
-    public function read(array $conditions = []): ?array
+    public function list(array $conditions = []): array
     {
         $selection = $this->queryExecutor->readRecords($this->getTable(), $conditions);
         return $this->hydrator->hydrateCollection($selection);
@@ -80,7 +80,7 @@ abstract class AbstractResource
      */
     public function readFirst(array $conditions): ?EntityInterface
     {
-        $selection = $this->read($conditions);
+        $selection = $this->list($conditions);
         return !empty($selection) ? array_shift($selection) : null;
     }
 

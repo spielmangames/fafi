@@ -73,13 +73,13 @@ class CountryResource extends AbstractResource
     /**
      * @param EntityCriteriaInterface[] $conditions
      *
-     * @return Country[]|null
+     * @return Country[]
      * @throws FafiException
      */
-    public function read(array $conditions = []): ?array
+    public function list(array $conditions = []): array
     {
-        /** @var Country[]|null $result */
-        $result = parent::read($conditions);
+        /** @var Country[] $result */
+        $result = parent::list($conditions);
 
         return $result;
     }

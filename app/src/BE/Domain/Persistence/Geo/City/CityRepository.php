@@ -42,7 +42,7 @@ class CityRepository implements RepositoryInterface
      */
     public function findCollection(array $conditions): array
     {
-        return $this->cityResource->read($conditions);
+        return $this->cityResource->list($conditions);
     }
 
 

@@ -54,7 +54,7 @@ class PositionRepository implements RepositoryInterface
      */
     public function findCollection(array $conditions): array
     {
-        return $this->positionResource->read($conditions);
+        return $this->positionResource->list($conditions);
     }
 
 

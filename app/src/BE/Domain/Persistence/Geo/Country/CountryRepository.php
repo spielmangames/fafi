@@ -42,7 +42,7 @@ class CountryRepository implements RepositoryInterface
      */
     public function findCollection(array $conditions): array
     {
-        return $this->countryResource->read($conditions);
+        return $this->countryResource->list($conditions);
     }
 
     /**

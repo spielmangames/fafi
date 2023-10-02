@@ -73,13 +73,13 @@ class CityResource extends AbstractResource
     /**
      * @param EntityCriteriaInterface[] $conditions
      *
-     * @return City[]|null
+     * @return City[]
      * @throws FafiException
      */
-    public function read(array $conditions = []): ?array
+    public function list(array $conditions = []): array
     {
-        /** @var City[]|null $result */
-        $result = parent::read($conditions);
+        /** @var City[] $result */
+        $result = parent::list($conditions);
 
         return $result;
     }

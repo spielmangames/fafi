@@ -78,13 +78,13 @@ class ClubResource extends AbstractResource
     /**
      * @param EntityCriteriaInterface[] $conditions
      *
-     * @return Club[]|null
+     * @return Club[]
      * @throws FafiException
      */
-    public function read(array $conditions = []): ?array
+    public function list(array $conditions = []): array
     {
-        /** @var Club[]|null $result */
-        $result = parent::read($conditions);
+        /** @var Club[] $result */
+        $result = parent::list($conditions);
 
         return $result;
     }

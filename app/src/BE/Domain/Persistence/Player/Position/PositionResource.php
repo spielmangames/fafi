@@ -70,13 +70,13 @@ class PositionResource extends AbstractResource
     /**
      * @param EntityCriteriaInterface[] $conditions
      *
-     * @return Position[]|null
+     * @return Position[]
      * @throws FafiException
      */
-    public function read(array $conditions = []): ?array
+    public function list(array $conditions = []): array
     {
-        /** @var Position[]|null $result */
-        $result = parent::read($conditions);
+        /** @var Position[] $result */
+        $result = parent::list($conditions);
 
         return $result;
     }

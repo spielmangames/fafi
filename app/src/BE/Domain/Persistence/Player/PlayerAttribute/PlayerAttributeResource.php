@@ -77,13 +77,13 @@ class PlayerAttributeResource extends AbstractResource
     /**
      * @param EntityCriteriaInterface[] $conditions
      *
-     * @return PlayerAttribute[]|null
+     * @return PlayerAttribute[]
      * @throws FafiException
      */
-    public function read(array $conditions = []): ?array
+    public function list(array $conditions = []): array
     {
-        /** @var PlayerAttribute[]|null $result */
-        $result = parent::read($conditions);
+        /** @var PlayerAttribute[] $result */
+        $result = parent::list($conditions);
 
         return $result;
     }

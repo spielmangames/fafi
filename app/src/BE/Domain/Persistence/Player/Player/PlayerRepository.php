@@ -42,7 +42,7 @@ class PlayerRepository implements RepositoryInterface
      */
     public function findCollection(array $conditions = []): array
     {
-        return $this->playerResource->read($conditions);
+        return $this->playerResource->list($conditions);
     }
 
 
