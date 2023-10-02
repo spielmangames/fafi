@@ -7,6 +7,7 @@ namespace FAFI\src\BE\Domain\Persistence\Player\Player;
 use FAFI\db\Query\QuerySyntax;
 use FAFI\exception\FafiException;
 use FAFI\src\BE\Domain\Criteria;
+use FAFI\src\BE\Domain\Dto\EntityDataInterface;
 use FAFI\src\BE\Domain\Dto\Player\Player\Player;
 use FAFI\src\BE\Domain\Persistence\AbstractResource;
 use FAFI\src\BE\Domain\Persistence\EntityCriteriaInterface;
@@ -47,12 +48,12 @@ class PlayerRepository implements RepositoryInterface
 
 
     /**
-     * @param Player $entity
+     * @param PlayerData $entity
      *
      * @return Player
      * @throws FafiException
      */
-    public function save($entity): Player
+    public function save(EntityDataInterface $entity): Player
     {
         return $entity->getId() ? $this->playerResource->update($entity) : $this->playerResource->create($entity);
     }

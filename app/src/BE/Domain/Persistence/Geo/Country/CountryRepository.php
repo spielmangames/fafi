@@ -7,7 +7,9 @@ namespace FAFI\src\BE\Domain\Persistence\Geo\Country;
 use FAFI\db\Query\QuerySyntax;
 use FAFI\exception\FafiException;
 use FAFI\src\BE\Domain\Criteria;
+use FAFI\src\BE\Domain\Dto\EntityDataInterface;
 use FAFI\src\BE\Domain\Dto\Geo\Country\Country;
+use FAFI\src\BE\Domain\Dto\Geo\Country\CountryData;
 use FAFI\src\BE\Domain\Persistence\AbstractResource;
 use FAFI\src\BE\Domain\Persistence\EntityCriteriaInterface;
 use FAFI\src\BE\RepositoryInterface;
@@ -59,12 +61,12 @@ class CountryRepository implements RepositoryInterface
 
 
     /**
-     * @param Country $entity
+     * @param CountryData $entity
      *
      * @return Country
      * @throws FafiException
      */
-    public function save($entity): Country
+    public function save(EntityDataInterface $entity): Country
     {
         return $entity->getId() ? $this->countryResource->update($entity) : $this->countryResource->create($entity);
     }

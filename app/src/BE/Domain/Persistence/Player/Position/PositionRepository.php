@@ -7,7 +7,9 @@ namespace FAFI\src\BE\Domain\Persistence\Player\Position;
 use FAFI\db\Query\QuerySyntax;
 use FAFI\exception\FafiException;
 use FAFI\src\BE\Domain\Criteria;
+use FAFI\src\BE\Domain\Dto\EntityDataInterface;
 use FAFI\src\BE\Domain\Dto\Player\Position\Position;
+use FAFI\src\BE\Domain\Dto\Player\Position\PositionData;
 use FAFI\src\BE\Domain\Persistence\AbstractResource;
 use FAFI\src\BE\Domain\Persistence\EntityCriteriaInterface;
 use FAFI\src\BE\RepositoryInterface;
@@ -59,12 +61,12 @@ class PositionRepository implements RepositoryInterface
 
 
     /**
-     * @param Position $entity
+     * @param PositionData $entity
      *
      * @return Position
      * @throws FafiException
      */
-    public function save($entity): Position
+    public function save(EntityDataInterface $entity): Position
     {
         return $entity->getId() ? $this->positionResource->update($entity) : $this->positionResource->create($entity);
     }

@@ -7,7 +7,9 @@ namespace FAFI\src\BE\Domain\Persistence\Geo\City;
 use FAFI\db\Query\QuerySyntax;
 use FAFI\exception\FafiException;
 use FAFI\src\BE\Domain\Criteria;
+use FAFI\src\BE\Domain\Dto\EntityDataInterface;
 use FAFI\src\BE\Domain\Dto\Geo\City\City;
+use FAFI\src\BE\Domain\Dto\Geo\City\CityData;
 use FAFI\src\BE\Domain\Persistence\AbstractResource;
 use FAFI\src\BE\Domain\Persistence\EntityCriteriaInterface;
 use FAFI\src\BE\RepositoryInterface;
@@ -47,12 +49,12 @@ class CityRepository implements RepositoryInterface
 
 
     /**
-     * @param City $entity
+     * @param CityData $entity
      *
      * @return City
      * @throws FafiException
      */
-    public function save($entity): City
+    public function save(EntityDataInterface $entity): City
     {
         return $entity->getId() ? $this->cityResource->update($entity) : $this->cityResource->create($entity);
     }

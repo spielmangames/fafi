@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace FAFI\src\BE;
 
 use FAFI\exception\FafiException;
+use FAFI\src\BE\Domain\Dto\EntityDataInterface;
 use FAFI\src\BE\Domain\Dto\EntityInterface;
 use FAFI\src\BE\Domain\Persistence\EntityCriteriaInterface;
 
@@ -28,12 +29,12 @@ interface RepositoryInterface
 
 
     /**
-     * @param EntityInterface $entity
+     * @param EntityDataInterface $entity
      *
      * @return EntityInterface
      * @throws FafiException
      */
-    public function save(EntityInterface $entity): EntityInterface;
+    public function save(EntityDataInterface $entity): EntityInterface;
 
     /**
      * @param int $id

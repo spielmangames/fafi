@@ -7,7 +7,9 @@ namespace FAFI\src\BE\Domain\Persistence\Team\Club;
 use FAFI\db\Query\QuerySyntax;
 use FAFI\exception\FafiException;
 use FAFI\src\BE\Domain\Criteria;
+use FAFI\src\BE\Domain\Dto\EntityDataInterface;
 use FAFI\src\BE\Domain\Dto\Team\Club\Club;
+use FAFI\src\BE\Domain\Dto\Team\Club\ClubData;
 use FAFI\src\BE\Domain\Persistence\AbstractResource;
 use FAFI\src\BE\Domain\Persistence\EntityCriteriaInterface;
 use FAFI\src\BE\RepositoryInterface;
@@ -47,12 +49,12 @@ class ClubRepository implements RepositoryInterface
 
 
     /**
-     * @param Club $entity
+     * @param ClubData $entity
      *
      * @return Club
      * @throws FafiException
      */
-    public function save($entity): Club
+    public function save(EntityDataInterface $entity): Club
     {
         return $entity->getId() ? $this->clubResource->update($entity) : $this->clubResource->create($entity);
     }
