@@ -43,7 +43,7 @@ class CountryHydrator implements HydratorInterface
 
     public function extract(EntityDataInterface $entity): array
     {
-        EntityValidator::verifyInterface(CountryData::class, $entity);
+        EntityValidator::assertEntityType(CountryData::class, $entity);
         /** @var CountryData $entity */
 
         return [

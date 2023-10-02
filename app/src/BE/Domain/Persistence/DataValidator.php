@@ -33,28 +33,28 @@ class DataValidator
     }
 
 
-    public static function assertFieldArr($value, string $property): void
+    public static function assertFieldArr(mixed $value, string $property): void
     {
         if (!is_array($value)) {
             throw new FafiException(sprintf(EntityErr::VALUE_TYPE_INVALID_ARR, $property));
         }
     }
 
-    public static function assertFieldBool($value, string $property): void
+    public static function assertFieldBool(mixed $value, string $property): void
     {
         if (!is_bool($value)) {
             throw new FafiException(sprintf(EntityErr::VALUE_TYPE_INVALID_BOOL, $property));
         }
     }
 
-    public static function assertFieldOneOf($value, string $property, array $allowed): void
+    public static function assertFieldOneOf(mixed $value, string $property, array $allowed): void
     {
         if (!in_array($value, $allowed)) {
             throw new FafiException(sprintf(EntityErr::VALUE_TYPE_INVALID_ENUM, $property));
         }
     }
 
-    public static function assertFieldInt($value, string $property, ?int $min = null, ?int $max = null): void
+    public static function assertFieldInt(mixed $value, string $property, ?int $min = null, ?int $max = null): void
     {
         if (!is_int($value)) {
             throw new FafiException(sprintf(EntityErr::VALUE_TYPE_INVALID_INT, $property));
@@ -68,7 +68,7 @@ class DataValidator
         }
     }
 
-    public static function assertFieldStr($value, string $property, ?int $lengthMin = null, ?int $lengthMax = null): void
+    public static function assertFieldStr(mixed $value, string $property, ?int $lengthMin = null, ?int $lengthMax = null): void
     {
         if (!is_string($value)) {
             throw new FafiException(sprintf(EntityErr::VALUE_TYPE_INVALID_STR, $property));

@@ -7,6 +7,7 @@ namespace FAFI\exception;
 interface EntityErr extends Err
 {
     public const ENTITY_ABSENT = '%s (%s = %s) is absent.';
+    public const ENTITY_UNEXPECTED = 'Class "%s" is not expected. Must be "%s".';
 
     public const REQ_ABSENT = 'Required fields are absent for %s: "%s".';
     public const ID_ABSENT = 'ID is required for updating %s and can not be null.';

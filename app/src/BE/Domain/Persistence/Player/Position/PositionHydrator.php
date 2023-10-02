@@ -41,7 +41,7 @@ class PositionHydrator implements HydratorInterface
 
     public function extract(EntityDataInterface $entity): array
     {
-        EntityValidator::verifyInterface(PositionData::class, $entity);
+        EntityValidator::assertEntityType(PositionData::class, $entity);
         /** @var PositionData $entity */
 
         return [

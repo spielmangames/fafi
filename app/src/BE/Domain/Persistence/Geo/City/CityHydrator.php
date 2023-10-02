@@ -43,7 +43,7 @@ class CityHydrator implements HydratorInterface
 
     public function extract(EntityDataInterface $entity): array
     {
-        EntityValidator::verifyInterface(CityData::class, $entity);
+        EntityValidator::assertEntityType(CityData::class, $entity);
         /** @var CityData $entity */
 
         return [

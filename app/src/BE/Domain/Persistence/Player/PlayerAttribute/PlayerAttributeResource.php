@@ -95,7 +95,7 @@ class PlayerAttributeResource extends AbstractResource
      */
     public function create(EntityDataInterface $entityData): PlayerAttribute
     {
-        $this->entityValidator::verifyInterface(PlayerAttributeData::class, $entityData);
+        $this->entityValidator::assertEntityType(PlayerAttributeData::class, $entityData);
 
         /** @var PlayerAttribute $result */
         $result = parent::create($entityData);
@@ -111,7 +111,7 @@ class PlayerAttributeResource extends AbstractResource
      */
     public function update(EntityDataInterface $entityData): PlayerAttribute
     {
-        $this->entityValidator::verifyInterface(PlayerAttributeData::class, $entityData);
+        $this->entityValidator::assertEntityType(PlayerAttributeData::class, $entityData);
 
         /** @var PlayerAttribute $result */
         $result = parent::update($entityData);

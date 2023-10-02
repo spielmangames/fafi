@@ -45,7 +45,7 @@ class PlayerAttributeHydrator implements HydratorInterface
 
     public function extract(EntityDataInterface $entity): array
     {
-        EntityValidator::verifyInterface(PlayerAttributeData::class, $entity);
+        EntityValidator::assertEntityType(PlayerAttributeData::class, $entity);
         /** @var PlayerAttributeData $entity */
 
         return [

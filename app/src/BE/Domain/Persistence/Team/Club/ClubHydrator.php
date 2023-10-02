@@ -47,7 +47,7 @@ class ClubHydrator implements HydratorInterface
 
     public function extract(EntityDataInterface $entity): array
     {
-        EntityValidator::verifyInterface(ClubData::class, $entity);
+        EntityValidator::assertEntityType(ClubData::class, $entity);
         /** @var ClubData $entity */
 
         return [

@@ -88,7 +88,7 @@ class PositionResource extends AbstractResource
      */
     public function create(EntityDataInterface $entityData): Position
     {
-        $this->entityValidator::verifyInterface(PositionData::class, $entityData);
+        $this->entityValidator::assertEntityType(PositionData::class, $entityData);
 
         /** @var Position $result */
         $result = parent::create($entityData);
@@ -104,7 +104,7 @@ class PositionResource extends AbstractResource
      */
     public function update(EntityDataInterface $entityData): Position
     {
-        $this->entityValidator::verifyInterface(PositionData::class, $entityData);
+        $this->entityValidator::assertEntityType(PositionData::class, $entityData);
 
         /** @var Position $result */
         $result = parent::update($entityData);

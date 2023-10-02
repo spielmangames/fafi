@@ -121,19 +121,19 @@ abstract class AbstractResource
     }
 
 
-    private function verifyConstraintsOnCreate(string $table, EntityDataInterface $entity, array $data): void
+    private function verifyConstraintsOnCreate(string $table, EntityDataInterface $entityData, array $data): void
     {
-        $this->entityValidator::assertEntityIdAbsent($entity);
-        $this->entityValidator::assertEntityMandatoryDataPresent($entity, $data, $this->getRequiredFields());
+        $this->entityValidator::assertEntityIdAbsent($entityData);
+        $this->entityValidator::assertEntityMandatoryDataPresent($entityData, $data, $this->getRequiredFields());
 
-        $this->verifyModelConstraints($table, $entity, $data);
+        $this->verifyModelConstraints($table, $entityData, $data);
     }
 
-    private function verifyConstraintsOnUpdate(string $table, EntityDataInterface $entity, array $data): void
+    private function verifyConstraintsOnUpdate(string $table, EntityDataInterface $entityData, array $data): void
     {
-        $this->entityValidator::assertEntityIdPresent($entity);
+        $this->entityValidator::assertEntityIdPresent($entityData);
 
-        $this->verifyModelConstraints($table, $entity, $data);
+        $this->verifyModelConstraints($table, $entityData, $data);
     }
 
     private function verifyModelConstraints(string $table, EntityInterface $entity, array $data): void

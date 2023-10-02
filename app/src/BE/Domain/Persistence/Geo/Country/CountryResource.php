@@ -91,7 +91,7 @@ class CountryResource extends AbstractResource
      */
     public function create(EntityDataInterface $entityData): Country
     {
-        $this->entityValidator::verifyInterface(CountryData::class, $entityData);
+        $this->entityValidator::assertEntityType(CountryData::class, $entityData);
 
         /** @var Country $result */
         $result = parent::create($entityData);
@@ -107,7 +107,7 @@ class CountryResource extends AbstractResource
      */
     public function update(EntityDataInterface $entityData): Country
     {
-        $this->entityValidator::verifyInterface(CountryData::class, $entityData);
+        $this->entityValidator::assertEntityType(CountryData::class, $entityData);
 
         /** @var Country $result */
         $result = parent::update($entityData);

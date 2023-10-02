@@ -91,7 +91,7 @@ class CityResource extends AbstractResource
      */
     public function create(EntityDataInterface $entityData): City
     {
-        $this->entityValidator::verifyInterface(CityData::class, $entityData);
+        $this->entityValidator::assertEntityType(CityData::class, $entityData);
 
         /** @var City $result */
         $result = parent::create($entityData);
@@ -107,7 +107,7 @@ class CityResource extends AbstractResource
      */
     public function update(EntityDataInterface $entityData): City
     {
-        $this->entityValidator::verifyInterface(CityData::class, $entityData);
+        $this->entityValidator::assertEntityType(CityData::class, $entityData);
 
         /** @var City $result */
         $result = parent::update($entityData);
