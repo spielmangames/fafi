@@ -75,17 +75,15 @@ class PlayerResource extends AbstractResource
 
 
     /**
-     * @param PlayerData $entityData
+     * @param EntityCriteriaInterface[] $conditions
      *
-     * @return Player
+     * @return Player|null
      * @throws FafiException
      */
-    public function create(EntityDataInterface $entityData): Player
+    public function read(array $conditions): ?Player
     {
-        $this->entityValidator::verifyInterface(PlayerData::class, $entityData);
-
-        /** @var Player $result */
-        $result = parent::create($entityData);
+        /** @var Player|null $result */
+        $result = parent::read($conditions);
 
         return $result;
     }
@@ -104,16 +102,19 @@ class PlayerResource extends AbstractResource
         return $result;
     }
 
+
     /**
-     * @param EntityCriteriaInterface[] $conditions
+     * @param PlayerData $entityData
      *
-     * @return Player|null
+     * @return Player
      * @throws FafiException
      */
-    public function read(array $conditions): ?Player
+    public function create(EntityDataInterface $entityData): Player
     {
-        /** @var Player|null $result */
-        $result = parent::read($conditions);
+        $this->entityValidator::verifyInterface(PlayerData::class, $entityData);
+
+        /** @var Player $result */
+        $result = parent::create($entityData);
 
         return $result;
     }

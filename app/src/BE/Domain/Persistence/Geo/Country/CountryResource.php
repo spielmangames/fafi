@@ -55,17 +55,15 @@ class CountryResource extends AbstractResource
 
 
     /**
-     * @param CountryData $entityData
+     * @param EntityCriteriaInterface[] $conditions
      *
-     * @return Country
+     * @return Country|null
      * @throws FafiException
      */
-    public function create(EntityDataInterface $entityData): Country
+    public function read(array $conditions): ?Country
     {
-        $this->entityValidator::verifyInterface(CountryData::class, $entityData);
-
-        /** @var Country $result */
-        $result = parent::create($entityData);
+        /** @var Country|null $result */
+        $result = parent::read($conditions);
 
         return $result;
     }
@@ -84,16 +82,19 @@ class CountryResource extends AbstractResource
         return $result;
     }
 
+
     /**
-     * @param EntityCriteriaInterface[] $conditions
+     * @param CountryData $entityData
      *
-     * @return Country|null
+     * @return Country
      * @throws FafiException
      */
-    public function read(array $conditions): ?Country
+    public function create(EntityDataInterface $entityData): Country
     {
-        /** @var Country|null $result */
-        $result = parent::read($conditions);
+        $this->entityValidator::verifyInterface(CountryData::class, $entityData);
+
+        /** @var Country $result */
+        $result = parent::create($entityData);
 
         return $result;
     }

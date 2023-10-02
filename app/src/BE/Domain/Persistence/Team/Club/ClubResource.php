@@ -60,17 +60,15 @@ class ClubResource extends AbstractResource
 
 
     /**
-     * @param ClubData $entityData
+     * @param EntityCriteriaInterface[] $conditions
      *
-     * @return Club
+     * @return Club|null
      * @throws FafiException
      */
-    public function create(EntityDataInterface $entityData): Club
+    public function read(array $conditions): ?Club
     {
-        $this->entityValidator::verifyInterface(ClubData::class, $entityData);
-
-        /** @var Club $result */
-        $result = parent::create($entityData);
+        /** @var Club|null $result */
+        $result = parent::read($conditions);
 
         return $result;
     }
@@ -89,16 +87,19 @@ class ClubResource extends AbstractResource
         return $result;
     }
 
+
     /**
-     * @param EntityCriteriaInterface[] $conditions
+     * @param ClubData $entityData
      *
-     * @return Club|null
+     * @return Club
      * @throws FafiException
      */
-    public function read(array $conditions): ?Club
+    public function create(EntityDataInterface $entityData): Club
     {
-        /** @var Club|null $result */
-        $result = parent::read($conditions);
+        $this->entityValidator::verifyInterface(ClubData::class, $entityData);
+
+        /** @var Club $result */
+        $result = parent::create($entityData);
 
         return $result;
     }

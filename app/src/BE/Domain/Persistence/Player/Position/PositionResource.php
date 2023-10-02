@@ -52,17 +52,15 @@ class PositionResource extends AbstractResource
 
 
     /**
-     * @param PositionData $entityData
+     * @param EntityCriteriaInterface[] $conditions
      *
-     * @return Position
+     * @return Position|null
      * @throws FafiException
      */
-    public function create(EntityDataInterface $entityData): Position
+    public function read(array $conditions): ?Position
     {
-        $this->entityValidator::verifyInterface(PositionData::class, $entityData);
-
-        /** @var Position $result */
-        $result = parent::create($entityData);
+        /** @var Position|null $result */
+        $result = parent::read($conditions);
 
         return $result;
     }
@@ -81,16 +79,19 @@ class PositionResource extends AbstractResource
         return $result;
     }
 
+
     /**
-     * @param EntityCriteriaInterface[] $conditions
+     * @param PositionData $entityData
      *
-     * @return Position|null
+     * @return Position
      * @throws FafiException
      */
-    public function read(array $conditions): ?Position
+    public function create(EntityDataInterface $entityData): Position
     {
-        /** @var Position|null $result */
-        $result = parent::read($conditions);
+        $this->entityValidator::verifyInterface(PositionData::class, $entityData);
+
+        /** @var Position $result */
+        $result = parent::create($entityData);
 
         return $result;
     }

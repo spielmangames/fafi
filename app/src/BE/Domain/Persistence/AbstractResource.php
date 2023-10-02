@@ -39,6 +39,31 @@ abstract class AbstractResource
 
 
     /**
+     * @param EntityCriteriaInterface[] $conditions
+     *
+     * @return EntityInterface|null
+     * @throws FafiException
+     */
+    public function read(array $conditions): ?EntityInterface
+    {
+        $selection = $this->list($conditions);
+        return !empty($selection) ? array_shift($selection) : null;
+    }
+
+    /**
+     * @param EntityCriteriaInterface[] $conditions
+     *
+     * @return EntityInterface[]
+     * @throws FafiException
+     */
+    public function list(array $conditions = []): array
+    {
+        $selection = $this->queryExecutor->readRecords($this->getTable(), $conditions);
+        return $this->hydrator->hydrateCollection($selection);
+    }
+
+
+    /**
      * @param EntityDataInterface $entityData
      *
      * @return EntityInterface
@@ -58,30 +83,6 @@ abstract class AbstractResource
         }
 
         return $result;
-    }
-
-    /**
-     * @param EntityCriteriaInterface[] $conditions
-     *
-     * @return EntityInterface[]
-     * @throws FafiException
-     */
-    public function list(array $conditions = []): array
-    {
-        $selection = $this->queryExecutor->readRecords($this->getTable(), $conditions);
-        return $this->hydrator->hydrateCollection($selection);
-    }
-
-    /**
-     * @param EntityCriteriaInterface[] $conditions
-     *
-     * @return EntityInterface|null
-     * @throws FafiException
-     */
-    public function read(array $conditions): ?EntityInterface
-    {
-        $selection = $this->list($conditions);
-        return !empty($selection) ? array_shift($selection) : null;
     }
 
     /**

@@ -55,17 +55,15 @@ class CityResource extends AbstractResource
 
 
     /**
-     * @param CityData $entityData
+     * @param EntityCriteriaInterface[] $conditions
      *
-     * @return City
+     * @return City|null
      * @throws FafiException
      */
-    public function create(EntityDataInterface $entityData): City
+    public function read(array $conditions): ?City
     {
-        $this->entityValidator::verifyInterface(CityData::class, $entityData);
-
-        /** @var City $result */
-        $result = parent::create($entityData);
+        /** @var City|null $result */
+        $result = parent::read($conditions);
 
         return $result;
     }
@@ -84,16 +82,19 @@ class CityResource extends AbstractResource
         return $result;
     }
 
+
     /**
-     * @param EntityCriteriaInterface[] $conditions
+     * @param CityData $entityData
      *
-     * @return City|null
+     * @return City
      * @throws FafiException
      */
-    public function read(array $conditions): ?City
+    public function create(EntityDataInterface $entityData): City
     {
-        /** @var City|null $result */
-        $result = parent::read($conditions);
+        $this->entityValidator::verifyInterface(CityData::class, $entityData);
+
+        /** @var City $result */
+        $result = parent::create($entityData);
 
         return $result;
     }
