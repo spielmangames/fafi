@@ -10,93 +10,48 @@ class PlayerAttribute implements EntityInterface
 {
     public const ENTITY = 'Player Attribute';
 
-
-    private ?int $id = null;
-
-    protected ?int $playerId = null;
-    protected ?int $positionId = null;
-
-    protected ?int $attMin = null;
-    protected ?int $attMax = null;
-    protected ?int $defMin = null;
-    protected ?int $defMax = null;
-
-
-    public function setId(int $id): self
-    {
-        $this->id = $id;
-        return $this;
+    public function __construct(
+        private readonly int $id,
+        private readonly int $playerId,
+        private readonly int $positionId,
+        private readonly int $attMin,
+        private readonly int $attMax,
+        private readonly int $defMin,
+        private readonly int $defMax,
+    ) {
     }
 
-    public function getId(): ?int
+    public function getId(): int
     {
         return $this->id;
     }
 
-
-    public function setPlayerId(int $playerId): self
-    {
-        $this->playerId = $playerId;
-        return $this;
-    }
-
-    public function getPlayerId(): ?int
+    public function getPlayerId(): int
     {
         return $this->playerId;
     }
 
-    public function setPositionId(int $positionId): self
-    {
-        $this->positionId = $positionId;
-        return $this;
-    }
-
-    public function getPositionId(): ?int
+    public function getPositionId(): int
     {
         return $this->positionId;
     }
 
-
-    public function setAttMin(int $attMin): self
-    {
-        $this->attMin = $attMin;
-        return $this;
-    }
-
-    public function getAttMin(): ?int
+    public function getAttMin(): int
     {
         return $this->attMin;
     }
 
-    public function setAttMax(int $attMax): self
-    {
-        $this->attMax = $attMax;
-        return $this;
-    }
-
-    public function getAttMax(): ?int
+    public function getAttMax(): int
     {
         return $this->attMax;
     }
 
-    public function setDefMin(int $defMin): self
-    {
-        $this->defMin = $defMin;
-        return $this;
-    }
-
-    public function getDefMin(): ?int
+    public function getDefMin(): int
     {
         return $this->defMin;
     }
 
-    public function setDefMax(int $defMax): self
-    {
-        $this->defMax = $defMax;
-        return $this;
-    }
-
-    public function getDefMax(): ?int
+    public function getDefMax(): int
     {
         return $this->defMax;
     }

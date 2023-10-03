@@ -6,6 +6,7 @@ namespace FAFI\src\BE\Domain\Persistence\Player\PlayerAttribute;
 
 use FAFI\src\BE\Domain\Dto\EntityDataInterface;
 use FAFI\src\BE\Domain\Dto\Player\PlayerAttribute\PlayerAttribute;
+use FAFI\src\BE\Domain\Dto\Player\PlayerAttribute\PlayerAttributeData;
 use FAFI\src\BE\Domain\Persistence\EntityValidator;
 use FAFI\src\BE\Domain\Persistence\HydratorInterface;
 
@@ -28,19 +29,25 @@ class PlayerAttributeHydrator implements HydratorInterface
 
     public function hydrate(array $data): PlayerAttribute
     {
-        $attribute = new PlayerAttribute();
+        $id = (int)$data[PlayerAttributeResource::ID_FIELD];
 
-        !isset($data[PlayerAttributeResource::ID_FIELD]) ?: $attribute->setId($data[PlayerAttributeResource::ID_FIELD]);
+        $playerId = (int)$data[PlayerAttributeResource::PLAYER_ID_FIELD];
+        $positionId = (int)$data[PlayerAttributeResource::POSITION_ID_FIELD];
 
-        !isset($data[PlayerAttributeResource::PLAYER_ID_FIELD]) ?: $attribute->setPlayerId($data[PlayerAttributeResource::PLAYER_ID_FIELD]);
-        !isset($data[PlayerAttributeResource::POSITION_ID_FIELD]) ?: $attribute->setPositionId($data[PlayerAttributeResource::POSITION_ID_FIELD]);
+        $attMin = (int)$data[PlayerAttributeResource::ATT_MIN_FIELD];
+        $attMax = (int)$data[PlayerAttributeResource::ATT_MAX_FIELD];
+        $defMin = (int)$data[PlayerAttributeResource::DEF_MIN_FIELD];
+        $defMax = (int)$data[PlayerAttributeResource::DEF_MAX_FIELD];
 
-        !isset($data[PlayerAttributeResource::ATT_MIN_FIELD]) ?: $attribute->setAttMin($data[PlayerAttributeResource::ATT_MIN_FIELD]);
-        !isset($data[PlayerAttributeResource::ATT_MAX_FIELD]) ?: $attribute->setAttMax($data[PlayerAttributeResource::ATT_MAX_FIELD]);
-        !isset($data[PlayerAttributeResource::DEF_MIN_FIELD]) ?: $attribute->setDefMin($data[PlayerAttributeResource::DEF_MIN_FIELD]);
-        !isset($data[PlayerAttributeResource::DEF_MAX_FIELD]) ?: $attribute->setDefMax($data[PlayerAttributeResource::DEF_MAX_FIELD]);
-
-        return $attribute;
+        return new PlayerAttribute(
+            $id,
+            $playerId,
+            $positionId,
+            $attMin,
+            $attMax,
+            $defMin,
+            $defMax
+        );
     }
 
     public function extract(EntityDataInterface $entity): array
