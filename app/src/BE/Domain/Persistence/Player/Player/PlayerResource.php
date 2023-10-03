@@ -8,6 +8,7 @@ use FAFI\exception\FafiException;
 use FAFI\src\BE\Domain\Dto\EntityDataInterface;
 use FAFI\src\BE\Domain\Dto\Player\Player\Player;
 use FAFI\src\BE\Domain\Dto\Player\Player\PlayerConstraints;
+use FAFI\src\BE\Domain\Dto\Player\Player\PlayerData;
 use FAFI\src\BE\Domain\Persistence\AbstractResource;
 use FAFI\src\BE\Domain\Persistence\EntityCriteriaInterface;
 
@@ -27,7 +28,7 @@ class PlayerResource extends AbstractResource
 
         self::HEIGHT_FIELD,
         self::FOOT_FIELD,
-        self::INJURE_FACTOR_FIELD,
+        self::IS_FRAGILE_FIELD,
     ];
     private const REQUIRED_FIELDS = [
         self::SURNAME_FIELD,
@@ -50,7 +51,7 @@ class PlayerResource extends AbstractResource
     // skills shape
     public const HEIGHT_FIELD = 'height';
     public const FOOT_FIELD = 'foot';
-    public const INJURE_FACTOR_FIELD = 'injure_factor';
+    public const IS_FRAGILE_FIELD = 'injure_factor';
 
 
     public function __construct()

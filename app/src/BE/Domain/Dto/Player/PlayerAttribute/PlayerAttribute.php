@@ -26,6 +26,7 @@ class PlayerAttribute implements EntityInterface
         return $this->id;
     }
 
+
     public function getPlayerId(): int
     {
         return $this->playerId;
@@ -35,6 +36,7 @@ class PlayerAttribute implements EntityInterface
     {
         return $this->positionId;
     }
+
 
     public function getAttMin(): int
     {

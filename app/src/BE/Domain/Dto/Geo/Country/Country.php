@@ -22,6 +22,7 @@ class Country implements EntityInterface
         return $this->id;
     }
 
+
     public function getName(): string
     {
         return $this->name;

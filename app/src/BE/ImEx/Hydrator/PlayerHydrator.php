@@ -30,7 +30,7 @@ class PlayerHydrator implements EntityHydratorInterface
 
         !isset($data[PlayerEntityFileSchema::HEIGHT]) ?: $player->setHeight($data[PlayerEntityFileSchema::HEIGHT]);
         !isset($data[PlayerEntityFileSchema::FOOT]) ?: $player->setFoot($data[PlayerEntityFileSchema::FOOT]);
-        !isset($data[PlayerEntityFileSchema::INJURE_FACTOR]) ?: $player->setInjureFactor($data[PlayerEntityFileSchema::INJURE_FACTOR]);
+        !isset($data[PlayerEntityFileSchema::INJURE_FACTOR]) ?: $player->setIsFragile($data[PlayerEntityFileSchema::INJURE_FACTOR]);
 
         !isset($data[PlayerEntityFileSchema::ATTRIBUTES]) ?: $player->setAttributes(
             $this->playerAttributeHydrator->hydrateCollection($data[PlayerEntityFileSchema::ATTRIBUTES])
@@ -52,7 +52,7 @@ class PlayerHydrator implements EntityHydratorInterface
 
             PlayerEntityFileSchema::HEIGHT => $entity->getHeight(),
             PlayerEntityFileSchema::FOOT => $entity->getFoot(),
-            PlayerEntityFileSchema::INJURE_FACTOR => $entity->getInjureFactor(),
+            PlayerEntityFileSchema::INJURE_FACTOR => $entity->getIsFragile(),
 
             PlayerEntityFileSchema::ATTRIBUTES => $entity->getAttributes(),
         ];
