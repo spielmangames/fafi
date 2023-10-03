@@ -9,7 +9,7 @@ use FAFI\src\BE\Domain\Dto\Player\PlayerAttribute\PlayerAttribute;
 
 class Player implements EntityInterface
 {
-    use PlayerDataHelper;
+    use PlayerNameHelper;
 
     public const ENTITY = 'Player';
 
@@ -142,11 +142,5 @@ class Player implements EntityInterface
     public function getAttributes(): ?array
     {
         return $this->attributes;
-    }
-
-
-    public function __toString(): string
-    {
-        return self::ENTITY;
     }
 }

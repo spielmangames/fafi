@@ -138,6 +138,8 @@ class PlayerResource extends AbstractResource
 
     protected function verifyModelPropertiesConstraints(array $data): void
     {
+        throw new FafiException('Needs to be tested!');
+
         if (isset($data[self::NAME_FIELD])) {
             $field = self::NAME_FIELD;
             $this->entityValidator::assertEntityPropertyStr($data[$field], $field, PlayerConstraints::NAME_MIN, PlayerConstraints::NAME_MAX);

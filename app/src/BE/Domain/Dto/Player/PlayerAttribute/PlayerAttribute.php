@@ -100,10 +100,4 @@ class PlayerAttribute implements EntityInterface
     {
         return $this->defMax;
     }
-
-
-    public function __toString(): string
-    {
-        return self::ENTITY;
-    }
 }

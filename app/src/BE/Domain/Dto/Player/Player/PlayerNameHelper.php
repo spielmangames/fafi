@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace FAFI\src\BE\Domain\Dto\Player\Player;
 
-trait PlayerDataHelper
+trait PlayerNameHelper
 {
     public function buildFullName(bool $initials = false): string
     {

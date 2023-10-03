@@ -93,6 +93,8 @@ abstract class AbstractResource
      */
     public function update(EntityDataInterface $entityData): EntityInterface
     {
+        throw new FafiException('Needs to be tested!');
+
         $data = $this->hydrator->extract($entityData);
         $this->verifyConstraintsOnUpdate($this->getTable(), $entityData, $data);
 
@@ -117,6 +119,7 @@ abstract class AbstractResource
      */
     public function delete(array $conditions = []): void
     {
+        throw new FafiException('Needs to be tested!');
         $this->queryExecutor->deleteRecords($this->getTable(), $conditions);
     }
 
