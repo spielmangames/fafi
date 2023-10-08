@@ -4,9 +4,8 @@ declare(strict_types=1);
 
 namespace FAFI\src\BE\Domain\Persistence\Geo\Country;
 
-use FAFI\src\BE\Domain\Dto\EntityDataInterface;
+use FAFI\src\BE\Domain\Dto\EntityInterface;
 use FAFI\src\BE\Domain\Dto\Geo\Country\Country;
-use FAFI\src\BE\Domain\Dto\Geo\Country\CountryData;
 use FAFI\src\BE\Domain\Persistence\EntityValidator;
 use FAFI\src\BE\Domain\Persistence\EntityHydratorInterface;
 
@@ -41,10 +40,10 @@ class CountryHydrator implements EntityHydratorInterface
         );
     }
 
-    public function extract(EntityDataInterface $entity): array
+    public function dehydrate(EntityInterface $entity): array
     {
-        EntityValidator::assertEntityType(CountryData::class, $entity);
-        /** @var CountryData $entity */
+        EntityValidator::assertEntityType(Country::class, $entity);
+        /** @var Country $entity */
 
         return [
             CountryResource::ID_FIELD => $entity->getId(),

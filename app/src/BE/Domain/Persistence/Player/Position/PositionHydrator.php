@@ -4,11 +4,10 @@ declare(strict_types=1);
 
 namespace FAFI\src\BE\Domain\Persistence\Player\Position;
 
-use FAFI\src\BE\Domain\Dto\EntityDataInterface;
+use FAFI\src\BE\Domain\Dto\EntityInterface;
 use FAFI\src\BE\Domain\Dto\Player\Position\Position;
-use FAFI\src\BE\Domain\Dto\Player\Position\PositionData;
-use FAFI\src\BE\Domain\Persistence\EntityValidator;
 use FAFI\src\BE\Domain\Persistence\EntityHydratorInterface;
+use FAFI\src\BE\Domain\Persistence\EntityValidator;
 
 class PositionHydrator implements EntityHydratorInterface
 {
@@ -39,10 +38,10 @@ class PositionHydrator implements EntityHydratorInterface
         );
     }
 
-    public function extract(EntityDataInterface $entity): array
+    public function dehydrate(EntityInterface $entity): array
     {
-        EntityValidator::assertEntityType(PositionData::class, $entity);
-        /** @var PositionData $entity */
+        EntityValidator::assertEntityType(Position::class, $entity);
+        /** @var Position $entity */
 
         return [
             PositionResource::ID_FIELD => $entity->getId(),

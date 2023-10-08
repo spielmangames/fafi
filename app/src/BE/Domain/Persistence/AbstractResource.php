@@ -20,14 +20,18 @@ abstract class AbstractResource
 
     protected EntityValidator $entityValidator;
     protected EntityHydratorInterface $entityHydrator;
+    protected EntityDataHydratorInterface $entityDataHydrator;
 
     protected DatabaseValidator $dbValidator;
     protected QueryExecutor $queryExecutor;
 
-    public function __construct(EntityHydratorInterface $entityHydrator)
-    {
+    public function __construct(
+        EntityHydratorInterface $entityHydrator,
+        EntityDataHydratorInterface $entityDataHydrator,
+    ){
         $this->entityValidator = new EntityValidator();
         $this->entityHydrator = $entityHydrator;
+        $this->entityDataHydrator = $entityDataHydrator;
 
         $this->dbValidator = new DatabaseValidator();
         $this->queryExecutor = new QueryExecutor();
@@ -71,7 +75,7 @@ abstract class AbstractResource
      */
     public function create(EntityDataInterface $entityData): EntityInterface
     {
-        $data = $this->entityHydrator->extract($entityData);
+        $data = $this->entityDataHydrator->dehydrate($entityData);
         $this->verifyConstraintsOnCreate($this->getTable(), $entityData, $data);
 
         $id = $this->queryExecutor->createRecord($this->getTable(), $data);
@@ -95,7 +99,7 @@ abstract class AbstractResource
     {
         throw new FafiException('Needs to be tested!');
 
-        $data = $this->entityHydrator->extract($entityData);
+        $data = $this->entityDataHydrator->dehydrate($entityData);
         $this->verifyConstraintsOnUpdate($this->getTable(), $entityData, $data);
 
         $id = $entityData->getId();

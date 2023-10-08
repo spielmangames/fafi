@@ -4,11 +4,10 @@ declare(strict_types=1);
 
 namespace FAFI\src\BE\Domain\Persistence\Team\Club;
 
-use FAFI\src\BE\Domain\Dto\EntityDataInterface;
+use FAFI\src\BE\Domain\Dto\EntityInterface;
 use FAFI\src\BE\Domain\Dto\Team\Club\Club;
-use FAFI\src\BE\Domain\Dto\Team\Club\ClubData;
-use FAFI\src\BE\Domain\Persistence\EntityValidator;
 use FAFI\src\BE\Domain\Persistence\EntityHydratorInterface;
+use FAFI\src\BE\Domain\Persistence\EntityValidator;
 
 class ClubHydrator implements EntityHydratorInterface
 {
@@ -45,10 +44,10 @@ class ClubHydrator implements EntityHydratorInterface
         );
     }
 
-    public function extract(EntityDataInterface $entity): array
+    public function dehydrate(EntityInterface $entity): array
     {
-        EntityValidator::assertEntityType(ClubData::class, $entity);
-        /** @var ClubData $entity */
+        EntityValidator::assertEntityType(Club::class, $entity);
+        /** @var Club $entity */
 
         return [
             ClubResource::ID_FIELD => $entity->getId(),

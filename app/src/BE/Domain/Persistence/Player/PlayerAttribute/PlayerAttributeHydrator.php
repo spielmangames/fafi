@@ -4,11 +4,10 @@ declare(strict_types=1);
 
 namespace FAFI\src\BE\Domain\Persistence\Player\PlayerAttribute;
 
-use FAFI\src\BE\Domain\Dto\EntityDataInterface;
+use FAFI\src\BE\Domain\Dto\EntityInterface;
 use FAFI\src\BE\Domain\Dto\Player\PlayerAttribute\PlayerAttribute;
-use FAFI\src\BE\Domain\Dto\Player\PlayerAttribute\PlayerAttributeData;
-use FAFI\src\BE\Domain\Persistence\EntityValidator;
 use FAFI\src\BE\Domain\Persistence\EntityHydratorInterface;
+use FAFI\src\BE\Domain\Persistence\EntityValidator;
 
 class PlayerAttributeHydrator implements EntityHydratorInterface
 {
@@ -50,10 +49,10 @@ class PlayerAttributeHydrator implements EntityHydratorInterface
         );
     }
 
-    public function extract(EntityDataInterface $entity): array
+    public function dehydrate(EntityInterface $entity): array
     {
-        EntityValidator::assertEntityType(PlayerAttributeData::class, $entity);
-        /** @var PlayerAttributeData $entity */
+        EntityValidator::assertEntityType(PlayerAttribute::class, $entity);
+        /** @var PlayerAttribute $entity */
 
         return [
             PlayerAttributeResource::ID_FIELD => $entity->getId(),
