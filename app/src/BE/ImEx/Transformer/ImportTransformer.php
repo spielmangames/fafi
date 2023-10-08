@@ -6,6 +6,7 @@ namespace FAFI\src\BE\ImEx\Transformer;
 
 use FAFI\exception\FafiException;
 use FAFI\exception\ImExErr;
+use FAFI\src\BE\Domain\Dto\EntityDataInterface;
 use FAFI\src\BE\ImEx\Transformer\Field\ImportFieldConverter;
 use FAFI\src\BE\ImEx\Transformer\Field\ImExFieldConverterFactory;
 use FAFI\src\BE\ImEx\Transformer\Specification\Entity\ImportableEntityConfig;
@@ -31,7 +32,7 @@ class ImportTransformer
      * @param string[][] $extractedEntities
      * @param ImportableEntityConfig $entityConfig
      *
-     * @return array
+     * @return EntityDataInterface[]
      * @throws FafiException
      */
     public function transform(array $extractedEntities, ImportableEntityConfig $entityConfig): array
@@ -51,10 +52,10 @@ class ImportTransformer
      * @param string[] $extractedEntity
      * @param ImportableEntityConfig $entityConfig
      *
-     * @return array
+     * @return EntityDataInterface
      * @throws FafiException
      */
-    private function transformEntity(array $extractedEntity, ImportableEntityConfig $entityConfig): array
+    private function transformEntity(array $extractedEntity, ImportableEntityConfig $entityConfig): EntityDataInterface
     {
         $transformed = [];
 

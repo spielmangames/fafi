@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace FAFI\src\BE\ImEx\Import\Load;
 
 use FAFI\exception\FafiException;
+use FAFI\src\BE\Domain\Dto\EntityDataInterface;
 use FAFI\src\BE\ImEx\Clients\EntityClientFactory;
 use FAFI\src\BE\ImEx\Clients\EntityClientInterface;
 use FAFI\src\BE\ImEx\Hydrator\EntityHydratorFactory;
@@ -25,7 +26,7 @@ class ImportLoader
 
 
     /**
-     * @param array[] $entities
+     * @param EntityDataInterface[] $entities
      * @param ImportableEntityConfig $entitySpecification
      *
      * @return void
