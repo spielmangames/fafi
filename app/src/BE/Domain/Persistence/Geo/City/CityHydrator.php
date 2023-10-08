@@ -8,9 +8,9 @@ use FAFI\src\BE\Domain\Dto\EntityDataInterface;
 use FAFI\src\BE\Domain\Dto\Geo\City\City;
 use FAFI\src\BE\Domain\Dto\Geo\City\CityData;
 use FAFI\src\BE\Domain\Persistence\EntityValidator;
-use FAFI\src\BE\Domain\Persistence\HydratorInterface;
+use FAFI\src\BE\Domain\Persistence\EntityHydratorInterface;
 
-class CityHydrator implements HydratorInterface
+class CityHydrator implements EntityHydratorInterface
 {
     /**
      * @param array $data

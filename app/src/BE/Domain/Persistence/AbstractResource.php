@@ -19,15 +19,15 @@ abstract class AbstractResource
 
 
     protected EntityValidator $entityValidator;
-    protected HydratorInterface $hydrator;
+    protected EntityHydratorInterface $entityHydrator;
 
     protected DatabaseValidator $dbValidator;
     protected QueryExecutor $queryExecutor;
 
-    public function __construct(HydratorInterface $hydrator)
+    public function __construct(EntityHydratorInterface $entityHydrator)
     {
         $this->entityValidator = new EntityValidator();
-        $this->hydrator = $hydrator;
+        $this->entityHydrator = $entityHydrator;
 
         $this->dbValidator = new DatabaseValidator();
         $this->queryExecutor = new QueryExecutor();
@@ -59,7 +59,7 @@ abstract class AbstractResource
     public function list(array $conditions = []): array
     {
         $selection = $this->queryExecutor->readRecords($this->getTable(), $conditions);
-        return $this->hydrator->hydrateCollection($selection);
+        return $this->entityHydrator->hydrateCollection($selection);
     }
 
 
@@ -71,7 +71,7 @@ abstract class AbstractResource
      */
     public function create(EntityDataInterface $entityData): EntityInterface
     {
-        $data = $this->hydrator->extract($entityData);
+        $data = $this->entityHydrator->extract($entityData);
         $this->verifyConstraintsOnCreate($this->getTable(), $entityData, $data);
 
         $id = $this->queryExecutor->createRecord($this->getTable(), $data);
@@ -95,7 +95,7 @@ abstract class AbstractResource
     {
         throw new FafiException('Needs to be tested!');
 
-        $data = $this->hydrator->extract($entityData);
+        $data = $this->entityHydrator->extract($entityData);
         $this->verifyConstraintsOnUpdate($this->getTable(), $entityData, $data);
 
         $id = $entityData->getId();

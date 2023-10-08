@@ -8,9 +8,9 @@ use FAFI\src\BE\Domain\Dto\EntityDataInterface;
 use FAFI\src\BE\Domain\Dto\Team\Club\Club;
 use FAFI\src\BE\Domain\Dto\Team\Club\ClubData;
 use FAFI\src\BE\Domain\Persistence\EntityValidator;
-use FAFI\src\BE\Domain\Persistence\HydratorInterface;
+use FAFI\src\BE\Domain\Persistence\EntityHydratorInterface;
 
-class ClubHydrator implements HydratorInterface
+class ClubHydrator implements EntityHydratorInterface
 {
     /**
      * @param array $data

@@ -7,7 +7,7 @@ namespace FAFI\src\BE\Domain\Persistence;
 use FAFI\src\BE\Domain\Dto\EntityDataInterface;
 use FAFI\src\BE\Domain\Dto\EntityInterface;
 
-interface HydratorInterface
+interface EntityHydratorInterface
 {
     /**
      * @param array[] $data

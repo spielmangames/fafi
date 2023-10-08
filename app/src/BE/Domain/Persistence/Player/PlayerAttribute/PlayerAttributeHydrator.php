@@ -8,9 +8,9 @@ use FAFI\src\BE\Domain\Dto\EntityDataInterface;
 use FAFI\src\BE\Domain\Dto\Player\PlayerAttribute\PlayerAttribute;
 use FAFI\src\BE\Domain\Dto\Player\PlayerAttribute\PlayerAttributeData;
 use FAFI\src\BE\Domain\Persistence\EntityValidator;
-use FAFI\src\BE\Domain\Persistence\HydratorInterface;
+use FAFI\src\BE\Domain\Persistence\EntityHydratorInterface;
 
-class PlayerAttributeHydrator implements HydratorInterface
+class PlayerAttributeHydrator implements EntityHydratorInterface
 {
     /**
      * @param array $data
