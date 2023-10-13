@@ -5,53 +5,52 @@ declare(strict_types=1);
 namespace FAFI\src\BE\Domain\Persistence\Player\Player;
 
 use FAFI\src\BE\Domain\Dto\EntityDataInterface;
-use FAFI\src\BE\Domain\Dto\Player\Player\Player;
 use FAFI\src\BE\Domain\Dto\Player\Player\PlayerData;
 use FAFI\src\BE\Domain\Persistence\EntityDataHydratorInterface;
 use FAFI\src\BE\Domain\Persistence\EntityValidator;
-use FAFI\src\BE\Domain\Persistence\EntityHydratorInterface;
 
 class PlayerDataHydrator implements EntityDataHydratorInterface
 {
-//    /**
-//     * @param array $data
-//     *
-//     * @return Player[]
-//     */
-//    public function hydrateCollection(array $data): array
-//    {
-//        $hydrated = [];
-//        foreach ($data as $row) {
-//            $hydrated[] = $this->hydrate($row);
-//        }
-//
-//        return $hydrated;
-//    }
-//
-//    public function hydrate(array $data): Player
-//    {
-//        $id = (int)$data[PlayerResource::ID_FIELD];
-//
-//        $name = $data[PlayerResource::NAME_FIELD];
-//        $particle = $data[PlayerResource::PARTICLE_FIELD];
-//        $surname = $data[PlayerResource::SURNAME_FIELD];
-//        $fafiSurname = $data[PlayerResource::FAFI_SURNAME_FIELD];
-//
-//        $height = (int)$data[PlayerResource::HEIGHT_FIELD];
-//        $foot = $data[PlayerResource::FOOT_FIELD];
-//        $isFragile = (bool)$data[PlayerResource::IS_FRAGILE_FIELD];
-//
-//        return new Player(
-//            $id,
-//            $name,
-//            $particle,
-//            $surname,
-//            $fafiSurname,
-//            $height,
-//            $foot,
-//            $isFragile
-//        );
-//    }
+    /**
+     * @param array $data
+     *
+     * @return PlayerData[]
+     */
+    public function hydrateCollection(array $data): array
+    {
+        $hydrated = [];
+        foreach ($data as $row) {
+            $hydrated[] = $this->hydrate($row);
+        }
+
+        return $hydrated;
+    }
+
+    public function hydrate(array $data): PlayerData
+    {
+        $playerData = new PlayerData();
+
+        $id = (int)$data[PlayerResource::ID_FIELD] ?? null;
+
+        $name = (string)$data[PlayerResource::NAME_FIELD] ?? null;
+        $particle = (string)$data[PlayerResource::PARTICLE_FIELD] ?? null;
+        $surname = (string)$data[PlayerResource::SURNAME_FIELD] ?? null;
+        $fafiSurname = (string)$data[PlayerResource::FAFI_SURNAME_FIELD] ?? null;
+
+        $height = (int)$data[PlayerResource::HEIGHT_FIELD] ?? null;
+        $foot = (string)$data[PlayerResource::FOOT_FIELD] ?? null;
+        $isFragile = (bool)$data[PlayerResource::IS_FRAGILE_FIELD] ?? null;
+
+        return $playerData
+            ->setId($id)
+            ->setName($name)
+            ->setParticle($particle)
+            ->setSurname($surname)
+            ->setFafiSurname($fafiSurname)
+            ->setHeight($height)
+            ->setFoot($foot)
+            ->setIsFragile($isFragile);
+    }
 
     public function dehydrate(EntityDataInterface $entity): array
     {

@@ -13,9 +13,9 @@ interface EntityDataHydratorInterface
      *
      * @return EntityDataInterface[]
      */
-//    public function hydrateCollection(array $data): array;
+    public function hydrateCollection(array $data): array;
 
-//    public function hydrate(array $data): EntityDataInterface;
+    public function hydrate(array $data): EntityDataInterface;
 
     public function dehydrate(EntityDataInterface $entity): array;
 }

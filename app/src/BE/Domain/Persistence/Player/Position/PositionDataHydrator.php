@@ -5,40 +5,39 @@ declare(strict_types=1);
 namespace FAFI\src\BE\Domain\Persistence\Player\Position;
 
 use FAFI\src\BE\Domain\Dto\EntityDataInterface;
-use FAFI\src\BE\Domain\Dto\Player\Position\Position;
 use FAFI\src\BE\Domain\Dto\Player\Position\PositionData;
 use FAFI\src\BE\Domain\Persistence\EntityDataHydratorInterface;
 use FAFI\src\BE\Domain\Persistence\EntityValidator;
-use FAFI\src\BE\Domain\Persistence\EntityHydratorInterface;
 
 class PositionDataHydrator implements EntityDataHydratorInterface
 {
-//    /**
-//     * @param array $data
-//     *
-//     * @return Position[]
-//     */
-//    public function hydrateCollection(array $data): array
-//    {
-//        $hydrated = [];
-//        foreach ($data as $row) {
-//            $hydrated[] = $this->hydrate($row);
-//        }
-//
-//        return $hydrated;
-//    }
-//
-//    public function hydrate(array $data): Position
-//    {
-//        $id = (int)$data[PositionResource::ID_FIELD];
-//
-//        $name = $data[PositionResource::NAME_FIELD];
-//
-//        return new Position(
-//            $id,
-//            $name
-//        );
-//    }
+    /**
+     * @param array $data
+     *
+     * @return PositionData[]
+     */
+    public function hydrateCollection(array $data): array
+    {
+        $hydrated = [];
+        foreach ($data as $row) {
+            $hydrated[] = $this->hydrate($row);
+        }
+
+        return $hydrated;
+    }
+
+    public function hydrate(array $data): PositionData
+    {
+        $positionData = new PositionData();
+
+        $id = (int)$data[PositionResource::ID_FIELD] ?? null;
+
+        $name = (string)$data[PositionResource::NAME_FIELD] ?? null;
+
+        return $positionData
+            ->setId($id)
+            ->setName($name);
+    }
 
     public function dehydrate(EntityDataInterface $entity): array
     {

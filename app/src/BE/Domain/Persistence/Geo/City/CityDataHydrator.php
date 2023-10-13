@@ -4,43 +4,42 @@ declare(strict_types=1);
 
 namespace FAFI\src\BE\Domain\Persistence\Geo\City;
 
-use FAFI\exception\FafiException;
 use FAFI\src\BE\Domain\Dto\EntityDataInterface;
-use FAFI\src\BE\Domain\Dto\Geo\City\City;
 use FAFI\src\BE\Domain\Dto\Geo\City\CityData;
 use FAFI\src\BE\Domain\Persistence\EntityDataHydratorInterface;
 use FAFI\src\BE\Domain\Persistence\EntityValidator;
 
 class CityDataHydrator implements EntityDataHydratorInterface
 {
-//    /**
-//     * @param array $data
-//     *
-//     * @return City[]
-//     */
-//    public function hydrateCollection(array $data): array
-//    {
-//        $hydrated = [];
-//        foreach ($data as $row) {
-//            $hydrated[] = $this->hydrate($row);
-//        }
-//
-//        return $hydrated;
-//    }
+    /**
+     * @param array $data
+     *
+     * @return CityData[]
+     */
+    public function hydrateCollection(array $data): array
+    {
+        $hydrated = [];
+        foreach ($data as $row) {
+            $hydrated[] = $this->hydrate($row);
+        }
 
-//    public function hydrate(array $data): City
-//    {
-//        $id = (int)$data[CityResource::ID_FIELD];
-//
-//        $name = $data[CityResource::NAME_FIELD];
-//        $countryId = (int)$data[CityResource::COUNTRY_ID_FIELD];
-//
-//        return new City(
-//            $id,
-//            $name,
-//            $countryId
-//        );
-//    }
+        return $hydrated;
+    }
+
+    public function hydrate(array $data): CityData
+    {
+        $cityData = new CityData();
+
+        $id = (int)$data[CityResource::ID_FIELD] ?? null;
+
+        $name = (string)$data[CityResource::NAME_FIELD] ?? null;
+        $countryId = (int)$data[CityResource::COUNTRY_ID_FIELD] ?? null;
+
+        return $cityData
+            ->setId($id)
+            ->setName($name)
+            ->setCountryId($countryId);
+    }
 
     public function dehydrate(EntityDataInterface $entity): array
     {
@@ -51,6 +50,7 @@ class CityDataHydrator implements EntityDataHydratorInterface
             CityResource::ID_FIELD => $entity->getId(),
 
             CityResource::NAME_FIELD => $entity->getName(),
+            CityResource::COUNTRY_ID_FIELD => $entity->getCountryId(),
         ];
     }
 }
