@@ -29,19 +29,19 @@ class ImportTransformer
 
 
     /**
-     * @param string[][] $extractedEntities
+     * @param string[][] $extractedRows
      * @param ImportableEntityConfig $entityConfig
      *
      * @return EntityDataInterface[]
      * @throws FafiException
      */
-    public function transform(array $extractedEntities, ImportableEntityConfig $entityConfig): array
+    public function transform(array $extractedRows, ImportableEntityConfig $entityConfig): array
     {
         $transformed = [];
 
-        foreach ($extractedEntities as $line => $entity) {
+        foreach ($extractedRows as $line => $extractedRow) {
             $this->line = $line;
-            $transformed[$line] = $this->transformEntity($entity, $entityConfig);
+            $transformed[$line] = $this->transformEntity($extractedRow, $entityConfig);
         }
 
         return $transformed;
@@ -49,17 +49,17 @@ class ImportTransformer
 
 
     /**
-     * @param string[] $extractedEntity
+     * @param string[] $extractedRow
      * @param ImportableEntityConfig $entityConfig
      *
      * @return EntityDataInterface
      * @throws FafiException
      */
-    private function transformEntity(array $extractedEntity, ImportableEntityConfig $entityConfig): EntityDataInterface
+    private function transformEntity(array $extractedRow, ImportableEntityConfig $entityConfig): EntityDataInterface
     {
         $transformed = [];
 
-        foreach ($extractedEntity as $fieldName => $fieldValue) {
+        foreach ($extractedRow as $fieldName => $fieldValue) {
             $fieldConverter = $this->prepareFieldConverter($entityConfig, $fieldName);
             $fieldValue = $fieldConverter->fromStr($fieldName, $fieldValue);
 
