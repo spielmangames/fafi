@@ -10,7 +10,7 @@ use FAFI\src\BE\ImEx\Transformer\Field\Typical\BooleanFieldConverter;
 use FAFI\src\BE\ImEx\Transformer\Field\Typical\IntegerFieldConverter;
 use FAFI\src\BE\ImEx\Transformer\Field\Typical\StringFieldConverter;
 
-class ImExFieldConverterFactory
+class ImportFieldConverterFactory
 {
     /**
      * @param string $class
