@@ -81,7 +81,7 @@ class ImportTransformer
      */
     private function prepareFieldConverter(ImportableEntityConfig $entityConfig, string $field): ImportFieldConverter
     {
-        $className = $this->defineFieldConverterClassName($entityConfig, $field);
+        $className = $this->getFieldConverterDetails($entityConfig, $field);
 
         try {
             $converter = $this->fieldConverterFactory->create($className);
@@ -99,7 +99,7 @@ class ImportTransformer
      * @return string
      * @throws FafiException
      */
-    private function defineFieldConverterClassName(ImportableEntityConfig $entityConfig, string $field): string
+    private function getFieldConverterDetails(ImportableEntityConfig $entityConfig, string $field): string
     {
         $entity = $entityConfig->getEntityName();
         $fieldConvertersMap = $entityConfig->getFieldConvertersMap();
@@ -124,6 +124,26 @@ class ImportTransformer
      */
     private function prepareFieldSpecification(ImportableEntityConfig $entityConfig, string $field): FieldSpecification
     {
+        [$class, $params] = $this->getFieldSpecificationDetails($entityConfig, $field);
+
+        try {
+            $specification = $this->fieldSpecificationFactory->create($class, $params);
+        } catch (FafiException $exception) {
+            $this->fail($exception->getMessage());
+        }
+
+        return $specification;
+    }
+
+    /**
+     * @param ImportableEntityConfig $entityConfig
+     * @param string $field
+     *
+     * @return array
+     * @throws FafiException
+     */
+    private function getFieldSpecificationDetails(ImportableEntityConfig $entityConfig, string $field): array
+    {
         $entity = $entityConfig->getEntityName();
         $fieldSpecificationsMap = $entityConfig->getFieldSpecificationsMap();
 
@@ -146,19 +166,12 @@ class ImportTransformer
         $params = null;
         if (isset($fieldSpecification[ImportableEntityConfig::PARAMS])) {
             $params = $fieldSpecification[ImportableEntityConfig::PARAMS];
-
             if (!is_array($params) || empty($params)) {
                 $this->fail(sprintf(ImExErr::IMPORT_ENTITY_FIELD_SPECIFICATION_INVALID, $field, $entity));
             }
         }
 
-        try {
-            $specification = $this->fieldSpecificationFactory->create($class, $params);
-        } catch (FafiException $exception) {
-            $this->fail($exception->getMessage());
-        }
-
-        return $specification;
+        return [$class, $params];
     }
 
 
