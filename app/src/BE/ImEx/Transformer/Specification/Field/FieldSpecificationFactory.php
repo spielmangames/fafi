@@ -24,25 +24,19 @@ class FieldSpecificationFactory
      */
     public function create(string $class, ?array $params = null): FieldSpecification
     {
-        switch ($class) {
+        return match ($class) {
             // typical
-            case BooleanSpecification::class:
-                return $this->createBoolSpecification();
-            case EnumSpecification::class:
-                return $this->createEnumSpecification($params);
-            case IdSpecification::class:
-                return $this->createIdSpecification();
-            case IntegerSpecification::class:
-                return $this->createIntSpecification($params);
-            case StringSpecification::class:
-                return $this->createStrSpecification($params);
+            BooleanSpecification::class => $this->createBoolSpecification(),
+            EnumSpecification::class => $this->createEnumSpecification($params),
+            IdSpecification::class => $this->createIdSpecification(),
+            IntegerSpecification::class => $this->createIntSpecification($params),
+            StringSpecification::class => $this->createStrSpecification($params),
 
-            // Player
-            case PlayerAttributesSpecification::class:
-                return new PlayerAttributesSpecification();
-        }
+            // Player specific
+            PlayerAttributesSpecification::class => new PlayerAttributesSpecification(),
 
-        throw new FafiException(sprintf(FafiException::E_CLASS_ABSENT, $class));
+            default => throw new FafiException(sprintf(FafiException::E_CLASS_ABSENT, $class)),
+        };
     }
 
 

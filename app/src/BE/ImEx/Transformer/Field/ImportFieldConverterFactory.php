@@ -21,10 +21,12 @@ class ImportFieldConverterFactory
     public function create(string $class): ImportFieldConverter
     {
         return match ($class) {
+            // typical
             BooleanFieldConverter::class => new BooleanFieldConverter(),
             IntegerFieldConverter::class => new IntegerFieldConverter(),
             StringFieldConverter::class => new StringFieldConverter(),
 
+            // Player specific
             PlayerAttributesFieldConverter::class => new PlayerAttributesFieldConverter(),
 
             default => throw new FafiException(sprintf(FafiException::E_CLASS_ABSENT, $class)),
