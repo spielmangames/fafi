@@ -12,9 +12,9 @@ use FAFI\src\BE\ImEx\Transformer\Specification\Entity\ImportableEntityConfig;
 
 class Importer
 {
-    protected ImportExtractor $importExtractor;
-    protected ImportTransformer $importTransformer;
-    protected ImportLoader $importLoader;
+    private ImportExtractor $importExtractor;
+    private ImportTransformer $importTransformer;
+    private ImportLoader $importLoader;
 
     public function __construct()
     {

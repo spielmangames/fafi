@@ -34,7 +34,7 @@ class ImportLoader
      */
     public function load(array $entities, ImportableEntityConfig $entitySpecification): void
     {
-        $resourceHydrator = $this->entityHydratorFactory->create($entitySpecification->getResourceHydrator());
+        $resourceHydrator = $this->entityHydratorFactory->create($entitySpecification->getResourceDataHydrator());
         $subResourceHydrators = $this->buildSubResourceHydrators($entitySpecification);
 
         $resourceClient = $this->entityClientFactory->create($entitySpecification->getResourceLoader());
@@ -67,7 +67,7 @@ class ImportLoader
     private function buildSubResourceHydrators(ImportableEntityConfig $entitySpecification): array
     {
         $hydrators = [];
-        foreach ($entitySpecification->getSubResourceHydrators() as $subResource => $hydrator) {
+        foreach ($entitySpecification->getSubResourceDataHydrators() as $subResource => $hydrator) {
             $hydrators[$subResource] = $this->entityHydratorFactory->create($hydrator);
         }
 

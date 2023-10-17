@@ -35,3 +35,7 @@ Implement DI
 
 
 
+## FAFI-007
+implement Enums
+
+

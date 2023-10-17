@@ -42,12 +42,12 @@ class PositionConfig implements ImportableEntityConfig
         ];
     }
 
-    public function getResourceHydrator(): string
+    public function getResourceDataHydrator(): string
     {
         return PositionHydrator::class;
     }
 
-    public function getSubResourceHydrators(): array
+    public function getSubResourceDataHydrators(): array
     {
         return [];
     }

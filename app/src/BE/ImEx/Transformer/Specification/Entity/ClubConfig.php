@@ -46,12 +46,12 @@ class ClubConfig implements ImportableEntityConfig
         ];
     }
 
-    public function getResourceHydrator(): string
+    public function getResourceDataHydrator(): string
     {
         return ClubHydrator::class;
     }
 
-    public function getSubResourceHydrators(): array
+    public function getSubResourceDataHydrators(): array
     {
         return [];
     }

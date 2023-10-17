@@ -105,12 +105,12 @@ class PlayerConfig implements ImportableEntityConfig
         ];
     }
 
-    public function getResourceHydrator(): string
+    public function getResourceDataHydrator(): string
     {
         return PlayerHydrator::class;
     }
 
-    public function getSubResourceHydrators(): array
+    public function getSubResourceDataHydrators(): array
     {
         return [
             PlayerEntityFileSchema::ATTRIBUTES => PlayerAttributeHydrator::class,
