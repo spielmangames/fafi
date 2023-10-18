@@ -27,7 +27,7 @@ class FieldSpecificationFactory
         return match ($class) {
             // typical
             BooleanSpecification::class => $this->createBoolSpecification(),
-            EnumSpecification::class => $this->createEnumSpecification($params),
+//            EnumSpecification::class => $this->createEnumSpecification($params),
             IdSpecification::class => $this->createIdSpecification(),
             IntegerSpecification::class => $this->createIntSpecification($params),
             StringSpecification::class => $this->createStrSpecification($params),

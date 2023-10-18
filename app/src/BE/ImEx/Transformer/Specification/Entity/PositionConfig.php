@@ -33,12 +33,9 @@ class PositionConfig implements ImportableEntityConfig
     public function getFieldSpecificationsMap(): array
     {
         return [
-            PositionEntityFileSchema::ID => [ImportableEntityConfig::OBJECT => IdSpecification::class],
+            PositionEntityFileSchema::ID => IdSpecification::class,
 
-            PositionEntityFileSchema::NAME => [
-                ImportableEntityConfig::OBJECT => StringSpecification::class,
-                ImportableEntityConfig::PARAMS => []
-            ],
+            PositionEntityFileSchema::NAME => StringSpecification::class,
         ];
     }
 

@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace FAFI\src\BE\ImEx\Transformer\Specification\Entity;
 
 use FAFI\src\BE\Domain\Dto\Team\Club\Club;
-use FAFI\src\BE\Domain\Dto\Team\Club\ClubConstraints;
 use FAFI\src\BE\Domain\Persistence\Team\Club\ClubHydrator;
 use FAFI\src\BE\ImEx\Clients\ClubClient;
 use FAFI\src\BE\ImEx\FileSchemas\Entity\ClubEntityFileSchema;
@@ -34,15 +33,9 @@ class ClubConfig implements ImportableEntityConfig
     public function getFieldSpecificationsMap(): array
     {
         return [
-            ClubEntityFileSchema::ID => [ImportableEntityConfig::OBJECT => IdSpecification::class],
+            ClubEntityFileSchema::ID => IdSpecification::class,
 
-            ClubEntityFileSchema::NAME => [
-                ImportableEntityConfig::OBJECT => StringSpecification::class,
-                ImportableEntityConfig::PARAMS => [
-                    StringSpecification::PARAM_MIN => ClubConstraints::NAME_MIN,
-                    StringSpecification::PARAM_MAX => ClubConstraints::NAME_MAX
-                ]
-            ],
+            ClubEntityFileSchema::NAME => StringSpecification::class,
         ];
     }
 
