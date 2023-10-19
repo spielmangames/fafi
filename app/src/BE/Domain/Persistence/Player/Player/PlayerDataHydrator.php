@@ -30,26 +30,15 @@ class PlayerDataHydrator implements EntityDataHydratorInterface
     {
         $playerData = new PlayerData();
 
-        $id = (int)$data[PlayerResource::ID_FIELD] ?? null;
-
-        $name = (string)$data[PlayerResource::NAME_FIELD] ?? null;
-        $particle = (string)$data[PlayerResource::PARTICLE_FIELD] ?? null;
-        $surname = (string)$data[PlayerResource::SURNAME_FIELD] ?? null;
-        $fafiSurname = (string)$data[PlayerResource::FAFI_SURNAME_FIELD] ?? null;
-
-        $height = (int)$data[PlayerResource::HEIGHT_FIELD] ?? null;
-        $foot = (string)$data[PlayerResource::FOOT_FIELD] ?? null;
-        $isFragile = (bool)$data[PlayerResource::IS_FRAGILE_FIELD] ?? null;
-
         return $playerData
-            ->setId($id)
-            ->setName($name)
-            ->setParticle($particle)
-            ->setSurname($surname)
-            ->setFafiSurname($fafiSurname)
-            ->setHeight($height)
-            ->setFoot($foot)
-            ->setIsFragile($isFragile);
+            ->setId($data[PlayerResource::ID_FIELD] ?? null)
+            ->setName($data[PlayerResource::NAME_FIELD] ?? null)
+            ->setParticle($data[PlayerResource::PARTICLE_FIELD] ?? null)
+            ->setSurname($data[PlayerResource::SURNAME_FIELD] ?? null)
+            ->setFafiSurname($data[PlayerResource::FAFI_SURNAME_FIELD] ?? null)
+            ->setHeight($data[PlayerResource::HEIGHT_FIELD] ?? null)
+            ->setFoot($data[PlayerResource::FOOT_FIELD] ?? null)
+            ->setIsFragile($data[PlayerResource::IS_FRAGILE_FIELD] ?? null);
     }
 
     public function dehydrate(EntityDataInterface $entity): array

@@ -30,24 +30,14 @@ class PlayerAttributeDataHydrator implements EntityDataHydratorInterface
     {
         $playerAttributeData = new PlayerAttributeData();
 
-        $id = (int)$data[PlayerAttributeResource::ID_FIELD] ?? null;
-
-        $playerId = (int)$data[PlayerAttributeResource::PLAYER_ID_FIELD] ?? null;
-        $positionId = (int)$data[PlayerAttributeResource::POSITION_ID_FIELD] ?? null;
-
-        $attMin = (int)$data[PlayerAttributeResource::ATT_MIN_FIELD] ?? null;
-        $attMax = (int)$data[PlayerAttributeResource::ATT_MAX_FIELD] ?? null;
-        $defMin = (int)$data[PlayerAttributeResource::DEF_MIN_FIELD] ?? null;
-        $defMax = (int)$data[PlayerAttributeResource::DEF_MAX_FIELD] ?? null;
-
         return $playerAttributeData
-            ->setId($id)
-            ->setPlayerId($playerId)
-            ->setPositionId($positionId)
-            ->setAttMin($attMin)
-            ->setAttMax($attMax)
-            ->setDefMin($defMin)
-            ->setDefMax($defMax);
+            ->setId($data[PlayerAttributeResource::ID_FIELD] ?? null)
+            ->setPlayerId($data[PlayerAttributeResource::PLAYER_ID_FIELD] ?? null)
+            ->setPositionId($data[PlayerAttributeResource::POSITION_ID_FIELD] ?? null)
+            ->setAttMin($data[PlayerAttributeResource::ATT_MIN_FIELD] ?? null)
+            ->setAttMax($data[PlayerAttributeResource::ATT_MAX_FIELD] ?? null)
+            ->setDefMin($data[PlayerAttributeResource::DEF_MIN_FIELD] ?? null)
+            ->setDefMax($data[PlayerAttributeResource::DEF_MAX_FIELD] ?? null);
     }
 
     public function dehydrate(EntityDataInterface $entity): array

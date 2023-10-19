@@ -30,15 +30,10 @@ class CityDataHydrator implements EntityDataHydratorInterface
     {
         $cityData = new CityData();
 
-        $id = (int)$data[CityResource::ID_FIELD] ?? null;
-
-        $name = (string)$data[CityResource::NAME_FIELD] ?? null;
-        $countryId = (int)$data[CityResource::COUNTRY_ID_FIELD] ?? null;
-
         return $cityData
-            ->setId($id)
-            ->setName($name)
-            ->setCountryId($countryId);
+            ->setId($data[CityResource::ID_FIELD] ?? null)
+            ->setName($data[CityResource::NAME_FIELD] ?? null)
+            ->setCountryId($data[CityResource::COUNTRY_ID_FIELD] ?? null);
     }
 
     public function dehydrate(EntityDataInterface $entity): array

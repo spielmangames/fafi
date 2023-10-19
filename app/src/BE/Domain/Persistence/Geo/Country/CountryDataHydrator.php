@@ -30,15 +30,10 @@ class CountryDataHydrator implements EntityDataHydratorInterface
     {
         $countryData = new CountryData();
 
-        $id = (int)$data[CountryResource::ID_FIELD] ?? null;
-
-        $name = (string)$data[CountryResource::NAME_FIELD] ?? null;
-        $continent = (string)$data[CountryResource::CONTINENT_FIELD] ?? null;
-
         return $countryData
-            ->setId($id)
-            ->setName($name)
-            ->setContinent($continent);
+            ->setId($data[CountryResource::ID_FIELD] ?? null)
+            ->setName($data[CountryResource::NAME_FIELD] ?? null)
+            ->setContinent($data[CountryResource::CONTINENT_FIELD] ?? null);
     }
 
     public function dehydrate(EntityDataInterface $entity): array

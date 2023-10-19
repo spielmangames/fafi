@@ -30,19 +30,12 @@ class ClubDataHydrator implements EntityDataHydratorInterface
     {
         $clubData = new ClubData();
 
-        $id = (int)$data[ClubResource::ID_FIELD] ?? null;
-
-        $name = (string)$data[ClubResource::NAME_FIELD] ?? null;
-        $fafiName = (string)$data[ClubResource::FAFI_NAME_FIELD] ?? null;
-        $cityId = (int)$data[ClubResource::CITY_ID_FIELD] ?? null;
-        $founded = (int)$data[ClubResource::FOUNDED_FIELD] ?? null;
-
         return $clubData
-            ->setId($id)
-            ->setName($name)
-            ->setFafiName($fafiName)
-            ->setCityId($cityId)
-            ->setFounded($founded);
+            ->setId($data[ClubResource::ID_FIELD] ?? null)
+            ->setName($data[ClubResource::NAME_FIELD] ?? null)
+            ->setFafiName($data[ClubResource::FAFI_NAME_FIELD] ?? null)
+            ->setCityId($data[ClubResource::CITY_ID_FIELD] ?? null)
+            ->setFounded($data[ClubResource::FOUNDED_FIELD] ?? null);
     }
 
     public function dehydrate(EntityDataInterface $entity): array

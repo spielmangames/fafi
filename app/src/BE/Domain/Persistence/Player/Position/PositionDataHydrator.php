@@ -30,13 +30,9 @@ class PositionDataHydrator implements EntityDataHydratorInterface
     {
         $positionData = new PositionData();
 
-        $id = (int)$data[PositionResource::ID_FIELD] ?? null;
-
-        $name = (string)$data[PositionResource::NAME_FIELD] ?? null;
-
         return $positionData
-            ->setId($id)
-            ->setName($name);
+            ->setId($data[PositionResource::ID_FIELD] ?? null)
+            ->setName($data[PositionResource::NAME_FIELD] ?? null);
     }
 
     public function dehydrate(EntityDataInterface $entity): array
