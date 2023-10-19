@@ -14,6 +14,7 @@ interface ImExErr extends Err
     public const IMPORT_ENTITY_FIELD_SPECIFICATION_ABSENT = 'Field "%s" Specification is absent in %s Config.';
     public const IMPORT_ENTITY_FIELD_SPECIFICATION_INVALID = 'Field "%s" Specification is invalid in %s Config.';
     public const IMPORT_ENTITY_FIELD_SPECIFICATION_PARAM_INVALID = 'Specification param "%s" is invalid.';
+    public const ENTITY_FIELD_NOT_MAPPED = 'The "%s" field is not mapped.';
 
     public const ENTITY_IMPORT_NOT_SUPPORTED = 'Entity "%s" is not supported for Import.';
 }

@@ -6,17 +6,18 @@ namespace FAFI\src\BE\ImEx\Import\Load;
 
 use FAFI\exception\FafiException;
 use FAFI\src\BE\Domain\Dto\EntityDataInterface;
+use FAFI\src\BE\Domain\Persistence\EntityDataHydratorFactory;
 use FAFI\src\BE\ImEx\Clients\EntityClientFactory;
 use FAFI\src\BE\ImEx\Transformer\Specification\Entity\ImportableEntityConfig;
 
 class ImportLoader
 {
-    private EntityHydratorFactory $entityHydratorFactory;
+    private EntityDataHydratorFactory $entityDataHydratorFactory;
     private EntityClientFactory $entityClientFactory;
 
     public function __construct()
     {
-        $this->entityHydratorFactory = new EntityHydratorFactory();
+        $this->entityDataHydratorFactory = new EntityDataHydratorFactory();
         $this->entityClientFactory = new EntityClientFactory();
     }
 
@@ -30,7 +31,7 @@ class ImportLoader
      */
     public function load(array $entities, ImportableEntityConfig $entitySpecification): void
     {
-        $resourceHydrator = $this->entityHydratorFactory->create($entitySpecification->getResourceDataHydrator());
+        $resourceHydrator = $this->entityDataHydratorFactory->create($entitySpecification->getResourceDataHydrator());
         $subResourceHydrators = $this->buildSubResourceHydrators($entitySpecification);
 
         $resourceClient = $this->entityClientFactory->create($entitySpecification->getResourceLoader());
@@ -64,7 +65,7 @@ class ImportLoader
     {
         $hydrators = [];
         foreach ($entitySpecification->getSubResourceDataHydrators() as $subResource => $hydrator) {
-            $hydrators[$subResource] = $this->entityHydratorFactory->create($hydrator);
+            $hydrators[$subResource] = $this->entityDataHydratorFactory->create($hydrator);
         }
 
         return $hydrators;
