@@ -8,6 +8,7 @@ use FAFI\src\BE\Domain\Dto\Geo\City\City;
 use FAFI\src\BE\Domain\Persistence\Geo\City\CityDataHydrator;
 use FAFI\src\BE\ImEx\Clients\CityClient;
 use FAFI\src\BE\ImEx\FileSchemas\Entity\CityEntityFileSchema;
+use FAFI\src\BE\ImEx\FileSchemas\Entity\Mapper\CityMapper;
 use FAFI\src\BE\ImEx\Transformer\Field\Geo\CountryNameToIdFieldConverter;
 use FAFI\src\BE\ImEx\Transformer\Field\Typical\IntegerFieldConverter;
 use FAFI\src\BE\ImEx\Transformer\Field\Typical\StringFieldConverter;
@@ -43,16 +44,23 @@ class CityConfig implements ImportableEntityConfig
         ];
     }
 
+    public function getResourceMapper(): string
+    {
+        return CityMapper::class;
+    }
+
     public function getResourceDataHydrator(): string
     {
         return CityDataHydrator::class;
     }
 
+
+
+
     public function getSubResourceDataHydrators(): array
     {
         return [];
     }
-
 
     public function getResourceLoader(): string
     {

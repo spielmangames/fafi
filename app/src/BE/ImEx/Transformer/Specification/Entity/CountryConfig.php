@@ -8,6 +8,7 @@ use FAFI\src\BE\Domain\Dto\Geo\Country\Country;
 use FAFI\src\BE\Domain\Persistence\Geo\Country\CountryDataHydrator;
 use FAFI\src\BE\ImEx\Clients\CountryClient;
 use FAFI\src\BE\ImEx\FileSchemas\Entity\CountryEntityFileSchema;
+use FAFI\src\BE\ImEx\FileSchemas\Entity\Mapper\CountryMapper;
 use FAFI\src\BE\ImEx\Transformer\Field\Typical\IntegerFieldConverter;
 use FAFI\src\BE\ImEx\Transformer\Field\Typical\StringFieldConverter;
 use FAFI\src\BE\ImEx\Transformer\Specification\Field\Typical\IdSpecification;
@@ -41,16 +42,23 @@ class CountryConfig implements ImportableEntityConfig
         ];
     }
 
+    public function getResourceMapper(): string
+    {
+        return CountryMapper::class;
+    }
+
     public function getResourceDataHydrator(): string
     {
         return CountryDataHydrator::class;
     }
 
+
+
+
     public function getSubResourceDataHydrators(): array
     {
         return [];
     }
-
 
     public function getResourceLoader(): string
     {
