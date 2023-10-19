@@ -35,7 +35,7 @@ class CityResource extends AbstractResource
 
     public function __construct()
     {
-        parent::__construct(new CityHydrator());
+        parent::__construct(new CityHydrator(), new CityDataHydrator());
     }
 
     protected function getTable(): string

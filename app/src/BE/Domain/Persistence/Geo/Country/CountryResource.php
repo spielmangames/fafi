@@ -35,7 +35,7 @@ class CountryResource extends AbstractResource
 
     public function __construct()
     {
-        parent::__construct(new CountryHydrator());
+        parent::__construct(new CountryHydrator(), new CountryDataHydrator());
     }
 
     protected function getTable(): string

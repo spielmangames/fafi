@@ -32,7 +32,7 @@ class PositionResource extends AbstractResource
 
     public function __construct()
     {
-        parent::__construct(new PositionHydrator());
+        parent::__construct(new PositionHydrator(), new PositionDataHydrator());
     }
 
     protected function getTable(): string

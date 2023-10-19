@@ -56,7 +56,7 @@ class PlayerResource extends AbstractResource
 
     public function __construct()
     {
-        parent::__construct(new PlayerHydrator());
+        parent::__construct(new PlayerHydrator(), new PlayerDataHydrator());
     }
 
     protected function getTable(): string

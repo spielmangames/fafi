@@ -40,7 +40,7 @@ class ClubResource extends AbstractResource
 
     public function __construct()
     {
-        parent::__construct(new ClubHydrator());
+        parent::__construct(new ClubHydrator(), new ClubDataHydrator());
     }
 
     protected function getTable(): string
