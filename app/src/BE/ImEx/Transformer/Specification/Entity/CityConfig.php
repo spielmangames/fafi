@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace FAFI\src\BE\ImEx\Transformer\Specification\Entity;
 
 use FAFI\src\BE\Domain\Dto\Geo\City\City;
-use FAFI\src\BE\ImEx\Clients\CountryClient;
+use FAFI\src\BE\Domain\Persistence\Geo\City\CityDataHydrator;
+use FAFI\src\BE\ImEx\Clients\CityClient;
 use FAFI\src\BE\ImEx\FileSchemas\Entity\CityEntityFileSchema;
-use FAFI\src\BE\ImEx\Hydrator\CountryHydrator;
 use FAFI\src\BE\ImEx\Transformer\Field\Geo\CountryNameToIdFieldConverter;
 use FAFI\src\BE\ImEx\Transformer\Field\Typical\IntegerFieldConverter;
 use FAFI\src\BE\ImEx\Transformer\Field\Typical\StringFieldConverter;
@@ -45,7 +45,7 @@ class CityConfig implements ImportableEntityConfig
 
     public function getResourceDataHydrator(): string
     {
-        return CountryHydrator::class;
+        return CityDataHydrator::class;
     }
 
     public function getSubResourceDataHydrators(): array
@@ -56,7 +56,7 @@ class CityConfig implements ImportableEntityConfig
 
     public function getResourceLoader(): string
     {
-        return CountryClient::class;
+        return CityClient::class;
     }
 
     public function getSubResourceLoaders(): array

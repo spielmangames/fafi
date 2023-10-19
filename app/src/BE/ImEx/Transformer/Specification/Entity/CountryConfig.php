@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace FAFI\src\BE\ImEx\Transformer\Specification\Entity;
 
 use FAFI\src\BE\Domain\Dto\Geo\Country\Country;
+use FAFI\src\BE\Domain\Persistence\Geo\Country\CountryDataHydrator;
 use FAFI\src\BE\ImEx\Clients\CountryClient;
-use FAFI\src\BE\ImEx\Hydrator\CountryHydrator;
 use FAFI\src\BE\ImEx\FileSchemas\Entity\CountryEntityFileSchema;
 use FAFI\src\BE\ImEx\Transformer\Field\Typical\IntegerFieldConverter;
 use FAFI\src\BE\ImEx\Transformer\Field\Typical\StringFieldConverter;
@@ -43,7 +43,7 @@ class CountryConfig implements ImportableEntityConfig
 
     public function getResourceDataHydrator(): string
     {
-        return CountryHydrator::class;
+        return CountryDataHydrator::class;
     }
 
     public function getSubResourceDataHydrators(): array
