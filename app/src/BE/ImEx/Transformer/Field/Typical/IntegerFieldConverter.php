@@ -10,6 +10,15 @@ class IntegerFieldConverter implements ImportFieldConverter
 {
     public function fromStr(string $property, string $value): int|string
     {
-        return ctype_digit($value) ? (int)$value : $value;
+        return $this->isInteger($value) ? (int)$value : $value;
+    }
+
+    private function isInteger(string $field): bool
+    {
+        if ($field === '') {
+            return false;
+        }
+
+        return is_numeric($field) && ctype_digit($field);
     }
 }
