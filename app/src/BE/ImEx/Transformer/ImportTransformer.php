@@ -33,10 +33,10 @@ class ImportTransformer
      */
     public function transform(array $extractedRows, ImportableEntityConfig $entityConfig): array
     {
-        $converted = $this->importConverter->convert($extractedRows, $entityConfig);
-        $this->importSpecificator->validate($converted, $entityConfig);
-        $mapped = $this->importMapper->map($converted, $entityConfig);
+        $transformed = $this->importConverter->convert($extractedRows, $entityConfig);
+        $this->importSpecificator->validate($transformed, $entityConfig);
+        $transformed = $this->importMapper->map($transformed, $entityConfig);
 
-        return $this->importHydrator->hydrate($mapped, $entityConfig);
+        return $this->importHydrator->hydrate($transformed, $entityConfig);
     }
 }
