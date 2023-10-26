@@ -5,8 +5,9 @@ declare(strict_types=1);
 namespace FAFI\src\BE\ImEx\Transformer\Specification\Entity;
 
 use FAFI\src\BE\Domain\Dto\Player\Position\Position;
+use FAFI\src\BE\Domain\Persistence\Player\Position\PositionDataHydrator;
 use FAFI\src\BE\ImEx\Clients\PositionClient;
-use FAFI\src\BE\ImEx\Hydrator\PositionHydrator;
+use FAFI\src\BE\ImEx\FileSchemas\Entity\Mapper\PositionMapper;
 use FAFI\src\BE\ImEx\FileSchemas\Entity\PositionEntityFileSchema;
 use FAFI\src\BE\ImEx\Transformer\Field\Typical\IntegerFieldConverter;
 use FAFI\src\BE\ImEx\Transformer\Field\Typical\StringFieldConverter;
@@ -39,16 +40,21 @@ class PositionConfig implements ImportableEntityConfig
         ];
     }
 
+    public function getResourceMapper(): string
+    {
+        return PositionMapper::class;
+    }
+
     public function getResourceDataHydrator(): string
     {
-        return PositionHydrator::class;
+        return PositionDataHydrator::class;
     }
+
 
     public function getSubResourceDataHydrators(): array
     {
         return [];
     }
-
 
     public function getResourceLoader(): string
     {

@@ -47,6 +47,18 @@ class CityRepository implements RepositoryInterface
         return $this->cityResource->list($conditions);
     }
 
+    /**
+     * @param string $name
+     *
+     * @return City|null
+     * @throws FafiException
+     */
+    public function findByName(string $name): ?City
+    {
+        $criteria = new Criteria(CityResource::NAME_FIELD, QuerySyntax::OPERATOR_IS, [$name]);
+        return $this->cityResource->read([$criteria]);
+    }
+
 
     /**
      * @param CityData $entity

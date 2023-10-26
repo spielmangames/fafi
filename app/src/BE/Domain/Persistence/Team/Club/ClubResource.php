@@ -20,7 +20,6 @@ class ClubResource extends AbstractResource
         self::NAME_FIELD,
         self::FAFI_NAME_FIELD,
         self::CITY_ID_FIELD,
-        self::COUNTRY_ID_FIELD,
         self::FOUNDED_FIELD,
     ];
     private const REQUIRED_FIELDS = [
@@ -34,7 +33,6 @@ class ClubResource extends AbstractResource
     public const NAME_FIELD = 'name';
     public const FAFI_NAME_FIELD = 'fafi_name';
     public const CITY_ID_FIELD = 'city_id';
-    public const COUNTRY_ID_FIELD = 'country_id';
     public const FOUNDED_FIELD = 'founded';
 
 

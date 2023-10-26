@@ -91,6 +91,17 @@ class GeoService
         return $this->cityRepository->findCollection($conditions);
     }
 
+    /**
+     * @param string $name
+     *
+     * @return City|null
+     * @throws FafiException
+     */
+    public function findCityByName(string $name): ?City
+    {
+        return $this->cityRepository->findByName($name);
+    }
+
 
     /**
      * @param City $city

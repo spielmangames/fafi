@@ -17,8 +17,15 @@ class ImExableEntityMapperFactory
     public function create(string $class): ImExableEntityMapperInterface
     {
         return match ($class) {
+            // Geo specific
             CountryMapper::class => new CountryMapper(),
             CityMapper::class => new CityMapper(),
+
+            // Team specific
+            ClubMapper::class => new ClubMapper(),
+
+            // Player specific
+            PositionMapper::class => new PositionMapper(),
 
             default => throw new FafiException(sprintf(FafiException::E_CLASS_ABSENT, $class)),
         };

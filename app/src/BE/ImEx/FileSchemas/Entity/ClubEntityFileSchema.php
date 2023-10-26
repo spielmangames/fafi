@@ -7,16 +7,17 @@ namespace FAFI\src\BE\ImEx\FileSchemas\Entity;
 class ClubEntityFileSchema extends AbstractEntityFileSchema
 {
     public const NAME = 'name';
-
-//    public const REGION = 'region';
-//    public const COUNTRY = 'country';
+    public const FAFI_NAME = 'fafi_name';
+    public const CITY = 'city';
+    public const FOUNDED = 'founded';
 
 
     public const HEADER = [
         self::ID,
 
         self::NAME,
-//        self::REGION,
-//        self::COUNTRY,
+        self::FAFI_NAME,
+        self::CITY,
+        self::FOUNDED,
     ];
 }
