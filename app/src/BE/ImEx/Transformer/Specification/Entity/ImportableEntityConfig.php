@@ -15,10 +15,6 @@ interface ImportableEntityConfig
     public function getFieldSpecificationsMap(): array;
     public function getResourceMapper(): string;
     public function getResourceDataHydrator(): string;
-    /** @return string[] */
-    public function getSubResourceDataHydrators(): array;
 
     public function getResourceLoader(): string;
-    /** @return string[] */
-    public function getSubResourceLoaders(): array;
 }

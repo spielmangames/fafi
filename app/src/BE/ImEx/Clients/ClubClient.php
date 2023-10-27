@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace FAFI\src\BE\ImEx\Clients;
 
+use FAFI\src\BE\Domain\Dto\EntityDataInterface;
 use FAFI\src\BE\Domain\Dto\Team\Club\Club;
+use FAFI\src\BE\Domain\Dto\Team\Club\ClubData;
 use FAFI\src\BE\Domain\Service\TeamService;
 
 class ClubClient implements EntityClientInterface
@@ -17,13 +19,9 @@ class ClubClient implements EntityClientInterface
     }
 
 
-    public function create($entity): Club
+    public function save(EntityDataInterface $entity): Club
     {
-        return $this->teamService->saveClub($entity);
-    }
-
-    public function update($entity): Club
-    {
+        /** @var ClubData $entity */
         return $this->teamService->saveClub($entity);
     }
 }

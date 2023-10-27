@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace FAFI\src\BE\ImEx\Clients;
 
+use FAFI\src\BE\Domain\Dto\EntityDataInterface;
 use FAFI\src\BE\Domain\Dto\Player\Position\Position;
+use FAFI\src\BE\Domain\Dto\Player\Position\PositionData;
 use FAFI\src\BE\Domain\Service\PlayerService;
 
 class PositionClient implements EntityClientInterface
@@ -17,13 +19,9 @@ class PositionClient implements EntityClientInterface
     }
 
 
-    public function create($entity): Position
+    public function save(EntityDataInterface $entity): Position
     {
-        return $this->playerService->savePosition($entity);
-    }
-
-    public function update($entity): Position
-    {
+        /** @var PositionData $entity */
         return $this->playerService->savePosition($entity);
     }
 }

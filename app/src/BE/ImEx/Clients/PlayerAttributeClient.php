@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace FAFI\src\BE\ImEx\Clients;
 
+use FAFI\src\BE\Domain\Dto\EntityDataInterface;
 use FAFI\src\BE\Domain\Dto\Player\PlayerAttribute\PlayerAttribute;
+use FAFI\src\BE\Domain\Dto\Player\PlayerAttribute\PlayerAttributeData;
 use FAFI\src\BE\Domain\Service\PlayerService;
 
 class PlayerAttributeClient implements EntityClientInterface
@@ -17,13 +19,9 @@ class PlayerAttributeClient implements EntityClientInterface
     }
 
 
-    public function create($entity): PlayerAttribute
+    public function save(EntityDataInterface $entity): PlayerAttribute
     {
-        return $this->playerService->getPlayerAttributeRepo()->save($entity);
-    }
-
-    public function update($entity): PlayerAttribute
-    {
-        return $this->playerService->getPlayerAttributeRepo()->save($entity);
+        /** @var PlayerAttributeData $entity */
+        return $this->playerService->savePlayerAttribute($entity);
     }
 }

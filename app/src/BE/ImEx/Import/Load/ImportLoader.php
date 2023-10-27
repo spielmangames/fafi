@@ -5,90 +5,83 @@ declare(strict_types=1);
 namespace FAFI\src\BE\ImEx\Import\Load;
 
 use FAFI\exception\FafiException;
+use FAFI\exception\ImExErr;
 use FAFI\src\BE\Domain\Dto\EntityDataInterface;
-use FAFI\src\BE\Domain\Persistence\EntityDataHydratorFactory;
 use FAFI\src\BE\ImEx\Clients\EntityClientFactory;
+use FAFI\src\BE\ImEx\Clients\EntityClientInterface;
 use FAFI\src\BE\ImEx\Transformer\Specification\Entity\ImportableEntityConfig;
 
 class ImportLoader
 {
-    private EntityDataHydratorFactory $entityDataHydratorFactory;
+    private int $line;
+
+
     private EntityClientFactory $entityClientFactory;
 
     public function __construct()
     {
-        $this->entityDataHydratorFactory = new EntityDataHydratorFactory();
         $this->entityClientFactory = new EntityClientFactory();
     }
 
 
     /**
-     * @param EntityDataInterface[] $entities
-     * @param ImportableEntityConfig $entitySpecification
+     * @param EntityDataInterface[] $transformedRows
+     * @param ImportableEntityConfig $entityConfig
      *
      * @return void
      * @throws FafiException
      */
-    public function load(array $entities, ImportableEntityConfig $entitySpecification): void
+    public function load(array $transformedRows, ImportableEntityConfig $entityConfig): void
     {
-        $resourceHydrator = $this->entityDataHydratorFactory->create($entitySpecification->getResourceDataHydrator());
-        $subResourceHydrators = $this->buildSubResourceHydrators($entitySpecification);
-
-        $resourceClient = $this->entityClientFactory->create($entitySpecification->getResourceLoader());
-        $subResourceClients = $this->buildSubResourceClients($entitySpecification);
-
-        foreach ($entities as $entityData) {
-            $entity = $resourceHydrator->hydrate($entityData);
-
-            $resource = $this->isFieldPresent($entityData, AbstractEntityFileSchema::ID)
-                ? $resourceClient->update($entity)
-                : $resourceClient->create($entity);
-
-            foreach ($subResourceHydrators as $field => $subResourceHydrator) {
-                if ($this->isFieldPresent($entityData, $field)) {
-                    $subEntity = $subResourceHydrator->hydrate($entityData[$field]);
-
-                    $subResourceClients[$field]->create($subEntity);
-                }
-            }
+        foreach ($transformedRows as $line => $transformedRow) {
+            $this->line = $line;
+            $this->loadEntity($transformedRow, $entityConfig);
         }
     }
 
 
     /**
-     * @param ImportableEntityConfig $entitySpecification
+     * @param EntityDataInterface $transformedRow
+     * @param ImportableEntityConfig $entityConfig
      *
-     * @return EntityHydratorInterface[]
+     * @return void
      * @throws FafiException
      */
-    private function buildSubResourceHydrators(ImportableEntityConfig $entitySpecification): array
+    private function loadEntity(EntityDataInterface $transformedRow, ImportableEntityConfig $entityConfig): void
     {
-        $hydrators = [];
-        foreach ($entitySpecification->getSubResourceDataHydrators() as $subResource => $hydrator) {
-            $hydrators[$subResource] = $this->entityDataHydratorFactory->create($hydrator);
-        }
-
-        return $hydrators;
+        $loader = $this->prepareResourceLoader($entityConfig);
+        $loader->save($transformedRow);
     }
 
     /**
-     * @param ImportableEntityConfig $entitySpecification
+     * @param ImportableEntityConfig $entityConfig
      *
-     * @return \FAFI\src\BE\ImEx\Clients\EntityClientInterface[]
+     * @return EntityClientInterface
      * @throws FafiException
      */
-    private function buildSubResourceClients(ImportableEntityConfig $entitySpecification): array
+    private function prepareResourceLoader(ImportableEntityConfig $entityConfig): EntityClientInterface
     {
-        $clients = [];
-        foreach ($entitySpecification->getSubResourceLoaders() as $subResource => $client) {
-            $clients[$subResource] = $this->entityClientFactory->create($client);
+        $class = $entityConfig->getResourceLoader();
+
+        try {
+            $loader = $this->entityClientFactory->create($class);
+        } catch (FafiException $exception) {
+            $this->fail($exception->getMessage());
         }
 
-        return $clients;
+        return $loader;
     }
 
-    private function isFieldPresent(array $entity, string $field): bool
+
+    /**
+     * @param string $error
+     *
+     * @return void
+     * @throws FafiException
+     */
+    private function fail(string $error): void
     {
-        return array_key_exists($field, $entity);
+        $e = [sprintf(ImExErr::IMPORT_FAILED, $this->line), $error];
+        throw new FafiException(FafiException::combine($e));
     }
 }

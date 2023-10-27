@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace FAFI\src\BE\ImEx\Clients;
 
+use FAFI\src\BE\Domain\Dto\EntityDataInterface;
 use FAFI\src\BE\Domain\Dto\Geo\City\City;
+use FAFI\src\BE\Domain\Dto\Geo\City\CityData;
 use FAFI\src\BE\Domain\Service\GeoService;
 
 class CityClient implements EntityClientInterface
@@ -17,13 +19,9 @@ class CityClient implements EntityClientInterface
     }
 
 
-    public function create($entity): City
+    public function save(EntityDataInterface $entity): City
     {
-        return $this->geoService->saveCity($entity);
-    }
-
-    public function update($entity): City
-    {
+        /** @var CityData $entity */
         return $this->geoService->saveCity($entity);
     }
 }

@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace FAFI\src\BE\ImEx\Clients;
 
+use FAFI\src\BE\Domain\Dto\EntityDataInterface;
 use FAFI\src\BE\Domain\Dto\Player\Player\Player;
+use FAFI\src\BE\Domain\Dto\Player\Player\PlayerData;
 use FAFI\src\BE\Domain\Service\PlayerService;
 
 class PlayerClient implements EntityClientInterface
@@ -17,13 +19,9 @@ class PlayerClient implements EntityClientInterface
     }
 
 
-    public function create($entity): Player
+    public function save(EntityDataInterface $entity): Player
     {
-        return $this->playerService->savePlayer($entity);
-    }
-
-    public function update($entity): Player
-    {
+        /** @var PlayerData $entity */
         return $this->playerService->savePlayer($entity);
     }
 }

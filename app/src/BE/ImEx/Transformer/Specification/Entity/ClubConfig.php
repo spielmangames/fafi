@@ -59,18 +59,8 @@ class ClubConfig implements ImportableEntityConfig
     }
 
 
-    public function getSubResourceDataHydrators(): array
-    {
-        return [];
-    }
-
     public function getResourceLoader(): string
     {
         return ClubClient::class;
-    }
-
-    public function getSubResourceLoaders(): array
-    {
-        return [];
     }
 }

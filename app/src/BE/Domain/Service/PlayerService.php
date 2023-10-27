@@ -6,6 +6,8 @@ namespace FAFI\src\BE\Domain\Service;
 
 use FAFI\exception\FafiException;
 use FAFI\src\BE\Domain\Dto\Player\Player\Player;
+use FAFI\src\BE\Domain\Dto\Player\PlayerAttribute\PlayerAttribute;
+use FAFI\src\BE\Domain\Dto\Player\PlayerAttribute\PlayerAttributeData;
 use FAFI\src\BE\Domain\Dto\Player\Position\Position;
 use FAFI\src\BE\Domain\Persistence\EntityCriteriaInterface;
 use FAFI\src\BE\Domain\Persistence\Player\Player\PlayerRepository;
@@ -117,9 +119,14 @@ class PlayerService
         $attributes = [];
 
         foreach($attributesToSave as $attributeToSave) {
-            $attributes[] = $this->playerAttributeRepository->save($attributeToSave);
+            $attributes[] = $this->savePlayerAttribute($attributeToSave);
         }
 
         return $attributes;
+    }
+
+    public function savePlayerAttribute(PlayerAttributeData $attributeToSave): PlayerAttribute
+    {
+        return $this->playerAttributeRepository->save($attributeToSave);
     }
 }

@@ -5,16 +5,12 @@ declare(strict_types=1);
 namespace FAFI\src\BE\ImEx\Transformer\Specification\Entity;
 
 use FAFI\src\BE\Domain\Dto\Player\Player\Player;
-use FAFI\src\BE\ImEx\Clients\PlayerAttributeClient;
+use FAFI\src\BE\Domain\Persistence\Player\Player\PlayerDataHydrator;
 use FAFI\src\BE\ImEx\Clients\PlayerClient;
-use FAFI\src\BE\ImEx\Hydrator\PlayerAttributeHydrator;
-use FAFI\src\BE\ImEx\Hydrator\PlayerHydrator;
 use FAFI\src\BE\ImEx\FileSchemas\Entity\PlayerEntityFileSchema;
-use FAFI\src\BE\ImEx\Transformer\Field\Player\PlayerAttributesFieldConverter;
 use FAFI\src\BE\ImEx\Transformer\Field\Typical\BooleanFieldConverter;
 use FAFI\src\BE\ImEx\Transformer\Field\Typical\IntegerFieldConverter;
 use FAFI\src\BE\ImEx\Transformer\Field\Typical\StringFieldConverter;
-use FAFI\src\BE\ImEx\Transformer\Specification\Field\Player\PlayerAttributesSpecification;
 use FAFI\src\BE\ImEx\Transformer\Specification\Field\Typical\BooleanSpecification;
 use FAFI\src\BE\ImEx\Transformer\Specification\Field\Typical\IdSpecification;
 use FAFI\src\BE\ImEx\Transformer\Specification\Field\Typical\IntegerSpecification;
@@ -41,8 +37,6 @@ class PlayerConfig implements ImportableEntityConfig
             PlayerEntityFileSchema::HEIGHT => IntegerFieldConverter::class,
             PlayerEntityFileSchema::FOOT => StringFieldConverter::class,
             PlayerEntityFileSchema::INJURE_FACTOR => BooleanFieldConverter::class,
-
-            PlayerEntityFileSchema::ATTRIBUTES => PlayerAttributesFieldConverter::class,
         ];
     }
 
@@ -59,34 +53,22 @@ class PlayerConfig implements ImportableEntityConfig
             PlayerEntityFileSchema::HEIGHT => IntegerSpecification::class,
             PlayerEntityFileSchema::FOOT => StringSpecification::class,
             PlayerEntityFileSchema::INJURE_FACTOR => BooleanSpecification::class,
-
-
-            PlayerEntityFileSchema::ATTRIBUTES => PlayerAttributesSpecification::class,
         ];
+    }
+
+    public function getResourceMapper(): string
+    {
+        return PlayerMapper::class;
     }
 
     public function getResourceDataHydrator(): string
     {
-        return PlayerHydrator::class;
-    }
-
-    public function getSubResourceDataHydrators(): array
-    {
-        return [
-            PlayerEntityFileSchema::ATTRIBUTES => PlayerAttributeHydrator::class,
-        ];
+        return PlayerDataHydrator::class;
     }
 
 
     public function getResourceLoader(): string
     {
         return PlayerClient::class;
-    }
-
-    public function getSubResourceLoaders(): array
-    {
-        return [
-            PlayerEntityFileSchema::ATTRIBUTES => PlayerAttributeClient::class,
-        ];
     }
 }

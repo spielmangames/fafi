@@ -27,14 +27,30 @@ class Importer
     /**
      * @param string $filePath
      * @param ImportableEntityConfig $entityConfig
+     * @param bool $logMemory
      *
      * @return void
      * @throws FafiException
      */
-    public function import(string $filePath, ImportableEntityConfig $entityConfig): void
+    public function import(string $filePath, ImportableEntityConfig $entityConfig, bool $logMemory = false): void
     {
+        !$logMemory ?: $this->logMemoryUsage('before Import Extractor');
         $extracted = $this->importExtractor->extract($filePath);
+        !$logMemory ?: $this->logMemoryUsage('after Import Extractor');
+
+        !$logMemory ?: $this->logMemoryUsage('before Import Transformer');
         $transformed = $this->importTransformer->transform($extracted, $entityConfig);
+        !$logMemory ?: $this->logMemoryUsage('after Import Transformer');
+
+        !$logMemory ?: $this->logMemoryUsage('before Import Loader');
         $this->importLoader->load($transformed, $entityConfig);
+        !$logMemory ?: $this->logMemoryUsage('after Import Loader');
+    }
+
+    private function logMemoryUsage(string $context): void
+    {
+        $memory = memory_get_usage();
+        $log = sprintf('Memory usage: %s: %s.', $context, $memory);
+        var_dump($log);
     }
 }

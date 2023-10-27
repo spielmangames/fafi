@@ -51,18 +51,8 @@ class PositionConfig implements ImportableEntityConfig
     }
 
 
-    public function getSubResourceDataHydrators(): array
-    {
-        return [];
-    }
-
     public function getResourceLoader(): string
     {
         return PositionClient::class;
-    }
-
-    public function getSubResourceLoaders(): array
-    {
-        return [];
     }
 }

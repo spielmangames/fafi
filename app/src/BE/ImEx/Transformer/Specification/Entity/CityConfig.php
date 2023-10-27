@@ -55,20 +55,8 @@ class CityConfig implements ImportableEntityConfig
     }
 
 
-
-
-    public function getSubResourceDataHydrators(): array
-    {
-        return [];
-    }
-
     public function getResourceLoader(): string
     {
         return CityClient::class;
-    }
-
-    public function getSubResourceLoaders(): array
-    {
-        return [];
     }
 }

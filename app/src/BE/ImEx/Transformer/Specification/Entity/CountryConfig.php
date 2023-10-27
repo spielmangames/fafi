@@ -53,20 +53,8 @@ class CountryConfig implements ImportableEntityConfig
     }
 
 
-
-
-    public function getSubResourceDataHydrators(): array
-    {
-        return [];
-    }
-
     public function getResourceLoader(): string
     {
         return CountryClient::class;
-    }
-
-    public function getSubResourceLoaders(): array
-    {
-        return [];
     }
 }
