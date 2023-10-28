@@ -86,25 +86,6 @@ class PlayerService implements ServiceInterface
         return $this->playerRepository->findCollection($conditions);
     }
 
-//    /**
-//     * @param Player $player
-//     *
-//     * @return Player
-//     * @throws FafiException
-//     */
-//    public function savePlayerComposite(Player $player): Player
-//    {
-//        $attributesToSave = $player->getAttributes();
-//
-//        $player = $this->savePlayer($player);
-//
-//        if (!is_null($attributesToSave)) {
-//            $player->setAttributes($this->savePlayerAttributes($attributesToSave));
-//        }
-//
-//        return $player;
-//    }
-
     /**
      * @param PlayerData $player
      *
@@ -115,6 +96,7 @@ class PlayerService implements ServiceInterface
     {
         return $this->playerRepository->save($player);
     }
+
 
     public function savePlayerAttributes(array $attributesToSave): array
     {
@@ -137,4 +119,18 @@ class PlayerService implements ServiceInterface
     {
         return $this->playerAttributeRepository->save($attributeToSave);
     }
+
+
+    //    public function savePlayerComposite(PlayerData $playerData): Player
+//    {
+//        $attributesToSave = $player->getAttributes();
+//
+//        $player = $this->savePlayer($playerData);
+//
+//        if (!is_null($attributesToSave)) {
+//            $player->setAttributes($this->savePlayerAttributes($attributesToSave));
+//        }
+//
+//        return $player;
+//    }
 }

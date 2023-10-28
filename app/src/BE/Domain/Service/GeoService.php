@@ -37,17 +37,6 @@ class GeoService implements ServiceInterface
     }
 
     /**
-     * @param EntityCriteriaInterface[] $conditions
-     *
-     * @return Country[]
-     * @throws FafiException
-     */
-    public function findCountriesCollection(array $conditions): array
-    {
-        return $this->countryRepository->findCollection($conditions);
-    }
-
-    /**
      * @param string $name
      *
      * @return Country|null
@@ -58,6 +47,16 @@ class GeoService implements ServiceInterface
         return $this->countryRepository->findByName($name);
     }
 
+    /**
+     * @param EntityCriteriaInterface[] $conditions
+     *
+     * @return Country[]
+     * @throws FafiException
+     */
+    public function findCountriesCollection(array $conditions): array
+    {
+        return $this->countryRepository->findCollection($conditions);
+    }
 
     /**
      * @param CountryData $country
@@ -83,17 +82,6 @@ class GeoService implements ServiceInterface
     }
 
     /**
-     * @param EntityCriteriaInterface[] $conditions
-     *
-     * @return City[]
-     * @throws FafiException
-     */
-    public function findCitiesCollection(array $conditions): array
-    {
-        return $this->cityRepository->findCollection($conditions);
-    }
-
-    /**
      * @param string $name
      *
      * @return City|null
@@ -104,6 +92,16 @@ class GeoService implements ServiceInterface
         return $this->cityRepository->findByName($name);
     }
 
+    /**
+     * @param EntityCriteriaInterface[] $conditions
+     *
+     * @return City[]
+     * @throws FafiException
+     */
+    public function findCitiesCollection(array $conditions): array
+    {
+        return $this->cityRepository->findCollection($conditions);
+    }
 
     /**
      * @param CityData $city
