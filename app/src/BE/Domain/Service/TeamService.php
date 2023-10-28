@@ -6,6 +6,7 @@ namespace FAFI\src\BE\Domain\Service;
 
 use FAFI\exception\FafiException;
 use FAFI\src\BE\Domain\Dto\Team\Club\Club;
+use FAFI\src\BE\Domain\Dto\Team\Club\ClubData;
 use FAFI\src\BE\Domain\Persistence\EntityCriteriaInterface;
 use FAFI\src\BE\Domain\Persistence\Team\Club\ClubRepository;
 
@@ -42,12 +43,12 @@ class TeamService implements ServiceInterface
     }
 
     /**
-     * @param Club $club
+     * @param ClubData $club
      *
      * @return Club
      * @throws FafiException
      */
-    public function saveClub(Club $club): Club
+    public function saveClub(ClubData $club): Club
     {
         return $this->clubRepository->save($club);
     }

@@ -6,9 +6,11 @@ namespace FAFI\src\BE\Domain\Service;
 
 use FAFI\exception\FafiException;
 use FAFI\src\BE\Domain\Dto\Player\Player\Player;
+use FAFI\src\BE\Domain\Dto\Player\Player\PlayerData;
 use FAFI\src\BE\Domain\Dto\Player\PlayerAttribute\PlayerAttribute;
 use FAFI\src\BE\Domain\Dto\Player\PlayerAttribute\PlayerAttributeData;
 use FAFI\src\BE\Domain\Dto\Player\Position\Position;
+use FAFI\src\BE\Domain\Dto\Player\Position\PositionData;
 use FAFI\src\BE\Domain\Persistence\EntityCriteriaInterface;
 use FAFI\src\BE\Domain\Persistence\Player\Player\PlayerRepository;
 use FAFI\src\BE\Domain\Persistence\Player\PlayerAttribute\PlayerAttributeRepository;
@@ -51,12 +53,12 @@ class PlayerService implements ServiceInterface
     }
 
     /**
-     * @param Position $position
+     * @param PositionData $position
      *
      * @return Position
      * @throws FafiException
      */
-    public function savePosition(Position $position): Position
+    public function savePosition(PositionData $position): Position
     {
         return $this->positionRepository->save($position);
     }
@@ -84,32 +86,32 @@ class PlayerService implements ServiceInterface
         return $this->playerRepository->findCollection($conditions);
     }
 
+//    /**
+//     * @param Player $player
+//     *
+//     * @return Player
+//     * @throws FafiException
+//     */
+//    public function savePlayerComposite(Player $player): Player
+//    {
+//        $attributesToSave = $player->getAttributes();
+//
+//        $player = $this->savePlayer($player);
+//
+//        if (!is_null($attributesToSave)) {
+//            $player->setAttributes($this->savePlayerAttributes($attributesToSave));
+//        }
+//
+//        return $player;
+//    }
+
     /**
-     * @param Player $player
+     * @param PlayerData $player
      *
      * @return Player
      * @throws FafiException
      */
-    public function savePlayerComposite(Player $player): Player
-    {
-        $attributesToSave = $player->getAttributes();
-
-        $player = $this->savePlayer($player);
-
-        if (!is_null($attributesToSave)) {
-            $player->setAttributes($this->savePlayerAttributes($attributesToSave));
-        }
-
-        return $player;
-    }
-
-    /**
-     * @param Player $player
-     *
-     * @return Player
-     * @throws FafiException
-     */
-    public function savePlayer(Player $player): Player
+    public function savePlayer(PlayerData $player): Player
     {
         return $this->playerRepository->save($player);
     }
@@ -125,6 +127,12 @@ class PlayerService implements ServiceInterface
         return $attributes;
     }
 
+    /**
+     * @param PlayerAttributeData $attributeToSave
+     *
+     * @return PlayerAttribute
+     * @throws FafiException
+     */
     public function savePlayerAttribute(PlayerAttributeData $attributeToSave): PlayerAttribute
     {
         return $this->playerAttributeRepository->save($attributeToSave);

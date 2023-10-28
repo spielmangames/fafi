@@ -6,7 +6,9 @@ namespace FAFI\src\BE\Domain\Service;
 
 use FAFI\exception\FafiException;
 use FAFI\src\BE\Domain\Dto\Geo\City\City;
+use FAFI\src\BE\Domain\Dto\Geo\City\CityData;
 use FAFI\src\BE\Domain\Dto\Geo\Country\Country;
+use FAFI\src\BE\Domain\Dto\Geo\Country\CountryData;
 use FAFI\src\BE\Domain\Persistence\EntityCriteriaInterface;
 use FAFI\src\BE\Domain\Persistence\Geo\City\CityRepository;
 use FAFI\src\BE\Domain\Persistence\Geo\Country\CountryRepository;
@@ -58,12 +60,12 @@ class GeoService implements ServiceInterface
 
 
     /**
-     * @param Country $country
+     * @param CountryData $country
      *
      * @return Country
      * @throws FafiException
      */
-    public function saveCountry(Country $country): Country
+    public function saveCountry(CountryData $country): Country
     {
         return $this->countryRepository->save($country);
     }
@@ -104,12 +106,12 @@ class GeoService implements ServiceInterface
 
 
     /**
-     * @param City $city
+     * @param CityData $city
      *
      * @return City
      * @throws FafiException
      */
-    public function saveCity(City $city): City
+    public function saveCity(CityData $city): City
     {
         return $this->cityRepository->save($city);
     }
