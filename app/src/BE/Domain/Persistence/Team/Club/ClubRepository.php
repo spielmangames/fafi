@@ -37,6 +37,18 @@ class ClubRepository implements RepositoryInterface
     }
 
     /**
+     * @param string $fafiName
+     *
+     * @return Club|null
+     * @throws FafiException
+     */
+    public function findByFafiName(string $fafiName): ?Club
+    {
+        $criteria = new Criteria(ClubResource::FAFI_NAME_FIELD, QuerySyntax::OPERATOR_IS, [$fafiName]);
+        return $this->clubResource->read([$criteria]);
+    }
+
+    /**
      * @param EntityCriteriaInterface[] $conditions
      *
      * @return Club[]

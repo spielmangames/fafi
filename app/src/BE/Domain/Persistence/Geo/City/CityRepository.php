@@ -37,17 +37,6 @@ class CityRepository implements RepositoryInterface
     }
 
     /**
-     * @param EntityCriteriaInterface[] $conditions
-     *
-     * @return City[]
-     * @throws FafiException
-     */
-    public function findCollection(array $conditions): array
-    {
-        return $this->cityResource->list($conditions);
-    }
-
-    /**
      * @param string $name
      *
      * @return City|null
@@ -57,6 +46,17 @@ class CityRepository implements RepositoryInterface
     {
         $criteria = new Criteria(CityResource::NAME_FIELD, QuerySyntax::OPERATOR_IS, [$name]);
         return $this->cityResource->read([$criteria]);
+    }
+
+    /**
+     * @param EntityCriteriaInterface[] $conditions
+     *
+     * @return City[]
+     * @throws FafiException
+     */
+    public function findCollection(array $conditions): array
+    {
+        return $this->cityResource->list($conditions);
     }
 
 

@@ -100,6 +100,7 @@ abstract class AbstractResource
         throw new FafiException('Needs to be tested!');
 
         $data = $this->entityDataHydrator->dehydrate($entityData);
+        $data = $this->skipNullValues($data);
         $this->verifyConstraintsOnUpdate($this->getTable(), $entityData, $data);
 
         $id = $entityData->getId();
@@ -116,6 +117,18 @@ abstract class AbstractResource
     }
 
     /**
+     * See FAFI-002 for details
+     *
+     * @param array $entityDataAsArray
+     *
+     * @return array
+     */
+    private function skipNullValues(array $entityDataAsArray): array
+    {
+        return array_filter($entityDataAsArray, fn($propertyValue) => !is_null($propertyValue));
+    }
+
+    /**
      * @param EntityCriteriaInterface[] $conditions
      *
      * @return void
@@ -123,7 +136,7 @@ abstract class AbstractResource
      */
     public function delete(array $conditions = []): void
     {
-        throw new FafiException('Needs to be tested!');
+        throw new FafiException('Forbidden. See FAFI-004 for details.');
         $this->queryExecutor->deleteRecords($this->getTable(), $conditions);
     }
 

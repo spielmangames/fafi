@@ -9,6 +9,7 @@ use FAFI\exception\FafiException;
 use FAFI\src\BE\Domain\Criteria;
 use FAFI\src\BE\Domain\Dto\EntityDataInterface;
 use FAFI\src\BE\Domain\Dto\Player\Player\Player;
+use FAFI\src\BE\Domain\Dto\Player\Player\PlayerData;
 use FAFI\src\BE\Domain\Persistence\AbstractResource;
 use FAFI\src\BE\Domain\Persistence\EntityCriteriaInterface;
 use FAFI\src\BE\RepositoryInterface;
@@ -32,6 +33,19 @@ class PlayerRepository implements RepositoryInterface
     public function findById(int $id): ?Player
     {
         $criteria = new Criteria(AbstractResource::ID_FIELD, QuerySyntax::OPERATOR_IS, [$id]);
+        return $this->playerResource->read([$criteria]);
+    }
+
+    /**
+     * @param string $name
+     *
+     * @return Player|null
+     * @throws FafiException
+     */
+    public function findByFullName(string $name): ?Player
+    {
+        // TODO investigate this!!!
+        $criteria = new Criteria(PlayerResource::ID_FIELD, QuerySyntax::OPERATOR_IS, [$name]);
         return $this->playerResource->read([$criteria]);
     }
 
@@ -69,15 +83,4 @@ class PlayerRepository implements RepositoryInterface
         $criteria = new Criteria(AbstractResource::ID_FIELD, QuerySyntax::OPERATOR_IS, [$id]);
         $this->playerResource->delete([$criteria]);
     }
-
-
-//    public function updateFoot(int $playerId, string $foot): bool
-//    {
-//        return (bool)$this->playerResource->patch($playerId, [PlayerResource::FOOT_FIELD => $foot]);
-//    }
-//
-//    public function count(PlayerCriteria $criteria): int
-//    {
-//        return $this->playerResource->count($criteria);
-//    }
 }

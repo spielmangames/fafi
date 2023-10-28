@@ -37,17 +37,6 @@ class CountryRepository implements RepositoryInterface
     }
 
     /**
-     * @param EntityCriteriaInterface[] $conditions
-     *
-     * @return Country[]
-     * @throws FafiException
-     */
-    public function findCollection(array $conditions): array
-    {
-        return $this->countryResource->list($conditions);
-    }
-
-    /**
      * @param string $name
      *
      * @return Country|null
@@ -57,6 +46,17 @@ class CountryRepository implements RepositoryInterface
     {
         $criteria = new Criteria(CountryResource::NAME_FIELD, QuerySyntax::OPERATOR_IS, [$name]);
         return $this->countryResource->read([$criteria]);
+    }
+
+    /**
+     * @param EntityCriteriaInterface[] $conditions
+     *
+     * @return Country[]
+     * @throws FafiException
+     */
+    public function findCollection(array $conditions): array
+    {
+        return $this->countryResource->list($conditions);
     }
 
 
