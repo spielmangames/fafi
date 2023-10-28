@@ -5,8 +5,9 @@ declare(strict_types=1);
 namespace FAFI\src\BE\Install;
 
 use FAFI\exception\FafiException;
+use FAFI\src\BE\Domain\Service\ServiceInterface;
 
-class InstallService
+class InstallService implements ServiceInterface
 {
     private DatabaseInstaller $databaseInstaller;
     private DataInstaller $dataInstaller;

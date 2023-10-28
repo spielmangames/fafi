@@ -7,10 +7,11 @@ namespace FAFI\src\FE;
 use FAFI\exception\FafiException;
 use FAFI\src\BE\Domain\Dto\Player\Player\Player;
 use FAFI\src\FE\Structure\Page\PageInterface;
+use FAFI\src\BE\Domain\Service\ServiceInterface;
 use FAFI\src\FE\Themes\ThemeFactory;
 use FAFI\src\FE\Themes\ThemeInterface;
 
-class StorefrontService
+class StorefrontService implements ServiceInterface
 {
     private ThemeInterface $theme;
 

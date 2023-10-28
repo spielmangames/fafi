@@ -9,7 +9,7 @@ use FAFI\src\BE\Domain\Dto\Team\Club\Club;
 use FAFI\src\BE\Domain\Persistence\EntityCriteriaInterface;
 use FAFI\src\BE\Domain\Persistence\Team\Club\ClubRepository;
 
-class TeamService
+class TeamService implements ServiceInterface
 {
     private ClubRepository $clubRepository;
 

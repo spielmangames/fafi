@@ -11,7 +11,7 @@ use FAFI\src\BE\Domain\Persistence\EntityCriteriaInterface;
 use FAFI\src\BE\Domain\Persistence\Geo\City\CityRepository;
 use FAFI\src\BE\Domain\Persistence\Geo\Country\CountryRepository;
 
-class GeoService
+class GeoService implements ServiceInterface
 {
     private CountryRepository $countryRepository;
     private CityRepository $cityRepository;

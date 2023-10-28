@@ -6,9 +6,10 @@ namespace FAFI\src\BE\ImEx;
 
 use FAFI\data\CsvFileHandlerInterface;
 use FAFI\exception\FafiException;
+use FAFI\src\BE\Domain\Service\ServiceInterface;
 use FAFI\src\BE\ImEx\Import\Importer;
 
-class ImExService
+class ImExService implements ServiceInterface
 {
     public const FILE_EXT = CsvFileHandlerInterface::FILE_EXT;
 
