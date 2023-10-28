@@ -7,6 +7,7 @@ namespace FAFI\src\BE\ImEx\Transformer\Specification\Entity;
 use FAFI\src\BE\Domain\Dto\Player\Player\Player;
 use FAFI\src\BE\Domain\Persistence\Player\Player\PlayerDataHydrator;
 use FAFI\src\BE\ImEx\Clients\PlayerClient;
+use FAFI\src\BE\ImEx\FileSchemas\Entity\Mapper\PlayerMapper;
 use FAFI\src\BE\ImEx\FileSchemas\Entity\PlayerEntityFileSchema;
 use FAFI\src\BE\ImEx\Transformer\Field\Typical\BooleanFieldConverter;
 use FAFI\src\BE\ImEx\Transformer\Field\Typical\IntegerFieldConverter;
@@ -36,7 +37,7 @@ class PlayerConfig implements ImportableEntityConfig
 
             PlayerEntityFileSchema::HEIGHT => IntegerFieldConverter::class,
             PlayerEntityFileSchema::FOOT => StringFieldConverter::class,
-            PlayerEntityFileSchema::INJURE_FACTOR => BooleanFieldConverter::class,
+            PlayerEntityFileSchema::IS_FRAGILE => BooleanFieldConverter::class,
         ];
     }
 
@@ -52,7 +53,7 @@ class PlayerConfig implements ImportableEntityConfig
 
             PlayerEntityFileSchema::HEIGHT => IntegerSpecification::class,
             PlayerEntityFileSchema::FOOT => StringSpecification::class,
-            PlayerEntityFileSchema::INJURE_FACTOR => BooleanSpecification::class,
+            PlayerEntityFileSchema::IS_FRAGILE => BooleanSpecification::class,
         ];
     }
 

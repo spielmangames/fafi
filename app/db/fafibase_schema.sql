@@ -108,22 +108,21 @@ CREATE TABLE `players` (
     `particle` VARCHAR(8),
     `surname` VARCHAR(32) NOT NULL,
     `fafi_surname` VARCHAR(32) NOT NULL,
-
 #     `birth_country` INT(11) UNSIGNED NOT NULL,
 #     `birth_city` INT(11) UNSIGNED NOT NULL,
 #     `birth_date`
     `nationality` INT(11) UNSIGNED NOT NULL,
 
-#     `height` TINYINT(3) UNSIGNED,
+    `height` TINYINT(3) UNSIGNED,
     `foot` ENUM('L', 'R'),
-#     `injure_factor` BIT DEFAULT 0,
+    `is_fragile` BIT DEFAULT 0,
 
     PRIMARY KEY (`id`),
     UNIQUE KEY `u_players_name_particle_surname` (`name`, `particle`, `surname`),
     UNIQUE KEY `u_players_name_particle_fafi_surname` (`name`, `particle`, `surname`),
 #     CONSTRAINT `birth_country` FOREIGN KEY (`birth_country`) REFERENCES `countries` (`id`) ON DELETE CASCADE,
 #     CONSTRAINT `birth_city` FOREIGN KEY (`birth_city`) REFERENCES `cities` (`id`) ON DELETE CASCADE,
-    CONSTRAINT `nationality` FOREIGN KEY (`nationality`) REFERENCES `countries` (`id`) ON DELETE CASCADE
+#     CONSTRAINT `nationality` FOREIGN KEY (`nationality`) REFERENCES `countries` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 

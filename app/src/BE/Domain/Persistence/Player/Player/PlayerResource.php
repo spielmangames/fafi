@@ -51,7 +51,7 @@ class PlayerResource extends AbstractResource
     // skills shape
     public const HEIGHT_FIELD = 'height';
     public const FOOT_FIELD = 'foot';
-    public const IS_FRAGILE_FIELD = 'injure_factor';
+    public const IS_FRAGILE_FIELD = 'is_fragile';
 
 
     public function __construct()
