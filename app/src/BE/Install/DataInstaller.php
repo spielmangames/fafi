@@ -59,6 +59,7 @@ class DataInstaller
     {
         $this->imExService->import($this->formSampleFilePath(ImExableEntities::POSITIONS));
         $this->imExService->import($this->formSampleFilePath(ImExableEntities::PLAYERS));
+        $this->imExService->import($this->formSampleFilePath(ImExableEntities::PLAYER_ATTRIBUTES));
     }
 
 
