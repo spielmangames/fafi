@@ -1,9 +1,9 @@
 
 ## FAFI-002
 
-Support PATCH.
+Support PATCH operations solidly.
     - need to set only 1 particular Entity field to null while others stay untouched (nullable among them)
-
+`CURRENT_WORKAROUND` AbstractResource::update operation is skipping null values under the hood.
 
 
 ## FAFI-003
@@ -21,8 +21,9 @@ If both options are needed, which one is preferable as a default?
 
 
 ## FAFI-004
-using ON DELETE CASCADE in DB (eg: ```table "clubs" > CONSTRAINT `city_id` FOREIGN KEY (`city_id`) REFERENCES `cities` (`id`) ON DELETE CASCADE```)
-
+Get the rid of Delete operations
+    - using ON DELETE CASCADE in DB (eg: ```table "clubs" > CONSTRAINT `city_id` FOREIGN KEY (`city_id`) REFERENCES `cities` (`id`) ON DELETE CASCADE```)
+`CURRENT_WORKAROUND` AbstractResource::delete operation is temporarily forbidden.
 
 
 ## FAFI-005
@@ -36,6 +37,6 @@ Implement DI
 
 
 ## FAFI-007
-implement Enums
+Consider implementing Enums
 
 
