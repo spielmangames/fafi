@@ -13,4 +13,5 @@ interface ImExableEntities
 
     public const POSITIONS = 'positions';
     public const PLAYERS = 'players';
+    public const PLAYER_ATTRIBUTES = 'player_attributes';
 }

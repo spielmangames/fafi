@@ -10,12 +10,15 @@ use FAFI\src\BE\Domain\Criteria;
 use FAFI\src\BE\Domain\Dto\EntityDataInterface;
 use FAFI\src\BE\Domain\Dto\Player\Player\Player;
 use FAFI\src\BE\Domain\Dto\Player\Player\PlayerData;
+use FAFI\src\BE\Domain\Dto\Player\Player\PlayerNameHelper;
 use FAFI\src\BE\Domain\Persistence\AbstractResource;
 use FAFI\src\BE\Domain\Persistence\EntityCriteriaInterface;
 use FAFI\src\BE\RepositoryInterface;
 
 class PlayerRepository implements RepositoryInterface
 {
+    use PlayerNameHelper;
+
     private PlayerResource $playerResource;
 
     public function __construct()
@@ -37,16 +40,15 @@ class PlayerRepository implements RepositoryInterface
     }
 
     /**
-     * @param string $name
+     * @param string $fullName
      *
      * @return Player|null
      * @throws FafiException
      */
-    public function findByFullName(string $name): ?Player
+    public function findByFullName(string $fullName): ?Player
     {
-        // TODO investigate this!!!
-        $criteria = new Criteria(PlayerResource::ID_FIELD, QuerySyntax::OPERATOR_IS, [$name]);
-        return $this->playerResource->read([$criteria]);
+        $criteria = $this->buildMultiCriteria($this->deconstructFullName($fullName));
+        return $this->playerResource->read($criteria);
     }
 
     /**
@@ -82,5 +84,17 @@ class PlayerRepository implements RepositoryInterface
     {
         $criteria = new Criteria(AbstractResource::ID_FIELD, QuerySyntax::OPERATOR_IS, [$id]);
         $this->playerResource->delete([$criteria]);
+    }
+
+
+    protected function buildMultiCriteria(array $filters, string $operator = QuerySyntax::OPERATOR_IS): array
+    {
+        $resultCriteria = [];
+
+        foreach($filters as $property => $value) {
+            $resultCriteria[] = new Criteria($property, $operator, $value);
+        }
+
+        return $resultCriteria;
     }
 }

@@ -43,7 +43,7 @@ class ClubConfig implements ImportableEntityConfig
 
             ClubEntityFileSchema::NAME => StringSpecification::class,
             ClubEntityFileSchema::FAFI_NAME => StringSpecification::class,
-            ClubEntityFileSchema::CITY => IntegerSpecification::class,
+            ClubEntityFileSchema::CITY => IdSpecification::class,
             ClubEntityFileSchema::FOUNDED => IntegerSpecification::class,
         ];
     }

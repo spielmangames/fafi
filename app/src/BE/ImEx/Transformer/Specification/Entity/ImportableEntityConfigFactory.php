@@ -16,21 +16,20 @@ class ImportableEntityConfigFactory
      */
     public function create(string $class): ImportableEntityConfig
     {
-        switch ($class) {
-            case CountryConfig::class:
-                return new CountryConfig();
-            case CityConfig::class:
-                return new CityConfig();
+        return match ($class) {
+            // Geo specific
+            CountryConfig::class => new CountryConfig(),
+            CityConfig::class => new CityConfig(),
 
-            case ClubConfig::class:
-                return new ClubConfig();
+            // Team specific
+            ClubConfig::class => new ClubConfig(),
 
-            case PositionConfig::class:
-                return new PositionConfig();
-            case PlayerConfig::class:
-                return new PlayerConfig();
-        }
+            // Player specific
+            PositionConfig::class => new PositionConfig(),
+            PlayerConfig::class => new PlayerConfig(),
+            PlayerAttributeConfig::class => new PlayerAttributeConfig(),
 
-        throw new FafiException(sprintf(FafiException::E_CLASS_ABSENT, $class));
+            default => throw new FafiException(sprintf(FafiException::E_CLASS_ABSENT, $class)),
+        };
     }
 }

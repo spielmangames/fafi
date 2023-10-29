@@ -13,7 +13,6 @@ use FAFI\src\BE\ImEx\Transformer\Field\Geo\CountryNameToIdFieldConverter;
 use FAFI\src\BE\ImEx\Transformer\Field\Typical\IntegerFieldConverter;
 use FAFI\src\BE\ImEx\Transformer\Field\Typical\StringFieldConverter;
 use FAFI\src\BE\ImEx\Transformer\Specification\Field\Typical\IdSpecification;
-use FAFI\src\BE\ImEx\Transformer\Specification\Field\Typical\IntegerSpecification;
 use FAFI\src\BE\ImEx\Transformer\Specification\Field\Typical\StringSpecification;
 
 class CityConfig implements ImportableEntityConfig
@@ -40,7 +39,7 @@ class CityConfig implements ImportableEntityConfig
             CityEntityFileSchema::ID => IdSpecification::class,
 
             CityEntityFileSchema::NAME => StringSpecification::class,
-            CityEntityFileSchema::COUNTRY => IntegerSpecification::class,
+            CityEntityFileSchema::COUNTRY => IdSpecification::class,
         ];
     }
 

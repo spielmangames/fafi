@@ -42,6 +42,17 @@ class PlayerService implements ServiceInterface
     }
 
     /**
+     * @param string $name
+     *
+     * @return Position|null
+     * @throws FafiException
+     */
+    public function findPositionByName(string $name): ?Position
+    {
+        return $this->positionRepository->findByName($name);
+    }
+
+    /**
      * @param EntityCriteriaInterface[] $conditions
      *
      * @return Position[]
@@ -73,6 +84,17 @@ class PlayerService implements ServiceInterface
     public function findPlayerById(int $id): ?Player
     {
         return $this->playerRepository->findById($id);
+    }
+
+    /**
+     * @param string $fullName
+     *
+     * @return Player|null
+     * @throws FafiException
+     */
+    public function findPlayerByFullName(string $fullName): ?Player
+    {
+        return $this->playerRepository->findByFullName($fullName);
     }
 
     /**

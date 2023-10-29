@@ -10,6 +10,7 @@ use FAFI\src\BE\ImEx\Transformer\Specification\Entity\ClubConfig;
 use FAFI\src\BE\ImEx\Transformer\Specification\Entity\CountryConfig;
 use FAFI\src\BE\ImEx\Transformer\Specification\Entity\ImportableEntityConfig;
 use FAFI\src\BE\ImEx\Transformer\Specification\Entity\ImportableEntityConfigFactory;
+use FAFI\src\BE\ImEx\Transformer\Specification\Entity\PlayerAttributeConfig;
 use FAFI\src\BE\ImEx\Transformer\Specification\Entity\PlayerConfig;
 
 class ImportEntityConfigDetector
@@ -19,9 +20,10 @@ class ImportEntityConfigDetector
         ImExableEntities::CITIES => CityConfig::class,
 
         ImExableEntities::CLUBS => ClubConfig::class,
-        ImExableEntities::POSITIONS => ClubConfig::class,
 
+        ImExableEntities::POSITIONS => ClubConfig::class,
         ImExableEntities::PLAYERS => PlayerConfig::class,
+        ImExableEntities::PLAYER_ATTRIBUTES => PlayerAttributeConfig::class,
     ];
 
 

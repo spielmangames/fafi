@@ -4,9 +4,11 @@ declare(strict_types=1);
 
 namespace FAFI\src\BE\Domain\Dto\Player\Player;
 
+use FAFI\src\BE\Domain\Persistence\Player\Player\PlayerResource;
+
 trait PlayerNameHelper
 {
-    public function buildFullName(bool $initials = false): string
+    public function constructFullName(bool $initials = false): string
     {
         $result = [];
 
@@ -17,13 +19,13 @@ trait PlayerNameHelper
             }
             $result[] = $name;
         }
-        $result[] = $this->buildSurnameWithParticle();
+        $result[] = $this->constructSurnameWithParticle();
 
         $delimiter = $initials ? '' : ' ';
         return implode($delimiter, $result);
     }
 
-    public function buildSurnameWithParticle(): string
+    public function constructSurnameWithParticle(): string
     {
         $result = [];
 
@@ -34,5 +36,21 @@ trait PlayerNameHelper
         $result[] = $this->getSurname();
 
         return implode(' ', $result);
+    }
+
+
+    public function deconstructFullName(string $fullName): array
+    {
+        $fullName = explode(' ', $fullName);
+
+        $result[PlayerResource::SURNAME_FIELD] = array_pop($fullName);
+        if (!empty($fullName)) {
+            $result[PlayerResource::NAME_FIELD] = array_shift($fullName);
+        }
+        if (!empty($fullName)) {
+            $result[PlayerResource::PARTICLE_FIELD] = implode(' ', $fullName);
+        }
+
+        return $result;
     }
 }

@@ -37,6 +37,6 @@ class PlayerTitle extends AbstractTitle
         /** @var \FAFI\src\BE\Domain\Dto\Player\Player\Player $player */
         $player = $this->player;
 
-        return $player->buildFullName();
+        return $player->constructFullName();
     }
 }
