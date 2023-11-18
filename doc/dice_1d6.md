@@ -1,11 +1,12 @@
 
-# 1D6 roll probability layouts
+# 1D6 single roll probability layouts
 
 
 ###### Roll layout
 
-| 1 | 2 | 3 | 4 | 5 | 6 |
-|---|---|---|---|---|---|
+| `1` | `2` | `3` | `4` | `5` | `6` |
+|:---:|:---:|:---:|:---:|:---:|:---:|
+|  1  |  2  |  3  |  4  |  5  |  6  |
 
 - P<sub>1D6</sub> = 1/6
 
