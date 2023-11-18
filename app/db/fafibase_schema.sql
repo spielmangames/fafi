@@ -1,6 +1,6 @@
 
 #-----------------------------------------------------------------------------------------------------------------------
-# DB init [version=1.14]
+# DB init [version=1.16]
 #-----------------------------------------------------------------------------------------------------------------------
 
 
@@ -21,7 +21,7 @@ CREATE TABLE `_version` (
     `db_schema` VARCHAR(8) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
-INSERT INTO _version VALUES ('1.14');
+INSERT INTO _version VALUES ('1.16');
 
 
 
@@ -68,7 +68,7 @@ CREATE TABLE clubs (
      `fafi_name` VARCHAR(32) NOT NULL,
 
      `city_id` INT(11) UNSIGNED NOT NULL,
-     `founded` SMALLINT(4) UNSIGNED NOT NULL,,
+     `founded` SMALLINT(4) UNSIGNED,
 
      PRIMARY KEY (`id`),
      UNIQUE KEY `u_clubs_name` (`name`),
@@ -107,10 +107,7 @@ CREATE TABLE `players` (
     `name` VARCHAR(32),
     `particle` VARCHAR(8),
     `surname` VARCHAR(32) NOT NULL,
-    `fafi_surname` VARCHAR(32) NOT NULL,
-#     `birth_country` INT(11) UNSIGNED NOT NULL,
-#     `birth_city` INT(11) UNSIGNED NOT NULL,
-#     `birth_date`
+    `fafi_surname` VARCHAR(32),
     `nationality` INT(11) UNSIGNED NOT NULL,
 
     `height` TINYINT(3) UNSIGNED,
@@ -120,9 +117,7 @@ CREATE TABLE `players` (
     PRIMARY KEY (`id`),
     UNIQUE KEY `u_players_name_particle_surname` (`name`, `particle`, `surname`),
     UNIQUE KEY `u_players_name_particle_fafi_surname` (`name`, `particle`, `surname`),
-#     CONSTRAINT `birth_country` FOREIGN KEY (`birth_country`) REFERENCES `countries` (`id`) ON DELETE CASCADE,
-#     CONSTRAINT `birth_city` FOREIGN KEY (`birth_city`) REFERENCES `cities` (`id`) ON DELETE CASCADE,
-#     CONSTRAINT `nationality` FOREIGN KEY (`nationality`) REFERENCES `countries` (`id`) ON DELETE CASCADE
+    CONSTRAINT `nationality` FOREIGN KEY (`nationality`) REFERENCES `countries` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 
