@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace FAFI\src\BE\ImEx\FileSchemas\Entity\Mapper;
+namespace FAFI\src\BE\ImEx\Schema\Mapper;
 
 use FAFI\src\BE\Domain\Persistence\Geo\City\CityResource;
-use FAFI\src\BE\ImEx\FileSchemas\Entity\CityEntityFileSchema;
+use FAFI\src\BE\ImEx\Schema\FileSchema\Entity\CityEntityFileSchema;
 
 class CityMapper extends AbstractImExableEntityMapper implements ImExableEntityMapperInterface
 {

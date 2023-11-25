@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace FAFI\src\BE\ImEx\FileSchemas\Entity;
+namespace FAFI\src\BE\ImEx\Schema\FileSchema\Entity;
 
 class CountryEntityFileSchema extends AbstractEntityFileSchema
 {

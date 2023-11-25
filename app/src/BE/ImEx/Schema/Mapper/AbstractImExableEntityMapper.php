@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace FAFI\src\BE\ImEx\FileSchemas\Entity\Mapper;
+namespace FAFI\src\BE\ImEx\Schema\Mapper;
 
 use FAFI\exception\FafiException;
 use FAFI\exception\ImExErr;

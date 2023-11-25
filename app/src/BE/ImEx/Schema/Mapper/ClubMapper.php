@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace FAFI\src\BE\ImEx\FileSchemas\Entity\Mapper;
+namespace FAFI\src\BE\ImEx\Schema\Mapper;
 
 use FAFI\src\BE\Domain\Persistence\Team\Club\ClubResource;
-use FAFI\src\BE\ImEx\FileSchemas\Entity\ClubEntityFileSchema;
+use FAFI\src\BE\ImEx\Schema\FileSchema\Entity\ClubEntityFileSchema;
 
 class ClubMapper extends AbstractImExableEntityMapper implements ImExableEntityMapperInterface
 {

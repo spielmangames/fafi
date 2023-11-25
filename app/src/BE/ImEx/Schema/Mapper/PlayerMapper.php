@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace FAFI\src\BE\ImEx\FileSchemas\Entity\Mapper;
+namespace FAFI\src\BE\ImEx\Schema\Mapper;
 
 use FAFI\src\BE\Domain\Persistence\Player\Player\PlayerResource;
-use FAFI\src\BE\ImEx\FileSchemas\Entity\PlayerEntityFileSchema;
+use FAFI\src\BE\ImEx\Schema\FileSchema\Entity\PlayerEntityFileSchema;
 
 class PlayerMapper extends AbstractImExableEntityMapper implements ImExableEntityMapperInterface
 {

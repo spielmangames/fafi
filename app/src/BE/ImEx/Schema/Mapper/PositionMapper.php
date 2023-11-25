@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace FAFI\src\BE\ImEx\FileSchemas\Entity\Mapper;
+namespace FAFI\src\BE\ImEx\Schema\Mapper;
 
 use FAFI\src\BE\Domain\Persistence\Player\Position\PositionResource;
-use FAFI\src\BE\ImEx\FileSchemas\Entity\PositionEntityFileSchema;
+use FAFI\src\BE\ImEx\Schema\FileSchema\Entity\PositionEntityFileSchema;
 
 class PositionMapper extends AbstractImExableEntityMapper implements ImExableEntityMapperInterface
 {

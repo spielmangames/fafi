@@ -6,8 +6,8 @@ namespace FAFI\src\BE\ImEx\Transformer;
 
 use FAFI\exception\FafiException;
 use FAFI\exception\ImExErr;
-use FAFI\src\BE\ImEx\FileSchemas\Entity\Mapper\ImExableEntityMapperFactory;
-use FAFI\src\BE\ImEx\FileSchemas\Entity\Mapper\ImExableEntityMapperInterface;
+use FAFI\src\BE\ImEx\Schema\Mapper\ImExableEntityMapperFactory;
+use FAFI\src\BE\ImEx\Schema\Mapper\ImExableEntityMapperInterface;
 use FAFI\src\BE\ImEx\Transformer\Specification\Entity\ImportableEntityConfig;
 
 class ImportMapper
