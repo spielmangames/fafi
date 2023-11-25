@@ -17,12 +17,12 @@ class FieldSpecificationFactory
 {
     /**
      * @param string $class
-     * @param array|null $params
+     * @param array $params
      *
      * @return FieldSpecification
      * @throws FafiException
      */
-    public function create(string $class, ?array $params = null): FieldSpecification
+    public function create(string $class, array $params = []): FieldSpecification
     {
         return match ($class) {
             // typical
@@ -77,7 +77,7 @@ class FieldSpecificationFactory
      * @return IntegerSpecification
      * @throws FafiException
      */
-    private function createIntSpecification(array $params): IntegerSpecification
+    private function createIntSpecification(array $params = []): IntegerSpecification
     {
         list($min, $max) = null;
 
@@ -106,7 +106,7 @@ class FieldSpecificationFactory
      * @return StringSpecification
      * @throws FafiException
      */
-    private function createStrSpecification(array $params): StringSpecification
+    private function createStrSpecification(array $params = []): StringSpecification
     {
         list($min, $max) = null;
 
