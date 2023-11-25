@@ -49,7 +49,7 @@ CREATE TABLE `cities` (
     `country_id` INT(11) UNSIGNED NOT NULL,
 
     PRIMARY KEY (`id`),
-    UNIQUE KEY `u_cities_name` (`name`)
+    UNIQUE KEY `u_cities_name` (`name`),
     CONSTRAINT `country_id` FOREIGN KEY (`country_id`) REFERENCES `countries` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -116,7 +116,7 @@ CREATE TABLE `players` (
 
     PRIMARY KEY (`id`),
     UNIQUE KEY `u_players_name_particle_surname` (`name`, `particle`, `surname`),
-    UNIQUE KEY `u_players_name_particle_fafi_surname` (`name`, `particle`, `surname`),
+    UNIQUE KEY `u_players_name_particle_fafi_surname` (`name`, `particle`, `fafi_surname`),
     CONSTRAINT `nationality` FOREIGN KEY (`nationality`) REFERENCES `countries` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 

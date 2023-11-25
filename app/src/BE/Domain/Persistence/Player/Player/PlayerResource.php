@@ -22,9 +22,7 @@ class PlayerResource extends AbstractResource
         self::PARTICLE_FIELD,
         self::SURNAME_FIELD,
         self::FAFI_SURNAME_FIELD,
-//        self::BIRTH_COUNTRY_FIELD,
-//        self::BIRTH_CITY_FIELD,
-//        self::BIRTH_DATE_FIELD,
+        self::NATIONALITY_FIELD,
 
         self::HEIGHT_FIELD,
         self::FOOT_FIELD,
@@ -32,10 +30,11 @@ class PlayerResource extends AbstractResource
     ];
     private const REQUIRED_FIELDS = [
         self::SURNAME_FIELD,
-        self::FAFI_SURNAME_FIELD,
+        self::NATIONALITY_FIELD,
     ];
     private const UNIQUE_FIELDS = [
-        self::FAFI_SURNAME_FIELD,
+//        self::SURNAME_FIELD,
+//        self::FAFI_SURNAME_FIELD,
     ];
 
 
@@ -44,9 +43,7 @@ class PlayerResource extends AbstractResource
     public const PARTICLE_FIELD = 'particle';
     public const SURNAME_FIELD = 'surname';
     public const FAFI_SURNAME_FIELD = 'fafi_surname';
-//    public const BIRTH_COUNTRY_FIELD = 'birth_country';
-//    public const BIRTH_CITY_FIELD = 'birth_city';
-//    public const BIRTH_DATE_FIELD = 'birth_date';
+    public const NATIONALITY_FIELD = 'nationality';
 
     // skills shape
     public const HEIGHT_FIELD = 'height';

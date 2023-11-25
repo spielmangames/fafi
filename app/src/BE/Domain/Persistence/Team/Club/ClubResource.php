@@ -24,9 +24,11 @@ class ClubResource extends AbstractResource
     ];
     private const REQUIRED_FIELDS = [
         self::NAME_FIELD,
+        self::CITY_ID_FIELD,
     ];
     private const UNIQUE_FIELDS = [
         self::NAME_FIELD,
+        self::FAFI_NAME_FIELD,
     ];
 
 

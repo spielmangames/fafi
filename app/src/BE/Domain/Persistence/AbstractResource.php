@@ -28,7 +28,7 @@ abstract class AbstractResource
     public function __construct(
         EntityHydratorInterface $entityHydrator,
         EntityDataHydratorInterface $entityDataHydrator,
-    ){
+    ) {
         $this->entityValidator = new EntityValidator();
         $this->entityHydrator = $entityHydrator;
         $this->entityDataHydrator = $entityDataHydrator;

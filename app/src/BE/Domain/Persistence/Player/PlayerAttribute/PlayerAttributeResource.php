@@ -25,7 +25,15 @@ class PlayerAttributeResource extends AbstractResource
         self::DEF_MIN_FIELD,
         self::DEF_MAX_FIELD,
     ];
-    private const REQUIRED_FIELDS = [];
+    private const REQUIRED_FIELDS = [
+        self::PLAYER_ID_FIELD,
+        self::POSITION_ID_FIELD,
+
+        self::ATT_MIN_FIELD,
+        self::ATT_MAX_FIELD,
+        self::DEF_MIN_FIELD,
+        self::DEF_MAX_FIELD,
+    ];
     private const UNIQUE_FIELDS = [];
 
 
