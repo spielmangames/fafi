@@ -1,6 +1,6 @@
 
 #-----------------------------------------------------------------------------------------------------------------------
-# DB init [version=1.16]
+# DB init [version=1.17]
 #-----------------------------------------------------------------------------------------------------------------------
 
 
@@ -21,7 +21,7 @@ CREATE TABLE `_version` (
     `db_schema` VARCHAR(8) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
-INSERT INTO _version VALUES ('1.16');
+INSERT INTO _version VALUES ('1.17');
 
 
 
@@ -65,7 +65,7 @@ CREATE TABLE clubs (
      `id` INT(11) UNSIGNED AUTO_INCREMENT NOT NULL,
 
      `name` VARCHAR(32) NOT NULL,
-     `fafi_name` VARCHAR(32) NOT NULL,
+     `fafi_name` VARCHAR(32),
 
      `city_id` INT(11) UNSIGNED NOT NULL,
      `founded` SMALLINT(4) UNSIGNED,
