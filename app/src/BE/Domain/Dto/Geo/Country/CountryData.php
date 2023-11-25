@@ -14,7 +14,7 @@ class CountryData implements EntityDataInterface
     private ?string $continent = null;
 
 
-    public function setId(int $id): self
+    public function setId(?int $id): self
     {
         $this->id = $id;
         return $this;
@@ -26,7 +26,7 @@ class CountryData implements EntityDataInterface
     }
 
 
-    public function setName(string $name): self
+    public function setName(?string $name): self
     {
         $this->name = $name;
         return $this;
@@ -37,7 +37,7 @@ class CountryData implements EntityDataInterface
         return $this->name;
     }
 
-    public function setContinent(string $continent): self
+    public function setContinent(?string $continent): self
     {
         $this->continent = $continent;
         return $this;

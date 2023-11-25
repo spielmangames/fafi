@@ -19,7 +19,7 @@ class PlayerAttributeData implements EntityDataInterface
     protected ?int $defMax = null;
 
 
-    public function setId(int $id): self
+    public function setId(?int $id): self
     {
         $this->id = $id;
         return $this;
@@ -31,7 +31,7 @@ class PlayerAttributeData implements EntityDataInterface
     }
 
 
-    public function setPlayerId(int $playerId): self
+    public function setPlayerId(?int $playerId): self
     {
         $this->playerId = $playerId;
         return $this;
@@ -42,7 +42,7 @@ class PlayerAttributeData implements EntityDataInterface
         return $this->playerId;
     }
 
-    public function setPositionId(int $positionId): self
+    public function setPositionId(?int $positionId): self
     {
         $this->positionId = $positionId;
         return $this;
@@ -54,7 +54,7 @@ class PlayerAttributeData implements EntityDataInterface
     }
 
 
-    public function setAttMin(int $attMin): self
+    public function setAttMin(?int $attMin): self
     {
         $this->attMin = $attMin;
         return $this;
@@ -65,7 +65,7 @@ class PlayerAttributeData implements EntityDataInterface
         return $this->attMin;
     }
 
-    public function setAttMax(int $attMax): self
+    public function setAttMax(?int $attMax): self
     {
         $this->attMax = $attMax;
         return $this;
@@ -76,7 +76,7 @@ class PlayerAttributeData implements EntityDataInterface
         return $this->attMax;
     }
 
-    public function setDefMin(int $defMin): self
+    public function setDefMin(?int $defMin): self
     {
         $this->defMin = $defMin;
         return $this;
@@ -87,7 +87,7 @@ class PlayerAttributeData implements EntityDataInterface
         return $this->defMin;
     }
 
-    public function setDefMax(int $defMax): self
+    public function setDefMax(?int $defMax): self
     {
         $this->defMax = $defMax;
         return $this;

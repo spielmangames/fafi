@@ -11,26 +11,19 @@ class PlayerData implements EntityDataInterface
 {
 //    use PlayerNameHelper;
 
-    // profile: basic
     private ?int $id = null;
 
-    // personal: origin
     protected ?string $name = null;
     protected ?string $particle = null;
     protected ?string $surname = null;
     protected ?string $fafiSurname = null;
 
-    // skills: shape
     protected ?int $height = null;
     protected ?string $foot = null;
     protected ?bool $isFragile = null;
 
-    // skills: attributes per positions
-    /** @var PlayerAttributeData[]|null $attributes */
-    protected ?array $attributes = null;
 
-
-    public function setId(int $id): self
+    public function setId(?int $id): self
     {
         $this->id = $id;
         return $this;
@@ -42,7 +35,7 @@ class PlayerData implements EntityDataInterface
     }
 
 
-    public function setName(string $name): self
+    public function setName(?string $name): self
     {
         $this->name = $name;
         return $this;
@@ -53,7 +46,7 @@ class PlayerData implements EntityDataInterface
         return $this->name;
     }
 
-    public function setParticle(string $particle): self
+    public function setParticle(?string $particle): self
     {
         $this->particle = $particle;
         return $this;
@@ -64,7 +57,7 @@ class PlayerData implements EntityDataInterface
         return $this->particle;
     }
 
-    public function setSurname(string $surname): self
+    public function setSurname(?string $surname): self
     {
         $this->surname = $surname;
         return $this;
@@ -75,7 +68,7 @@ class PlayerData implements EntityDataInterface
         return $this->surname;
     }
 
-    public function setFafiSurname(string $fafiSurname): self
+    public function setFafiSurname(?string $fafiSurname): self
     {
         $this->fafiSurname = $fafiSurname;
         return $this;
@@ -87,7 +80,7 @@ class PlayerData implements EntityDataInterface
     }
 
 
-    public function setHeight(int $height): self
+    public function setHeight(?int $height): self
     {
         $this->height = $height;
         return $this;
@@ -98,7 +91,7 @@ class PlayerData implements EntityDataInterface
         return $this->height;
     }
 
-    public function setFoot(string $foot): self
+    public function setFoot(?string $foot): self
     {
         $this->foot = $foot;
         return $this;
@@ -109,7 +102,7 @@ class PlayerData implements EntityDataInterface
         return $this->foot;
     }
 
-    public function setIsFragile(bool $isFragile): self
+    public function setIsFragile(?bool $isFragile): self
     {
         $this->isFragile = $isFragile;
         return $this;
@@ -118,23 +111,5 @@ class PlayerData implements EntityDataInterface
     public function getIsFragile(): ?bool
     {
         return $this->isFragile;
-    }
-
-
-    /**
-     * @param PlayerAttributeData[] $attributes
-     *
-     * @return PlayerData
-     */
-    public function setAttributes(array $attributes): self
-    {
-        $this->attributes = $attributes;
-        return $this;
-    }
-
-    /** @return PlayerAttributeData[]|null */
-    public function getAttributes(): ?array
-    {
-        return $this->attributes;
     }
 }

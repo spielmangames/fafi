@@ -16,7 +16,7 @@ class ClubData implements EntityDataInterface
     private ?int $founded = null;
 
 
-    public function setId(int $id): self
+    public function setId(?int $id): self
     {
         $this->id = $id;
         return $this;
@@ -28,7 +28,7 @@ class ClubData implements EntityDataInterface
     }
 
 
-    public function setName(string $name): self
+    public function setName(?string $name): self
     {
         $this->name = $name;
         return $this;
@@ -39,7 +39,7 @@ class ClubData implements EntityDataInterface
         return $this->name;
     }
 
-    public function setFafiName(string $fafiName): self
+    public function setFafiName(?string $fafiName): self
     {
         $this->fafiName = $fafiName;
         return $this;
@@ -50,7 +50,7 @@ class ClubData implements EntityDataInterface
         return $this->fafiName;
     }
 
-    public function setCityId(int $cityId): self
+    public function setCityId(?int $cityId): self
     {
         $this->cityId = $cityId;
         return $this;
@@ -61,7 +61,7 @@ class ClubData implements EntityDataInterface
         return $this->cityId;
     }
 
-    public function setFounded(int $founded): self
+    public function setFounded(?int $founded): self
     {
         $this->founded = $founded;
         return $this;

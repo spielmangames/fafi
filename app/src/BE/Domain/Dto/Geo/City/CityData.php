@@ -14,7 +14,7 @@ class CityData implements EntityDataInterface
     private ?int $countryId = null;
 
 
-    public function setId(int $id): self
+    public function setId(?int $id): self
     {
         $this->id = $id;
         return $this;
@@ -26,7 +26,7 @@ class CityData implements EntityDataInterface
     }
 
 
-    public function setName(string $name): self
+    public function setName(?string $name): self
     {
         $this->name = $name;
         return $this;
@@ -37,7 +37,7 @@ class CityData implements EntityDataInterface
         return $this->name;
     }
 
-    public function setCountryId(int $countryId): self
+    public function setCountryId(?int $countryId): self
     {
         $this->countryId = $countryId;
         return $this;

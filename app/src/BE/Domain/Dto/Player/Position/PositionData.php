@@ -13,7 +13,7 @@ class PositionData implements EntityDataInterface
     private ?string $name = null;
 
 
-    public function setId(int $id): self
+    public function setId(?int $id): self
     {
         $this->id = $id;
         return $this;
@@ -25,7 +25,7 @@ class PositionData implements EntityDataInterface
     }
 
 
-    public function setName(string $name): self
+    public function setName(?string $name): self
     {
         $this->name = $name;
         return $this;
