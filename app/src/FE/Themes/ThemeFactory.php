@@ -13,7 +13,6 @@ class ThemeFactory
 
     private const E_THEME_NOT_SUPPORTED = 'Theme %s is not supported.';
 
-
     /**
      * @param string $themeName
      * @return ThemeInterface
@@ -24,9 +23,8 @@ class ThemeFactory
         switch ($themeName) {
             case self::THEME_PRINTER:
                 return new Printer();
-
-            default:
-                throw new FafiException(sprintf(self::E_THEME_NOT_SUPPORTED, $themeName));
         }
+
+        throw new FafiException(sprintf(self::E_THEME_NOT_SUPPORTED, $themeName));
     }
 }

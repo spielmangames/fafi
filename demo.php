@@ -9,6 +9,7 @@ use FAFI\demo\DemoImportService;
 use FAFI\demo\DemoPlayerRepo;
 use FAFI\exception\FafiException;
 use FAFI\FAFI;
+use FAFI\src\BE\Domain\Persistence\Player\Player\PlayerRepository;
 
 
 /**

@@ -13,7 +13,7 @@ class Printer implements ThemeInterface
 {
     public function getPlayersListPage(array $players): PageInterface
     {
-//        return new PlayerPage($players);
+        return new PlayersPage();
     }
 
     public function getPlayerReadPage(Player $player): PageInterface

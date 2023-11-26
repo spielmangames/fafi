@@ -75,10 +75,10 @@ abstract class AbstractResource
      */
     public function create(EntityDataInterface $entityData): EntityInterface
     {
-        $data = $this->entityDataHydrator->dehydrate($entityData);
-        $this->verifyConstraintsOnCreate($this->getTable(), $entityData, $data);
+        $request = $this->entityDataHydrator->dehydrate($entityData);
+        $this->verifyConstraintsOnCreate($this->getTable(), $entityData, $request);
 
-        $id = $this->queryExecutor->createRecord($this->getTable(), $data);
+        $id = $this->queryExecutor->createRecord($this->getTable(), $request);
 
         $criteria = new Criteria(self::ID_FIELD, QuerySyntax::OPERATOR_IS, [$id]);
         $result = $this->read([$criteria]);
@@ -99,13 +99,13 @@ abstract class AbstractResource
     {
         throw new FafiException('Needs to be tested!');
 
-        $data = $this->entityDataHydrator->dehydrate($entityData);
-        $data = $this->skipNullValues($data);
-        $this->verifyConstraintsOnUpdate($this->getTable(), $entityData, $data);
+        $request = $this->entityDataHydrator->dehydrate($entityData);
+        $request = $this->skipNullValues($request);
+        $this->verifyConstraintsOnUpdate($this->getTable(), $entityData, $request);
 
         $id = $entityData->getId();
         $criteria = new Criteria(self::ID_FIELD, QuerySyntax::OPERATOR_IS, [$id]);
-        $this->queryExecutor->updateRecord($this->getTable(), $data, [$criteria]);
+        $this->queryExecutor->updateRecord($this->getTable(), $request, [$criteria]);
 
         $criteria = new Criteria(self::ID_FIELD, QuerySyntax::OPERATOR_IS, [$id]);
         $result = $this->read([$criteria]);
