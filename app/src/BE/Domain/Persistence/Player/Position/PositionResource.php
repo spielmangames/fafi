@@ -7,6 +7,7 @@ namespace FAFI\src\BE\Domain\Persistence\Player\Position;
 use FAFI\exception\FafiException;
 use FAFI\src\BE\Domain\Dto\EntityDataInterface;
 use FAFI\src\BE\Domain\Dto\Player\Position\Position;
+use FAFI\src\BE\Domain\Dto\Player\Position\PositionConstraints;
 use FAFI\src\BE\Domain\Dto\Player\Position\PositionData;
 use FAFI\src\BE\Domain\Persistence\AbstractResource;
 use FAFI\src\BE\Domain\Persistence\EntityCriteriaInterface;
@@ -115,6 +116,14 @@ class PositionResource extends AbstractResource
 
     protected function verifyModelPropertiesConstraints(array $data): void
     {
-        // to implement
+        if (isset($data[self::ID_FIELD])) {
+            $field = self::ID_FIELD;
+            $this->entityValidator::assertEntityPropertyIdInt($data[$field], $field);
+        }
+
+        if (isset($data[self::NAME_FIELD])) {
+            $field = self::NAME_FIELD;
+            $this->entityValidator::assertEntityPropertyStr($data[$field], $field, PositionConstraints::NAME_MIN, PositionConstraints::NAME_MAX);
+        }
     }
 }

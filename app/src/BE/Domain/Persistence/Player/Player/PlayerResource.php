@@ -136,7 +136,10 @@ class PlayerResource extends AbstractResource
 
     protected function verifyModelPropertiesConstraints(array $data): void
     {
-        throw new FafiException('Needs to be tested!');
+        if (isset($data[self::ID_FIELD])) {
+            $field = self::ID_FIELD;
+            $this->entityValidator::assertEntityPropertyIdInt($data[$field], $field);
+        }
 
         if (isset($data[self::NAME_FIELD])) {
             $field = self::NAME_FIELD;
@@ -154,6 +157,10 @@ class PlayerResource extends AbstractResource
             $field = self::FAFI_SURNAME_FIELD;
             $this->entityValidator::assertEntityPropertyStr($data[$field], $field, PlayerConstraints::FAFI_SURNAME_MIN, PlayerConstraints::FAFI_SURNAME_MAX);
         }
+        if (isset($data[self::NATIONALITY_FIELD])) {
+            $field = self::NATIONALITY_FIELD;
+            $this->entityValidator::assertEntityPropertyIdInt($data[$field], $field);
+        }
 
         if (isset($data[self::HEIGHT_FIELD])) {
             $field = self::HEIGHT_FIELD;
@@ -163,15 +170,13 @@ class PlayerResource extends AbstractResource
             $field = self::FOOT_FIELD;
             $this->entityValidator::assertEntityPropertyEnum($data[$field], $field, PlayerConstraints::FOOT_SUPPORTED);
         }
+        if (isset($data[self::IS_FRAGILE_FIELD])) {
+            $field = self::IS_FRAGILE_FIELD;
+            $this->entityValidator::assertEntityPropertyBool($data[$field], $field);
+        }
     }
 
-//    public function patch(int $playerId, array $fieldValues): int
-//    {
-//        return $this->connection->table(self::TABLE)
-//            ->where(self::ID_FIELD, '=', $playerId)
-//            ->update($fieldValues);
-//    }
-//
+
 //    public function count(PlayerCriteria $criteria): int
 //    {
 //        $query = $this->connection->table(self::TABLE);

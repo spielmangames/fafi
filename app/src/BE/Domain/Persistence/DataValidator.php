@@ -50,7 +50,7 @@ class DataValidator
     public static function assertFieldOneOf(mixed $value, string $property, array $allowed): void
     {
         if (!in_array($value, $allowed)) {
-            throw new FafiException(sprintf(EntityErr::VALUE_TYPE_INVALID_ENUM, $property));
+            throw new FafiException(sprintf(EntityErr::VALUE_TYPE_INVALID_ENUM, $property, $value));
         }
     }
 

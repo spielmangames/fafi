@@ -7,6 +7,7 @@ namespace FAFI\src\BE\Domain\Persistence\Player\PlayerAttribute;
 use FAFI\exception\FafiException;
 use FAFI\src\BE\Domain\Dto\EntityDataInterface;
 use FAFI\src\BE\Domain\Dto\Player\PlayerAttribute\PlayerAttribute;
+use FAFI\src\BE\Domain\Dto\Player\PlayerAttribute\PlayerAttributeConstraints;
 use FAFI\src\BE\Domain\Dto\Player\PlayerAttribute\PlayerAttributeData;
 use FAFI\src\BE\Domain\Persistence\AbstractResource;
 use FAFI\src\BE\Domain\Persistence\EntityCriteriaInterface;
@@ -131,6 +132,35 @@ class PlayerAttributeResource extends AbstractResource
 
     protected function verifyModelPropertiesConstraints(array $data): void
     {
-        // to implement
+        if (isset($data[self::ID_FIELD])) {
+            $field = self::ID_FIELD;
+            $this->entityValidator::assertEntityPropertyIdInt($data[$field], $field);
+        }
+
+        if (isset($data[self::PLAYER_ID_FIELD])) {
+            $field = self::PLAYER_ID_FIELD;
+            $this->entityValidator::assertEntityPropertyIdInt($data[$field], $field);
+        }
+        if (isset($data[self::POSITION_ID_FIELD])) {
+            $field = self::POSITION_ID_FIELD;
+            $this->entityValidator::assertEntityPropertyIdInt($data[$field], $field);
+        }
+
+        if (isset($data[self::ATT_MIN_FIELD])) {
+            $field = self::ATT_MIN_FIELD;
+            $this->entityValidator::assertEntityPropertyInt($data[$field], $field, PlayerAttributeConstraints::ATT_MIN_MIN, PlayerAttributeConstraints::ATT_MIN_MAX);
+        }
+        if (isset($data[self::ATT_MAX_FIELD])) {
+            $field = self::ATT_MAX_FIELD;
+            $this->entityValidator::assertEntityPropertyInt($data[$field], $field, PlayerAttributeConstraints::ATT_MAX_MIN, PlayerAttributeConstraints::ATT_MAX_MAX);
+        }
+        if (isset($data[self::DEF_MIN_FIELD])) {
+            $field = self::DEF_MIN_FIELD;
+            $this->entityValidator::assertEntityPropertyInt($data[$field], $field, PlayerAttributeConstraints::DEF_MIN_MIN, PlayerAttributeConstraints::DEF_MIN_MAX);
+        }
+        if (isset($data[self::DEF_MAX_FIELD])) {
+            $field = self::DEF_MAX_FIELD;
+            $this->entityValidator::assertEntityPropertyInt($data[$field], $field, PlayerAttributeConstraints::DEF_MAX_MIN, PlayerAttributeConstraints::DEF_MAX_MAX);
+        }
     }
 }

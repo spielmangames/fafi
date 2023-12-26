@@ -40,6 +40,11 @@ class EntityValidator
         DataValidator::assertRequiredFieldsPresent($entity::class, $entityData, $mandatory);
     }
 
+    public static function assertEntityPropertyBool(mixed $value, string $property): void
+    {
+        DataValidator::assertFieldBool($value, $property);
+    }
+
     public static function assertEntityPropertyStr(mixed $value, string $property, ?int $lengthMin = null, ?int $lengthMax = null): void
     {
         DataValidator::assertFieldStr($value, $property, $lengthMin, $lengthMax);
@@ -48,6 +53,11 @@ class EntityValidator
     public static function assertEntityPropertyInt(mixed $value, string $property, ?int $min = null, ?int $max = null): void
     {
         DataValidator::assertFieldInt($value, $property, $min, $max);
+    }
+
+    public static function assertEntityPropertyIdInt(mixed $value, string $property): void
+    {
+        DataValidator::assertFieldInt($value, $property, 1);
     }
 
     public static function assertEntityPropertyEnum(mixed $value, string $property, array $allowed): void

@@ -20,7 +20,7 @@ interface EntityErr extends Err
     public const VALUE_TYPE_INVALID_BOOL = 'Property "%s" must be boolean.';
     public const VALUE_TYPE_INVALID_INT = 'Property "%s" must be integer.';
     public const VALUE_TYPE_INVALID_STR = 'Property "%s" must be string.';
-    public const VALUE_TYPE_INVALID_ENUM = 'Property "%s" value is not supported.';
+    public const VALUE_TYPE_INVALID_ENUM = 'Property "%s" does not support value "%s".';
 
     public const VALUE_DIGIT_MIN_RANGE_CROSSED = 'Property "%s" must be ≥ %d.';
     public const VALUE_DIGIT_MAX_RANGE_CROSSED = 'Property "%s" must be ≤ %d.';

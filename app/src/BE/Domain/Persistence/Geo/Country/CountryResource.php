@@ -7,6 +7,7 @@ namespace FAFI\src\BE\Domain\Persistence\Geo\Country;
 use FAFI\exception\FafiException;
 use FAFI\src\BE\Domain\Dto\EntityDataInterface;
 use FAFI\src\BE\Domain\Dto\Geo\Country\Country;
+use FAFI\src\BE\Domain\Dto\Geo\Country\CountryConstraints;
 use FAFI\src\BE\Domain\Dto\Geo\Country\CountryData;
 use FAFI\src\BE\Domain\Persistence\AbstractResource;
 use FAFI\src\BE\Domain\Persistence\EntityCriteriaInterface;
@@ -118,6 +119,18 @@ class CountryResource extends AbstractResource
 
     protected function verifyModelPropertiesConstraints(array $data): void
     {
-        // to implement
+        if (isset($data[self::ID_FIELD])) {
+            $field = self::ID_FIELD;
+            $this->entityValidator::assertEntityPropertyIdInt($data[$field], $field);
+        }
+
+        if (isset($data[self::NAME_FIELD])) {
+            $field = self::NAME_FIELD;
+            $this->entityValidator::assertEntityPropertyStr($data[$field], $field, CountryConstraints::NAME_MIN, CountryConstraints::NAME_MAX);
+        }
+        if (isset($data[self::CONTINENT_FIELD])) {
+            $field = self::CONTINENT_FIELD;
+            $this->entityValidator::assertEntityPropertyEnum($data[$field], $field, CountryConstraints::CONTINENTS_SUPPORTED);
+        }
     }
 }

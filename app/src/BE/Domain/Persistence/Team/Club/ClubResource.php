@@ -7,6 +7,7 @@ namespace FAFI\src\BE\Domain\Persistence\Team\Club;
 use FAFI\exception\FafiException;
 use FAFI\src\BE\Domain\Dto\EntityDataInterface;
 use FAFI\src\BE\Domain\Dto\Team\Club\Club;
+use FAFI\src\BE\Domain\Dto\Team\Club\ClubConstraints;
 use FAFI\src\BE\Domain\Dto\Team\Club\ClubData;
 use FAFI\src\BE\Domain\Persistence\AbstractResource;
 use FAFI\src\BE\Domain\Persistence\EntityCriteriaInterface;
@@ -19,6 +20,7 @@ class ClubResource extends AbstractResource
 
         self::NAME_FIELD,
         self::FAFI_NAME_FIELD,
+
         self::CITY_ID_FIELD,
         self::FOUNDED_FIELD,
     ];
@@ -34,6 +36,7 @@ class ClubResource extends AbstractResource
 
     public const NAME_FIELD = 'name';
     public const FAFI_NAME_FIELD = 'fafi_name';
+
     public const CITY_ID_FIELD = 'city_id';
     public const FOUNDED_FIELD = 'founded';
 
@@ -123,6 +126,27 @@ class ClubResource extends AbstractResource
 
     protected function verifyModelPropertiesConstraints(array $data): void
     {
-        // to implement
+        if (isset($data[self::ID_FIELD])) {
+            $field = self::ID_FIELD;
+            $this->entityValidator::assertEntityPropertyIdInt($data[$field], $field);
+        }
+
+        if (isset($data[self::NAME_FIELD])) {
+            $field = self::NAME_FIELD;
+            $this->entityValidator::assertEntityPropertyStr($data[$field], $field, ClubConstraints::NAME_MIN, ClubConstraints::NAME_MAX);
+        }
+        if (isset($data[self::FAFI_NAME_FIELD])) {
+            $field = self::FAFI_NAME_FIELD;
+            $this->entityValidator::assertEntityPropertyStr($data[$field], $field, ClubConstraints::FAFI_NAME_MIN, ClubConstraints::FAFI_NAME_MAX);
+        }
+
+        if (isset($data[self::CITY_ID_FIELD])) {
+            $field = self::CITY_ID_FIELD;
+            $this->entityValidator::assertEntityPropertyIdInt($data[$field], $field);
+        }
+        if (isset($data[self::FOUNDED_FIELD])) {
+            $field = self::FOUNDED_FIELD;
+            $this->entityValidator::assertEntityPropertyInt($data[$field], $field, ClubConstraints::FOUNDED_MIN, ClubConstraints::FOUNDED_MAX);
+        }
     }
 }

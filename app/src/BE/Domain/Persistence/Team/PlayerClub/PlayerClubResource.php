@@ -6,9 +6,8 @@ namespace FAFI\src\BE\Domain\Persistence\Team\PlayerClub;
 
 use FAFI\exception\FafiException;
 use FAFI\src\BE\Domain\Dto\EntityDataInterface;
-use FAFI\src\BE\Domain\Dto\Team\Club\Club;
-use FAFI\src\BE\Domain\Dto\Team\Club\ClubData;
 use FAFI\src\BE\Domain\Dto\Team\PlayerClub\PlayerClub;
+use FAFI\src\BE\Domain\Dto\Team\PlayerClub\PlayerClubConstraints;
 use FAFI\src\BE\Domain\Dto\Team\PlayerClub\PlayerClubData;
 use FAFI\src\BE\Domain\Persistence\AbstractResource;
 use FAFI\src\BE\Domain\Persistence\EntityCriteriaInterface;
@@ -121,6 +120,22 @@ class PlayerClubResource extends AbstractResource
 
     protected function verifyModelPropertiesConstraints(array $data): void
     {
-        // to implement
+        if (isset($data[self::ID_FIELD])) {
+            $field = self::ID_FIELD;
+            $this->entityValidator::assertEntityPropertyIdInt($data[$field], $field);
+        }
+
+        if (isset($data[self::CLUB_ID_FIELD])) {
+            $field = self::CLUB_ID_FIELD;
+            $this->entityValidator::assertEntityPropertyIdInt($data[$field], $field);
+        }
+        if (isset($data[self::NUM_FIELD])) {
+            $field = self::NUM_FIELD;
+            $this->entityValidator::assertEntityPropertyInt($data[$field], $field, PlayerClubConstraints::NUM_MIN, PlayerClubConstraints::NUM_MAX);
+        }
+        if (isset($data[self::PLAYER_ID_FIELD])) {
+            $field = self::PLAYER_ID_FIELD;
+            $this->entityValidator::assertEntityPropertyIdInt($data[$field], $field);
+        }
     }
 }

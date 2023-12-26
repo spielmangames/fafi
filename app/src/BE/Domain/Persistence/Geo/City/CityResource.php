@@ -7,6 +7,7 @@ namespace FAFI\src\BE\Domain\Persistence\Geo\City;
 use FAFI\exception\FafiException;
 use FAFI\src\BE\Domain\Dto\EntityDataInterface;
 use FAFI\src\BE\Domain\Dto\Geo\City\City;
+use FAFI\src\BE\Domain\Dto\Geo\City\CityConstraints;
 use FAFI\src\BE\Domain\Dto\Geo\City\CityData;
 use FAFI\src\BE\Domain\Persistence\AbstractResource;
 use FAFI\src\BE\Domain\Persistence\EntityCriteriaInterface;
@@ -118,6 +119,18 @@ class CityResource extends AbstractResource
 
     protected function verifyModelPropertiesConstraints(array $data): void
     {
-        // to implement
+        if (isset($data[self::ID_FIELD])) {
+            $field = self::ID_FIELD;
+            $this->entityValidator::assertEntityPropertyIdInt($data[$field], $field);
+        }
+
+        if (isset($data[self::NAME_FIELD])) {
+            $field = self::NAME_FIELD;
+            $this->entityValidator::assertEntityPropertyStr($data[$field], $field, CityConstraints::NAME_MIN, CityConstraints::NAME_MAX);
+        }
+        if (isset($data[self::COUNTRY_ID_FIELD])) {
+            $field = self::COUNTRY_ID_FIELD;
+            $this->entityValidator::assertEntityPropertyIdInt($data[$field], $field);
+        }
     }
 }

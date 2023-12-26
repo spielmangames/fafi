@@ -76,6 +76,7 @@ abstract class AbstractResource
     public function create(EntityDataInterface $entityData): EntityInterface
     {
         $request = $this->entityDataHydrator->dehydrate($entityData);
+//        $request = $this->skipNullValues($request);
         $this->verifyConstraintsOnCreate($this->getTable(), $entityData, $request);
 
         $id = $this->queryExecutor->createRecord($this->getTable(), $request);
