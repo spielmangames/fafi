@@ -48,9 +48,13 @@ class ImportSpecificator
      */
     private function validateEntity(array $convertedRow, ImportableEntityConfig $entityConfig): void
     {
-        foreach ($convertedRow as $fieldName => $fieldValue) {
-            $fieldSpecification = $this->prepareFieldSpecification($entityConfig, $fieldName);
-            $fieldSpecification->validate($fieldName, $fieldValue);
+        try {
+            foreach ($convertedRow as $fieldName => $fieldValue) {
+                $fieldSpecification = $this->prepareFieldSpecification($entityConfig, $fieldName);
+                $fieldSpecification->validate($fieldName, $fieldValue);
+            }
+        } catch (FafiException $exception) {
+            $this->fail($exception->getMessage());
         }
     }
 

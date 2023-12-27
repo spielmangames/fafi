@@ -10,6 +10,7 @@ use FAFI\src\BE\Domain\Persistence\Geo\Country\CountryDataHydrator;
 use FAFI\src\BE\Domain\Persistence\Player\Player\PlayerDataHydrator;
 use FAFI\src\BE\Domain\Persistence\Player\PlayerAttribute\PlayerAttributeDataHydrator;
 use FAFI\src\BE\Domain\Persistence\Player\Position\PositionDataHydrator;
+use FAFI\src\BE\Domain\Persistence\Team\Club\ClubDataHydrator;
 
 class EntityDataHydratorFactory
 {
@@ -24,6 +25,8 @@ class EntityDataHydratorFactory
         return match ($class) {
             CountryDataHydrator::class => new CountryDataHydrator(),
             CityDataHydrator::class => new CityDataHydrator(),
+
+            ClubDataHydrator::class => new ClubDataHydrator(),
 
             PositionDataHydrator::class => new PositionDataHydrator(),
             PlayerDataHydrator::class => new PlayerDataHydrator(),

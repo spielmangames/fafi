@@ -16,20 +16,17 @@ class EntityClientFactory
      */
     public function create(string $class): EntityClientInterface
     {
-        switch ($class) {
-            case CountryClient::class:
-                return new CountryClient();
-            case CityClient::class:
-                return new CityClient();
+        return match ($class) {
+            CountryClient::class => new CountryClient(),
+            CityClient::class => new CityClient(),
 
-            case PositionClient::class:
-                return new PositionClient();
-            case PlayerClient::class:
-                return new PlayerClient();
-            case PlayerAttributeClient::class:
-                return new PlayerAttributeClient();
-        }
+            ClubClient::class => new ClubClient(),
 
-        throw new FafiException(sprintf(FafiException::E_CLASS_ABSENT, $class));
+            PositionClient::class => new PositionClient(),
+            PlayerClient::class => new PlayerClient(),
+            PlayerAttributeClient::class => new PlayerAttributeClient(),
+
+            default => throw new FafiException(sprintf(FafiException::E_CLASS_ABSENT, $class)),
+        };
     }
 }

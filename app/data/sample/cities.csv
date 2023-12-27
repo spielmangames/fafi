@@ -1,7 +1,11 @@
-name
-Liverpool
-London
-Manchester
-Turin
-Barcelona
-Madrid
+name,country
+Liverpool,England
+London,England
+Manchester,England
+Newcastle upon Tyne,England
+Rome,Italy
+Turin,Italy
+Barcelona,Spain
+Madrid,Spain
+Munich,Germany
+Kyiv,Ukraine

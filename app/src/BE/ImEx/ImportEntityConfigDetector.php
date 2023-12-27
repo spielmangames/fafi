@@ -12,6 +12,7 @@ use FAFI\src\BE\ImEx\Transformer\Specification\Entity\ImportableEntityConfig;
 use FAFI\src\BE\ImEx\Transformer\Specification\Entity\ImportableEntityConfigFactory;
 use FAFI\src\BE\ImEx\Transformer\Specification\Entity\PlayerAttributeConfig;
 use FAFI\src\BE\ImEx\Transformer\Specification\Entity\PlayerConfig;
+use FAFI\src\BE\ImEx\Transformer\Specification\Entity\PositionConfig;
 
 class ImportEntityConfigDetector
 {
@@ -21,7 +22,7 @@ class ImportEntityConfigDetector
 
         ImExableEntities::CLUBS => ClubConfig::class,
 
-        ImExableEntities::POSITIONS => ClubConfig::class,
+        ImExableEntities::POSITIONS => PositionConfig::class,
         ImExableEntities::PLAYERS => PlayerConfig::class,
         ImExableEntities::PLAYER_ATTRIBUTES => PlayerAttributeConfig::class,
     ];
