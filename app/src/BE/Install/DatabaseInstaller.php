@@ -11,7 +11,7 @@ use FAFI\src\BE\DB\DatabaseConnector;
 
 class DatabaseInstaller
 {
-    private const DB_SCHEMA_FILE_NAME = 'fafibase_schema';
+    private const DB_SCHEMA_FILE_NAME = 'fafibase_schema.sql';
     private const DB_SCHEMA_FILE_EXT = '.sql';
     private const DB_SCHEMA_FILE_SIZE_MAX = 1;
 
@@ -39,7 +39,7 @@ class DatabaseInstaller
 
     private function formSchemaFilePath(): string
     {
-        return PATH_APP . 'db' . DS . self::DB_SCHEMA_FILE_NAME . self::DB_SCHEMA_FILE_EXT;
+        return PATH_APP . 'src' . DS . 'BE' . DS . 'Install' . self::DB_SCHEMA_FILE_NAME;
     }
 
     /**
