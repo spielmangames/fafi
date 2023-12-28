@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace FAFI\db;
+namespace FAFI\src\BE\DB;
 
 use FAFI\config\Settings;
 
-class DatabaseSettings
+final class DatabaseSettings
 {
     private const SETTINGS_DB = 'db';
 

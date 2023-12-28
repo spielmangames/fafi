@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace FAFI\db;
+namespace FAFI\src\BE\DB;
 
 use FAFI\exception\DbErr;
 use mysqli;

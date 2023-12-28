@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace FAFI\db;
+namespace FAFI\src\BE\DB;
 
 use FAFI\exception\EntityErr;
 use FAFI\exception\FafiException;

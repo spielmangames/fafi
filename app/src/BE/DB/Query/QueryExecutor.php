@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace FAFI\src\BE\DB\Query;
 
-use FAFI\db\DatabaseDispatcher;
 use FAFI\exception\FafiException;
+use FAFI\src\BE\DB\DatabaseDispatcher;
 use FAFI\src\BE\Domain\Persistence\EntityCriteriaInterface;
 
 class QueryExecutor

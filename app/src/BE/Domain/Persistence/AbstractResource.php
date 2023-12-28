@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace FAFI\src\BE\Domain\Persistence;
 
-use FAFI\db\DatabaseValidator;
 use FAFI\exception\EntityErr;
 use FAFI\exception\FafiException;
+use FAFI\src\BE\DB\DatabaseValidator;
 use FAFI\src\BE\DB\Query\QueryExecutor;
 use FAFI\src\BE\DB\Query\QuerySyntax;
 use FAFI\src\BE\Domain\Criteria;

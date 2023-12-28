@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace FAFI\src\BE\Install;
 
 use FAFI\data\FileValidator;
-use FAFI\db\DatabaseConnector;
 use FAFI\exception\FafiException;
 use FAFI\exception\FileErr;
+use FAFI\src\BE\DB\DatabaseConnector;
 
 class DatabaseInstaller
 {
