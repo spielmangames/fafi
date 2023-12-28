@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace FAFI\db\Query;
+namespace FAFI\src\BE\DB\Query;
 
 use FAFI\db\DatabaseDispatcher;
 use FAFI\exception\FafiException;
