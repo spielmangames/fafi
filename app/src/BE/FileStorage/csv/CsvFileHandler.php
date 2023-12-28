@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace FAFI\data;
+namespace FAFI\src\BE\FileStorage\csv;
 
 use Exception;
 use FAFI\exception\FafiException;

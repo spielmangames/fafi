@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace FAFI\demo;
 
-use FAFI\data\CsvFileHandlerInterface;
 use FAFI\exception\FafiException;
+use FAFI\src\BE\FileStorage\csv\CsvFileHandlerInterface;
 use FAFI\src\BE\ImEx\ImExService;
 use FAFI\src\BE\Install\InstallService;
 

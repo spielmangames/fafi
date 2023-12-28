@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace FAFI\data;
+namespace FAFI\src\BE\FileStorage;
 
 use FAFI\exception\FafiException;
 use FAFI\exception\FileErr;

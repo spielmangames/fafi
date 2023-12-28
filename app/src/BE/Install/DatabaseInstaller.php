@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace FAFI\src\BE\Install;
 
-use FAFI\data\FileValidator;
 use FAFI\exception\FafiException;
 use FAFI\exception\FileErr;
 use FAFI\src\BE\DB\DatabaseConnector;
+use FAFI\src\BE\FileStorage\FileValidator;
 
 class DatabaseInstaller
 {
@@ -39,7 +39,7 @@ class DatabaseInstaller
 
     private function formSchemaFilePath(): string
     {
-        return PATH_APP . 'src' . DS . 'BE' . DS . 'Install' . self::DB_SCHEMA_FILE_NAME;
+        return PATH_APP . 'src' . DS . 'BE' . DS . 'Install' . DS . self::DB_SCHEMA_FILE_NAME;
     }
 
     /**

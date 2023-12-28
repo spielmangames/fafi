@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace FAFI\src\BE\ImEx\Import\Extract;
 
-use FAFI\data\CsvFileHandler;
-use FAFI\data\FileValidator;
 use FAFI\exception\FafiException;
+use FAFI\src\BE\FileStorage\csv\CsvFileHandler;
+use FAFI\src\BE\FileStorage\FileValidator;
 use FAFI\src\BE\ImEx\ImExService;
 
 class ImportExtractor
