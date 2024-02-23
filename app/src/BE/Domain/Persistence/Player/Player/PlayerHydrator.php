@@ -35,6 +35,8 @@ class PlayerHydrator implements EntityHydratorInterface
         $surname = $data[PlayerResource::SURNAME_FIELD];
         $fafiSurname = $data[PlayerResource::FAFI_SURNAME_FIELD];
 
+        $nationality = (int)$data[PlayerResource::NATIONALITY_FIELD];
+
         $height = (int)$data[PlayerResource::HEIGHT_FIELD];
         $foot = $data[PlayerResource::FOOT_FIELD];
         $isFragile = (bool)$data[PlayerResource::IS_FRAGILE_FIELD];
@@ -45,6 +47,7 @@ class PlayerHydrator implements EntityHydratorInterface
             $particle,
             $surname,
             $fafiSurname,
+            $nationality,
             $height,
             $foot,
             $isFragile
@@ -63,6 +66,8 @@ class PlayerHydrator implements EntityHydratorInterface
             PlayerResource::PARTICLE_FIELD => $entity->getParticle(),
             PlayerResource::SURNAME_FIELD => $entity->getSurname(),
             PlayerResource::FAFI_SURNAME_FIELD => $entity->getFafiSurname(),
+
+            PlayerResource::NATIONALITY_FIELD => $entity->getNationality(),
 
             PlayerResource::HEIGHT_FIELD => $entity->getHeight(),
             PlayerResource::FOOT_FIELD => $entity->getFoot(),

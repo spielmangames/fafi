@@ -43,6 +43,7 @@ class PlayerResource extends AbstractResource
     public const PARTICLE_FIELD = 'particle';
     public const SURNAME_FIELD = 'surname';
     public const FAFI_SURNAME_FIELD = 'fafi_surname';
+
     public const NATIONALITY_FIELD = 'nationality';
 
     // skills shape

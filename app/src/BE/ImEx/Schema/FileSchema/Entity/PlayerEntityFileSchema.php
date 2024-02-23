@@ -11,6 +11,8 @@ class PlayerEntityFileSchema extends AbstractEntityFileSchema
     public const SURNAME = 'surname';
     public const FAFI_SURNAME = 'fafi_surname';
 
+    public const NATIONALITY = 'nationality';
+
     public const HEIGHT = 'height';
     public const FOOT = 'foot';
     public const IS_FRAGILE = 'is_fragile';
@@ -23,6 +25,8 @@ class PlayerEntityFileSchema extends AbstractEntityFileSchema
         self::PARTICLE,
         self::SURNAME,
         self::FAFI_SURNAME,
+
+        self::NATIONALITY,
 
         self::HEIGHT,
         self::FOOT,

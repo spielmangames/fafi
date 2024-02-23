@@ -108,6 +108,7 @@ CREATE TABLE `players` (
     `particle` VARCHAR(8),
     `surname` VARCHAR(32) NOT NULL,
     `fafi_surname` VARCHAR(32),
+
     `nationality` INT(11) UNSIGNED NOT NULL,
 
     `height` TINYINT(3) UNSIGNED,

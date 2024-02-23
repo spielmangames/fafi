@@ -18,6 +18,8 @@ class PlayerData implements EntityDataInterface
     protected ?string $surname = null;
     protected ?string $fafiSurname = null;
 
+    protected ?int $nationality = null;
+
     protected ?int $height = null;
     protected ?string $foot = null;
     protected ?bool $isFragile = null;
@@ -77,6 +79,18 @@ class PlayerData implements EntityDataInterface
     public function getFafiSurname(): ?string
     {
         return $this->fafiSurname;
+    }
+
+
+    public function setNationality(?int $nationality): self
+    {
+        $this->nationality = $nationality;
+        return $this;
+    }
+
+    public function getNationality(): ?int
+    {
+        return $this->nationality;
     }
 
 

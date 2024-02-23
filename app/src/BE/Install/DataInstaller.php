@@ -38,8 +38,10 @@ class DataInstaller
      */
     private function installGeo(): void
     {
-        $this->imExService->import($this->formSampleFilePath(ImExableEntities::COUNTRIES));
-        $this->imExService->import($this->formSampleFilePath(ImExableEntities::CITIES));
+        $geo = ImExableEntities::GROUP_GEO;
+
+        $this->imExService->import($this->formFilePath($geo, ImExableEntities::COUNTRIES));
+        $this->imExService->import($this->formFilePath($geo, ImExableEntities::CITIES));
     }
 
     /**
@@ -48,7 +50,10 @@ class DataInstaller
      */
     private function installTeams(): void
     {
-        $this->imExService->import($this->formSampleFilePath(ImExableEntities::CLUBS));
+        $team = ImExableEntities::GROUP_TEAM;
+
+        $this->imExService->import($this->formFilePath($team, ImExableEntities::CLUBS));
+//        $this->imExService->import($this->formFilePath($team, ImExableEntities::CLUBS . ImExableEntities::TO_DO));
     }
 
     /**
@@ -57,14 +62,17 @@ class DataInstaller
      */
     private function installPlayer(): void
     {
-        $this->imExService->import($this->formSampleFilePath(ImExableEntities::POSITIONS));
-        $this->imExService->import($this->formSampleFilePath(ImExableEntities::PLAYERS));
-        $this->imExService->import($this->formSampleFilePath(ImExableEntities::PLAYER_ATTRIBUTES));
+        $player = ImExableEntities::GROUP_PLAYER;
+
+        $this->imExService->import($this->formFilePath($player, ImExableEntities::POSITIONS));
+        $this->imExService->import($this->formFilePath($player, ImExableEntities::PLAYERS));
+//        $this->imExService->import($this->formFilePath($player, ImExableEntities::PLAYERS . ImExableEntities::TO_DO));
+        $this->imExService->import($this->formFilePath($player, ImExableEntities::PLAYER_ATTRIBUTES));
     }
 
 
-    public function formSampleFilePath(string $entityName): string
+    private function formFilePath(string $groupName, string $entityName): string
     {
-        return self::IMEX_SAMPLE_DIR_PATH . $entityName . ImExService::FILE_EXT;
+        return self::IMEX_SAMPLE_DIR_PATH . $groupName . DS . $entityName . ImExService::FILE_EXT;
     }
 }

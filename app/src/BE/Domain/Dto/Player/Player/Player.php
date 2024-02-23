@@ -19,10 +19,11 @@ class Player implements EntityInterface
         private readonly ?string $particle,
         private readonly string $surname,
         private readonly ?string $fafiSurname,
+        private readonly int $nationality,
         private readonly int $height,
         private readonly string $foot,
         private readonly bool $isFragile,
-        private readonly array $attributes,
+//        private readonly array $attributes,
     ) {
     }
 
@@ -53,6 +54,12 @@ class Player implements EntityInterface
     }
 
 
+    public function getNationality(): int
+    {
+        return $this->nationality;
+    }
+
+
     public function getHeight(): int
     {
         return $this->height;
@@ -72,6 +79,7 @@ class Player implements EntityInterface
     /** @return PlayerAttribute[] */
     public function getAttributes(): array
     {
-        return $this->attributes;
+        return [];
+//        return $this->attributes;
     }
 }
