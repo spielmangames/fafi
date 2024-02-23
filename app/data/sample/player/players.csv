@@ -1,3 +1,5 @@
-name,particle,surname,fafi_surname,height,foot,is_fragile
-,,Alisson,,193,R,0
-,,Alisson,,193,R,0
+nationality,name,particle,surname,fafi_surname,height,foot,is_fragile
+Brazil,,,Alisson,,193,R,0
+Cameroon,Andre,,Onana,,190,R,0
+England,Nick,,Pope,,198,R,0
+England,Aaron,,Ramsdale,,190,R,0
