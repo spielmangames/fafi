@@ -39,7 +39,7 @@ class DemoPlayerRepo
         $id = $this->playerRepo->save($player)->getId();
         $player = $this->playerRepo->findById($id);
 
-        $player->setSurname('Serginho')->setHeight(181)->setFoot('L');
+        $player->setSurname('Serginho')->setFoot('L')->setHeight(181);
         $player = $this->playerRepo->save($player);
         $player = $this->playerRepo->findById($id);
 

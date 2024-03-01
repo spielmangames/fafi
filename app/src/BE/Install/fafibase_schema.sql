@@ -111,8 +111,8 @@ CREATE TABLE `players` (
 
     `nationality` INT(11) UNSIGNED NOT NULL,
 
-    `height` TINYINT(3) UNSIGNED,
     `foot` ENUM('L', 'R'),
+    `height` TINYINT(3) UNSIGNED,
     `is_fragile` BIT DEFAULT 0,
 
     PRIMARY KEY (`id`),

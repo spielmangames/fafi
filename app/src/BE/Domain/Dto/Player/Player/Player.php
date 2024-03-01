@@ -20,8 +20,8 @@ class Player implements EntityInterface
         private readonly string $surname,
         private readonly ?string $fafiSurname,
         private readonly int $nationality,
-        private readonly int $height,
         private readonly string $foot,
+        private readonly int $height,
         private readonly bool $isFragile,
 //        private readonly array $attributes,
     ) {
@@ -60,14 +60,14 @@ class Player implements EntityInterface
     }
 
 
-    public function getHeight(): int
-    {
-        return $this->height;
-    }
-
     public function getFoot(): string
     {
         return $this->foot;
+    }
+
+    public function getHeight(): int
+    {
+        return $this->height;
     }
 
     public function getIsFragile(): bool

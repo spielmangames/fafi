@@ -19,8 +19,8 @@ class PlayerMapper extends AbstractImExableEntityMapper implements ImExableEntit
 
         PlayerEntityFileSchema::NATIONALITY => PlayerResource::NATIONALITY_FIELD,
 
-        PlayerEntityFileSchema::HEIGHT => PlayerResource::HEIGHT_FIELD,
         PlayerEntityFileSchema::FOOT => PlayerResource::FOOT_FIELD,
+        PlayerEntityFileSchema::HEIGHT => PlayerResource::HEIGHT_FIELD,
         PlayerEntityFileSchema::IS_FRAGILE => PlayerResource::IS_FRAGILE_FIELD,
     ];
 

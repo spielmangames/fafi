@@ -40,8 +40,8 @@ class PlayerConfig implements ImportableEntityConfig
 
             PlayerEntityFileSchema::NATIONALITY => CountryNameToIdFieldConverter::class,
 
-            PlayerEntityFileSchema::HEIGHT => IntegerFieldConverter::class,
             PlayerEntityFileSchema::FOOT => StringFieldConverter::class,
+            PlayerEntityFileSchema::HEIGHT => IntegerFieldConverter::class,
             PlayerEntityFileSchema::IS_FRAGILE => BooleanFieldConverter::class,
 
             PlayerEntityFileSchema::ATTRIBUTES => PlayerAttributesFieldConverter::class,
@@ -62,8 +62,8 @@ class PlayerConfig implements ImportableEntityConfig
 
             PlayerEntityFileSchema::NATIONALITY => IdSpecification::class,
 
-            PlayerEntityFileSchema::HEIGHT => IntegerSpecification::class,
             PlayerEntityFileSchema::FOOT => StringSpecification::class,
+            PlayerEntityFileSchema::HEIGHT => IntegerSpecification::class,
             PlayerEntityFileSchema::IS_FRAGILE => BooleanSpecification::class,
 
             PlayerEntityFileSchema::ATTRIBUTES => PlayerAttributesSpecification::class,

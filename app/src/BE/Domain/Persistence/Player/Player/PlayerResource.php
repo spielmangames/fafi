@@ -22,10 +22,11 @@ class PlayerResource extends AbstractResource
         self::PARTICLE_FIELD,
         self::SURNAME_FIELD,
         self::FAFI_SURNAME_FIELD,
+
         self::NATIONALITY_FIELD,
 
-        self::HEIGHT_FIELD,
         self::FOOT_FIELD,
+        self::HEIGHT_FIELD,
         self::IS_FRAGILE_FIELD,
     ];
     private const REQUIRED_FIELDS = [
@@ -47,8 +48,8 @@ class PlayerResource extends AbstractResource
     public const NATIONALITY_FIELD = 'nationality';
 
     // skills shape
-    public const HEIGHT_FIELD = 'height';
     public const FOOT_FIELD = 'foot';
+    public const HEIGHT_FIELD = 'height';
     public const IS_FRAGILE_FIELD = 'is_fragile';
 
 
@@ -163,13 +164,13 @@ class PlayerResource extends AbstractResource
             $this->entityValidator::assertEntityPropertyIdInt($data[$field], $field);
         }
 
-        if (isset($data[self::HEIGHT_FIELD])) {
-            $field = self::HEIGHT_FIELD;
-            $this->entityValidator::assertEntityPropertyInt($data[$field], $field, PlayerConstraints::HEIGHT_MIN, PlayerConstraints::HEIGHT_MAX);
-        }
         if (isset($data[self::FOOT_FIELD])) {
             $field = self::FOOT_FIELD;
             $this->entityValidator::assertEntityPropertyEnum($data[$field], $field, PlayerConstraints::FOOT_SUPPORTED);
+        }
+        if (isset($data[self::HEIGHT_FIELD])) {
+            $field = self::HEIGHT_FIELD;
+            $this->entityValidator::assertEntityPropertyInt($data[$field], $field, PlayerConstraints::HEIGHT_MIN, PlayerConstraints::HEIGHT_MAX);
         }
         if (isset($data[self::IS_FRAGILE_FIELD])) {
             $field = self::IS_FRAGILE_FIELD;

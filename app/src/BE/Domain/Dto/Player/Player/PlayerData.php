@@ -20,8 +20,8 @@ class PlayerData implements EntityDataInterface
 
     protected ?int $nationality = null;
 
-    protected ?int $height = null;
     protected ?string $foot = null;
+    protected ?int $height = null;
     protected ?bool $isFragile = null;
 
 
@@ -94,17 +94,6 @@ class PlayerData implements EntityDataInterface
     }
 
 
-    public function setHeight(?int $height): self
-    {
-        $this->height = $height;
-        return $this;
-    }
-
-    public function getHeight(): ?int
-    {
-        return $this->height;
-    }
-
     public function setFoot(?string $foot): self
     {
         $this->foot = $foot;
@@ -114,6 +103,17 @@ class PlayerData implements EntityDataInterface
     public function getFoot(): ?string
     {
         return $this->foot;
+    }
+
+    public function setHeight(?int $height): self
+    {
+        $this->height = $height;
+        return $this;
+    }
+
+    public function getHeight(): ?int
+    {
+        return $this->height;
     }
 
     public function setIsFragile(?bool $isFragile): self

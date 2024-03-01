@@ -13,8 +13,8 @@ class PlayerEntityFileSchema extends AbstractEntityFileSchema
 
     public const NATIONALITY = 'nationality';
 
-    public const HEIGHT = 'height';
     public const FOOT = 'foot';
+    public const HEIGHT = 'height';
     public const IS_FRAGILE = 'is_fragile';
 
     public const ATTRIBUTES = 'attributes';
@@ -34,8 +34,8 @@ class PlayerEntityFileSchema extends AbstractEntityFileSchema
 
         self::ATTRIBUTES,
 
-//        self::HEIGHT,
         self::FOOT,
+        self::HEIGHT,
         self::IS_FRAGILE,
 
         self::TMARKT,

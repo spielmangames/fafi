@@ -37,8 +37,8 @@ class PlayerHydrator implements EntityHydratorInterface
 
         $nationality = (int)$data[PlayerResource::NATIONALITY_FIELD];
 
-        $height = (int)$data[PlayerResource::HEIGHT_FIELD];
         $foot = $data[PlayerResource::FOOT_FIELD];
+        $height = (int)$data[PlayerResource::HEIGHT_FIELD];
         $isFragile = (bool)$data[PlayerResource::IS_FRAGILE_FIELD];
 
         return new Player(
@@ -48,8 +48,8 @@ class PlayerHydrator implements EntityHydratorInterface
             $surname,
             $fafiSurname,
             $nationality,
-            $height,
             $foot,
+            $height,
             $isFragile
         );
     }
@@ -69,8 +69,8 @@ class PlayerHydrator implements EntityHydratorInterface
 
             PlayerResource::NATIONALITY_FIELD => $entity->getNationality(),
 
-            PlayerResource::HEIGHT_FIELD => $entity->getHeight(),
             PlayerResource::FOOT_FIELD => $entity->getFoot(),
+            PlayerResource::HEIGHT_FIELD => $entity->getHeight(),
             PlayerResource::IS_FRAGILE_FIELD => $entity->getIsFragile(),
         ];
     }

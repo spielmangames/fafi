@@ -19,8 +19,8 @@ abstract class PlayerConstraints
     public const FAFI_SURNAME_MAX = 32;
 
 
+    public const FOOT_SUPPORTED = FootEnum::SUPPORTED;
+
     public const HEIGHT_MIN = 111;
     public const HEIGHT_MAX = 222;
-
-    public const FOOT_SUPPORTED = FootEnum::SUPPORTED;
 }
