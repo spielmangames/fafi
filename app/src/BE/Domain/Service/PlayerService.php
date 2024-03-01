@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace FAFI\src\BE\Domain\Service;
 
 use FAFI\exception\FafiException;
+use FAFI\src\BE\Domain\Dto\Player\Integration\PlayerIntegration;
+use FAFI\src\BE\Domain\Dto\Player\Integration\PlayerIntegrationData;
 use FAFI\src\BE\Domain\Dto\Player\Player\Player;
 use FAFI\src\BE\Domain\Dto\Player\Player\PlayerData;
 use FAFI\src\BE\Domain\Dto\Player\PlayerAttribute\PlayerAttribute;
@@ -12,6 +14,7 @@ use FAFI\src\BE\Domain\Dto\Player\PlayerAttribute\PlayerAttributeData;
 use FAFI\src\BE\Domain\Dto\Player\Position\Position;
 use FAFI\src\BE\Domain\Dto\Player\Position\PositionData;
 use FAFI\src\BE\Domain\Persistence\EntityCriteriaInterface;
+use FAFI\src\BE\Domain\Persistence\Player\Integration\PlayerIntegrationRepository;
 use FAFI\src\BE\Domain\Persistence\Player\Player\PlayerRepository;
 use FAFI\src\BE\Domain\Persistence\Player\PlayerAttribute\PlayerAttributeRepository;
 use FAFI\src\BE\Domain\Persistence\Player\Position\PositionRepository;
@@ -21,12 +24,14 @@ class PlayerService implements ServiceInterface
     private PositionRepository $positionRepository;
     private PlayerRepository $playerRepository;
     private PlayerAttributeRepository $playerAttributeRepository;
+    private PlayerIntegrationRepository $playerIntegrationRepository;
 
     public function __construct()
     {
         $this->positionRepository = new PositionRepository();
         $this->playerRepository = new PlayerRepository();
         $this->playerAttributeRepository = new PlayerAttributeRepository();
+        $this->playerIntegrationRepository = new PlayerIntegrationRepository();
     }
 
 
@@ -155,4 +160,9 @@ class PlayerService implements ServiceInterface
 //
 //        return $player;
 //    }
+
+    public function savePlayerIntegration(PlayerIntegrationData $playerIntegrationToSave): PlayerIntegration
+    {
+        return $this->playerIntegrationRepository->save($playerIntegrationToSave);
+    }
 }

@@ -1,6 +1,6 @@
 
 #-----------------------------------------------------------------------------------------------------------------------
-# DB init [version=1.17]
+# DB init [version=1.18]
 #-----------------------------------------------------------------------------------------------------------------------
 
 
@@ -151,6 +151,19 @@ CREATE TABLE `player_club_assocs` (
     UNIQUE KEY `u_player_club_assocs_club_id_no` (`club_id`, `num`),
     UNIQUE KEY `u_player_club_assocs_club_id_player_id` (`club_id`, `player_id`),
     CONSTRAINT `club_id` FOREIGN KEY (`club_id`) REFERENCES `clubs` (`id`) ON DELETE CASCADE,
+    CONSTRAINT `player_id` FOREIGN KEY (`player_id`) REFERENCES `players` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+
+CREATE TABLE `player_integrations` (
+    `id` INT(11) UNSIGNED AUTO_INCREMENT NOT NULL,
+
+    `player_id` INT(11) UNSIGNED NOT NULL,
+    `tmarkt` VARCHAR(255) NOT NULL,
+
+    PRIMARY KEY (`id`),
+    UNIQUE KEY `u_player_integrations_player_id` (`player_id`),
+    UNIQUE KEY `u_player_integrations_tmarkt` (`tmarkt`),
     CONSTRAINT `player_id` FOREIGN KEY (`player_id`) REFERENCES `players` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
