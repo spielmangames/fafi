@@ -77,4 +77,9 @@ class FAFI
     {
         $this->installService->installSample();
     }
+
+    public function installSamplePlayers(bool $cleanupBefore): void
+    {
+        $this->installService->installSamplePlayers($cleanupBefore);
+    }
 }
