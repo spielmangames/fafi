@@ -33,4 +33,19 @@ class InstallService implements ServiceInterface
         $this->databaseInstaller->installDbSchema();
         $this->dataInstaller->installSampleData();
     }
+
+    /**
+     * @param bool $cleanup
+     *
+     * @return void
+     * @throws FafiException
+     */
+    public function installSamplePlayers(bool $cleanup): void
+    {
+        if ($cleanup) {
+            $this->databaseInstaller->dropDbPlayersData();
+        }
+
+        $this->dataInstaller->installPlayerModule();
+    }
 }

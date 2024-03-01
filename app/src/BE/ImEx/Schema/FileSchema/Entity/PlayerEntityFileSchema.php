@@ -17,19 +17,27 @@ class PlayerEntityFileSchema extends AbstractEntityFileSchema
     public const FOOT = 'foot';
     public const IS_FRAGILE = 'is_fragile';
 
+    public const ATTRIBUTES = 'attributes';
+
+    public const TMARKT = 'tmarkt';
+
 
     public const HEADER = [
         self::ID,
+
+        self::NATIONALITY,
 
         self::NAME,
         self::PARTICLE,
         self::SURNAME,
         self::FAFI_SURNAME,
 
-        self::NATIONALITY,
+        self::ATTRIBUTES,
 
-        self::HEIGHT,
+//        self::HEIGHT,
         self::FOOT,
         self::IS_FRAGILE,
+
+        self::TMARKT,
     ];
 }

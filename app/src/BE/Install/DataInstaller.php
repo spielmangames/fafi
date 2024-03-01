@@ -27,16 +27,17 @@ class DataInstaller
      */
     public function installSampleData(): void
     {
-        $this->installGeo();
-        $this->installTeams();
-        $this->installPlayer();
+        $this->installGeoModule();
+        $this->installRulesModule();
+        $this->installTeamModule();
+        $this->installPlayerModule();
     }
 
     /**
      * @return void
      * @throws FafiException
      */
-    private function installGeo(): void
+    private function installGeoModule(): void
     {
         $geo = ImExableEntities::GROUP_GEO;
 
@@ -48,7 +49,18 @@ class DataInstaller
      * @return void
      * @throws FafiException
      */
-    private function installTeams(): void
+    private function installRulesModule(): void
+    {
+        $team = ImExableEntities::GROUP_RULES;
+
+        $this->imExService->import($this->formFilePath($team, ImExableEntities::POSITIONS));
+    }
+
+    /**
+     * @return void
+     * @throws FafiException
+     */
+    private function installTeamModule(): void
     {
         $team = ImExableEntities::GROUP_TEAM;
 
@@ -60,14 +72,13 @@ class DataInstaller
      * @return void
      * @throws FafiException
      */
-    private function installPlayer(): void
+    public function installPlayerModule(): void
     {
         $player = ImExableEntities::GROUP_PLAYER;
 
-        $this->imExService->import($this->formFilePath($player, ImExableEntities::POSITIONS));
         $this->imExService->import($this->formFilePath($player, ImExableEntities::PLAYERS));
 //        $this->imExService->import($this->formFilePath($player, ImExableEntities::PLAYERS . ImExableEntities::TO_DO));
-        $this->imExService->import($this->formFilePath($player, ImExableEntities::PLAYER_ATTRIBUTES));
+//        $this->imExService->import($this->formFilePath($player, ImExableEntities::PLAYER_ATTRIBUTES));
     }
 
 

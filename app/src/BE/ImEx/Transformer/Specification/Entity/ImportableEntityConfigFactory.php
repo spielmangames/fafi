@@ -21,11 +21,13 @@ class ImportableEntityConfigFactory
             CountryConfig::class => new CountryConfig(),
             CityConfig::class => new CityConfig(),
 
+            // Rules specific
+            PositionConfig::class => new PositionConfig(),
+
             // Team specific
             ClubConfig::class => new ClubConfig(),
 
             // Player specific
-            PositionConfig::class => new PositionConfig(),
             PlayerConfig::class => new PlayerConfig(),
             PlayerAttributeConfig::class => new PlayerAttributeConfig(),
 

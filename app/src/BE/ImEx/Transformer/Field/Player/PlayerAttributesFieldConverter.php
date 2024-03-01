@@ -11,7 +11,9 @@ class PlayerAttributesFieldConverter implements ImportFieldConverter
 {
     public function fromStr(string $property, string $value): array
     {
-        $attributeSets = explode(PlayerAttributesSpecification::ATTRIBUTES_SEPARATOR, $value);
+        $separator = PlayerAttributesSpecification::ATTRIBUTE_WRAP_CLOSE . PlayerAttributesSpecification::ATTRIBUTE_WRAP_OPEN;
+        $value = trim($value, $separator);
+        $attributeSets = explode($separator, $value);
 
         $transformed = [];
         foreach ($attributeSets as $attributeSet) {

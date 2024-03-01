@@ -9,11 +9,12 @@ use FAFI\src\BE\ImEx\Transformer\Specification\Field\FieldSpecification;
 
 class PlayerAttributesSpecification implements FieldSpecification
 {
-    public const ATTRIBUTES_SEPARATOR = '|';
+    public const ATTRIBUTE_WRAP_OPEN = '[';
+    public const ATTRIBUTE_WRAP_CLOSE = ']';
     public const ATTRIBUTE_NAME_VALUE_SEPARATOR = ':';
-    public const ATTRIBUTE_VALUES_SEPARATOR = ',';
+    public const ATTRIBUTE_VALUES_SEPARATOR = ';';
     public const ATTRIBUTE_VALUE_SEPARATOR = '=';
-    public const ATTRIBUTE_VALUE_RANGE_SEPARATOR = '~';
+    public const ATTRIBUTE_VALUE_RANGE_SEPARATOR = '.';
 
     public const ATTRIBUTE_NAME_ATT = 'a';
     public const ATTRIBUTE_NAME_DEF = 'd';
