@@ -34,17 +34,17 @@ class Importer
      */
     public function import(string $filePath, ImportableEntityConfig $entityConfig, bool $logMemory = false): void
     {
-        !$logMemory ?: $this->logMemoryUsage('before Import Extractor');
+//        !$logMemory ?: $this->logMemoryUsage('before Import Extractor');
         $extracted = $this->importExtractor->extract($filePath);
-        !$logMemory ?: $this->logMemoryUsage('after Import Extractor');
+//        !$logMemory ?: $this->logMemoryUsage('after Import Extractor');
 
-        !$logMemory ?: $this->logMemoryUsage('before Import Transformer');
+//        !$logMemory ?: $this->logMemoryUsage('before Import Transformer');
         $transformed = $this->importTransformer->transform($extracted, $entityConfig);
-        !$logMemory ?: $this->logMemoryUsage('after Import Transformer');
+//        !$logMemory ?: $this->logMemoryUsage('after Import Transformer');
 
-        !$logMemory ?: $this->logMemoryUsage('before Import Loader');
+//        !$logMemory ?: $this->logMemoryUsage('before Import Loader');
         $this->importLoader->load($transformed, $entityConfig);
-        !$logMemory ?: $this->logMemoryUsage('after Import Loader');
+//        !$logMemory ?: $this->logMemoryUsage('after Import Loader');
     }
 
     private function logMemoryUsage(string $context): void

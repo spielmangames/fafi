@@ -10,6 +10,10 @@ interface ImportableEntityConfig
 
 
     /** @return string[] */
+    function getSubResourcesMap(): array;
+
+
+    /** @return string[] */
     public function getFieldConvertersMap(): array;
     /** @return string[] */
     public function getFieldSpecificationsMap(): array;

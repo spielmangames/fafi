@@ -28,6 +28,14 @@ class PlayerConfig implements ImportableEntityConfig
     }
 
 
+    public function getSubResourcesMap(): array
+    {
+        return [
+            PlayerEntityFileSchema::ATTRIBUTES => PlayerAttributeConfig::class,
+        ];
+    }
+
+
     public function getFieldConvertersMap(): array
     {
         return [

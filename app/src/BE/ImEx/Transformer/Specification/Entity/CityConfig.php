@@ -24,6 +24,12 @@ class CityConfig implements ImportableEntityConfig
     }
 
 
+    public function getSubResourcesMap(): array
+    {
+        return [];
+    }
+
+
     public function getFieldConvertersMap(): array
     {
         return [
