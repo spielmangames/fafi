@@ -26,4 +26,6 @@ interface EntityErr extends Err
     public const VALUE_DIGIT_MAX_RANGE_CROSSED = 'Property "%s" must be ≤ %d.';
     public const VALUE_STR_MIN_LENGTH_CROSSED = 'Property "%s" length must be ≥ %d.';
     public const VALUE_STR_MAX_LENGTH_CROSSED = 'Property "%s" length must be ≤ %d.';
+    public const VALUE_ARR_MIN_COUNT_CROSSED = 'Property "%s" count must be ≥ %d.';
+    public const VALUE_ARR_MAX_COUNT_CROSSED = 'Property "%s" count must be ≤ %d.';
 }

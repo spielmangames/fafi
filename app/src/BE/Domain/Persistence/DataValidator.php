@@ -33,10 +33,18 @@ class DataValidator
     }
 
 
-    public static function assertFieldArr(mixed $value, string $property): void
+    public static function assertFieldArr(mixed $value, string $property, ?int $countMin = null, ?int $countMax = null): void
     {
         if (!is_array($value)) {
             throw new FafiException(sprintf(EntityErr::VALUE_TYPE_INVALID_ARR, $property));
+        }
+
+        $count = count($value);
+        if (!is_null($countMin) && $count < $countMin) {
+            throw new FafiException(sprintf(EntityErr::VALUE_ARR_MIN_COUNT_CROSSED, $property, $countMin));
+        }
+        if (!is_null($countMax) && $count > $countMax) {
+            throw new FafiException(sprintf(EntityErr::VALUE_ARR_MAX_COUNT_CROSSED, $property, $countMax));
         }
     }
 
