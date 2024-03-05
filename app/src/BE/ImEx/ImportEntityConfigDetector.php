@@ -24,7 +24,7 @@ class ImportEntityConfigDetector
 
         ImExableEntities::POSITIONS => PositionConfig::class,
         ImExableEntities::PLAYERS => PlayerConfig::class,
-        ImExableEntities::PLAYER_ATTRIBUTES => PlayerAttributeConfig::class,
+//        ImExableEntities::PLAYER_ATTRIBUTES => PlayerAttributeConfig::class,
     ];
 
 
