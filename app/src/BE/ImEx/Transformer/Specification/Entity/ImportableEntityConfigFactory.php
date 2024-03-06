@@ -17,19 +17,20 @@ class ImportableEntityConfigFactory
     public function create(string $class): ImportableEntityConfig
     {
         return match ($class) {
-            // Geo specific
+            // Geo
             CountryConfig::class => new CountryConfig(),
             CityConfig::class => new CityConfig(),
 
-            // Rules specific
-            PositionConfig::class => new PositionConfig(),
-
-            // Team specific
+            // Team
             ClubConfig::class => new ClubConfig(),
 
-            // Player specific
+            // Skills
+            PositionConfig::class => new PositionConfig(),
+
+            // Player
             PlayerConfig::class => new PlayerConfig(),
             PlayerAttributeConfig::class => new PlayerAttributeConfig(),
+
 
             default => throw new FafiException(sprintf(FafiException::E_CLASS_ABSENT, $class)),
         };

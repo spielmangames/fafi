@@ -9,10 +9,10 @@ class PlayerAttributeEntityFileSchema extends AbstractEntityFileSchema
     public const PLAYER = 'player';
     public const POSITION = 'position';
 
-    public const ATT_MIN = 'att_min';
-    public const ATT_MAX = 'att_max';
-    public const DEF_MIN = 'def_min';
-    public const DEF_MAX = 'def_max';
+    public const ATT_MIN = 'a_min';
+    public const ATT_MAX = 'a_max';
+    public const DEF_MIN = 'd_min';
+    public const DEF_MAX = 'd_max';
 
 
     public const HEADER = [
