@@ -62,7 +62,7 @@ class EntityValidator
 
     public static function assertEntityPropertyEnum(mixed $value, string $property, array $allowed): void
     {
-        DataValidator::assertFieldOneOf($value, $property, $allowed);
+        DataValidator::assertFieldOneOf($value, $allowed, $property);
     }
 
 
