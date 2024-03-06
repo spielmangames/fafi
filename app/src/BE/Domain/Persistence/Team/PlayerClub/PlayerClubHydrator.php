@@ -18,12 +18,18 @@ class PlayerClubHydrator implements EntityHydratorInterface
      */
     public function hydrateCollection(array $data): array
     {
-        $hydrated = [];
-        foreach ($data as $row) {
-            $hydrated[] = $this->hydrate($row);
-        }
+        return array_map(
+            fn(array $row): PlayerClub => $this->hydrate($row),
+            $data
+        );
 
-        return $hydrated;
+
+//        $hydrated = [];
+//        foreach ($data as $row) {
+//            $hydrated[] = $this->hydrate($row);
+//        }
+//
+//        return $hydrated;
     }
 
     public function hydrate(array $data): PlayerClub

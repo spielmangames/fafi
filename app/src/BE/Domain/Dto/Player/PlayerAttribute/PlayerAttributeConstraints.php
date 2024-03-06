@@ -6,6 +6,10 @@ namespace FAFI\src\BE\Domain\Dto\Player\PlayerAttribute;
 
 abstract class PlayerAttributeConstraints
 {
+    public const PLAYER_POSITIONS_MIN = 0;
+    public const PLAYER_POSITIONS_MAX = 4;
+
+
     public const ATT_MIN_MIN = 0;
     public const ATT_MIN_MAX = 6;
 
