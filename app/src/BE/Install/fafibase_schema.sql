@@ -21,7 +21,7 @@ CREATE TABLE `_version` (
     `db_schema` VARCHAR(8) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
-INSERT INTO _version VALUES ('1.17');
+INSERT INTO _version VALUES ('1.18');
 
 
 
@@ -49,8 +49,8 @@ CREATE TABLE `cities` (
     `country_id` INT(11) UNSIGNED NOT NULL,
 
     PRIMARY KEY (`id`),
-    UNIQUE KEY `u_cities_name` (`name`),
-    CONSTRAINT `country_id` FOREIGN KEY (`country_id`) REFERENCES `countries` (`id`) ON DELETE CASCADE
+    UNIQUE KEY `u_cities_name` (`name`)
+#     CONSTRAINT `country_id` FOREIGN KEY (`country_id`) REFERENCES `countries` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 
@@ -72,8 +72,8 @@ CREATE TABLE clubs (
 
      PRIMARY KEY (`id`),
      UNIQUE KEY `u_clubs_name` (`name`),
-     UNIQUE KEY `u_clubs_fafi_name` (`fafi_name`),
-     CONSTRAINT `city_id` FOREIGN KEY (`city_id`) REFERENCES `cities` (`id`) ON DELETE CASCADE
+     UNIQUE KEY `u_clubs_fafi_name` (`fafi_name`)
+#      CONSTRAINT `city_id` FOREIGN KEY (`city_id`) REFERENCES `cities` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 
@@ -117,8 +117,8 @@ CREATE TABLE `players` (
 
     PRIMARY KEY (`id`),
     UNIQUE KEY `u_players_name_particle_surname` (`name`, `particle`, `surname`),
-    UNIQUE KEY `u_players_name_particle_fafi_surname` (`name`, `particle`, `fafi_surname`),
-    CONSTRAINT `nationality` FOREIGN KEY (`nationality`) REFERENCES `countries` (`id`)
+    UNIQUE KEY `u_players_name_particle_fafi_surname` (`name`, `particle`, `fafi_surname`)
+#     CONSTRAINT `nationality` FOREIGN KEY (`nationality`) REFERENCES `countries` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 
@@ -134,9 +134,9 @@ CREATE TABLE `player_position_assocs` (
     `def_max` TINYINT(1) UNSIGNED NOT NULL DEFAULT 0,
 
     PRIMARY KEY (`id`),
-    UNIQUE KEY `u_player_position_assocs_player_id_position_id` (`player_id`, `position_id`),
-    CONSTRAINT `player_id` FOREIGN KEY (`player_id`) REFERENCES `players` (`id`) ON DELETE CASCADE,
-    CONSTRAINT `position_id` FOREIGN KEY (`position_id`) REFERENCES `positions` (`id`) ON DELETE CASCADE
+    UNIQUE KEY `u_player_position_assocs_player_id_position_id` (`player_id`, `position_id`)
+#     CONSTRAINT `player_id` FOREIGN KEY (`player_id`) REFERENCES `players` (`id`) ON DELETE CASCADE,
+#     CONSTRAINT `position_id` FOREIGN KEY (`position_id`) REFERENCES `positions` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 
@@ -149,9 +149,9 @@ CREATE TABLE `player_club_assocs` (
 
     PRIMARY KEY (`id`),
     UNIQUE KEY `u_player_club_assocs_club_id_no` (`club_id`, `num`),
-    UNIQUE KEY `u_player_club_assocs_club_id_player_id` (`club_id`, `player_id`),
-    CONSTRAINT `club_id` FOREIGN KEY (`club_id`) REFERENCES `clubs` (`id`) ON DELETE CASCADE,
-    CONSTRAINT `player_id` FOREIGN KEY (`player_id`) REFERENCES `players` (`id`) ON DELETE CASCADE
+    UNIQUE KEY `u_player_club_assocs_club_id_player_id` (`club_id`, `player_id`)
+#     CONSTRAINT `club_id` FOREIGN KEY (`club_id`) REFERENCES `clubs` (`id`) ON DELETE CASCADE,
+#     CONSTRAINT `player_id` FOREIGN KEY (`player_id`) REFERENCES `players` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 
@@ -163,8 +163,8 @@ CREATE TABLE `player_integrations` (
 
     PRIMARY KEY (`id`),
     UNIQUE KEY `u_player_integrations_player_id` (`player_id`),
-    UNIQUE KEY `u_player_integrations_tmarkt` (`tmarkt`),
-    CONSTRAINT `player_id` FOREIGN KEY (`player_id`) REFERENCES `players` (`id`) ON DELETE CASCADE
+    UNIQUE KEY `u_player_integrations_tmarkt` (`tmarkt`)
+#     CONSTRAINT `player_id` FOREIGN KEY (`player_id`) REFERENCES `players` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 
