@@ -8,13 +8,9 @@ use FAFI\src\BE\Domain\Persistence\DataValidator;
 use FAFI\src\BE\ImEx\Schema\FileSchema\Entity\PlayerAttributeEntityFileSchema;
 use FAFI\src\BE\ImEx\Schema\FileSchema\Entity\PlayerAttributeFileSchema;
 use FAFI\src\BE\ImEx\Transformer\Field\ImportFieldConverter;
-use FAFI\src\BE\ImEx\Transformer\Specification\Field\Player\PlayerAttributesSpecification;
 
 class PlayerAttributesFieldConverter implements ImportFieldConverter
 {
-//    private string $property;
-
-
     private DataValidator $dataValidator;
 
     public function __construct()
@@ -25,7 +21,6 @@ class PlayerAttributesFieldConverter implements ImportFieldConverter
 
     public function fromStr(string $property, string $value): array
     {
-//        $this->property = $property;
         return $this->parseAttributeSets($value);
     }
 
@@ -37,7 +32,9 @@ class PlayerAttributesFieldConverter implements ImportFieldConverter
 
         $converted = [];
         foreach ($attributeSets as $attributeSet) {
-            $converted = array_merge($converted, $this->parseAttributeSet($attributeSet));
+            $attributeSetConverted = $this->parseAttributeSet($attributeSet);
+            $this->validateAttributeSet($attributeSetConverted);
+            $converted[] = $attributeSetConverted;
         }
 
         return $converted;
@@ -51,9 +48,11 @@ class PlayerAttributesFieldConverter implements ImportFieldConverter
 
         $this->dataValidator::assertFieldStr($position);
         $this->dataValidator::assertFieldStr($attributes);
+
+        $position = [PlayerAttributeEntityFileSchema::POSITION => $position];
         $attributes = explode(PlayerAttributeFileSchema::ATTRIBUTE_VALUES_SEPARATOR, $attributes);
 
-        return [$position => $this->parseAttributes($attributes)];
+        return array_merge($position, $this->parseAttributes($attributes));
     }
 
     private function parseAttributes(array $attributes): array
@@ -64,7 +63,6 @@ class PlayerAttributesFieldConverter implements ImportFieldConverter
             $converted = array_merge($converted, $this->parseAttribute($attribute));
         }
 
-//        $this->dataValidator::assertFieldArr($attributes, countMin: PlayerAttributeConstraints::PLAYER_POSITIONS_MIN, countMax: PlayerAttributeConstraints::PLAYER_POSITIONS_MAX);
         return $converted;
     }
 
@@ -74,11 +72,15 @@ class PlayerAttributesFieldConverter implements ImportFieldConverter
         $attributeName = array_shift($attribute);
         $attributeValues = array_shift($attribute);
 
-        $attributeName = $this->convertAttributeName($attributeName);
+        $this->dataValidator::assertFieldStr($attributeName);
+        $this->dataValidator::assertFieldStr($attributeValues);
 
         $attributeValues = explode(PlayerAttributeFileSchema::ATTRIBUTE_VALUE_RANGE_SEPARATOR, $attributeValues);
         $attributeMin = array_shift($attributeValues);
         $attributeMax = array_shift($attributeValues);
+
+        $this->dataValidator::assertFieldStr($attributeMin);
+        $this->dataValidator::assertFieldStr($attributeMax);
 
         return [
             $attributeName . '_min' => $attributeMin,
@@ -86,16 +88,11 @@ class PlayerAttributesFieldConverter implements ImportFieldConverter
         ];
     }
 
-    private function convertAttributeName(string $attributeName): string
+    private function validateAttributeSet(array $attributeSet): void
     {
-        $this->dataValidator::assertFieldOneOf($attributeName, PlayerAttributeFileSchema::ATTRIBUTE_NAME_MAP);
-        $map = array_flip(PlayerAttributeFileSchema::ATTRIBUTE_NAME_MAP);
-
-        return $map[$attributeName];
-    }
-
-    private function finalValidate(): void
-    {
-//        $this->dataValidator::assertFieldStr($position, PlayerAttributeEntityFileSchema::POSITION);
+        foreach ($attributeSet as $field => $value) {
+            $this->dataValidator::assertFieldOneOf($field, PlayerAttributeEntityFileSchema::HEADER);
+            $this->dataValidator::assertFieldStr($value);
+        }
     }
 }

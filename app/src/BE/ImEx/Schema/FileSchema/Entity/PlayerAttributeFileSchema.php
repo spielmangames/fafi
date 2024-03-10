@@ -15,9 +15,4 @@ class PlayerAttributeFileSchema
 
     public const ATTRIBUTE_NAME_ATT = 'a';
     public const ATTRIBUTE_NAME_DEF = 'd';
-    public const ATTRIBUTE_NAME_MAP = [
-        'att' => self::ATTRIBUTE_NAME_ATT,
-        'def' => self::ATTRIBUTE_NAME_DEF,
-    ];
-
 }

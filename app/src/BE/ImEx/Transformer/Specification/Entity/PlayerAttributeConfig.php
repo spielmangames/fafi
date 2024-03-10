@@ -9,7 +9,6 @@ use FAFI\src\BE\Domain\Persistence\Player\PlayerAttribute\PlayerAttributeDataHyd
 use FAFI\src\BE\ImEx\Clients\PlayerAttributeClient;
 use FAFI\src\BE\ImEx\Schema\FileSchema\Entity\PlayerAttributeEntityFileSchema;
 use FAFI\src\BE\ImEx\Schema\Mapper\PlayerAttributeMapper;
-use FAFI\src\BE\ImEx\Transformer\Field\Player\PlayerFullNameToIdFieldConverter;
 use FAFI\src\BE\ImEx\Transformer\Field\Player\PositionNameToIdFieldConverter;
 use FAFI\src\BE\ImEx\Transformer\Field\Typical\IntegerFieldConverter;
 use FAFI\src\BE\ImEx\Transformer\Specification\Field\Typical\IdSpecification;
@@ -34,7 +33,7 @@ class PlayerAttributeConfig implements ImportableEntityConfig
         return [
             PlayerAttributeEntityFileSchema::ID => IntegerFieldConverter::class,
 
-            PlayerAttributeEntityFileSchema::PLAYER => PlayerFullNameToIdFieldConverter::class,
+//            PlayerAttributeEntityFileSchema::PLAYER => PlayerFullNameToIdFieldConverter::class,
             PlayerAttributeEntityFileSchema::POSITION => PositionNameToIdFieldConverter::class,
 
             PlayerAttributeEntityFileSchema::ATT_MIN => IntegerFieldConverter::class,
@@ -49,7 +48,7 @@ class PlayerAttributeConfig implements ImportableEntityConfig
         return [
             PlayerAttributeEntityFileSchema::ID => IdSpecification::class,
 
-            PlayerAttributeEntityFileSchema::PLAYER => IdSpecification::class,
+//            PlayerAttributeEntityFileSchema::PLAYER => IdSpecification::class,
             PlayerAttributeEntityFileSchema::POSITION => IdSpecification::class,
 
             PlayerAttributeEntityFileSchema::ATT_MIN => IntegerSpecification::class,
