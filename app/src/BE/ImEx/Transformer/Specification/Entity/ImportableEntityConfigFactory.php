@@ -30,6 +30,7 @@ class ImportableEntityConfigFactory
             // Player
             PlayerConfig::class => new PlayerConfig(),
             PlayerAttributeConfig::class => new PlayerAttributeConfig(),
+            PlayerIntegrationConfig::class => new PlayerIntegrationConfig(),
 
 
             default => throw new FafiException(sprintf(FafiException::E_CLASS_ABSENT, $class)),

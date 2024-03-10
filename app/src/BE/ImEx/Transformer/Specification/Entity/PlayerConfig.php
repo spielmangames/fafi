@@ -11,6 +11,7 @@ use FAFI\src\BE\ImEx\Schema\FileSchema\Entity\PlayerEntityFileSchema;
 use FAFI\src\BE\ImEx\Schema\Mapper\PlayerMapper;
 use FAFI\src\BE\ImEx\Transformer\Field\Geo\CountryNameToIdFieldConverter;
 use FAFI\src\BE\ImEx\Transformer\Field\Player\PlayerAttributesFieldConverter;
+use FAFI\src\BE\ImEx\Transformer\Field\Player\PlayerIntegrationsFieldConverter;
 use FAFI\src\BE\ImEx\Transformer\Field\Typical\BooleanFieldConverter;
 use FAFI\src\BE\ImEx\Transformer\Field\Typical\IntegerFieldConverter;
 use FAFI\src\BE\ImEx\Transformer\Field\Typical\StringFieldConverter;
@@ -32,6 +33,7 @@ class PlayerConfig implements ImportableEntityConfig
     {
         return [
             PlayerEntityFileSchema::ATTRIBUTES => PlayerAttributeConfig::class,
+            PlayerEntityFileSchema::TMARKT => PlayerIntegrationConfig::class,
         ];
     }
 
@@ -54,7 +56,7 @@ class PlayerConfig implements ImportableEntityConfig
 
             PlayerEntityFileSchema::ATTRIBUTES => PlayerAttributesFieldConverter::class,
 
-            PlayerEntityFileSchema::TMARKT => StringFieldConverter::class,
+            PlayerEntityFileSchema::TMARKT => PlayerIntegrationsFieldConverter::class,
         ];
     }
 
@@ -74,9 +76,9 @@ class PlayerConfig implements ImportableEntityConfig
             PlayerEntityFileSchema::HEIGHT => IntegerSpecification::class,
             PlayerEntityFileSchema::IS_FRAGILE => BooleanSpecification::class,
 
-            PlayerEntityFileSchema::ATTRIBUTES => PlayerAttributesSpecification::class,
+//            PlayerEntityFileSchema::ATTRIBUTES => PlayerAttributesSpecification::class,
 
-            PlayerEntityFileSchema::TMARKT => StringSpecification::class,
+//            PlayerEntityFileSchema::TMARKT => StringSpecification::class,
         ];
     }
 

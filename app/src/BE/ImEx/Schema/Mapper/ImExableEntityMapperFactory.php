@@ -28,6 +28,7 @@ class ImExableEntityMapperFactory
             PositionMapper::class => new PositionMapper(),
             PlayerMapper::class => new PlayerMapper(),
             PlayerAttributeMapper::class => new PlayerAttributeMapper(),
+            PlayerIntegrationMapper::class => new PlayerIntegrationMapper(),
 
             default => throw new FafiException(sprintf(FafiException::E_CLASS_ABSENT, $class)),
         };
