@@ -16,11 +16,11 @@ use FAFI\src\BE\RepositoryInterface;
 
 class PlayerIntegrationRepository implements RepositoryInterface
 {
-    private IntegrationResource $integrationResource;
+    private PlayerIntegrationResource $integrationResource;
 
     public function __construct()
     {
-        $this->integrationResource = new IntegrationResource();
+        $this->integrationResource = new PlayerIntegrationResource();
     }
 
 

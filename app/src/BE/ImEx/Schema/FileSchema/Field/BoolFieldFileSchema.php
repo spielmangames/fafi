@@ -6,6 +6,6 @@ namespace FAFI\src\BE\ImEx\Schema\FileSchema\Field;
 
 interface BoolFieldFileSchema
 {
-    public const TRUE = 'TRUE';
-    public const FALSE = 'FALSE';
+    public const TRUE = 'T';
+    public const FALSE = 'F';
 }

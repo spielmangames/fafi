@@ -9,7 +9,7 @@ use FAFI\src\BE\Domain\Dto\Player\Integration\PlayerIntegrationData;
 use FAFI\src\BE\Domain\Persistence\EntityDataHydratorInterface;
 use FAFI\src\BE\Domain\Persistence\EntityValidator;
 
-class IntegrationDataHydrator implements EntityDataHydratorInterface
+class PlayerIntegrationDataHydrator implements EntityDataHydratorInterface
 {
     /**
      * @param array $data
@@ -37,9 +37,9 @@ class IntegrationDataHydrator implements EntityDataHydratorInterface
         $playerIntegrationData = new PlayerIntegrationData();
 
         return $playerIntegrationData
-            ->setId($data[IntegrationResource::ID_FIELD] ?? null)
-            ->setPlayerId($data[IntegrationResource::PLAYER_ID_FIELD] ?? null)
-            ->setTmarkt($data[IntegrationResource::TMARKT_FIELD] ?? null);
+            ->setId($data[PlayerIntegrationResource::ID_FIELD] ?? null)
+            ->setPlayerId($data[PlayerIntegrationResource::PLAYER_ID_FIELD] ?? null)
+            ->setTmarkt($data[PlayerIntegrationResource::TMARKT_FIELD] ?? null);
     }
 
     public function dehydrate(EntityDataInterface $entity): array
@@ -48,10 +48,10 @@ class IntegrationDataHydrator implements EntityDataHydratorInterface
         /** @var PlayerIntegrationData $entity */
 
         return [
-            IntegrationResource::ID_FIELD => $entity->getId(),
+            PlayerIntegrationResource::ID_FIELD => $entity->getId(),
 
-            IntegrationResource::PLAYER_ID_FIELD => $entity->getPlayerId(),
-            IntegrationResource::TMARKT_FIELD => $entity->getTmarkt(),
+            PlayerIntegrationResource::PLAYER_ID_FIELD => $entity->getPlayerId(),
+            PlayerIntegrationResource::TMARKT_FIELD => $entity->getTmarkt(),
         ];
     }
 }

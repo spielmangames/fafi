@@ -11,7 +11,7 @@ use FAFI\src\BE\Domain\Dto\Player\Integration\PlayerIntegrationData;
 use FAFI\src\BE\Domain\Persistence\AbstractResource;
 use FAFI\src\BE\Domain\Persistence\EntityCriteriaInterface;
 
-class IntegrationResource extends AbstractResource
+class PlayerIntegrationResource extends AbstractResource
 {
     private const TABLE = 'player_integrations';
     private const COLUMNS = [
@@ -36,7 +36,7 @@ class IntegrationResource extends AbstractResource
 
     public function __construct()
     {
-        parent::__construct(new IntegrationHydrator(), new IntegrationDataHydrator());
+        parent::__construct(new PlayerIntegrationHydrator(), new PlayerIntegrationDataHydrator());
     }
 
     protected function getTable(): string
