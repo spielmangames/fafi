@@ -9,6 +9,7 @@ use FAFI\src\BE\ImEx\Transformer\Field\Geo\CityNameToIdFieldConverter;
 use FAFI\src\BE\ImEx\Transformer\Field\Geo\CountryNameToIdFieldConverter;
 use FAFI\src\BE\ImEx\Transformer\Field\Player\PlayerAttributesFieldConverter;
 use FAFI\src\BE\ImEx\Transformer\Field\Player\PlayerFullNameToIdFieldConverter;
+use FAFI\src\BE\ImEx\Transformer\Field\Player\PlayerIntegrationsFieldConverter;
 use FAFI\src\BE\ImEx\Transformer\Field\Player\PositionNameToIdFieldConverter;
 use FAFI\src\BE\ImEx\Transformer\Field\Typical\BooleanFieldConverter;
 use FAFI\src\BE\ImEx\Transformer\Field\Typical\IntegerFieldConverter;
@@ -38,6 +39,7 @@ class ImportFieldConverterFactory
             PlayerFullNameToIdFieldConverter::class => new PlayerFullNameToIdFieldConverter(),
             PositionNameToIdFieldConverter::class => new PositionNameToIdFieldConverter(),
             PlayerAttributesFieldConverter::class => new PlayerAttributesFieldConverter(),
+            PlayerIntegrationsFieldConverter::class => new PlayerIntegrationsFieldConverter(),
 
             default => throw new FafiException(sprintf(FafiException::E_CLASS_ABSENT, $class)),
         };
