@@ -5,20 +5,17 @@ declare(strict_types=1);
 namespace FAFI\src\BE\ImEx\Transformer;
 
 use FAFI\exception\FafiException;
-use FAFI\exception\ImExErr;
 use FAFI\src\BE\ImEx\Schema\Mapper\ImExableEntityMapperFactory;
 use FAFI\src\BE\ImEx\Schema\Mapper\ImExableEntityMapperInterface;
 use FAFI\src\BE\ImEx\Transformer\Specification\Entity\ImportableEntityConfig;
 
-class ImportMapper
+class ImportMapper extends AbstractImportModule
 {
-    private int $line;
-
-
     private ImExableEntityMapperFactory $entityMapperFactory;
 
     public function __construct()
     {
+        parent::__construct();
         $this->entityMapperFactory = new ImExableEntityMapperFactory();
     }
 
@@ -44,7 +41,7 @@ class ImportMapper
 
 
     /**
-     * @param string[] $convertedRow
+     * @param string[]|array[] $convertedRow
      * @param ImportableEntityConfig $entityConfig
      *
      * @return array
@@ -56,11 +53,38 @@ class ImportMapper
 
         $resourceMapper = $this->prepareResourceMapper($entityConfig);
         foreach ($convertedRow as $fieldName => $fieldValue) {
-            $mapped[$resourceMapper->fromFile($fieldName)] = $fieldValue;
+            if ($this->isSubResource($fieldName, $entityConfig)) {
+                $subResourceConfig = $this->prepareSubResourceConfig($fieldName, $entityConfig);
+                $fieldValue = $this->mapSubEntities($fieldValue, $subResourceConfig);
+            } else {
+                $fieldName = $resourceMapper->fromFile($fieldName);
+            }
+
+            $mapped[$fieldName] = $fieldValue;
+
         }
 
         return $mapped;
     }
+
+    /**
+     * @param array[] $subEntities
+     * @param ImportableEntityConfig $subEntityConfig
+     *
+     * @return array
+     * @throws FafiException
+     */
+    private function mapSubEntities(array $subEntities, ImportableEntityConfig $subEntityConfig): array
+    {
+        $mapped = [];
+
+        foreach ($subEntities as $subEntity) {
+            $mapped[] = $this->mapEntity($subEntity, $subEntityConfig);
+        }
+
+        return $mapped;
+    }
+
 
     /**
      * @param ImportableEntityConfig $entityConfig
@@ -79,18 +103,5 @@ class ImportMapper
         }
 
         return $mapper;
-    }
-
-
-    /**
-     * @param string $error
-     *
-     * @return void
-     * @throws FafiException
-     */
-    private function fail(string $error): void
-    {
-        $e = [sprintf(ImExErr::IMPORT_FAILED, $this->line), $error];
-        throw new FafiException(FafiException::combine($e));
     }
 }

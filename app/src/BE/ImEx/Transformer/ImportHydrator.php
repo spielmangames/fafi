@@ -5,22 +5,20 @@ declare(strict_types=1);
 namespace FAFI\src\BE\ImEx\Transformer;
 
 use FAFI\exception\FafiException;
-use FAFI\exception\ImExErr;
 use FAFI\src\BE\Domain\Dto\EntityDataInterface;
 use FAFI\src\BE\Domain\Persistence\EntityDataHydratorFactory;
 use FAFI\src\BE\Domain\Persistence\EntityDataHydratorInterface;
 use FAFI\src\BE\ImEx\Transformer\Specification\Entity\ImportableEntityConfig;
 
-class ImportHydrator
+class ImportHydrator extends AbstractImportModule
 {
-    private int $line;
-
-
     private EntityDataHydratorFactory $entityDataHydratorFactory;
 
     public function __construct()
     {
+        parent::__construct();
         $this->entityDataHydratorFactory = new EntityDataHydratorFactory();
+
     }
 
 
@@ -53,10 +51,17 @@ class ImportHydrator
      */
     private function hydrateEntity(array $mappedRow, ImportableEntityConfig $entityConfig): EntityDataInterface
     {
+        [$entity, $subEntities] = $this->splitSubResources($mappedRow, $entityConfig);
         $resourceHydrator = $this->prepareResourceHydrator($entityConfig);
 
         return $resourceHydrator->hydrate($mappedRow);
     }
+
+    private function hydrateSubEntities(): array
+    {
+
+    }
+
 
     /**
      * @param ImportableEntityConfig $entityConfig
@@ -75,18 +80,5 @@ class ImportHydrator
         }
 
         return $hydrator;
-    }
-
-
-    /**
-     * @param string $error
-     *
-     * @return void
-     * @throws FafiException
-     */
-    private function fail(string $error): void
-    {
-        $e = [sprintf(ImExErr::IMPORT_FAILED, $this->line), $error];
-        throw new FafiException(FafiException::combine($e));
     }
 }

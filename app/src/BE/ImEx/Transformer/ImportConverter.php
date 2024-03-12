@@ -10,15 +10,13 @@ use FAFI\src\BE\ImEx\Transformer\Field\ImportFieldConverter;
 use FAFI\src\BE\ImEx\Transformer\Field\ImportFieldConverterFactory;
 use FAFI\src\BE\ImEx\Transformer\Specification\Entity\ImportableEntityConfig;
 
-class ImportConverter
+class ImportConverter extends AbstractImportModule
 {
-    private int $line;
-
-
     private ImportFieldConverterFactory $fieldConverterFactory;
 
     public function __construct()
     {
+        parent::__construct();
         $this->fieldConverterFactory = new ImportFieldConverterFactory();
     }
 
@@ -58,11 +56,35 @@ class ImportConverter
             $fieldConverter = $this->prepareFieldConverter($entityConfig, $fieldName);
             $fieldValue = $fieldConverter->fromStr($fieldName, $fieldValue);
 
+            if ($this->isSubResource($fieldName, $entityConfig)) {
+                $subResourceConfig = $this->prepareSubResourceConfig($fieldName, $entityConfig);
+                $fieldValue = $this->convertSubEntities($fieldValue, $subResourceConfig);
+            }
+
             $converted[$fieldName] = $fieldValue;
         }
 
         return $converted;
     }
+
+    /**
+     * @param string[][] $subEntities
+     * @param ImportableEntityConfig $subEntityConfig
+     *
+     * @return array[]
+     * @throws FafiException
+     */
+    private function convertSubEntities(array $subEntities, ImportableEntityConfig $subEntityConfig): array
+    {
+        $converted = [];
+
+        foreach ($subEntities as $subEntity) {
+            $converted[] = $this->convertEntity($subEntity, $subEntityConfig);
+        }
+
+        return $converted;
+    }
+
 
     /**
      * @param ImportableEntityConfig $entityConfig
@@ -105,18 +127,5 @@ class ImportConverter
         }
 
         return $class;
-    }
-
-
-    /**
-     * @param string $error
-     *
-     * @return void
-     * @throws FafiException
-     */
-    private function fail(string $error): void
-    {
-        $e = [sprintf(ImExErr::IMPORT_FAILED, $this->line), $error];
-        throw new FafiException(FafiException::combine($e));
     }
 }

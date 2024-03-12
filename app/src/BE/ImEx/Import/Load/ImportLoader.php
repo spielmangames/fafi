@@ -5,37 +5,38 @@ declare(strict_types=1);
 namespace FAFI\src\BE\ImEx\Import\Load;
 
 use FAFI\exception\FafiException;
-use FAFI\exception\ImExErr;
 use FAFI\src\BE\Domain\Dto\EntityDataInterface;
 use FAFI\src\BE\ImEx\Clients\EntityClientFactory;
 use FAFI\src\BE\ImEx\Clients\EntityClientInterface;
+use FAFI\src\BE\ImEx\Import\ImportItem;
+use FAFI\src\BE\ImEx\Transformer\AbstractImportModule;
 use FAFI\src\BE\ImEx\Transformer\Specification\Entity\ImportableEntityConfig;
 
-class ImportLoader
+class ImportLoader extends AbstractImportModule
 {
-    private int $line;
-
-
     private EntityClientFactory $entityClientFactory;
 
     public function __construct()
     {
+        parent::__construct();
         $this->entityClientFactory = new EntityClientFactory();
     }
 
 
     /**
-     * @param EntityDataInterface[] $transformedRows
+     * @param ImportItem[] $transformedItems
      * @param ImportableEntityConfig $entityConfig
      *
      * @return void
      * @throws FafiException
      */
-    public function load(array $transformedRows, ImportableEntityConfig $entityConfig): void
+    public function load(array $transformedItems, ImportableEntityConfig $entityConfig): void
     {
-        foreach ($transformedRows as $line => $transformedRow) {
+        foreach ($transformedItems as $line => $transformedItem) {
             $this->line = $line;
-            $this->loadEntity($transformedRow, $entityConfig);
+
+            $id = $this->loadEntity($transformedItem->getTransformedContent(), $entityConfig);
+            $this->loadSubEntities($transformedItem->setId($id));
         }
     }
 
@@ -44,13 +45,24 @@ class ImportLoader
      * @param EntityDataInterface $transformedRow
      * @param ImportableEntityConfig $entityConfig
      *
-     * @return void
+     * @return int
      * @throws FafiException
      */
-    private function loadEntity(EntityDataInterface $transformedRow, ImportableEntityConfig $entityConfig): void
+    private function loadEntity(EntityDataInterface $transformedRow, ImportableEntityConfig $entityConfig): int
     {
         $loader = $this->prepareResourceLoader($entityConfig);
-        $loader->save($transformedRow);
+        return $loader->save($transformedRow)->getId();
+    }
+
+    private function loadSubEntities(ImportItem $item): void
+    {
+        $id = $item->getId();
+
+        foreach ($item->getSubItems() as $type => $subItem) {
+            $content = $subItem->getTransformedContent();
+            $content['product'] = $id;
+            $this->loadEntity($content);
+        }
     }
 
     /**
@@ -70,18 +82,5 @@ class ImportLoader
         }
 
         return $loader;
-    }
-
-
-    /**
-     * @param string $error
-     *
-     * @return void
-     * @throws FafiException
-     */
-    private function fail(string $error): void
-    {
-        $e = [sprintf(ImExErr::IMPORT_FAILED, $this->line), $error];
-        throw new FafiException(FafiException::combine($e));
     }
 }

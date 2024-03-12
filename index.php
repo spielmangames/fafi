@@ -8,7 +8,8 @@ use FAFI\FAFI;
 
 $fafi = new FAFI();
 
-$fafi->installAppWithSample();
+//$fafi->installAppWithSample();
+$fafi->installSamplePlayers(true);
 
 //demoPlayerService($fafi);
 //demoImport($fafi);

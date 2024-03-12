@@ -10,15 +10,13 @@ use FAFI\src\BE\ImEx\Transformer\Specification\Entity\ImportableEntityConfig;
 use FAFI\src\BE\ImEx\Transformer\Specification\Field\FieldSpecification;
 use FAFI\src\BE\ImEx\Transformer\Specification\Field\FieldSpecificationFactory;
 
-class ImportSpecificator
+class ImportSpecificator extends AbstractImportModule
 {
-    private int $line;
-
-
     private FieldSpecificationFactory $fieldSpecificationFactory;
 
     public function __construct()
     {
+        parent::__construct();
         $this->fieldSpecificationFactory = new FieldSpecificationFactory();
     }
 
@@ -50,11 +48,30 @@ class ImportSpecificator
     {
         try {
             foreach ($convertedRow as $fieldName => $fieldValue) {
-                $fieldSpecification = $this->prepareFieldSpecification($entityConfig, $fieldName);
-                $fieldSpecification->validate($fieldName, $fieldValue);
+                if ($this->isSubResource($fieldName, $entityConfig)) {
+                    $subResourceConfig = $this->prepareSubResourceConfig($fieldName, $entityConfig);
+                    $this->validateSubEntities($fieldValue, $subResourceConfig);
+                } else {
+                    $fieldSpecification = $this->prepareFieldSpecification($entityConfig, $fieldName);
+                    $fieldSpecification->validate($fieldName, $fieldValue);
+                }
             }
         } catch (FafiException $exception) {
             $this->fail($exception->getMessage());
+        }
+    }
+
+    /**
+     * @param array[] $subEntities
+     * @param ImportableEntityConfig $subEntityConfig
+     *
+     * @return void
+     * @throws FafiException
+     */
+    private function validateSubEntities(array $subEntities, ImportableEntityConfig $subEntityConfig): void
+    {
+        foreach ($subEntities as $subEntity) {
+            $this->validateEntity($subEntity, $subEntityConfig);
         }
     }
 
@@ -100,18 +117,5 @@ class ImportSpecificator
         }
 
         return $class;
-    }
-
-
-    /**
-     * @param string $error
-     *
-     * @return void
-     * @throws FafiException
-     */
-    private function fail(string $error): void
-    {
-        $e = [sprintf(ImExErr::IMPORT_FAILED, $this->line), $error];
-        throw new FafiException(FafiException::combine($e));
     }
 }

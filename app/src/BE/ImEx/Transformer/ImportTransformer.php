@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace FAFI\src\BE\ImEx\Transformer;
 
 use FAFI\exception\FafiException;
-use FAFI\src\BE\Domain\Dto\EntityDataInterface;
+use FAFI\src\BE\ImEx\Import\ImportItem;
 use FAFI\src\BE\ImEx\Transformer\Specification\Entity\ImportableEntityConfig;
 
 class ImportTransformer
@@ -28,7 +28,7 @@ class ImportTransformer
      * @param string[][] $extractedRows
      * @param ImportableEntityConfig $entityConfig
      *
-     * @return EntityDataInterface[]
+     * @return ImportItem[]
      * @throws FafiException
      */
     public function transform(array $extractedRows, ImportableEntityConfig $entityConfig): array
