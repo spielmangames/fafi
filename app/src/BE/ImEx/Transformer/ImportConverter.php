@@ -5,127 +5,78 @@ declare(strict_types=1);
 namespace FAFI\src\BE\ImEx\Transformer;
 
 use FAFI\exception\FafiException;
-use FAFI\exception\ImExErr;
-use FAFI\src\BE\ImEx\Transformer\Field\ImportFieldConverter;
-use FAFI\src\BE\ImEx\Transformer\Field\ImportFieldConverterFactory;
+use FAFI\src\BE\ImEx\Import\Entity\Config\ImportableEntityConfigRetriever;
+use FAFI\src\BE\ImEx\Import\ImportItem;
 use FAFI\src\BE\ImEx\Transformer\Specification\Entity\ImportableEntityConfig;
 
-class ImportConverter extends AbstractImportModule
+class ImportConverter
 {
-    private ImportFieldConverterFactory $fieldConverterFactory;
+    private ImportableEntityConfigRetriever $entityConfigRetriever;
 
     public function __construct()
     {
-        parent::__construct();
-        $this->fieldConverterFactory = new ImportFieldConverterFactory();
+        $this->entityConfigRetriever = new ImportableEntityConfigRetriever();
     }
 
 
     /**
-     * @param string[][] $extractedRows
-     * @param ImportableEntityConfig $entityConfig
-     *
-     * @return array[]
-     * @throws FafiException
-     */
-    public function convert(array $extractedRows, ImportableEntityConfig $entityConfig): array
-    {
-        $converted = [];
-
-        foreach ($extractedRows as $line => $extractedRow) {
-            $this->line = $line;
-            $converted[$line] = $this->convertEntity($extractedRow, $entityConfig);
-        }
-
-        return $converted;
-    }
-
-
-    /**
+     * @param int $line
      * @param string[] $extractedRow
      * @param ImportableEntityConfig $entityConfig
      *
-     * @return array
+     * @return ImportItem
      * @throws FafiException
      */
-    private function convertEntity(array $extractedRow, ImportableEntityConfig $entityConfig): array
+    public function convertEntity(int $line, array $extractedRow, ImportableEntityConfig $entityConfig): ImportItem
     {
-        $converted = [];
+        $item = new ImportItem($line, $entityConfig);
 
+        $converted = [];
         foreach ($extractedRow as $fieldName => $fieldValue) {
-            $fieldConverter = $this->prepareFieldConverter($entityConfig, $fieldName);
+            $fieldConverter = $this->entityConfigRetriever->getFieldConverter($entityConfig, $fieldName);
             $fieldValue = $fieldConverter->fromStr($fieldName, $fieldValue);
 
-            if ($this->isSubResource($fieldName, $entityConfig)) {
-                $subResourceConfig = $this->prepareSubResourceConfig($fieldName, $entityConfig);
-                $fieldValue = $this->convertSubEntities($fieldValue, $subResourceConfig);
+            if (!$this->isSubResource($entityConfig, $fieldName)) {
+                $converted[$fieldName] = $fieldValue;
+                continue;
             }
 
-            $converted[$fieldName] = $fieldValue;
+            $subResourceConfig = $this->entityConfigRetriever->getSubResourceConfig($entityConfig, $fieldName);
+            $subEntities = $this->convertSubEntities($line, $fieldValue, $subResourceConfig);
+            $item->addSubItems($subEntities);
         }
+        $item->setConvertedContent($converted);
 
-        return $converted;
+        return $item;
     }
 
     /**
+     * @param int $line
      * @param string[][] $subEntities
-     * @param ImportableEntityConfig $subEntityConfig
+     * @param ImportableEntityConfig $entityConfig
      *
-     * @return array[]
+     * @return ImportItem[]
      * @throws FafiException
      */
-    private function convertSubEntities(array $subEntities, ImportableEntityConfig $subEntityConfig): array
+    private function convertSubEntities(int $line, array $subEntities, ImportableEntityConfig $entityConfig): array
     {
-        $converted = [];
+        return array_map(
+            fn(array $subEntity): ImportItem => $this->convertEntity($line, $subEntity, $entityConfig),
+            $subEntities
+        );
 
-        foreach ($subEntities as $subEntity) {
-            $converted[] = $this->convertEntity($subEntity, $subEntityConfig);
-        }
-
-        return $converted;
+//        $converted = [];
+//
+//        foreach ($subEntities as $subEntity) {
+//            $converted[] = $this->convertEntity($line, $subEntity, $entityConfig);
+//        }
+//
+//        return $converted;
     }
 
 
-    /**
-     * @param ImportableEntityConfig $entityConfig
-     * @param string $field
-     *
-     * @return ImportFieldConverter
-     * @throws FafiException
-     */
-    private function prepareFieldConverter(ImportableEntityConfig $entityConfig, string $field): ImportFieldConverter
+    private function isSubResource(ImportableEntityConfig $entityConfig, string $fieldName): bool
     {
-        $class = $this->getFieldConverterClass($entityConfig, $field);
-
-        try {
-            $converter = $this->fieldConverterFactory->create($class);
-        } catch (FafiException $exception) {
-            $this->fail($exception->getMessage());
-        }
-
-        return $converter;
-    }
-
-    /**
-     * @param ImportableEntityConfig $entityConfig
-     * @param string $field
-     *
-     * @return string
-     * @throws FafiException
-     */
-    private function getFieldConverterClass(ImportableEntityConfig $entityConfig, string $field): string
-    {
-        $entity = $entityConfig->getEntityName();
-        $fieldConvertersMap = $entityConfig->getFieldConvertersMap();
-
-        if (!isset($fieldConvertersMap[$field])) {
-            $this->fail(sprintf(ImExErr::IMPORT_ENTITY_FIELD_CONVERTER_ABSENT, $field, $entity));
-        }
-        $class = $fieldConvertersMap[$field];
-        if (!is_string($class)) {
-            $this->fail(sprintf(ImExErr::IMPORT_ENTITY_FIELD_CONVERTER_INVALID, $field, $entity));
-        }
-
-        return $class;
+        return array_key_exists($fieldName, $entityConfig->getSubResourcesMap());
     }
 }

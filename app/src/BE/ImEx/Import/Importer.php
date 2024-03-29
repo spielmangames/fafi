@@ -43,7 +43,7 @@ class Importer
 //        !$logMemory ?: $this->logMemoryUsage('after Import Transformer');
 
 //        !$logMemory ?: $this->logMemoryUsage('before Import Loader');
-        $this->importLoader->load($transformed, $entityConfig);
+        $this->importLoader->load($transformed);
 //        !$logMemory ?: $this->logMemoryUsage('after Import Loader');
     }
 

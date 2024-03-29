@@ -33,10 +33,10 @@ class ImportExtractor
     public function extract(string $filePath): array
     {
         $this->validateFile($filePath);
-        $extracted = $this->fileHandler->read($filePath);
-        $this->validateContent($filePath, $extracted);
+        $extractedRows = $this->fileHandler->read($filePath);
+        $this->validateContent($filePath, $extractedRows);
 
-        return $extracted;
+        return $extractedRows;
     }
 
     /**
