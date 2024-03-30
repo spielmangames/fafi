@@ -33,13 +33,9 @@ class ImportTransformer
         $transformed = [];
 
         try {
-            $transformed = array_map(
-                fn(int $line, array $row): ImportItem => $this->transformRow($line, $row, $entityConfig),
-                $extractedRows
-            );
-//            foreach ($extractedRows as $line => $extractedRow) {
-//                $transformed[] = $this->transformRow($line, $extractedRow, $entityConfig);
-//            }
+            foreach ($extractedRows as $line => $extractedRow) {
+                $transformed[] = $this->transformRow($line, $extractedRow, $entityConfig);
+            }
         } catch (FafiException $exception) {
             $this->fail($line, $exception->getMessage());
         }
