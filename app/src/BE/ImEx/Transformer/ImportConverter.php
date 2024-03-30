@@ -64,14 +64,6 @@ class ImportConverter
             fn(array $subEntity): ImportItem => $this->convertEntity($line, $subEntity, $entityConfig),
             $subEntities
         );
-
-//        $converted = [];
-//
-//        foreach ($subEntities as $subEntity) {
-//            $converted[] = $this->convertEntity($line, $subEntity, $entityConfig);
-//        }
-//
-//        return $converted;
     }
 
 
