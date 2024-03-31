@@ -12,7 +12,7 @@ class ImportItem
 //    private ?int $id;
 
     private array $convertedContent;
-//    private array $mappedContent;
+    private array $mappedContent;
 //    private EntityDataInterface $transformedContent;
 
     private array $subItems = [];
@@ -59,24 +59,24 @@ class ImportItem
         return $this->convertedContent;
     }
 
-//    public function cleanupConvertedContent(): self
-//    {
-//        $this->convertedContent = [];
-//        return $this;
-//    }
-//
-//    public function setMappedContent(array $mappedContent): self
-//    {
-//        $this->mappedContent = $mappedContent;
-//        return $this;
-//    }
-//
-//    public function getMappedContent(): array
-//    {
-//        return $this->mappedContent;
-//    }
-//
-//
+    public function cleanupConvertedContent(): self
+    {
+        $this->convertedContent = [];
+        return $this;
+    }
+
+    public function setMappedContent(array $mappedContent): self
+    {
+        $this->mappedContent = $mappedContent;
+        return $this;
+    }
+
+    public function getMappedContent(): array
+    {
+        return $this->mappedContent;
+    }
+
+
 //    public function setTransformedContent(EntityDataInterface $transformedContent): self
 //    {
 //        $this->transformedContent = $transformedContent;

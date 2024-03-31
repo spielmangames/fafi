@@ -5,38 +5,50 @@ declare(strict_types=1);
 namespace FAFI\src\BE\ImEx\Import\Load;
 
 use FAFI\exception\FafiException;
+use FAFI\exception\ImExErr;
 use FAFI\src\BE\Domain\Dto\EntityDataInterface;
 use FAFI\src\BE\ImEx\Clients\EntityClientFactory;
 use FAFI\src\BE\ImEx\Clients\EntityClientInterface;
+use FAFI\src\BE\ImEx\Import\Entity\Config\ImportableEntityConfigRetriever;
 use FAFI\src\BE\ImEx\Import\ImportItem;
-use FAFI\src\BE\ImEx\Transformer\AbstractImportModule;
+use FAFI\src\BE\ImEx\Transformer\ImportHydrator;
+use FAFI\src\BE\ImEx\Transformer\ImportMapper;
 use FAFI\src\BE\ImEx\Transformer\Specification\Entity\ImportableEntityConfig;
 
-class ImportLoader extends AbstractImportModule
+class ImportLoader
 {
-    private EntityClientFactory $entityClientFactory;
+    private ImportMapper $importMapper;
+    private ImportHydrator $importHydrator;
+    private ImportableEntityConfigRetriever $entityConfigRetriever;
 
     public function __construct()
     {
-        parent::__construct();
-        $this->entityClientFactory = new EntityClientFactory();
+        $this->importMapper = new ImportMapper();
+        $this->importHydrator = new ImportHydrator();
+        $this->entityConfigRetriever = new ImportableEntityConfigRetriever();
     }
 
 
     /**
      * @param ImportItem[] $transformedItems
-     * @param ImportableEntityConfig $entityConfig
      *
      * @return void
      * @throws FafiException
      */
-    public function load(array $transformedItems, ImportableEntityConfig $entityConfig): void
+    public function load(array $transformedItems): void
     {
-        foreach ($transformedItems as $line => $transformedItem) {
-            $this->line = $line;
+        try {
+            $transformedItems = $this->importMapper->execute($transformedItems);
+            $transformedItems = $this->importHydrator->execute($transformedItems);
 
-            $id = $this->loadEntity($transformedItem->getTransformedContent(), $entityConfig);
-            $this->loadSubEntities($transformedItem->setId($id));
+            foreach ($transformedItems as $line => $transformedItem) {
+                $this->line = $line;
+
+                $id = $this->loadEntity($transformedItem->getTransformedContent(), $transformedItem->getConfig());
+                $this->loadSubEntities($transformedItem->setId($id));
+            }
+        } catch (FafiException $exception) {
+            $this->fail($line, $exception->getMessage());
         }
     }
 
@@ -50,7 +62,7 @@ class ImportLoader extends AbstractImportModule
      */
     private function loadEntity(EntityDataInterface $transformedRow, ImportableEntityConfig $entityConfig): int
     {
-        $loader = $this->prepareResourceLoader($entityConfig);
+        $loader = $this->entityConfigRetriever->getResourceLoader($entityConfig);
         return $loader->save($transformedRow)->getId();
     }
 
@@ -65,22 +77,17 @@ class ImportLoader extends AbstractImportModule
         }
     }
 
+
     /**
-     * @param ImportableEntityConfig $entityConfig
+     * @param int $line
+     * @param string $error
      *
-     * @return EntityClientInterface
+     * @return void
      * @throws FafiException
      */
-    private function prepareResourceLoader(ImportableEntityConfig $entityConfig): EntityClientInterface
+    private function fail(int $line, string $error): void
     {
-        $class = $entityConfig->getResourceLoader();
-
-        try {
-            $loader = $this->entityClientFactory->create($class);
-        } catch (FafiException $exception) {
-            $this->fail($exception->getMessage());
-        }
-
-        return $loader;
+        $e = [sprintf(ImExErr::IMPORT_FAILED, $line), $error];
+        throw new FafiException(FafiException::combine($e));
     }
 }
