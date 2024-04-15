@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace FAFI\src\BE\ImEx\Transformer;
 
 use FAFI\exception\FafiException;
-use FAFI\exception\ImExErr;
+use FAFI\src\BE\ImEx\Import\Fail\ImportFailurer;
 use FAFI\src\BE\ImEx\Import\ImportItem;
 use FAFI\src\BE\ImEx\Transformer\Specification\Entity\ImportableEntityConfig;
 
@@ -13,11 +13,13 @@ class ImportTransformer
 {
     private ImportConverter $importConverter;
     private ImportSpecificator $importSpecificator;
+    private ImportFailurer $importFailurer;
 
     public function __construct()
     {
         $this->importConverter = new ImportConverter();
         $this->importSpecificator = new ImportSpecificator();
+        $this->importFailurer = new ImportFailurer();
     }
 
 
@@ -37,7 +39,7 @@ class ImportTransformer
                 $transformed[] = $this->transformRow($line, $extractedRow, $entityConfig);
             }
         } catch (FafiException $exception) {
-            $this->fail($line, $exception->getMessage());
+            $this->importFailurer->fail($line, $exception->getMessage());
         }
 
         return $transformed;
@@ -57,19 +59,5 @@ class ImportTransformer
         $this->importSpecificator->validateEntity($item);
 
         return $item;
-    }
-
-
-    /**
-     * @param int $line
-     * @param string $error
-     *
-     * @return void
-     * @throws FafiException
-     */
-    private function fail(int $line, string $error): void
-    {
-        $e = [sprintf(ImExErr::IMPORT_FAILED, $line), $error];
-        throw new FafiException(FafiException::combine($e));
     }
 }
