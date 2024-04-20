@@ -5,35 +5,31 @@ declare(strict_types=1);
 namespace FAFI\src\BE\ImEx\Transformer;
 
 use FAFI\exception\FafiException;
-use FAFI\src\BE\ImEx\Schema\Mapper\ImExableEntityMapperFactory;
-use FAFI\src\BE\ImEx\Schema\Mapper\ImExableEntityMapperInterface;
-use FAFI\src\BE\ImEx\Transformer\Specification\Entity\ImportableEntityConfig;
+use FAFI\src\BE\ImEx\Import\Entity\Config\ImportableEntityConfigRetriever;
+use FAFI\src\BE\ImEx\Import\ImportItem;
 
-class ImportMapper extends AbstractImportModule
+class ImportMapper
 {
-    private ImExableEntityMapperFactory $entityMapperFactory;
+    private ImportableEntityConfigRetriever $entityConfigRetriever;
 
     public function __construct()
     {
-        parent::__construct();
-        $this->entityMapperFactory = new ImExableEntityMapperFactory();
+        $this->entityConfigRetriever = new ImportableEntityConfigRetriever();
     }
 
 
     /**
-     * @param array[] $convertedRows
-     * @param ImportableEntityConfig $entityConfig
+     * @param ImportItem[] $convertedItems
      *
-     * @return array[]
+     * @return ImportItem[]
      * @throws FafiException
      */
-    public function map(array $convertedRows, ImportableEntityConfig $entityConfig): array
+    public function execute(array $convertedItems): array
     {
         $mapped = [];
 
-        foreach ($convertedRows as $line => $convertedRow) {
-            $this->line = $line;
-            $mapped[$line] = $this->mapEntity($convertedRow, $entityConfig);
+        foreach ($convertedItems as $convertedItem) {
+            $mapped[] = $this->mapEntity($convertedItem, true);
         }
 
         return $mapped;
@@ -41,67 +37,47 @@ class ImportMapper extends AbstractImportModule
 
 
     /**
-     * @param string[]|array[] $convertedRow
-     * @param ImportableEntityConfig $entityConfig
+     * @param ImportItem $item
+     * @param bool $mapSubItems
      *
-     * @return array
+     * @return ImportItem
      * @throws FafiException
      */
-    private function mapEntity(array $convertedRow, ImportableEntityConfig $entityConfig): array
+    public function mapEntity(ImportItem $item, bool $mapSubItems = false): ImportItem
     {
+        $entityConfig = $item->getConfig();
+
+        $resourceMapper = $this->entityConfigRetriever->getResourceMapper($entityConfig);
+
         $mapped = [];
-
-        $resourceMapper = $this->prepareResourceMapper($entityConfig);
-        foreach ($convertedRow as $fieldName => $fieldValue) {
-            if ($this->isSubResource($fieldName, $entityConfig)) {
-                $subResourceConfig = $this->prepareSubResourceConfig($fieldName, $entityConfig);
-                $fieldValue = $this->mapSubEntities($fieldValue, $subResourceConfig);
-            } else {
-                $fieldName = $resourceMapper->fromFile($fieldName);
-            }
-
+        foreach ($item->getConvertedContent() as $fieldName => $fieldValue) {
+            $fieldName = $resourceMapper->fromFile($fieldName);
             $mapped[$fieldName] = $fieldValue;
+        }
+        $item->cleanupConvertedContent()->setMappedContent($mapped);
 
+        if ($mapSubItems) {
+            $subEntities = $this->mapSubEntities($item);
+            $item->setSubItems($subEntities);
         }
 
-        return $mapped;
+        return $item;
     }
 
     /**
-     * @param array[] $subEntities
-     * @param ImportableEntityConfig $subEntityConfig
+     * @param ImportItem $item
      *
      * @return array
      * @throws FafiException
      */
-    private function mapSubEntities(array $subEntities, ImportableEntityConfig $subEntityConfig): array
+    public function mapSubEntities(ImportItem $item): array
     {
         $mapped = [];
 
-        foreach ($subEntities as $subEntity) {
-            $mapped[] = $this->mapEntity($subEntity, $subEntityConfig);
+        foreach ($item->getSubItems() as $subEntity) {
+            $mapped[] = $this->mapEntity($subEntity);
         }
 
         return $mapped;
-    }
-
-
-    /**
-     * @param ImportableEntityConfig $entityConfig
-     *
-     * @return ImExableEntityMapperInterface
-     * @throws FafiException
-     */
-    private function prepareResourceMapper(ImportableEntityConfig $entityConfig): ImExableEntityMapperInterface
-    {
-        $class = $entityConfig->getResourceMapper();
-
-        try {
-            $mapper = $this->entityMapperFactory->create($class);
-        } catch (FafiException $exception) {
-            $this->fail($exception->getMessage());
-        }
-
-        return $mapper;
     }
 }

@@ -6,36 +6,31 @@ namespace FAFI\src\BE\ImEx\Transformer;
 
 use FAFI\exception\FafiException;
 use FAFI\src\BE\Domain\Dto\EntityDataInterface;
-use FAFI\src\BE\Domain\Persistence\EntityDataHydratorFactory;
-use FAFI\src\BE\Domain\Persistence\EntityDataHydratorInterface;
-use FAFI\src\BE\ImEx\Transformer\Specification\Entity\ImportableEntityConfig;
+use FAFI\src\BE\ImEx\Import\Entity\Config\ImportableEntityConfigRetriever;
+use FAFI\src\BE\ImEx\Import\ImportItem;
 
-class ImportHydrator extends AbstractImportModule
+class ImportHydrator
 {
-    private EntityDataHydratorFactory $entityDataHydratorFactory;
+    private ImportableEntityConfigRetriever $entityConfigRetriever;
 
     public function __construct()
     {
-        parent::__construct();
-        $this->entityDataHydratorFactory = new EntityDataHydratorFactory();
-
+        $this->entityConfigRetriever = new ImportableEntityConfigRetriever();
     }
 
 
     /**
-     * @param array[] $mappedRows
-     * @param ImportableEntityConfig $entityConfig
+     * @param ImportItem[] $mappedItems
      *
-     * @return EntityDataInterface[]
+     * @return ImportItem[]
      * @throws FafiException
      */
-    public function hydrate(array $mappedRows, ImportableEntityConfig $entityConfig): array
+    public function execute(array $mappedItems): array
     {
         $hydrated = [];
 
-        foreach ($mappedRows as $line => $mappedRow) {
-            $this->line = $line;
-            $hydrated[$line] = $this->hydrateEntity($mappedRow, $entityConfig);
+        foreach ($mappedItems as $mappedItem) {
+            $hydrated[] = $this->hydrateEntity($mappedItem);
         }
 
         return $hydrated;
@@ -43,42 +38,17 @@ class ImportHydrator extends AbstractImportModule
 
 
     /**
-     * @param array $mappedRow
-     * @param ImportableEntityConfig $entityConfig
+     * @param ImportItem $item
      *
      * @return EntityDataInterface
      * @throws FafiException
      */
-    private function hydrateEntity(array $mappedRow, ImportableEntityConfig $entityConfig): EntityDataInterface
+    public function hydrateEntity(ImportItem $item): EntityDataInterface
     {
-        [$entity, $subEntities] = $this->splitSubResources($mappedRow, $entityConfig);
-        $resourceHydrator = $this->prepareResourceHydrator($entityConfig);
+        $entityConfig = $item->getConfig();
 
-        return $resourceHydrator->hydrate($mappedRow);
-    }
+        $resourceHydrator = $this->entityConfigRetriever->getResourceHydrator($entityConfig);
 
-    private function hydrateSubEntities(): array
-    {
-
-    }
-
-
-    /**
-     * @param ImportableEntityConfig $entityConfig
-     *
-     * @return EntityDataHydratorInterface
-     * @throws FafiException
-     */
-    private function prepareResourceHydrator(ImportableEntityConfig $entityConfig): EntityDataHydratorInterface
-    {
-        $class = $entityConfig->getResourceDataHydrator();
-
-        try {
-            $hydrator = $this->entityDataHydratorFactory->create($class);
-        } catch (FafiException $exception) {
-            $this->fail($exception->getMessage());
-        }
-
-        return $hydrator;
+        return $resourceHydrator->hydrate($item->getMappedContent());
     }
 }

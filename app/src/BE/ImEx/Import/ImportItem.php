@@ -13,7 +13,7 @@ class ImportItem
 
     private array $convertedContent;
     private array $mappedContent;
-//    private EntityDataInterface $transformedContent;
+    private EntityDataInterface $hydratedContent;
 
     private array $subItems = [];
 
@@ -76,16 +76,27 @@ class ImportItem
         return $this->mappedContent;
     }
 
+    public function cleanupMappedContent(): self
+    {
+        $this->mappedContent = [];
+        return $this;
+    }
 
-//    public function setTransformedContent(EntityDataInterface $transformedContent): self
+    public function setHydratedContent(EntityDataInterface $hydratedContent): self
+    {
+        $this->hydratedContent = $hydratedContent;
+        return $this;
+    }
+
+    public function getHydratedContent(): EntityDataInterface
+    {
+        return $this->hydratedContent;
+    }
+
+//    public function cleanupHydratedContent(): self
 //    {
-//        $this->transformedContent = $transformedContent;
+//        $this->hydratedContent = null;
 //        return $this;
-//    }
-//
-//    public function getTransformedContent(): EntityDataInterface
-//    {
-//        return $this->transformedContent;
 //    }
 
 
@@ -96,6 +107,16 @@ class ImportItem
     public function addSubItems(array $subItems): self
     {
         $this->subItems = array_merge($this->subItems, $subItems);
+        return $this;
+    }
+
+    /**
+     * @param ImportItem[] $subItems
+     * @return $this
+     */
+    public function setSubItems(array $subItems): self
+    {
+        $this->subItems = $subItems;
         return $this;
     }
 

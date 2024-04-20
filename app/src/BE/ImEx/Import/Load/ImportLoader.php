@@ -38,11 +38,14 @@ class ImportLoader
     public function load(array $transformedItems): void
     {
         try {
-            $transformedItems = $this->importMapper->execute($transformedItems);
-            $transformedItems = $this->importHydrator->execute($transformedItems);
+//            $transformedItems = $this->importMapper->execute($transformedItems);
+//            $transformedItems = $this->importHydrator->execute($transformedItems);
 
             foreach ($transformedItems as $transformedItem) {
                 $line = $transformedItem->getLine();
+
+                $mappedItem = $this->importMapper->mapEntity($transformedItem);
+                $hydratedItem = $this->importHydrator->hydrateEntity($mappedItem);
 
                 $id = $this->loadEntity($transformedItem->getHydratedContent(), $transformedItem->getConfig());
                 $this->loadSubEntities($transformedItem->setId($id));
